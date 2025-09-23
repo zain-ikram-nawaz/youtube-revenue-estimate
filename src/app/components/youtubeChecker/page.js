@@ -9,6 +9,63 @@ export default function ChannelEstimator() {
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("overview");
 
+  // Monetization calculation function
+  const calculateMonetizationStatus = (channelData) => {
+    const {
+      subscribers,
+      totalViews,
+      videoCount,
+      avgMonthlyViews,
+      creationDate
+    } = channelData;
+
+    // YouTube monetization requirements
+    const YOUTUBE_REQUIREMENTS = {
+      MIN_SUBSCRIBERS: 1000,
+      MIN_WATCH_HOURS: 4000, // hours in past 12 months
+      MIN_VIDEOS: 3, // public videos
+      MIN_CHANNEL_AGE: 30 // days
+    };
+
+    // Calculate channel age in days
+    const channelAgeDays = Math.floor((new Date() - new Date(creationDate)) / (1000 * 60 * 60 * 24));
+
+    // Estimate watch hours (assuming 5 minutes average watch time per view)
+    const estimatedWatchHours = (avgMonthlyViews * 5 / 60) * 12; // Convert to hours per year
+
+    // Check each requirement
+    const requirements = {
+      subscribers: subscribers >= YOUTUBE_REQUIREMENTS.MIN_SUBSCRIBERS,
+      watchHours: estimatedWatchHours >= YOUTUBE_REQUIREMENTS.MIN_WATCH_HOURS,
+      videos: videoCount >= YOUTUBE_REQUIREMENTS.MIN_VIDEOS,
+      channelAge: channelAgeDays >= YOUTUBE_REQUIREMENTS.MIN_CHANNEL_AGE
+    };
+
+    // Calculate compliance score (0-100)
+    const complianceScore = Math.min(
+      (subscribers / YOUTUBE_REQUIREMENTS.MIN_SUBSCRIBERS * 25) +
+      (estimatedWatchHours / YOUTUBE_REQUIREMENTS.MIN_WATCH_HOURS * 25) +
+      (Math.min(videoCount / YOUTUBE_REQUIREMENTS.MIN_VIDEOS, 1) * 25) +
+      (Math.min(channelAgeDays / YOUTUBE_REQUIREMENTS.MIN_CHANNEL_AGE, 1) * 25),
+      100
+    );
+
+    // Determine status
+    const allRequirementsMet = Object.values(requirements).every(req => req);
+    const status = allRequirementsMet ? "monetized" :
+                  complianceScore >= 70 ? "eligible" :
+                  complianceScore >= 40 ? "growing" : "not_eligible";
+
+    return {
+      status,
+      complianceScore: Math.round(complianceScore),
+      requirements,
+      estimatedWatchHours: Math.round(estimatedWatchHours),
+      channelAgeDays,
+      youtubeRequirements: YOUTUBE_REQUIREMENTS
+    };
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -16,7 +73,7 @@ export default function ChannelEstimator() {
     setData(null);
 
     try {
-      const res = await fetch(`http://localhost:5000/api/channel-estimate`, {
+      const res = await fetch(`https://3d-campervan-configurator-production.up.railway.app/api/channel-estimate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ channelUrl }),
@@ -25,12 +82,63 @@ export default function ChannelEstimator() {
       if (!res.ok) throw new Error("Failed to fetch estimates");
 
       const json = await res.json();
-      setData(json);
+
+      // Calculate monetization status
+      const monetizationData = calculateMonetizationStatus(json);
+
+      // Merge with original data
+      setData({
+        ...json,
+        monetization: monetizationData
+      });
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
+  };
+
+  // Get status display configuration
+  const getMonetizationConfig = (status) => {
+    const config = {
+      monetized: {
+        color: "green",
+        bgColor: "bg-green-50",
+        borderColor: "border-green-500",
+        textColor: "text-green-700",
+        icon: "✅",
+        label: "Monetized",
+        description: "Channel meets all YouTube Partner Program requirements"
+      },
+      eligible: {
+        color: "blue",
+        bgColor: "bg-blue-50",
+        borderColor: "border-blue-500",
+        textColor: "text-blue-700",
+        icon: "📊",
+        label: "Eligible Soon",
+        description: "Channel is close to meeting monetization requirements"
+      },
+      growing: {
+        color: "yellow",
+        bgColor: "bg-yellow-50",
+        borderColor: "border-yellow-500",
+        textColor: "text-yellow-700",
+        icon: "🌱",
+        label: "Growing",
+        description: "Channel needs significant growth to meet requirements"
+      },
+      not_eligible: {
+        color: "red",
+        bgColor: "bg-red-50",
+        borderColor: "border-red-500",
+        textColor: "text-red-700",
+        icon: "⏳",
+        label: "Not Eligible",
+        description: "Channel does not meet basic requirements"
+      }
+    };
+    return config[status] || config.not_eligible;
   };
 
   return (
@@ -50,7 +158,7 @@ export default function ChannelEstimator() {
               YouTube Channel Revenue Estimator
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-2">
-              Get accurate revenue estimates for any YouTube channel with our advanced analytics
+              Get accurate revenue estimates and monetization status for any YouTube channel
             </p>
           </div>
         </div>
@@ -136,10 +244,62 @@ export default function ChannelEstimator() {
               </div>
             )}
 
+            {/* Monetization Status Banner */}
+            {data.monetization && (
+              <div className={`rounded-xl md:rounded-2xl shadow-lg border-l-4 p-4 sm:p-6 ${
+                getMonetizationConfig(data.monetization.status).bgColor
+              } ${getMonetizationConfig(data.monetization.status).borderColor}`}>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{getMonetizationConfig(data.monetization.status).icon}</span>
+                    <div>
+                      <h3 className={`text-lg sm:text-xl font-bold ${getMonetizationConfig(data.monetization.status).textColor}`}>
+                        {getMonetizationConfig(data.monetization.status).label}
+                      </h3>
+                      <p className="text-gray-600 text-sm sm:text-base">
+                        {getMonetizationConfig(data.monetization.status).description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="text-center">
+                      <div className={`text-2xl font-bold ${getMonetizationConfig(data.monetization.status).textColor}`}>
+                        {data.monetization.complianceScore}%
+                      </div>
+                      <div className="text-gray-600 text-sm">Compliance Score</div>
+                    </div>
+                    <div className="w-16 h-16 relative">
+                      <svg className="w-full h-full" viewBox="0 0 36 36">
+                        <path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#E5E7EB"
+                          strokeWidth="3"
+                        />
+                        <path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke={getMonetizationConfig(data.monetization.status).color === 'green' ? '#10B981' :
+                                 getMonetizationConfig(data.monetization.status).color === 'blue' ? '#3B82F6' :
+                                 getMonetizationConfig(data.monetization.status).color === 'yellow' ? '#F59E0B' : '#EF4444'}
+                          strokeWidth="3"
+                          strokeDasharray={`${data.monetization.complianceScore}, 100`}
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Navigation Tabs */}
             <div className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden">
               <div className="flex flex-col sm:flex-row border-b border-gray-200">
-                {['overview', 'revenue', 'analytics'].map((tab) => (
+                {['overview', 'revenue', 'monetization', 'analytics'].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -151,6 +311,7 @@ export default function ChannelEstimator() {
                   >
                     {tab === 'overview' && 'Channel Overview'}
                     {tab === 'revenue' && 'Revenue Analysis'}
+                    {tab === 'monetization' && 'Monetization Status'}
                     {tab === 'analytics' && 'Advanced Analytics'}
                   </button>
                 ))}
@@ -278,6 +439,115 @@ export default function ChannelEstimator() {
                           ))}
                         </tbody>
                       </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Monetization Tab */}
+              {activeTab === 'monetization' && data.monetization && (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                  {/* Requirements Status */}
+                  <div className="bg-white rounded-xl shadow-lg p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">YouTube Partner Program Requirements</h3>
+                    <div className="space-y-4">
+                      {[
+                        {
+                          key: 'subscribers',
+                          label: '1,000 Subscribers',
+                          current: data.subscribers,
+                          required: data.monetization.youtubeRequirements.MIN_SUBSCRIBERS,
+                          met: data.monetization.requirements.subscribers
+                        },
+                        {
+                          key: 'watchHours',
+                          label: '4,000 Watch Hours (yearly)',
+                          current: data.monetization.estimatedWatchHours,
+                          required: data.monetization.youtubeRequirements.MIN_WATCH_HOURS,
+                          met: data.monetization.requirements.watchHours
+                        },
+                        {
+                          key: 'videos',
+                          label: '3 Public Videos',
+                          current: data.videoCount,
+                          required: data.monetization.youtubeRequirements.MIN_VIDEOS,
+                          met: data.monetization.requirements.videos
+                        },
+                        {
+                          key: 'channelAge',
+                          label: '30 Days Channel Age',
+                          current: data.monetization.channelAgeDays,
+                          required: data.monetization.youtubeRequirements.MIN_CHANNEL_AGE,
+                          met: data.monetization.requirements.channelAge
+                        }
+                      ].map((req, index) => (
+                        <div key={req.key} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-3 h-3 rounded-full ${
+                              req.met ? 'bg-green-500' : 'bg-red-500'
+                            }`}></div>
+                            <span className="font-medium">{req.label}</span>
+                          </div>
+                          <div className="text-right">
+                            <div className={`font-bold ${req.met ? 'text-green-600' : 'text-red-600'}`}>
+                              {req.current.toLocaleString()} / {req.required.toLocaleString()}
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              {req.met ? '✓ Met' : '✗ Not Met'}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Progress Analysis */}
+                  <div className="bg-white rounded-xl shadow-lg p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">Progress Analysis</h3>
+                    <div className="space-y-6">
+                      <div>
+                        <div className="flex justify-between mb-2">
+                          <span className="font-medium">Overall Compliance</span>
+                          <span className="font-bold text-green-600">{data.monetization.complianceScore}%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-3">
+                          <div
+                            className="bg-green-500 h-3 rounded-full transition-all duration-500"
+                            style={{ width: `${data.monetization.complianceScore}%` }}
+                          ></div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center p-4 bg-blue-50 rounded-lg">
+                          <div className="text-2xl font-bold text-blue-600">
+                            {Math.max(0, data.monetization.youtubeRequirements.MIN_SUBSCRIBERS - data.subscribers).toLocaleString()}
+                          </div>
+                          <div className="text-sm text-blue-600">Subscribers Needed</div>
+                        </div>
+                        <div className="text-center p-4 bg-purple-50 rounded-lg">
+                          <div className="text-2xl font-bold text-purple-600">
+                            {Math.max(0, data.monetization.youtubeRequirements.MIN_WATCH_HOURS - data.monetization.estimatedWatchHours).toLocaleString()}h
+                          </div>
+                          <div className="text-sm text-purple-600">Watch Hours Needed</div>
+                        </div>
+                      </div>
+
+                      <div className="p-4 bg-yellow-50 rounded-lg">
+                        <h4 className="font-semibold text-yellow-800 mb-2">Recommendations</h4>
+                        <ul className="text-sm text-yellow-700 space-y-1">
+                          {!data.monetization.requirements.subscribers && (
+                            <li>• Focus on subscriber growth through consistent content</li>
+                          )}
+                          {!data.monetization.requirements.watchHours && (
+                            <li>• Increase video length and watch time retention</li>
+                          )}
+                          {data.monetization.status === 'monetized' && (
+                            <li>• Maintain consistency to keep monetization status</li>
+                          )}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
