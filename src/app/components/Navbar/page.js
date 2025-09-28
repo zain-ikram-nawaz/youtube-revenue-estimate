@@ -32,12 +32,12 @@ export default function Navbar() {
             >
               Guide
             </Link>
-            <Link
+            {/* <Link
               href="/blog"
               className="text-red-900 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
             >
               Blog
-            </Link>
+            </Link> */}
             <Link
               href="/about-us"
               className="text-red-900 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
