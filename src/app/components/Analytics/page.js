@@ -13,7 +13,7 @@ export default function Analytics({ data }) {
                       Analysis Notes
                     </h3>
                     <ul className="space-y-2">
-                      {data.notes.map((note, i) => (
+                      {data?.notes.map((note, i) => (
                         <li key={i} className="flex items-start gap-2 p-2 sm:p-3 bg-red-50 rounded-lg">
                           <svg className="w-3 h-3 sm:w-4 sm:h-4 text-red-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
@@ -32,13 +32,13 @@ export default function Analytics({ data }) {
                         <div className="flex justify-between mb-1">
                           <span className="text-sm font-medium text-gray-600">Views per Subscriber</span>
                           <span className="text-sm font-bold text-red-600">
-                            {((data.totalViews / data.subscribers) || 0).toFixed(1)} views/sub
+                            {((data?.totalViews / data?.subscribers) || 0).toFixed(1)} views/sub
                           </span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <div
                             className="bg-red-600 h-2 rounded-full transition-all duration-500"
-                            style={{ width: `${Math.min((data.totalViews / data.subscribers) / 50 * 100, 100)}%` }}
+                            style={{ width: `${Math.min((data?.totalViews / data?.subscribers) / 50 * 100, 100)}%` }}
                           ></div>
                         </div>
                       </div>
@@ -47,13 +47,13 @@ export default function Analytics({ data }) {
                         <div className="flex justify-between mb-1">
                           <span className="text-sm font-medium text-gray-600">Content Frequency</span>
                           <span className="text-sm font-bold text-red-600">
-                            {(data.videoCount / Math.max((new Date() - new Date(data.creationDate)) / (365.25 * 24 * 60 * 60 * 1000), 1)).toFixed(1)} videos/year
+                            {(data?.videoCount / Math.max((new Date() - new Date(data?.creationDate)) / (365.25 * 24 * 60 * 60 * 1000), 1)).toFixed(1)} videos/year
                           </span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <div
                             className="bg-red-600 h-2 rounded-full transition-all duration-500"
-                            style={{ width: `${Math.min((data.videoCount / Math.max((new Date() - new Date(data.creationDate)) / (365.25 * 24 * 60 * 60 * 1000), 1)) / 100 * 100, 100)}%` }}
+                            style={{ width: `${Math.min((data?.videoCount / Math.max((new Date() - new Date(data?.creationDate)) / (365.25 * 24 * 60 * 60 * 1000), 1)) / 100 * 100, 100)}%` }}
                           ></div>
                         </div>
                       </div>

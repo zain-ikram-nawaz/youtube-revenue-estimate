@@ -58,10 +58,13 @@ export default function page() {
           {/* Our Story Section */}
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Story</h2>
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">From Creator Frustration to Innovative Solution</h3>
+           <h3 className="text-xl font-semibold text-gray-800 mb-4">
+  From Creator Frustration to Innovative Solution
+</h3>
+
             <p className="text-gray-700 mb-4">
-              YT Revenue Pro was born when its founder, a YouTube enthusiast and developer, grew frustrated with the lack of transparent revenue estimation tools available in the market.
-            </p>
+  YT Revenue Pro was born when it&apos;s founder, a YouTube enthusiast and developer, grew frustrated with the lack of transparent revenue estimation tools available in the market.
+</p>
             <p className="text-gray-700 mb-4">
               After struggling to find accurate data about potential earnings and watching fellow creators make important decisions based on incomplete information, the decision was made to build a better solution.
             </p>
@@ -79,9 +82,10 @@ export default function page() {
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-2">Zain Ikram</h3>
               <p className="text-red-600 font-medium mb-4">Founder & Developer</p>
-              <p className="text-gray-600 text-sm">
-                "As the sole creator behind YT Revenue Pro, I am passionate about empowering content creators with the data they need to succeed. As a developer and YouTube enthusiast, I built this platform to offer the transparency and accuracy I felt was missing from other tools. My commitment is to continuously improve this platform to help every creator understand their channel's true potential."
-              </p>
+            <p className="text-gray-600 text-sm">
+  &quot;As the sole creator behind YT Revenue Pro, I am passionate about empowering content creators with the data they need to succeed. As a developer and YouTube enthusiast, I built this platform to offer the transparency and accuracy I felt was missing from other tools. My commitment is to continuously improve this platform to help every creator understand their channel&apos;s true potential.&quot;
+</p>
+
             </div>
           </div>
 

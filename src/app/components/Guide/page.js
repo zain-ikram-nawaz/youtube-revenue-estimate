@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import { useState } from 'react';
 
 const YouTubeGuidePage = () => {
@@ -235,206 +236,269 @@ const YouTubeGuidePage = () => {
     topic.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-red-50 py-8 md:py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
 
-        {/* Header Section */}
-        <div className="text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-red-600 rounded-full mb-4 md:mb-6 shadow-lg">
-            <svg
-              className="w-8 h-8 md:w-10 md:h-10 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            YouTube Creator Guide
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-            Master YouTube growth with our comprehensive guides. From monetization to analytics, we've got you covered.
-          </p>
+return (
+  <div className="min-h-screen bg-gradient-to-br from-white to-red-50 py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto">
+
+      {/* Header Section */}
+      <div className="text-center mb-12 md:mb-16">
+        <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-red-600 rounded-full mb-4 md:mb-6 shadow-lg">
+          <svg
+            className="w-8 h-8 md:w-10 md:h-10 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
         </div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          YouTube Creator Guide
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+          Master YouTube growth with our comprehensive guides. From monetization to analytics,
+          we&apos;ve got you covered.
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar - Topics List */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Topics</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Sidebar - Topics List */}
+        <div className="lg:col-span-1">
+          <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Topics</h2>
 
-              {/* Search Box */}
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Search guides..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
+            {/* Search Box */}
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Search guides..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+              />
+            </div>
 
-              {/* Topics List */}
-              <div className="space-y-2 max-h-96 overflow-y-auto">
-                {filteredTopics.map((topic) => (
-                  <button
-                    key={topic}
-                    onClick={() => setActiveTopic(topic)}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                      activeTopic === topic
-                        ? 'bg-red-50 text-red-700 border-l-4 border-red-600'
-                        : 'text-gray-600 hover:bg-gray-50'
-                    }`}
-                  >
-                    {topic}
-                  </button>
-                ))}
-              </div>
+            {/* Topics List */}
+            <div className="space-y-2 max-h-96 overflow-y-auto">
+              {filteredTopics.map((topic) => (
+                <button
+                  key={topic}
+                  onClick={() => setActiveTopic(topic)}
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                    activeTopic === topic
+                      ? "bg-red-50 text-red-700 border-l-4 border-red-600"
+                      : "text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {topic}
+                </button>
+              ))}
+            </div>
 
-              {/* Quick Stats */}
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <h3 className="font-semibold text-gray-900 mb-3">Guide Stats</h3>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="text-center bg-gray-50 p-2 rounded">
-                    <div className="font-bold text-gray-900">{topics.length}</div>
-                    <div className="text-gray-600">Topics</div>
-                  </div>
-                  <div className="text-center bg-gray-50 p-2 rounded">
-                    <div className="font-bold text-gray-900">50K+</div>
-                    <div className="text-gray-600">Readers</div>
-                  </div>
+            {/* Quick Stats */}
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <h3 className="font-semibold text-gray-900 mb-3">Guide Stats</h3>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                <div className="text-center bg-gray-50 p-2 rounded">
+                  <div className="font-bold text-gray-900">{topics.length}</div>
+                  <div className="text-gray-600">Topics</div>
+                </div>
+                <div className="text-center bg-gray-50 p-2 rounded">
+                  <div className="font-bold text-gray-900">50K+</div>
+                  <div className="text-gray-600">Readers</div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-              {guideTopics[activeTopic] ? (
-                <>
-                  <div className="mb-6">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-                      {guideTopics[activeTopic].title}
-                    </h2>
-                    <p className="text-lg text-gray-600 mb-4">
-                      {guideTopics[activeTopic].description}
-                    </p>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <span>Last updated: January 2024</span>
-                      <span className="mx-2">•</span>
-                      <span>10 min read</span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div
-                    className="prose prose-lg max-w-none mb-8"
-                    dangerouslySetInnerHTML={{ __html: guideTopics[activeTopic].content }}
-                  />
-
-                  {/* Pro Tips */}
-                  {guideTopics[activeTopic].tips && (
-                    <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center">
-                        <svg className="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                        Pro Tips
-                      </h3>
-                      <ul className="space-y-2">
-                        {guideTopics[activeTopic].tips.map((tip, index) => (
-                          <li key={index} className="flex items-start">
-                            <svg className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            <span className="text-gray-700">{tip}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="text-center py-12">
-                  <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Guide Coming Soon</h3>
-                  <p className="text-gray-600">
-                    We're working on the "{activeTopic}" guide. Check back soon for comprehensive content on this topic.
+        {/* Main Content */}
+        <div className="lg:col-span-3">
+          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+            {guideTopics[activeTopic] ? (
+              <>
+                <div className="mb-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+                    {guideTopics[activeTopic].title}
+                  </h2>
+                  <p className="text-lg text-gray-600 mb-4">
+                    {guideTopics[activeTopic].description}
                   </p>
-                </div>
-              )}
-
-              {/* Navigation */}
-              <div className="flex justify-between items-center pt-8 mt-8 border-t border-gray-200">
-                <button className="flex items-center text-red-600 hover:text-red-700 font-medium">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  Previous Guide
-                </button>
-                <button className="flex items-center text-red-600 hover:text-red-700 font-medium">
-                  Next Guide
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Related Guides */}
-            <div className="mt-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Related Guides</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {topics.slice(0, 4).map((topic) => (
-                  <div key={topic} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-                    <h4 className="font-semibold text-gray-900 mb-2">{topic}</h4>
-                    <p className="text-gray-600 text-sm mb-3">
-                      Learn everything about {topic.toLowerCase()} and how to implement it...
-                    </p>
-                    <button
-                      onClick={() => setActiveTopic(topic)}
-                      className="text-red-600 hover:text-red-700 text-sm font-medium"
-                    >
-                      Read Guide →
-                    </button>
+                  <div className="flex items-center text-sm text-gray-500">
+                    <span>Last updated: January 2024</span>
+                    <span className="mx-2">•</span>
+                    <span>10 min read</span>
                   </div>
-                ))}
+                </div>
+
+                {/* Content */}
+                <div
+                  className="prose prose-lg max-w-none mb-8"
+                  dangerouslySetInnerHTML={{ __html: guideTopics[activeTopic].content }}
+                />
+
+                {/* Pro Tips */}
+                {guideTopics[activeTopic].tips && (
+                  <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center">
+                      <svg
+                        className="w-5 h-5 text-blue-500 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
+                      </svg>
+                      Pro Tips
+                    </h3>
+                    <ul className="space-y-2">
+                      {guideTopics[activeTopic].tips.map((tip, index) => (
+                        <li key={index} className="flex items-start">
+                          <svg
+                            className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span className="text-gray-700">{tip}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-center py-12">
+                <svg
+                  className="w-16 h-16 text-gray-400 mx-auto mb-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Guide Coming Soon</h3>
+                <p>
+                  We&apos;re working on the &quot;YouTube Guide&quot; and it&apos;s coming soon.
+                </p>
               </div>
+            )}
+
+            {/* Navigation */}
+            <div className="flex justify-between items-center pt-8 mt-8 border-t border-gray-200">
+              <button className="flex items-center text-red-600 hover:text-red-700 font-medium">
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                Previous Guide
+              </button>
+              <button className="flex items-center text-red-600 hover:text-red-700 font-medium">
+                Next Guide
+                <svg
+                  className="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
-        </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl p-8 md:p-12 text-white">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Grow Your YouTube Channel?</h2>
-            <p className="text-red-100 mb-6 max-w-2xl mx-auto text-lg">
-              Start implementing these strategies today and track your progress with our free YouTube analytics tools.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/"
-                className="inline-flex items-center px-6 py-3 bg-white text-red-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                Try Revenue Calculator
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-red-600 transition-colors"
-              >
-                Get Personalized Help
-              </a>
+          {/* Related Guides */}
+          <div className="mt-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Related Guides</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {topics.slice(0, 4).map((topic) => (
+                <div
+                  key={topic}
+                  className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
+                >
+                  <h4 className="font-semibold text-gray-900 mb-2">{topic}</h4>
+                  <p className="text-gray-600 text-sm mb-3">
+                    Learn everything about {topic.toLowerCase()} and how to implement it...
+                  </p>
+                  <button
+                    onClick={() => setActiveTopic(topic)}
+                    className="text-red-600 hover:text-red-700 text-sm font-medium"
+                  >
+                    Read Guide →
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* CTA Section */}
+      <div className="text-center mt-16">
+        <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl p-8 md:p-12 text-white">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Ready to Grow Your YouTube Channel?
+          </h2>
+          <p className="text-red-100 mb-6 max-w-2xl mx-auto text-lg">
+            Start implementing these strategies today and track your progress with our free YouTube analytics tools.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/"
+              className="inline-flex items-center px-6 py-3 bg-white text-red-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
+            >
+              Try Revenue Calculator
+            </Link>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-red-600 transition-colors"
+            >
+              Get Personalized Help
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
-  );
+  </div>
+);
+
+
 };
 
 export default YouTubeGuidePage;
