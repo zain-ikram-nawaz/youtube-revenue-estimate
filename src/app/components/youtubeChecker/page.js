@@ -134,7 +134,7 @@ export default function ChannelEstimator() {
     setData(null);
 
     try {
-      const res = await fetch(`/api/channel-estimate`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/channel-estimate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ channelUrl }),
