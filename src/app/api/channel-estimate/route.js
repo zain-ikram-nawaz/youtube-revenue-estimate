@@ -1,6 +1,11 @@
 import axios from "axios";
+import Cors from "cors";
+import initMiddleware from "../../../lib/init-middleware";
 
-const API_KEY = process.env.YOUTUBE_API_KEY;
+const corsMiddleware = initMiddleware(Cors({
+    methods: ["POST", "GET", "OPTIONS"],
+    origin: ["https://youtube-revenue-estimate.vercel.app"], // ya specific domain
+  }));
 
 function extractChannelId(url) {
   const matchId = url.match(/channel\/([a-zA-Z0-9_-]+)/);
@@ -13,6 +18,11 @@ function extractChannelId(url) {
 }
 
 export async function POST(req) {
+    await corsMiddleware(req, res); // <- yeh line important hai
+
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
   try {
     const body = await req.json();
     const { channelUrl } = body;
@@ -30,7 +40,7 @@ export async function POST(req) {
     // Handle resolve
     if (channelUrl.includes("@")) {
       const handleRes = await axios.get(
-        `https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=${channelIdentifier}&key=${API_KEY}`
+        `https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=${channelIdentifier}&key=${process.env.YOUTUBE_API_KEY}`
       );
       if (handleRes.data.items.length > 0) {
         channelId = handleRes.data.items[0].id;
@@ -48,7 +58,7 @@ export async function POST(req) {
 
     // Channel details
     const ytRes = await axios.get(
-      `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${API_KEY}`
+      `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${process.env.YOUTUBE_API_KEY}`
     );
 
     const channel = ytRes.data.items[0];
@@ -135,7 +145,7 @@ export async function POST(req) {
 
     // Shorts vs Long videos
     const searchRes = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=id&maxResults=50&order=date&type=video`
+      `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&channelId=${channelId}&part=id&maxResults=50&order=date&type=video`
     );
 
     const videoIds = searchRes.data.items.map((v) => v.id.videoId).join(",");
@@ -143,7 +153,7 @@ export async function POST(req) {
 
     if (videoIds.length > 0) {
       const videosRes = await axios.get(
-        `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=contentDetails`
+        `https://www.googleapis.com/youtube/v3/videos?key=${process.env.YOUTUBE_API_KEY}&id=${videoIds}&part=contentDetails`
       );
 
       let shortsCount = 0;
