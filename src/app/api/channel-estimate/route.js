@@ -1,11 +1,16 @@
 import axios from "axios";
-import Cors from "cors";
-import initMiddleware from "../../../lib/init-middleware";
 
-const corsMiddleware = initMiddleware(Cors({
-    methods: ["POST", "GET", "OPTIONS"],
-    origin: ["https://youtube-revenue-estimate.vercel.app"], // ya specific domain
-  }));
+
+const CORS_ORIGIN = process.env.NEXT_PUBLIC_CORS_ORIGIN || "*";
+
+function corsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": CORS_ORIGIN,
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+}
+
 
 function extractChannelId(url) {
   const matchId = url.match(/channel\/([a-zA-Z0-9_-]+)/);
@@ -18,11 +23,6 @@ function extractChannelId(url) {
 }
 
 export async function POST(req) {
-    await corsMiddleware(req, res); // <- yeh line important hai
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
   try {
     const body = await req.json();
     const { channelUrl } = body;
@@ -31,7 +31,9 @@ export async function POST(req) {
     if (!channelIdentifier) {
       return new Response(
         JSON.stringify({ error: "Invalid channel URL" }),
-        { status: 400 }
+        { status: 400,
+          headers: corsHeaders(),
+         }
       );
     }
 
@@ -52,7 +54,10 @@ export async function POST(req) {
     if (!channelId) {
       return new Response(
         JSON.stringify({ error: "Channel not found" }),
-        { status: 404 }
+        { status: 404,
+          headers: corsHeaders(),
+
+         }
       );
     }
 
@@ -65,7 +70,9 @@ export async function POST(req) {
     if (!channel) {
       return new Response(
         JSON.stringify({ error: "Channel not found" }),
-        { status: 404 }
+        { status: 404,
+          headers: corsHeaders(),
+         }
       );
     }
 
@@ -212,13 +219,20 @@ export async function POST(req) {
           "shortsRatio is based on last 50 videos (duration <60s = short).",
         ],
       }),
-      { status: 200 }
+      { status: 200, headers: corsHeaders() }
     );
   } catch (error) {
     console.error(error.response?.data || error.message);
     return new Response(
       JSON.stringify({ error: "Something went wrong" }),
-      { status: 500 }
+      { status: 500, headers: corsHeaders() }
     );
   }
+}
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: corsHeaders(),
+  });
 }
