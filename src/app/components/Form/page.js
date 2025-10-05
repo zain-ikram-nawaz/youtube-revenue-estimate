@@ -1,9 +1,10 @@
 'use client'
 import React from 'react'
+import ReCAPTCHA from "react-google-recaptcha";
 
-export default function Form({ channelUrl, setChannelUrl, loading, error, handleSubmit }) {
+export default function Form({ channelUrl, setChannelUrl, loading, error, handleSubmit,setCaptchaToken }) {
   return (
-    <div className="lg:col-span-8 lg:col-start-3 xl:col-span-6 xl:col-start-4">
+    <div className="lg:col-span-8 lg:col-start-1 xl:col-span-10 xl:col-start-2">
       <div className="bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-xl p-4 sm:p-6 md:p-8 border border-red-100">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -56,6 +57,10 @@ export default function Form({ channelUrl, setChannelUrl, loading, error, handle
               </button>
             </div>
           </div>
+           <ReCAPTCHA
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+        onChange={setCaptchaToken}
+      />
         </form>
 
         {error && (

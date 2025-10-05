@@ -1,17 +1,44 @@
 import axios from "axios";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
+// --- Redis & Rate Limiting Setup ---
+const redis = Redis.fromEnv();
+const rateLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, "10 s"), // 5 requests per 10 sec
+});
 
+// --- Config ---
 const CORS_ORIGIN = process.env.NEXT_PUBLIC_CORS_ORIGIN || "*";
 
+// --- Headers ---
 function corsHeaders() {
   return {
     "Access-Control-Allow-Origin": CORS_ORIGIN,
     "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+}
+function securityHeaders() {
+  return {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "geolocation=()", // disable unwanted browser APIs
+    "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+    "Content-Security-Policy":
+      "default-src 'self'; img-src *; media-src *; frame-ancestors 'none';",
+  };
+}
+function finalHeaders() {
+  return {
+    ...corsHeaders(),
+    ...securityHeaders(),
   };
 }
 
-
+// --- Helpers ---
 function extractChannelId(url) {
   const matchId = url.match(/channel\/([a-zA-Z0-9_-]+)/);
   if (matchId) return matchId[1];
@@ -22,7 +49,19 @@ function extractChannelId(url) {
   return null;
 }
 
+// --- Main API Handler ---
 export async function POST(req) {
+  // --- Rate limit ---
+  const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+  const { success } = await rateLimit.limit(ip);
+
+  if (!success) {
+    return new Response(
+      JSON.stringify({ error: "Too many requests" }),
+      { status: 429, headers: corsHeaders() }
+    );
+  }
+
   try {
     const body = await req.json();
     const { channelUrl } = body;
@@ -31,15 +70,13 @@ export async function POST(req) {
     if (!channelIdentifier) {
       return new Response(
         JSON.stringify({ error: "Invalid channel URL" }),
-        { status: 400,
-          headers: corsHeaders(),
-         }
+        { status: 400, headers: finalHeaders() }
       );
     }
 
     let channelId = null;
 
-    // Handle resolve
+    // --- Handle resolve ---
     if (channelUrl.includes("@")) {
       const handleRes = await axios.get(
         `https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=${channelIdentifier}&key=${process.env.YOUTUBE_API_KEY}`
@@ -54,14 +91,11 @@ export async function POST(req) {
     if (!channelId) {
       return new Response(
         JSON.stringify({ error: "Channel not found" }),
-        { status: 404,
-          headers: corsHeaders(),
-
-         }
+        { status: 404, headers: finalHeaders() }
       );
     }
 
-    // Channel details
+    // --- Channel details ---
     const ytRes = await axios.get(
       `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${process.env.YOUTUBE_API_KEY}`
     );
@@ -70,9 +104,7 @@ export async function POST(req) {
     if (!channel) {
       return new Response(
         JSON.stringify({ error: "Channel not found" }),
-        { status: 404,
-          headers: corsHeaders(),
-         }
+        { status: 404, headers: finalHeaders() }
       );
     }
 
@@ -85,7 +117,7 @@ export async function POST(req) {
     const channelImage = channel.snippet.thumbnails?.high?.url || null;
     const bannerImage = channel.brandingSettings?.image?.bannerExternalUrl || null;
 
-    // Legacy simple lifetime estimate
+    // Legacy revenue
     const legacyEstimatedRevenue = ((totalViews / 1000) * 1.5).toFixed(2);
 
     // Country multipliers
@@ -98,7 +130,8 @@ export async function POST(req) {
       PK: 0.3,
       default: 0.8,
     };
-    const countryFactor = (country && countryRPM[country]) ? countryRPM[country] : countryRPM.default;
+    const countryFactor =
+      (country && countryRPM[country]) ? countryRPM[country] : countryRPM.default;
 
     // Category multipliers
     const categoryFactors = {
@@ -137,7 +170,7 @@ export async function POST(req) {
       revenueEstimates[label] = `$${revenue}`;
     }
 
-    // Approx Monthly Revenue
+    // Monthly revenue
     const monthsSinceCreation =
       (new Date() - new Date(creationDate)) / (1000 * 60 * 60 * 24 * 30);
     const avgMonthlyViews =
@@ -201,7 +234,6 @@ export async function POST(req) {
         channelId,
         subscribers,
         totalViews,
-        views: totalViews,
         videoCount,
         country,
         channelImage,
@@ -219,20 +251,21 @@ export async function POST(req) {
           "shortsRatio is based on last 50 videos (duration <60s = short).",
         ],
       }),
-      { status: 200, headers: corsHeaders() }
+      { status: 200, headers: finalHeaders() }
     );
   } catch (error) {
     console.error(error.response?.data || error.message);
     return new Response(
       JSON.stringify({ error: "Something went wrong" }),
-      { status: 500, headers: corsHeaders() }
+      { status: 500, headers: finalHeaders() }
     );
   }
 }
 
+// --- Preflight OPTIONS handler ---
 export async function OPTIONS() {
-  return new Response(null, {
+  return new Response(JSON.stringify({ success: true }), {
     status: 200,
-    headers: corsHeaders(),
+    headers: finalHeaders(),
   });
 }

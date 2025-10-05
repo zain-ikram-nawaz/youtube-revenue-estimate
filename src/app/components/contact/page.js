@@ -84,8 +84,8 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Phone Support</h3>
-                    <p className="text-gray-600 text-sm mb-1">+1 (555) 123-4567</p>
-                    <p className="text-gray-500 text-xs">Mon-Fri, 9AM-6PM EST</p>
+                    <p className="text-gray-600 text-sm mb-1">+92 308 2821704</p>
+                    <p className="text-gray-500 text-xs">Mon-Fri, 9AM-6PM PSt</p>
                   </div>
                 </div>
 
@@ -97,24 +97,11 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
-                    <p className="text-gray-600 text-sm mb-1">support@ytrevenuepro.com</p>
+                    <p className="text-gray-600 text-sm mb-1">Zainikram704@gmail.com</p>
                     <p className="text-gray-500 text-xs">24/7 email support</p>
                   </div>
                 </div>
 
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Visit Us</h3>
-                    <p className="text-gray-600 text-sm mb-1">123 Creator Street</p>
-                    <p className="text-gray-500 text-xs">San Francisco, CA 94105</p>
-                  </div>
-                </div>
 
                 <div className="flex items-start">
                   <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
@@ -391,7 +378,7 @@ const ContactUs = () => {
                 </svg>
               </Link>
               <Link
-                href="/about"
+                href="/about-us"
                 className="inline-flex items-center px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-red-600 transition-colors"
               >
                 Learn More About Us

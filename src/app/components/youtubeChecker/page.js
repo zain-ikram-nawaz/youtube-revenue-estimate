@@ -11,11 +11,12 @@ import Image from "next/image";
 import Form from "../Form/page";
 
 export default function ChannelEstimator() {
-  const [channelUrl, setChannelUrl] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("overview");
+  const [channelUrl, setChannelUrl] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
 
   // Monetization calculation function
   const calculateMonetizationStatus = (channelData) => {
@@ -127,36 +128,56 @@ export default function ChannelEstimator() {
     };
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    setData(null);
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const res = await fetch(`/api/channel-estimate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ channelUrl }),
-      });
+  if (!captchaToken) {
+    alert("Please verify the reCAPTCHA first!");
+    return;
+  }
 
-      if (!res.ok) throw new Error("Failed to fetch estimates");
+  setLoading(true);
+  setError("");
+  setData(null);
 
-      const json = await res.json();
+  try {
+    // Step 1: Verify captcha
+    const verifyRes = await fetch("/api/verify-captcha", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: captchaToken }),
+    });
+    const verifyData = await verifyRes.json();
 
-      // Calculate monetization status
-      const monetizationData = calculateMonetizationStatus(json);
-
-      setData({
-        ...json,
-        monetization: monetizationData,
-      });
-    } catch (err) {
-      setError(err.message || "Something went wrong");
-    } finally {
+    if (!verifyData.success) {
       setLoading(false);
+      alert("❌ Captcha verification failed!");
+      return;
     }
-  };
+
+    // Step 2: Proceed with channel estimate
+    const res = await fetch(`/api/channel-estimate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ channelUrl }),
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch estimates");
+
+    const json = await res.json();
+    const monetizationData = calculateMonetizationStatus(json);
+
+    setData({
+      ...json,
+      monetization: monetizationData,
+    });
+  } catch (err) {
+    setError(err.message || "Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // Config for monetization status bar
   const getMonetizationConfig = (status) => {
@@ -238,6 +259,8 @@ return (
         </div>
       </div>
 
+
+
       {/* Input Section */}
       <Form
         channelUrl={channelUrl}
@@ -245,6 +268,7 @@ return (
         loading={loading}
         error={error}
         handleSubmit={handleSubmit}
+        setCaptchaToken={setCaptchaToken}
       />
 
       {/* How It Works Section */}
@@ -426,51 +450,12 @@ return (
             </div>
           </div>
 
-          {/* FAQ Section */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
 
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-2">How accurate are these revenue estimates?</h3>
-                <p className="text-gray-700 text-sm">
-                  Our estimates are based on industry averages and publicly available data. While we strive for accuracy,
-                  actual earnings can vary based on many factors including content niche, audience location, seasonality,
-                  and specific channel performance metrics.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-2">Why do CPM rates vary between channels?</h3>
-                <p className="text-gray-700 text-sm">
-                  CPM (Cost Per Mille) rates differ based on audience demographics, content category, video length,
-                  and advertiser demand. Channels with audiences in high-income countries or in lucrative niches
-                  like finance typically earn higher CPMs.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-2">What&apos;s the difference between CPM and RPM?</h3>
-                <p className="text-gray-700 text-sm">
-                  CPM represents what advertisers pay per 1,000 impressions, while RPM is what creators actually
-                  earn per 1,000 views after YouTube takes its 45% share. RPM is typically the more relevant metric
-                  for understanding actual channel earnings.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-2">How long does it take to get monetized on YouTube?</h3>
-                <p className="text-gray-700 text-sm">
-                  After reaching the 1,000 subscriber and 4,000 watch hour thresholds, the YouTube Partner Program
-                  application process typically takes 1-4 weeks. However, some channels may experience longer review
-                  periods depending on content type and compliance history.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       )}
+
     </div>
+
   </div>
 );
 

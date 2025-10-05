@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -12,11 +13,17 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">M</span>
-            </div>
-            <span className="font-bold text-xl text-red-800">MyWebsite</span>
-          </Link>
+  <div className=" overflow-hidden">
+    <Image
+      src="/icon.png"   // icon.png ko public folder me rakho
+      alt="MyWebsite Logo"
+      width={60}
+      height={30}
+      className="object-cover"
+    />
+  </div>
+  {/* <span className="font-bold text-xl text-red-800">MyWebsite</span> */}
+</Link>
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex space-x-8 font-medium">
@@ -50,12 +57,12 @@ export default function Navbar() {
             >
               Contact Us
             </Link>
-            <Link
+            {/* <Link
               href="/tool"
               className="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-lg transition-all duration-200 shadow-md"
             >
               Tool
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -82,33 +89,33 @@ export default function Navbar() {
               Home
             </Link>
             <Link
-              href="/blog"
+              href="/guide"
               className="block text-red-900 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
-              Blog
+              Guide
             </Link>
             <Link
-              href="/about"
+              href="/about-us"
               className="block text-red-900 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               About Us
             </Link>
             <Link
-              href="/contact"
+              href="/contact-us"
               className="block text-red-900 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact Us
             </Link>
-            <Link
+            {/* <Link
               href="/tool"
               className="block bg-red-600 text-white hover:bg-red-700 px-4 py-3 rounded-lg transition-all duration-200 font-medium text-center shadow-md"
               onClick={() => setIsMenuOpen(false)}
             >
               Tool
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

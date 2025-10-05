@@ -1,6 +1,7 @@
 import React from 'react'
+import Link from 'next/link';
 
-export default function page() {
+export default function Footer() {
   return (
     <div>
 
@@ -10,7 +11,7 @@ export default function page() {
     {/* Main Footer Content */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
       {/* Company Info */}
-      <div className="lg:col-span-1">
+      <div className="lg:col-span-2">
         <div className="flex items-center mb-4">
           <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-3">
             <svg
@@ -53,35 +54,31 @@ export default function page() {
         <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
         <ul className="space-y-2">
           <li>
-            <a href="/youtube-revenue-calculator" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Revenue Calculator
-            </a>
+            <Link href="/" className="text-gray-300 hover:text-white transition-colors text-sm">
+              Home
+            </Link>
           </li>
           <li>
-            <a href="/youtube-monetization-guide" className="text-gray-300 hover:text-white transition-colors text-sm">
+            <Link href="/guide" className="text-gray-300 hover:text-white transition-colors text-sm">
               Monetization Guide
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/youtube-cpm-rates" className="text-gray-300 hover:text-white transition-colors text-sm">
-              CPM Rates by Niche
-            </a>
+            <Link href="/about-us" className="text-gray-300 hover:text-white transition-colors text-sm">
+              About Us
+            </Link>
           </li>
           <li>
-            <a href="/youtube-growth-tips" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Growth Strategies
-            </a>
+            <Link href="/contact-us" className="text-gray-300 hover:text-white transition-colors text-sm">
+              Contact Us
+            </Link>
           </li>
-          <li>
-            <a href="/youtube-analytics" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Channel Analytics
-            </a>
-          </li>
+
         </ul>
       </div>
 
       {/* Resources */}
-      <div className="lg:col-span-1">
+      {/* <div className="lg:col-span-1">
         <h3 className="text-lg font-semibold mb-4">Resources</h3>
         <ul className="space-y-2">
           <li>
@@ -110,7 +107,7 @@ export default function page() {
             </a>
           </li>
         </ul>
-      </div>
+      </div> */}
 
       {/* Newsletter */}
       <div className="lg:col-span-1">
@@ -135,7 +132,7 @@ export default function page() {
     </div>
 
     {/* YouTube SEO Keywords Section */}
-    <div className="border-t border-gray-700 pt-8 mb-6">
+    {/* <div className="border-t border-gray-700 pt-8 mb-6">
       <h3 className="text-lg font-semibold mb-4 text-center">YouTube Monetization & Analytics Topics</h3>
       <div className="flex flex-wrap justify-center gap-2">
         {[
@@ -168,44 +165,44 @@ export default function page() {
           </span>
         ))}
       </div>
-    </div>
+    </div> */}
 
     {/* Legal & Bottom Section */}
     <div className="border-t border-gray-700 pt-8">
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="text-gray-400 text-sm mb-4 md:mb-0">
-          <p>&copy; 2024 YT Revenue Pro. All rights reserved.</p>
+          <p>&copy; 2025 YouTube Revenue Estimator. All rights reserved.</p>
           <p className="mt-1">
             This tool provides estimates only. Actual YouTube earnings may vary.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-4 text-sm">
-          <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
+          <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
             Privacy Policy
-          </a>
-          <a href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">
+          </Link>
+          <Link href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">
             Terms of Service
-          </a>
-          <a href="/disclaimer" className="text-gray-400 hover:text-white transition-colors">
+          </Link>
+          <Link href="/disclaimer" className="text-gray-400 hover:text-white transition-colors">
             Disclaimer
-          </a>
-          <a href="/contact" className="text-gray-400 hover:text-white transition-colors">
+          </Link>
+          <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
             Contact
-          </a>
+          </Link>
         </div>
       </div>
 
       {/* Additional SEO Content */}
       <div className="mt-6 text-center text-gray-500 text-xs">
         <p>
-          YT Revenue Pro is an independent tool not affiliated with YouTube or Google.
+          YouTube Revenue Estimator is an independent tool not affiliated with YouTube or Google.
           YouTube is a trademark of Google LLC. Our estimates are based on industry data
           and should be used for informational purposes only.
         </p>
         <p className="mt-2">
           Popular searches: YouTube money calculator, channel earnings estimator,
-          how much do YouTubers make, YouTube CPM rates by country, monetization requirements 2024
+          how much do YouTubers make, YouTube CPM rates by country, monetization requirements 2025
         </p>
       </div>
     </div>
