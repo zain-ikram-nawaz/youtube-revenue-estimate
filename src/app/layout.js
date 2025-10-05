@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 // ✅ Complete SEO + Social + Brand Metadata
 export const metadata = {
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL("https://youtube-revenue-estimate.vercel.app"),
   title: {
     default:
       "YouTube Channel Revenue Estimator | YouTube Analytics & Monetization Tool",
@@ -41,7 +41,7 @@ export const metadata = {
   authors: [
     {
       name: "YouTube Channel Revenue Estimator Team",
-      url: "https://your-domain.com",
+      url: "https://youtube-revenue-estimate.vercel.app",
     },
   ],
   creator: "YouTube Channel Revenue Estimator",
@@ -54,7 +54,7 @@ export const metadata = {
     "max-video-preview": -1,
   },
   alternates: {
-    canonical: "https://your-domain.com/",
+    canonical: "https://youtube-revenue-estimate.vercel.app/",
   },
   icons: {
     icon: "/icon.png",
@@ -66,7 +66,7 @@ export const metadata = {
       "YouTube Channel Revenue Estimator | Free YouTube Analytics Dashboard",
     description:
       "Analyze YouTube monetization, earnings, CPM, RPM, and subscriber growth. Get instant channel analytics and performance insights.",
-    url: "https://your-domain.com",
+    url: "https://youtube-revenue-estimate.vercel.app",
     siteName: "YouTube Channel Revenue Estimator",
     images: [
       {
@@ -116,11 +116,11 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "YouTube Channel Revenue Estimator",
-              url: "https://your-domain.com",
+              url: "https://youtube-revenue-estimate.vercel.app/",
               potentialAction: {
                 "@type": "SearchAction",
                 target:
-                  "https://your-domain.com/?query={search_term_string}",
+                  "https://youtube-revenue-estimate.vercel.app/?query={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
               description:
@@ -130,7 +130,7 @@ export default function RootLayout({ children }) {
                 name: "YouTube Channel Revenue Estimator",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://your-domain.com/icon.png",
+                  url: "https://youtube-revenue-estimate.vercel.app/icon.png",
                 },
               },
             }),

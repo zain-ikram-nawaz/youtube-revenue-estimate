@@ -19,13 +19,13 @@ export const metadata = {
     "Free YouTube Analytics",
   ],
   alternates: {
-    canonical: "https://your-domain.com/",
+    canonical: "https://youtube-revenue-estimate.vercel.app/",
   },
   openGraph: {
     title: "YouTube Channel Revenue Estimator | Free YouTube Analytics Tool",
     description:
       "Analyze any YouTube channel’s earnings, CPM, monetization, and engagement with our free YouTube analytics estimator.",
-    url: "https://your-domain.com/",
+    url: "https://youtube-revenue-estimate.vercel.app/",
     siteName: "YouTube Channel Revenue Estimator",
     images: [
       {
@@ -140,7 +140,7 @@ export default function Home() {
     creator: {
       "@type": "Organization",
       name: "YouTube Channel Revenue Estimator",
-      url: "https://your-domain.com",
+      url: "https://youtube-revenue-estimate.vercel.app/",
     },
   };
 
