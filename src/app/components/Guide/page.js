@@ -3,10 +3,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const YouTubeGuidePage = ({ data }) => {
-
-console.log(data, "data");
-
-
 return (
     <div className="min-h-screen bg-gradient-to-br from-white to-red-50 py-8 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
