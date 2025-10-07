@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://youtube-revenue-estimate.vercel.app
+Host: https://channelincome.com
 
 # Sitemaps
-Sitemap: https://youtube-revenue-estimate.vercel.app/sitemap.xml
+Sitemap: https://channelincome.com/sitemap.xml

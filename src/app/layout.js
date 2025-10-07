@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/page";
 import Footer from "./components/Footer/page";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 
 // ✅ Complete SEO + Social + Brand Metadata
 export const metadata = {
-  metadataBase: new URL("https://youtube-revenue-estimate.vercel.app"),
+  metadataBase: new URL("https://channelincome.com"),
   title: {
     default:
       "YouTube Channel Revenue Estimator | YouTube Analytics & Monetization Tool",
@@ -41,7 +42,7 @@ export const metadata = {
   authors: [
     {
       name: "YouTube Channel Revenue Estimator Team",
-      url: "https://youtube-revenue-estimate.vercel.app",
+      url: "https://channelincome.com",
     },
   ],
   creator: "YouTube Channel Revenue Estimator",
@@ -54,7 +55,7 @@ export const metadata = {
     "max-video-preview": -1,
   },
   alternates: {
-    canonical: "https://youtube-revenue-estimate.vercel.app/",
+    canonical: "https://channelincome.com/",
   },
   icons: {
     icon: "/icon.png",
@@ -66,7 +67,7 @@ export const metadata = {
       "YouTube Channel Revenue Estimator | Free YouTube Analytics Dashboard",
     description:
       "Analyze YouTube monetization, earnings, CPM, RPM, and subscriber growth. Get instant channel analytics and performance insights.",
-    url: "https://youtube-revenue-estimate.vercel.app",
+    url: "https://channelincome.com",
     siteName: "YouTube Channel Revenue Estimator",
     images: [
       {
@@ -116,11 +117,11 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "YouTube Channel Revenue Estimator",
-              url: "https://youtube-revenue-estimate.vercel.app/",
+              url: "https://channelincome.com/",
               potentialAction: {
                 "@type": "SearchAction",
                 target:
-                  "https://youtube-revenue-estimate.vercel.app/?query={search_term_string}",
+                  "https://channelincome.com/?query={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
               description:
@@ -130,7 +131,7 @@ export default function RootLayout({ children }) {
                 name: "YouTube Channel Revenue Estimator",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://youtube-revenue-estimate.vercel.app/icon.png",
+                  url: "https://channelincome.com/icon.png",
                 },
               },
             }),
@@ -141,6 +142,19 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}
       >
+          {/* ✅ Google Analytics Script */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-E89R0241YL"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-E89R0241YL');
+          `}
+        </Script>
         <Navbar />
         <main className="container mx-auto px-4 py-6">{children}</main>
         <Footer />

@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://youtube-revenue-estimate.vercel.app',
+  siteUrl: 'https://channelincome.com',
   generateRobotsTxt: true,
   sitemapSize: 7000,
   changefreq: 'daily',
@@ -9,7 +9,7 @@ module.exports = {
   exclude: ['/404', '/admin'], // pages you don't want indexed
   robotsTxtOptions: {
     additionalSitemaps: [
-      'https://youtube-revenue-estimate.vercel.app/sitemap.xml',
+      'https://channelincome.com/sitemap.xml',
     ],
   },
 };

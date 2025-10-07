@@ -20,7 +20,7 @@
     creator: {
       "@type": "Organization",
       name: "YouTube Channel Revenue Estimator",
-      url: "https://youtube-revenue-estimate.vercel.app",
+      url: "https://channelincome.com",
     },
   };
 
