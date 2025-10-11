@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { connectDB } from "../../lib/db"
 import Blog from "../../../models/Blog"
 import { NextResponse } from "next/server";
