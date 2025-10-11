@@ -6,10 +6,5 @@ module.exports = {
   changefreq: 'daily',
   priority: 0.7,
   autoLastmod: true,
-  exclude: ['/404', '/admin'], // pages you don't want indexed
-  robotsTxtOptions: {
-    additionalSitemaps: [
-      'https://channelincome.com/sitemap.xml',
-    ],
-  },
+  exclude: ['/404', '/admin'],
 };

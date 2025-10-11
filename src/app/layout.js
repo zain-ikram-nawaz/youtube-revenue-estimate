@@ -26,6 +26,8 @@ export const metadata = {
   description:
     "Free YouTube Channel Revenue Estimator — analyze monetization, earnings, CPM, RPM, subscribers, and engagement in one advanced YouTube analytics tool.",
   keywords: [
+    "youtube earnings check",
+    "YouTube Money Calculator",
     "YouTube Channel Analytics",
     "YouTube Revenue Estimator",
     "YouTube Monetization Checker",
@@ -80,19 +82,19 @@ export const metadata = {
     locale: "en_US",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "YouTube Channel Revenue Estimator",
-    description:
-      "Estimate YouTube revenue, CPM, and monetization status — all in one free analytics tool for creators.",
-    creator: "@YourTwitterHandle",
-    images: ["/icon.png"],
-  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "YouTube Channel Revenue Estimator",
+  //   description:
+  //     "Estimate YouTube revenue, CPM, and monetization status — all in one free analytics tool for creators.",
+  //   creator: "@YourTwitterHandle",
+  //   images: ["/icon.png"],
+  // },
   category: "technology",
   applicationName: "YouTube Channel Revenue Estimator",
   generator: "Next.js",
   verification: {
-    google: "google-site-verification-code-here", // 🔹 Add your Google Search Console code
+    google: "ceGH6h4gKdjlKm13KVCK5w3B6H-4X24LNgFnyrGUl44", // 🔹 Add your Google Search Console code
   },
 };
 
