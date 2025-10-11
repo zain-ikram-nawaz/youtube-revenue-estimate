@@ -2,37 +2,36 @@ import YoutubeAnalyzer from "./components/youtubeChecker/page";
 import Guide from "./components/Guide/page";
 import Data from "../data/data.json";
 import FAQ from "./components/FAQ/page";
+
 export const metadata = {
-  title: "YouTube Channel Revenue Estimator | YouTube Analytics Tool",
+  title: "Free YouTube Channel Revenue Estimator | ChannelIncome",
   description:
-    "Free YouTube Channel Revenue Estimator — analyze monetization, earnings, CPM, RPM, subscribers, and views for any channel.",
+    "Use our free YouTube Revenue Estimator to calculate YouTube earnings, CPM, RPM, and monetization eligibility. Track subscribers, views, and engagement in real-time.",
   keywords: [
-    "YouTube Channel Analytics",
     "YouTube Revenue Estimator",
-    "YouTube Monetization Checker",
     "YouTube Earnings Calculator",
-    "YouTube Stats Tracker",
-    "YouTube SEO Tool",
-    "YouTube CPM RPM Calculator",
-    "YouTube Monetization Eligibility Checker",
-    "YouTube Channel Insights",
-    "Free YouTube Analytics",
+    "YouTube Channel Analytics",
+    "YouTube CPM Calculator",
+    "YouTube Monetization Checker",
+    "Free YouTube Analytics Tool",
+    "YouTube Channel Income",
+    "YouTube RPM Estimator",
   ],
   alternates: {
     canonical: "https://channelincome.com/",
   },
   openGraph: {
-    title: "YouTube Channel Revenue Estimator | Free YouTube Analytics Tool",
+    title: "Free YouTube Revenue Estimator | ChannelIncome",
     description:
-      "Analyze any YouTube channel’s earnings, CPM, monetization, and engagement with our free YouTube analytics estimator.",
+      "Check YouTube channel earnings, CPM, RPM, and engagement instantly. ChannelIncome offers a free analytics tool for creators and marketers.",
     url: "https://channelincome.com/",
-    siteName: "YouTube Channel Revenue Estimator",
+    siteName: "ChannelIncome",
     images: [
       {
         url: "/icon.png",
         width: 1200,
         height: 630,
-        alt: "YouTube Channel Revenue Estimator Banner",
+        alt: "Free YouTube Channel Revenue Estimator Preview",
       },
     ],
     locale: "en_US",
@@ -40,9 +39,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "YouTube Channel Revenue Estimator",
+    title: "Free YouTube Channel Revenue Estimator",
     description:
-      "Check YouTube monetization, subscribers, and analytics with our free YouTube channel estimator tool.",
+      "Instantly estimate YouTube channel earnings, CPM, RPM, and engagement metrics for free.",
     images: ["/icon.png"],
   },
 };
@@ -117,43 +116,68 @@ export default function Home() {
     ],
   };
 
-
-  function JsonLd() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "YouTube Channel Revenue Estimator",
-    operatingSystem: "Web",
-    applicationCategory: "UtilityApplication",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-    description:
-      "Free YouTube analytics tool that estimates revenue, monetization eligibility, and channel performance based on subscribers, views, and engagement.",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "1482",
-    },
-    creator: {
-      "@type": "Organization",
+  // ✅ JSON-LD for Software Application
+  function JsonLdApp() {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
       name: "YouTube Channel Revenue Estimator",
-      url: "https://channelincome.com/",
-    },
-  };
+      operatingSystem: "Web",
+      applicationCategory: "UtilityApplication",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      description:
+        "Free YouTube analytics tool that estimates revenue, monetization eligibility, and channel performance based on subscribers, views, and engagement.",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        reviewCount: "1482",
+      },
+      creator: {
+        "@type": "Organization",
+        name: "YouTube Channel Revenue Estimator",
+        url: "https://channelincome.com/",
+      },
+    };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
-}
+    return (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    );
+  }
+
+  // ✅ JSON-LD for FAQ Schema
+  function JsonLdFAQ() {
+    const faqData = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: seoSections.faq.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.a,
+        },
+      })),
+    };
+
+    return (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+      />
+    );
+  }
+
   return (
     <>
-      <JsonLd />
+      <JsonLdApp />
+      <JsonLdFAQ />
       <YoutubeAnalyzer seoSections={seoSections} />
       <Guide data={Data} />
       <FAQ faq={seoSections.faq} />

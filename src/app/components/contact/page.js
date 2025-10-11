@@ -2,7 +2,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+
 const ContactUs = () => {
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,6 +46,7 @@ const ContactUs = () => {
   };
 
   return (
+
     <div className="min-h-screen bg-gradient-to-br from-white to-red-50 py-8 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
 
@@ -60,7 +63,7 @@ const ContactUs = () => {
             </svg>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Contact YT Revenue Pro
+            Contact YouTube Channel Revenue Estimator
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
             Get in touch with our YouTube analytics experts. We&apos;re here to help
@@ -372,7 +375,7 @@ const ContactUs = () => {
                 href="/"
                 className="inline-flex items-center px-6 py-3 bg-white text-red-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
               >
-                Try Revenue Calculator
+                  Try Revenue Estimator
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

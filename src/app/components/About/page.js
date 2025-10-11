@@ -15,7 +15,7 @@ export default function page() {
               </svg>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              About YT Revenue Pro
+              About YouTube Channel Revenue Estimator
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
               Empowering YouTube creators with accurate revenue insights and data-driven growth strategies.
@@ -63,7 +63,7 @@ export default function page() {
 </h3>
 
             <p className="text-gray-700 mb-4">
-  YT Revenue Pro was born when it&apos;s founder, a YouTube enthusiast and developer, grew frustrated with the lack of transparent revenue estimation tools available in the market.
+  YouTube Channel Revenue Estimator was born when it&apos;s founder, a YouTube enthusiast and developer, grew frustrated with the lack of transparent revenue estimation tools available in the market.
 </p>
             <p className="text-gray-700 mb-4">
               After struggling to find accurate data about potential earnings and watching fellow creators make important decisions based on incomplete information, the decision was made to build a better solution.
@@ -83,7 +83,7 @@ export default function page() {
               <h3 className="text-2xl font-semibold text-gray-900 mb-2">Zain Ikram</h3>
               <p className="text-red-600 font-medium mb-4">Founder & Developer</p>
             <p className="text-gray-600 text-sm">
-  &quot;As the sole creator behind YT Revenue Pro, I am passionate about empowering content creators with the data they need to succeed. As a developer and YouTube enthusiast, I built this platform to offer the transparency and accuracy I felt was missing from other tools. My commitment is to continuously improve this platform to help every creator understand their channel&apos;s true potential.&quot;
+  &quot;As the sole creator behind YouTube Channel Revenue Estimator, I am passionate about empowering content creators with the data they need to succeed. As a developer and YouTube enthusiast, I built this platform to offer the transparency and accuracy I felt was missing from other tools. My commitment is to continuously improve this platform to help every creator understand their channel&apos;s true potential.&quot;
 </p>
 
             </div>
@@ -91,7 +91,7 @@ export default function page() {
 
           {/* Why Choose Us Section */}
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Why Choose YT Revenue Pro?</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Why Choose YouTube Channel Revenue Estimator?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="text-center p-4">
                 <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -133,7 +133,7 @@ export default function page() {
           <div className="text-center mt-12">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Ready to Analyze Your YouTube Channel?</h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Join thousands of successful creators who use YT Revenue Pro to make data-driven decisions about their YouTube strategy and monetization.
+              Join thousands of successful creators who use YouTube Channel Revenue Estimator to make data-driven decisions about their YouTube strategy and monetization.
             </p>
             <Link
               href="/"

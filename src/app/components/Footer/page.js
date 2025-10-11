@@ -22,7 +22,8 @@ export default function Footer() {
               <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
             </svg>
           </div>
-          <span className="text-xl font-bold">YT Revenue Pro</span>
+          <span className="text-xl font-bold">YouTube Channel Revenue Estimator
+          </span>
         </div>
         <p className="text-gray-300 text-sm mb-4">
           The most accurate YouTube channel revenue estimator tool. Get detailed insights into monetization potential, channel analytics, and growth strategies.
@@ -171,7 +172,7 @@ export default function Footer() {
     <div className="border-t border-gray-700 pt-8">
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="text-gray-400 text-sm mb-4 md:mb-0">
-          <p>&copy; 2025 YouTube Revenue Estimator. All rights reserved.</p>
+          <p>&copy; 2025 YouTube Channel Revenue Estimator. All rights reserved.</p>
           <p className="mt-1">
             This tool provides estimates only. Actual YouTube earnings may vary.
           </p>
@@ -196,7 +197,7 @@ export default function Footer() {
       {/* Additional SEO Content */}
       <div className="mt-6 text-center text-gray-500 text-xs">
         <p>
-          YouTube Revenue Estimator is an independent tool not affiliated with YouTube or Google.
+          YouTube Channel Revenue Estimator is an independent tool not affiliated with YouTube or Google.
           YouTube is a trademark of Google LLC. Our estimates are based on industry data
           and should be used for informational purposes only.
         </p>
