@@ -11,7 +11,7 @@ import Form from "../Form/page";
 import Loader from "../Loader/page";
 
 export default function ChannelEstimator({seoSections}) {
-  console.log(seoSections,"text")
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -20,6 +20,7 @@ export default function ChannelEstimator({seoSections}) {
   const [captchaToken, setCaptchaToken] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const resultsRef = useRef(null);
+ if (!seoSections) return null; // safety check
 
   // Monetization calculation function (same as before)
   const calculateMonetizationStatus = (channelData) => {
@@ -238,17 +239,17 @@ export default function ChannelEstimator({seoSections}) {
     {/* SEO Content (Static, outside modal for indexing) */}
     <div className="lg:col-span-12 bg-white rounded-xl shadow-lg p-6 mt-6">
       {/* Intro Section */}
-      {seoSections.intro && (
+      {seoSections?.intro && (
         <>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            {seoSections.intro.heading}
+            {seoSections?.intro?.heading}
           </h2>
-          <p className="text-gray-700 mb-4">{seoSections.intro.content}</p>
+          <p className="text-gray-700 mb-4">{seoSections?.intro?.content}</p>
 
-          {seoSections.intro.disclaimer && (
+          {seoSections?.intro?.disclaimer && (
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
               <p className="text-sm text-yellow-700">
-                <strong>Disclaimer:</strong> {seoSections.intro.disclaimer}
+                <strong>Disclaimer:</strong> {seoSections?.intro?.disclaimer}
               </p>
             </div>
           )}
@@ -256,16 +257,16 @@ export default function ChannelEstimator({seoSections}) {
       )}
 
       {/* How It Works Section */}
-      {seoSections.howItWorks && (
+      {seoSections?.howItWorks && (
         <>
           <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">
-            {seoSections.howItWorks.title}
+            {seoSections?.howItWorks?.title}
           </h3>
-          {seoSections.howItWorks.steps && (
+          {seoSections?.howItWorks?.steps && (
             <ul className="list-disc pl-5 text-gray-700 mb-4 space-y-2">
-              {seoSections.howItWorks.steps.map((step, idx) => (
+              {seoSections?.howItWorks?.steps?.map((step, idx) => (
                 <li key={idx}>
-                  <strong>{step.title}:</strong> {step.desc}
+                  <strong>{step?.title}:</strong> {step?.desc}
                 </li>
               ))}
             </ul>
@@ -274,20 +275,20 @@ export default function ChannelEstimator({seoSections}) {
       )}
 
       {/* Monetization Guide Section */}
-      {seoSections.monetizationGuide && (
+      {seoSections?.monetizationGuide && (
         <>
           <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">
-            {seoSections.monetizationGuide.title}
+            {seoSections?.monetizationGuide?.title}
           </h3>
-          {seoSections.monetizationGuide.sections &&
-            seoSections.monetizationGuide.sections.map((section, idx) => (
+          {seoSections?.monetizationGuide?.sections &&
+            seoSections?.monetizationGuide?.sections?.map((section, idx) => (
               <div key={idx} className="mb-4">
                 <h4 className="text-lg font-semibold text-gray-800 mt-2 mb-2">
-                  {section.title}
+                  {section?.title}
                 </h4>
-                {section.list && (
+                {section?.list && (
                   <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                    {section.list.map((item, i) => (
+                    {section?.list?.map((item, i) => (
                       <li key={i}>{item}</li>
                     ))}
                   </ul>
@@ -310,9 +311,9 @@ export default function ChannelEstimator({seoSections}) {
 
       {/* Scrollable Content */}
       <div className="overflow-y-auto flex-1 modal-scroll">
-        {data.bannerImage && (
+        {data?.bannerImage && (
           <Image
-            src={data.bannerImage}
+            src={data?.bannerImage}
             width={1280}
             height={720}
             alt="Channel Banner"
@@ -320,12 +321,12 @@ export default function ChannelEstimator({seoSections}) {
           />
         )}
 
-        <h2 className="text-xl font-bold mb-2">{data.channelName}</h2>
-        <p className="text-gray-600 mb-4">{data.subscribers.toLocaleString()} subscribers</p>
+        <h2 className="text-xl font-bold mb-2">{data?.channelName}</h2>
+        <p className="text-gray-600 mb-4">{data?.subscribers?.toLocaleString()} subscribers</p>
 
-        {data.monetization && (
+        {data?.monetization && (
           <MonetizationStatusBar
-            data={data.monetization}
+            data={data?.monetization}
             getMonetizationConfig={getMonetizationConfig}
           />
         )}

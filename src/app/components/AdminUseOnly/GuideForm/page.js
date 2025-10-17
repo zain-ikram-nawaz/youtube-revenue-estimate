@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function GuideForm() {
   const [form, setForm] = useState({
@@ -234,9 +235,11 @@ export default function GuideForm() {
         <div>
           <input type="file" accept="image/*" onChange={handleImageChange} />
           {preview && (
-            <img
+            <Image
               src={preview}
               alt="preview"
+              width={100}
+              height={100}
               className="mt-2 w-32 h-32 object-cover rounded-md border"
             />
           )}

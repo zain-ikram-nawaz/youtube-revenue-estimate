@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/router";
 
 export default function AddGuide() {
-  const router = useRouter();
   const [form, setForm] = useState({
     title: "",
     content: "",
@@ -49,7 +47,6 @@ export default function AddGuide() {
           author: "",
           image: "",
         });
-        // router.push("/admin/guides");
       } else {
         setMessage("❌ Failed: " + data.message || data.error);
       }
