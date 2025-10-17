@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.channelincome.com" }],
+      "destination": "https://channelincome.com/:1",
+      "permanent": true
+    }
+  ]
+}

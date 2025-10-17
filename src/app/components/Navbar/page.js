@@ -15,8 +15,8 @@ export default function Navbar() {
           <Link href="/" className="flex items-center space-x-2">
   <div className=" overflow-hidden">
     <Image
-      src="/icon.png"   // icon.png ko public folder me rakho
-      alt="MyWebsite Logo"
+      src="/icon.png"
+      alt="Logo"
       width={60}
       height={30}
       className="object-cover"

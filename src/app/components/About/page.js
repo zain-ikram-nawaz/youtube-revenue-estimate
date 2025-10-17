@@ -74,7 +74,7 @@ export default function page() {
           </div>
 
           {/* From the Founder Section */}
-          <div className="mb-16">
+          {/* <div className="mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">From the Founder</h2>
             <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-lg p-6 text-center">
               <div className="w-24 h-24 bg-gradient-to-br from-red-400 to-orange-400 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-3xl">
@@ -87,7 +87,7 @@ export default function page() {
 </p>
 
             </div>
-          </div>
+          </div> */}
 
           {/* Why Choose Us Section */}
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-16">

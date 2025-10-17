@@ -15,6 +15,51 @@ const ContactUs = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
+
+  const guideFaqs = [
+  {
+    "q": "How can I grow my YouTube channel fast?",
+    "a": "Focus on consistent uploads, high-quality content, audience engagement, and optimizing titles, thumbnails, and descriptions. Analyze your metrics and experiment with trends to increase growth."
+  },
+  {
+    "q": "What are the best ways to increase watch time?",
+    "a": "Create longer engaging videos, use playlists to keep viewers on your channel, add end screens and cards, and maintain a strong hook at the beginning of each video."
+  },
+  {
+    "q": "How do I get more subscribers quickly?",
+    "a": "Encourage viewers to subscribe in your videos, collaborate with other creators, interact with your audience through comments and community posts, and create content that solves problems or entertains your niche."
+  },
+  {
+    "q": "How important are thumbnails and titles?",
+    "a": "Thumbnails and titles are critical for click-through rates. Make them eye-catching, relevant, and optimized with keywords to attract viewers."
+  },
+  {
+    "q": "Can I monetize my channel without 1,000 subscribers?",
+    "a": "Direct monetization through YouTube requires 1,000 subscribers and 4,000 watch hours. However, alternative revenue streams include sponsorships, affiliate marketing, and selling products."
+  },
+  {
+    "q": "What content niches earn the most on YouTube?",
+    "a": "Popular high-CPM niches include finance, technology, business, education, health, and gaming. Audience location and engagement also influence revenue."
+  },
+  {
+    "q": "How often should I upload videos?",
+    "a": "Consistency is key. Upload at least once a week or set a schedule your audience can expect. This improves algorithmic favor and audience retention."
+  },
+  {
+    "q": "Should I focus on short videos or long videos?",
+    "a": "Both have advantages. Shorts increase reach and discovery, while long videos increase watch time and revenue potential. Use a mix based on your content strategy."
+  },
+  {
+    "q": "How do I analyze which videos perform best?",
+    "a": "Use YouTube Analytics to track metrics like watch time, audience retention, click-through rate, and engagement. Focus on content types that drive growth and revenue."
+  },
+  {
+    "q": "Can AI tools help grow my YouTube channel?",
+    "a": "Yes, AI tools can assist with video ideas, SEO optimization, thumbnail creation, and audience insights, but content should remain authentic and valuable."
+  }
+];
+
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -87,7 +132,7 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Phone Support</h3>
-                    <p className="text-gray-600 text-sm mb-1">+92 308 2821704</p>
+                    <p className="text-gray-600 text-sm mb-1">Coming Soon...</p>
                     <p className="text-gray-500 text-xs">Mon-Fri, 9AM-6PM PSt</p>
                   </div>
                 </div>
@@ -100,7 +145,7 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
-                    <p className="text-gray-600 text-sm mb-1">Zainikram704@gmail.com</p>
+                    <p className="text-gray-600 text-sm mb-1">Coming Soon...</p>
                     <p className="text-gray-500 text-xs">24/7 email support</p>
                   </div>
                 </div>
@@ -306,62 +351,26 @@ const ContactUs = () => {
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <div className="mt-16">
-          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-              Frequently Asked Questions
-            </h2>
+     {/* FAQ Section */}
+<div className="mt-16">
+  <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+      Frequently Asked Questions
+    </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">How accurate is your YouTube revenue estimator?</h3>
-                  <p className="text-gray-600 text-sm">
-                    Our revenue estimates are based on industry-standard CPM rates and real market data. While we strive for accuracy, actual earnings may vary based on content niche, audience location, and other factors.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Do you store my YouTube channel data?</h3>
-                  <p className="text-gray-600 text-sm">
-                    No, we don&apos;t permanently store your channel data. All analyses are performed in real-time and we adhere to strict privacy standards to protect your information.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Is this service completely free?</h3>
-                  <p className="text-gray-600 text-sm">
-                    Yes! All our YouTube revenue estimation features are completely free to use. We believe in empowering creators with data-driven insights.
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Can I use this for multiple channels?</h3>
-                  <p className="text-gray-600 text-sm">
-                    Absolutely! You can analyze as many YouTube channels as you want. There are no limits on the number of analyses you can perform.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">How often is your data updated?</h3>
-                  <p className="text-gray-600 text-sm">
-                    We update our CPM rates and algorithms weekly to ensure you get the most current and accurate revenue estimates possible.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Do you offer API access?</h3>
-                  <p className="text-gray-600 text-sm">
-                    Currently, we don&apos;t offer public API access. However, for enterprise clients and partnerships, we may provide custom solutions. Contact us for more information.
-                  </p>
-                </div>
-              </div>
-            </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {guideFaqs.map((faq, index) => (
+        <div key={index} className="space-y-6">
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
+            <p className="text-gray-600 text-sm">{faq.a}</p>
           </div>
         </div>
+      ))}
+    </div>
+  </div>
+</div>
+
 
         {/* CTA Section */}
         <div className="text-center mt-12">
