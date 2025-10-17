@@ -4,7 +4,7 @@ import { jwtVerify } from "jose";
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export async function middleware(req) {
-  // console.log("🔥 Middleware triggered for:", req.nextUrl.pathname);
+
   const { pathname } = req.nextUrl;
   const token = req.cookies.get("ycresttoken")?.value;
 
