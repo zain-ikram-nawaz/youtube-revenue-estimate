@@ -351,7 +351,7 @@ const ContactUs = () => {
           </div>
         </div>
 
-     {/* FAQ Section */}
+
 <div className="mt-16">
   <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
     <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
