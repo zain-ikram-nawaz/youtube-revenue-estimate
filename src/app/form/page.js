@@ -19,7 +19,7 @@ export default function AddGuide() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // handle submit
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
