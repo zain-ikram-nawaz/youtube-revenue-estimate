@@ -131,7 +131,7 @@ export default async function GuidePage(props) {
 
         {/* Featured Image */}
         {guide.image && (
-          <div className="relative w-full h-80 md:h-96 lg:h-[500px] mb-12 rounded-3xl overflow-hidden shadow-2xl">
+          <div className="relative w-full h-80 md:h-96 lg:h-[500px] mb-12 rounded-md overflow-hidden shadow-2xl">
             <Image
               src={guide.image}
               alt={guide.title}
