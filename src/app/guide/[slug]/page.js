@@ -49,38 +49,7 @@ export async function generateMetadata(props) {
   };
 }
 
-// Share and Action Buttons Component
-function GuideActions() {
-  const shareGuide = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: document.title,
-        url: window.location.href,
-      });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      // Add toast notification here
-    }
-  };
 
-  return (
-    <div className="flex items-center gap-3">
-      <button
-        onClick={shareGuide}
-        className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
-        title="Share guide"
-      >
-        <Share2 className="w-5 h-5" />
-      </button>
-      <button
-        className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
-        title="Save guide"
-      >
-        <Bookmark className="w-5 h-5" />
-      </button>
-    </div>
-  );
-}
 
 // ✅ Page component
 export default async function GuidePage(props) {

@@ -188,7 +188,7 @@ export default function Footer() {
           <Link href="/disclaimer" className="text-gray-400 hover:text-white transition-colors">
             Disclaimer
           </Link>
-          <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+          <Link href="/contact-us" className="text-gray-400 hover:text-white transition-colors">
             Contact
           </Link>
         </div>
