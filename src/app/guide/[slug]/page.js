@@ -173,13 +173,14 @@ export default async function GuidePage(props) {
             </h3>
             <div className="flex flex-wrap gap-3">
               {guide.tags.map((tag, i) => (
-                <Link
+
+                <button
                   key={i}
-                  href={`/guides?tag=${tag}`}
+                  // href={`/guides?tag=${tag}`}
                   className="px-5 py-3 text-sm bg-red-50 text-red-700 rounded-xl font-semibold hover:bg-red-100 hover:scale-105 transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   #{tag}
-                </Link>
+                </button>
               ))}
             </div>
           </div>
