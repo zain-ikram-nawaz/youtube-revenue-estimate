@@ -239,68 +239,6 @@ export default function ChannelEstimator({ seoSections }) {
           setCaptchaToken={setCaptchaToken}
         />
 
-        {/* SEO Content (Static, outside modal for indexing) */}
-        <div className="lg:col-span-12 bg-white rounded-xl shadow-lg p-6 mt-6">
-          {/* Intro Section */}
-          {seoSections?.intro && (
-            <>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                {seoSections?.intro?.heading}
-              </h2>
-              <p className="text-gray-700 mb-4">{seoSections?.intro?.content}</p>
-
-              {seoSections?.intro?.disclaimer && (
-                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
-                  <p className="text-sm text-yellow-700">
-                    <strong>Disclaimer:</strong> {seoSections?.intro?.disclaimer}
-                  </p>
-                </div>
-              )}
-            </>
-          )}
-
-          {/* How It Works Section */}
-          {seoSections?.howItWorks && (
-            <>
-              <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">
-                {seoSections?.howItWorks?.title}
-              </h3>
-              {seoSections?.howItWorks?.steps && (
-                <ul className="list-disc pl-5 text-gray-700 mb-4 space-y-2">
-                  {seoSections?.howItWorks?.steps?.map((step, idx) => (
-                    <li key={idx}>
-                      <strong>{step?.title}:</strong> {step?.desc}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </>
-          )}
-
-          {/* Monetization Guide Section */}
-          {seoSections?.monetizationGuide && (
-            <>
-              <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">
-                {seoSections?.monetizationGuide?.title}
-              </h3>
-              {seoSections?.monetizationGuide?.sections &&
-                seoSections?.monetizationGuide?.sections?.map((section, idx) => (
-                  <div key={idx} className="mb-4">
-                    <h4 className="text-lg font-semibold text-gray-800 mt-2 mb-2">
-                      {section?.title}
-                    </h4>
-                    {section?.list && (
-                      <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                        {section?.list?.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))}
-            </>
-          )}
-        </div>
         {/* Modal */}
         {isModalOpen && data && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-70">

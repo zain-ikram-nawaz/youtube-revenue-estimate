@@ -26,17 +26,18 @@ export const metadata = {
   description:
     "Free YouTube Channel Revenue Estimator — analyze monetization, earnings, CPM, RPM, subscribers, and engagement in one advanced YouTube analytics tool.",
   keywords: [
+    "youtube income",
+    "youtube income calculator",
     "youtube earnings check",
-    "YouTube Money Calculator",
+    "YouTube money calculator",
     "YouTube Channel Analytics",
     "YouTube Revenue Estimator",
     "YouTube Monetization Checker",
+    "youtube earnings",
+    "youtube income checker",
+    "youtube view money",
     "YouTube Earnings Calculator",
-    "YouTube CPM RPM Calculator",
-    "YouTube Subscribers Tracker",
-    "YouTube Views Estimator",
     "YouTube SEO Tool",
-    "YouTube Analytics Dashboard",
     "YouTube Growth Tracker",
     "YouTube Channel Insights",
     "YouTube Performance Report",
@@ -144,7 +145,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}
       >
-          {/* ✅ Google Analytics Script */}
+        {/* ✅ Google Analytics Script */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-E89R0241YL"
           strategy="afterInteractive"
