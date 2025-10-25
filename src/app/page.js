@@ -62,6 +62,15 @@ export default async function Home() {
   const seoSections = {
     "faq": [
       {
+        "q": "What is YouTube CPM?",
+        "a": "CPM stands for Cost Per Mille — it represents how much advertisers pay YouTube for every 1,000 ad impressions on videos. For example, if a video has a CPM of $5, it means advertisers are paying $5 for every 1,000 ad views. However, creators only receive a portion of this amount after YouTube’s revenue share is deducted."
+      },
+      {
+        "q": "What is YouTube RPM?",
+        "a": "RPM stands for Revenue Per Mille — it shows how much actual revenue a YouTube creator earns per 1,000 video views after YouTube takes its share. RPM gives a clearer idea of how much money you truly make from your content, including ads, memberships, and other monetized features."
+      }
+,
+      {
         "q": "What are the requirements for YouTube monetization?",
         "a": "You need at least 1,000 subscribers and 4,000 watch hours in the past 12 months to qualify for the YouTube Partner Program (YPP)."
       },
