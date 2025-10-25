@@ -94,7 +94,7 @@ export async function GET(req) {
     // ✅ Query params
     const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get("page")) || 1;
-    const limit = parseInt(searchParams.get("limit")) || 1;
+    const limit = parseInt(searchParams.get("limit")) || 6;
 
     // ✅ Count total guides
     const totalGuides = await Guide.countDocuments();
