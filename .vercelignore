@@ -1,5 +1,7 @@
-src/
-components/
-node_modules/
-.git/
-
+node_modules
+.git
+.env
+.vercel
+.vscode
+.DS_Store
+README.md
