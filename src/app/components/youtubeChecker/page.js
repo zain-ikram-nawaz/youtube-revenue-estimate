@@ -9,8 +9,9 @@ import Analytics from "../Analytics/page";
 import Image from "next/image";
 import Form from "../Form/page";
 import Loader from "../Loader/page";
+import ChannelPerformance from "../ChannelPerformance/page"
 
-export default function ChannelEstimator({seoSections}) {
+export default function ChannelEstimator({ seoSections }) {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,7 @@ export default function ChannelEstimator({seoSections}) {
   const [captchaToken, setCaptchaToken] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const resultsRef = useRef(null);
- if (!seoSections) return null; // safety check
+  if (!seoSections) return null; // safety check
 
   // Monetization calculation function (same as before)
   const calculateMonetizationStatus = (channelData) => {
@@ -54,9 +55,9 @@ export default function ChannelEstimator({seoSections}) {
 
     const complianceScore = Math.min(
       (subscribers / YOUTUBE_REQUIREMENTS.MIN_SUBSCRIBERS) * 25 +
-        (estimatedWatchHours / YOUTUBE_REQUIREMENTS.MIN_WATCH_HOURS) * 25 +
-        Math.min(videoCount / YOUTUBE_REQUIREMENTS.MIN_VIDEOS, 1) * 25 +
-        Math.min(channelAgeDays / YOUTUBE_REQUIREMENTS.MIN_CHANNEL_AGE, 1) * 25,
+      (estimatedWatchHours / YOUTUBE_REQUIREMENTS.MIN_WATCH_HOURS) * 25 +
+      Math.min(videoCount / YOUTUBE_REQUIREMENTS.MIN_VIDEOS, 1) * 25 +
+      Math.min(channelAgeDays / YOUTUBE_REQUIREMENTS.MIN_CHANNEL_AGE, 1) * 25,
       100
     );
 
@@ -64,10 +65,10 @@ export default function ChannelEstimator({seoSections}) {
     const status = allRequirementsMet
       ? "monetized"
       : complianceScore >= 70
-      ? "eligible"
-      : complianceScore >= 40
-      ? "growing"
-      : "not_eligible";
+        ? "eligible"
+        : complianceScore >= 40
+          ? "growing"
+          : "not_eligible";
 
     const avgDailySubs = subscribers / channelAgeDays || 0;
     const daysTo1000 = YOUTUBE_REQUIREMENTS.MIN_SUBSCRIBERS / (avgDailySubs || 1);
@@ -151,6 +152,8 @@ export default function ChannelEstimator({seoSections}) {
       if (!res.ok) throw new Error("Failed to fetch estimates");
 
       const json = await res.json();
+      console.log(json, "json")
+
       const monetizationData = calculateMonetizationStatus(json);
 
       setData({
@@ -236,130 +239,136 @@ export default function ChannelEstimator({seoSections}) {
           setCaptchaToken={setCaptchaToken}
         />
 
-    {/* SEO Content (Static, outside modal for indexing) */}
-    <div className="lg:col-span-12 bg-white rounded-xl shadow-lg p-6 mt-6">
-      {/* Intro Section */}
-      {seoSections?.intro && (
-        <>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            {seoSections?.intro?.heading}
-          </h2>
-          <p className="text-gray-700 mb-4">{seoSections?.intro?.content}</p>
+        {/* SEO Content (Static, outside modal for indexing) */}
+        <div className="lg:col-span-12 bg-white rounded-xl shadow-lg p-6 mt-6">
+          {/* Intro Section */}
+          {seoSections?.intro && (
+            <>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                {seoSections?.intro?.heading}
+              </h2>
+              <p className="text-gray-700 mb-4">{seoSections?.intro?.content}</p>
 
-          {seoSections?.intro?.disclaimer && (
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
-              <p className="text-sm text-yellow-700">
-                <strong>Disclaimer:</strong> {seoSections?.intro?.disclaimer}
-              </p>
-            </div>
+              {seoSections?.intro?.disclaimer && (
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                  <p className="text-sm text-yellow-700">
+                    <strong>Disclaimer:</strong> {seoSections?.intro?.disclaimer}
+                  </p>
+                </div>
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {/* How It Works Section */}
-      {seoSections?.howItWorks && (
-        <>
-          <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">
-            {seoSections?.howItWorks?.title}
-          </h3>
-          {seoSections?.howItWorks?.steps && (
-            <ul className="list-disc pl-5 text-gray-700 mb-4 space-y-2">
-              {seoSections?.howItWorks?.steps?.map((step, idx) => (
-                <li key={idx}>
-                  <strong>{step?.title}:</strong> {step?.desc}
-                </li>
-              ))}
-            </ul>
+          {/* How It Works Section */}
+          {seoSections?.howItWorks && (
+            <>
+              <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">
+                {seoSections?.howItWorks?.title}
+              </h3>
+              {seoSections?.howItWorks?.steps && (
+                <ul className="list-disc pl-5 text-gray-700 mb-4 space-y-2">
+                  {seoSections?.howItWorks?.steps?.map((step, idx) => (
+                    <li key={idx}>
+                      <strong>{step?.title}:</strong> {step?.desc}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {/* Monetization Guide Section */}
-      {seoSections?.monetizationGuide && (
-        <>
-          <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">
-            {seoSections?.monetizationGuide?.title}
-          </h3>
-          {seoSections?.monetizationGuide?.sections &&
-            seoSections?.monetizationGuide?.sections?.map((section, idx) => (
-              <div key={idx} className="mb-4">
-                <h4 className="text-lg font-semibold text-gray-800 mt-2 mb-2">
-                  {section?.title}
-                </h4>
-                {section?.list && (
-                  <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                    {section?.list?.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-        </>
-      )}
-    </div>
-        {/* Modal */}
-      {isModalOpen && data && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-70">
-    <div className="bg-white rounded-xl p-6 max-w-5xl w-full relative max-h-[95vh] overflow-hidden flex flex-col">
-      <button
-        className="absolute right-2 text-white bg-red-500 px-3 py-1 hover:text-red-500 hover:bg-white rounded-full font-bold text-lg z-10"
-        onClick={() => setIsModalOpen(false)}
-      >
-        X
-      </button>
-
-      {/* Scrollable Content */}
-      <div className="overflow-y-auto flex-1 modal-scroll">
-        {data?.bannerImage && (
-          <Image
-            src={data?.bannerImage}
-            width={1280}
-            height={720}
-            alt="Channel Banner"
-            className="w-full h-32 sm:h-40 md:h-78 object-cover rounded-lg mb-4"
-          />
-        )}
-
-        <h2 className="text-xl font-bold mb-2">{data?.channelName}</h2>
-        <p className="text-gray-600 mb-4">{data?.subscribers?.toLocaleString()} subscribers</p>
-
-        {data?.monetization && (
-          <MonetizationStatusBar
-            data={data?.monetization}
-            getMonetizationConfig={getMonetizationConfig}
-          />
-        )}
-
-        {/* Tabs */}
-        <div className="bg-gray-100 rounded-lg overflow-hidden mt-4">
-          <div className="flex border-b border-gray-300">
-            {["overview", "revenue", "monetization", "analytics"].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-1 py-2 px-3 text-sm font-semibold transition-all ${
-                  activeTab === tab ? "bg-red-600 text-white" : "text-gray-700 hover:bg-red-100"
-                }`}
-              >
-                {tab === "overview" && "Channel Overview"}
-                {tab === "revenue" && "Revenue Analysis"}
-                {tab === "monetization" && "Monetization Status"}
-                {tab === "analytics" && "Advanced Analytics"}
-              </button>
-            ))}
-          </div>
-          <div className="p-4">
-            {activeTab === "overview" && <StatsCards data={data} />}
-            {activeTab === "revenue" && <Revenue data={data} />}
-            {activeTab === "monetization" && data.monetization && <Monetization data={data} />}
-            {activeTab === "analytics" && <Analytics data={data} />}
-          </div>
+          {/* Monetization Guide Section */}
+          {seoSections?.monetizationGuide && (
+            <>
+              <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">
+                {seoSections?.monetizationGuide?.title}
+              </h3>
+              {seoSections?.monetizationGuide?.sections &&
+                seoSections?.monetizationGuide?.sections?.map((section, idx) => (
+                  <div key={idx} className="mb-4">
+                    <h4 className="text-lg font-semibold text-gray-800 mt-2 mb-2">
+                      {section?.title}
+                    </h4>
+                    {section?.list && (
+                      <ul className="list-disc pl-5 text-gray-700 space-y-2">
+                        {section?.list?.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+            </>
+          )}
         </div>
-      </div>
-    </div>
-  </div>
-)}
+        {/* Modal */}
+        {isModalOpen && data && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-70">
+            <div className="bg-white rounded-xl p-6 max-w-5xl w-full relative max-h-[95vh] overflow-hidden flex flex-col">
+              <button
+                className="absolute right-2 text-white bg-red-500 px-3 py-1 hover:text-red-500 hover:bg-white rounded-full font-bold text-lg z-10"
+                onClick={() => setIsModalOpen(false)}
+              >
+                X
+              </button>
+
+              {/* Scrollable Content */}
+              <div className="overflow-y-auto flex-1 modal-scroll">
+                {data?.bannerImage && (
+                  <Image
+                    src={data?.bannerImage}
+                    width={1280}
+                    height={720}
+                    alt="Channel Banner"
+                    className="w-full h-32 sm:h-40 md:h-78 object-cover rounded-lg mb-4"
+                  />
+                )}
+
+                <h2 className="text-xl font-bold mb-2">{data?.channelName}</h2>
+                <p className="text-gray-600 mb-4">{data?.subscribers?.toLocaleString()} subscribers</p>
+
+                {data?.monetization && (
+                  <MonetizationStatusBar
+                    data={data?.monetization}
+                    getMonetizationConfig={getMonetizationConfig}
+                  />
+                )}
+
+                <div className="bg-gray-100 rounded-lg overflow-hidden mt-4">
+                  {/* ✅ Auto-wrap tabs when overflow */}
+                  <div className="flex-wrap border-b border-gray-300">
+                    {["overview", "revenue", "performance", "monetization", "analytics"].map((tab) => (
+                      <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`py-2 px-3 text-sm font-semibold transition-all m-1 rounded-md ${activeTab === tab
+                            ? "bg-red-600 text-white"
+                            : "text-gray-700 hover:bg-red-100"
+                          }`}
+                      >
+                        {tab === "performance" && "Channel Performance"}
+                        {tab === "overview" && "Channel Overview"}
+                        {tab === "revenue" && "Revenue Analysis"}
+                        {tab === "monetization" && "Monetization Status"}
+                        {tab === "analytics" && "Advanced Analytics"}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="p-4">
+                    {activeTab === "performance" && <ChannelPerformance data={data} />}
+                    {activeTab === "overview" && <StatsCards data={data} />}
+                    {activeTab === "revenue" && <Revenue data={data} />}
+                    {activeTab === "monetization" && data.monetization && <Monetization data={data} />}
+                    {activeTab === "analytics" && <Analytics data={data} />}
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

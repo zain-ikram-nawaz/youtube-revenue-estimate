@@ -1,9 +1,38 @@
 "use client";
 import GuideForm from "../components/AdminUseOnly/GuideForm/page";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import ListingGuide from "../components/AdminUseOnly/ListingGuide/page"
+// import { getGuides } from "../hooks/getGuides";
+
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("guides");
+  const [guides,setGuides] =useState()
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // ✅ detect current origin automatically
+
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/guide?page=1&limit=6`, {
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          console.error("❌ API Error:", res.status, res.statusText);
+          return;
+        }
+
+        const data = await res.json();
+        setGuides(data.guides)
+      
+      } catch (err) {
+        console.error("❌ Fetch failed:", err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen flex bg-gray-100">
@@ -33,7 +62,7 @@ export default function AdminDashboard() {
                 : "hover:bg-gray-800 transition"
             }`}
           >
-            📊 Analytics
+            📊Guide Section
           </button>
 
           <button
@@ -73,7 +102,7 @@ export default function AdminDashboard() {
         <section className="p-6 flex-1 overflow-y-auto">
           {activeTab === "guides" && <GuideForm />}
           {activeTab === "analytics" && (
-            <div className="text-gray-600 text-lg">📊 Analytics Coming Soon...</div>
+            <div className="text-gray-600 text-lg"><ListingGuide data={guides} role={true}/></div>
           )}
           {activeTab === "settings" && (
             <div className="text-gray-600 text-lg">⚙️ Settings Page Coming Soon...</div>

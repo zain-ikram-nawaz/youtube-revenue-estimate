@@ -6,7 +6,7 @@ import { Redis } from "@upstash/redis";
 const redis = Redis.fromEnv();
 const rateLimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(5, "10 s"), // 5 requests per 10 sec
+  limiter: Ratelimit.slidingWindow(5, "10 s"),
 });
 
 // --- Config ---
@@ -25,88 +25,126 @@ function securityHeaders() {
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY",
     "Referrer-Policy": "strict-origin-when-cross-origin",
-    "Permissions-Policy": "geolocation=()", // disable unwanted browser APIs
+    "Permissions-Policy": "geolocation=()",
     "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
     "Content-Security-Policy":
       "default-src 'self'; img-src *; media-src *; frame-ancestors 'none';",
   };
 }
 function finalHeaders() {
-  return {
-    ...corsHeaders(),
-    ...securityHeaders(),
-  };
+  return { ...corsHeaders(), ...securityHeaders() };
 }
 
 // --- Helpers ---
 function extractChannelId(url) {
   const matchId = url.match(/channel\/([a-zA-Z0-9_-]+)/);
   if (matchId) return matchId[1];
-
   const matchHandle = url.match(/youtube\.com\/@([a-zA-Z0-9._-]+)/);
   if (matchHandle) return matchHandle[1];
-
   return null;
+}
+function extractVideoId(url) {
+  const match = url.match(
+    /(?:v=|\/)([0-9A-Za-z_-]{11})(?:\?|&|$)/
+  );
+  return match ? match[1] : null;
 }
 
 // --- Main API Handler ---
 export async function POST(req) {
-  // --- Rate limit ---
   const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
   const { success } = await rateLimit.limit(ip);
-
-  if (!success) {
-    return new Response(
-      JSON.stringify({ error: "Too many requests" }),
-      { status: 429, headers: corsHeaders() }
-    );
-  }
+  if (!success)
+    return new Response(JSON.stringify({ error: "Too many requests" }), {
+      status: 429,
+      headers: corsHeaders(),
+    });
 
   try {
     const body = await req.json();
     const { channelUrl } = body;
-    const channelIdentifier = extractChannelId(channelUrl);
 
-    if (!channelIdentifier) {
-      return new Response(
-        JSON.stringify({ error: "Invalid channel URL" }),
-        { status: 400, headers: finalHeaders() }
+    // --- Case 1: If it's a VIDEO URL ---
+    const videoId = extractVideoId(channelUrl);
+    if (videoId) {
+      const videoRes = await axios.get(
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${videoId}&key=${process.env.YOUTUBE_API_KEY}`
       );
+      const video = videoRes.data.items[0];
+      if (!video)
+        return new Response(JSON.stringify({ error: "Video not found" }), {
+          status: 404,
+          headers: finalHeaders(),
+        });
+
+      // --- Duration in seconds ---
+      const match = video.contentDetails.duration.match(
+        /PT(?:(\d+)M)?(?:(\d+)S)?/
+      );
+      const minutes = parseInt(match?.[1] || 0);
+      const seconds = parseInt(match?.[2] || 0);
+      const durationSec = minutes * 60 + seconds;
+      const durationMin = (durationSec / 60).toFixed(2);
+
+      // --- Watch Time (approx) ---
+      const views = parseInt(video.statistics.viewCount || 0);
+      const avgViewDuration = durationMin * 0.6; // assume 60% average watch
+      const totalWatchTimeHours = ((views * avgViewDuration) / 60).toFixed(2);
+
+      const videoData = {
+        videoId,
+        title: video.snippet.title,
+        description: video.snippet.description,
+        tags: video.snippet.tags || [],
+        duration: `${minutes}m ${seconds}s`,
+        views: views.toLocaleString(),
+        likes: video.statistics.likeCount || "N/A",
+        comments: video.statistics.commentCount || "N/A",
+        estimatedWatchTime: {
+          avgViewDuration: `${avgViewDuration.toFixed(1)} min`,
+          totalWatchTimeHours: `${totalWatchTimeHours} hours`,
+        },
+      };
+
+      return new Response(JSON.stringify(videoData), {
+        status: 200,
+        headers: finalHeaders(),
+      });
     }
 
-    let channelId = null;
+    // --- Case 2: CHANNEL URL ---
+    const channelIdentifier = extractChannelId(channelUrl);
+    if (!channelIdentifier)
+      return new Response(JSON.stringify({ error: "Invalid channel URL" }), {
+        status: 400,
+        headers: finalHeaders(),
+      });
 
-    // --- Handle resolve ---
+    let channelId = null;
     if (channelUrl.includes("@")) {
       const handleRes = await axios.get(
         `https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=${channelIdentifier}&key=${process.env.YOUTUBE_API_KEY}`
       );
-      if (handleRes.data.items.length > 0) {
+      if (handleRes.data.items.length > 0)
         channelId = handleRes.data.items[0].id;
-      }
     } else {
       channelId = channelIdentifier;
     }
+    if (!channelId)
+      return new Response(JSON.stringify({ error: "Channel not found" }), {
+        status: 404,
+        headers: finalHeaders(),
+      });
 
-    if (!channelId) {
-      return new Response(
-        JSON.stringify({ error: "Channel not found" }),
-        { status: 404, headers: finalHeaders() }
-      );
-    }
-
-    // --- Channel details ---
     const ytRes = await axios.get(
       `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${process.env.YOUTUBE_API_KEY}`
     );
-
     const channel = ytRes.data.items[0];
-    if (!channel) {
-      return new Response(
-        JSON.stringify({ error: "Channel not found" }),
-        { status: 404, headers: finalHeaders() }
-      );
-    }
+    if (!channel)
+      return new Response(JSON.stringify({ error: "Channel not found" }), {
+        status: 404,
+        headers: finalHeaders(),
+      });
 
     const totalViews = parseInt(channel.statistics.viewCount || 0);
     const subscribers = parseInt(channel.statistics.subscriberCount || 0);
@@ -115,12 +153,11 @@ export async function POST(req) {
     const country = channel.brandingSettings?.channel?.country || "N/A";
     const categoryId = channel.snippet.categoryId || null;
     const channelImage = channel.snippet.thumbnails?.high?.url || null;
-    const bannerImage = channel.brandingSettings?.image?.bannerExternalUrl || null;
+    const bannerImage =
+      channel.brandingSettings?.image?.bannerExternalUrl || null;
 
-    // Legacy revenue
+    // --- Revenue Estimation ---
     const legacyEstimatedRevenue = ((totalViews / 1000) * 1.5).toFixed(2);
-
-    // Country multipliers
     const countryRPM = {
       US: 4.0,
       GB: 3.5,
@@ -133,7 +170,6 @@ export async function POST(req) {
     const countryFactor =
       (country && countryRPM[country]) ? countryRPM[country] : countryRPM.default;
 
-    // Category multipliers
     const categoryFactors = {
       1: 1.0,
       2: 0.7,
@@ -148,7 +184,6 @@ export async function POST(req) {
     const catNum = categoryId ? Number(categoryId) : null;
     const categoryFactor = catNum ? (categoryFactors[catNum] || 1.0) : 1.0;
 
-    // RPM brackets
     const rpmBrackets = {
       "$0.01 (low short RPM)": 0.01,
       "$0.05 (typical short RPM)": 0.05,
@@ -170,62 +205,117 @@ export async function POST(req) {
       revenueEstimates[label] = `$${revenue}`;
     }
 
-    // Monthly revenue
     const monthsSinceCreation =
       (new Date() - new Date(creationDate)) / (1000 * 60 * 60 * 24 * 30);
     const avgMonthlyViews =
       monthsSinceCreation > 0 ? totalViews / monthsSinceCreation : 0;
-
     const avgMonthlyRevenue = (
-      (avgMonthlyViews / 1000) *
-      2 *
-      countryFactor *
-      categoryFactor
+      (avgMonthlyViews / 1000) * 2 * countryFactor * categoryFactor
     ).toFixed(2);
 
-    // Shorts vs Long videos
+    // --- Fetch videos ---
     const searchRes = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&channelId=${channelId}&part=id&maxResults=50&order=date&type=video`
+      `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&channelId=${channelId}&part=id,snippet&maxResults=50&order=date&type=video`
     );
-
     const videoIds = searchRes.data.items.map((v) => v.id.videoId).join(",");
     let shortsRatio = null;
+    let videoAnalytics = null;
+    let estimatedWatchTime = null;
 
     if (videoIds.length > 0) {
       const videosRes = await axios.get(
-        `https://www.googleapis.com/youtube/v3/videos?key=${process.env.YOUTUBE_API_KEY}&id=${videoIds}&part=contentDetails`
+        `https://www.googleapis.com/youtube/v3/videos?key=${process.env.YOUTUBE_API_KEY}&id=${videoIds}&part=contentDetails,statistics,snippet`
       );
+      let shortsCount = 0,
+        longCount = 0,
+        engagementRatios = [],
+        velocities = [],
+        totalWatchSec = 0,
+        totalViewsAll = 0;
 
-      let shortsCount = 0;
-      let longCount = 0;
-
-      videosRes.data.items.forEach((v) => {
+      const videosData = videosRes.data.items.map((v) => {
+        const views = parseInt(v.statistics.viewCount || 0);
+        const likes = parseInt(v.statistics.likeCount || 0);
+        const comments = parseInt(v.statistics.commentCount || 0);
+        const published = new Date(v.snippet.publishedAt);
         const duration = v.contentDetails.duration;
         const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
+        const minutes = parseInt(match?.[1] || 0);
+        const seconds = parseInt(match?.[2] || 0);
+        const totalSec = minutes * 60 + seconds;
+        totalViewsAll += views;
+        totalWatchSec += totalSec * views * 0.6; // 60% retention
 
-        let seconds = 0;
-        if (match) {
-          const minutes = parseInt(match[1] || 0);
-          const secs = parseInt(match[2] || 0);
-          seconds = minutes * 60 + secs;
-        }
-
-        if (seconds > 0 && seconds < 60) {
-          shortsCount++;
-        } else {
-          longCount++;
-        }
+        if (totalSec > 0 && totalSec < 60) shortsCount++;
+        else longCount++;
+        if (views > 0) engagementRatios.push((likes + comments) / views);
+        const daysSince = (Date.now() - published) / (1000 * 60 * 60 * 24);
+        if (daysSince > 0) velocities.push(views / daysSince);
+        return { title: v.snippet.title, views, likes, comments };
       });
 
+      // --- WatchTime ---
+      if (totalViewsAll > 0) {
+        const avgViewDuration = (totalWatchSec / totalViewsAll / 60).toFixed(1);
+        const totalWatchTimeHours = (totalWatchSec / 3600).toFixed(1);
+        estimatedWatchTime = {
+          avgViewDuration: `${avgViewDuration} min`,
+          totalWatchTimeHours: `${totalWatchTimeHours} hours`,
+        };
+      }
+
       const totalChecked = shortsCount + longCount;
-      if (totalChecked > 0) {
+      if (totalChecked > 0)
         shortsRatio = {
           shortsCount,
           longCount,
           shortsPercent: ((shortsCount / totalChecked) * 100).toFixed(1) + "%",
           longsPercent: ((longCount / totalChecked) * 100).toFixed(1) + "%",
         };
-      }
+
+      const avgEngagement =
+        engagementRatios.length > 0
+          ? (
+              100 *
+              engagementRatios.reduce((a, b) => a + b, 0) /
+              engagementRatios.length
+            ).toFixed(1) + "%"
+          : "N/A";
+
+      const dates = searchRes.data.items
+        .map((v) => new Date(v.snippet.publishedAt))
+        .sort((a, b) => b - a);
+      const gaps = [];
+      for (let i = 1; i < dates.length; i++)
+        gaps.push((dates[i - 1] - dates[i]) / (1000 * 60 * 60 * 24));
+      const avgGap =
+        gaps.length > 0 ? gaps.reduce((a, b) => a + b, 0) / gaps.length : 0;
+      const uploadFrequency =
+        avgGap > 0 ? `${Math.round(30 / avgGap)} videos/month` : "N/A";
+
+      const avgVelocity =
+        velocities.length > 0
+          ? Math.round(velocities.reduce((a, b) => a + b, 0) / velocities.length)
+          : 0;
+      const viewVelocity = `${avgVelocity.toLocaleString()} views/day`;
+
+      const top = videosData.sort(
+        (a, b) =>
+          (b.likes + b.comments) / b.views - (a.likes + a.comments) / a.views
+      )[0];
+      const topPerformer = top
+        ? `${top.title} (${top.views.toLocaleString()} views, ${(
+            (100 * (top.likes + top.comments)) /
+            top.views
+          ).toFixed(1)}% engagement)`
+        : "N/A";
+
+      videoAnalytics = {
+        avgEngagement,
+        uploadFrequency,
+        viewVelocity,
+        topPerformer,
+      };
     }
 
     return new Response(
@@ -243,12 +333,14 @@ export async function POST(req) {
         revenueEstimates,
         avgMonthlyViews: Math.round(avgMonthlyViews),
         avgMonthlyRevenue: `$${avgMonthlyRevenue} (approx)`,
+        estimatedWatchTime, // ✅ Added
         shortsRatio,
+        videoAnalytics,
         notes: [
           "estimatedRevenue is a simple legacy lifetime estimate (fixed RPM = $1.5).",
-          "revenueEstimates show different RPM brackets adjusted by country & category.",
-          "Monthly revenue uses average monthly views (all numbers approximate).",
-          "shortsRatio is based on last 50 videos (duration <60s = short).",
+          "revenueEstimates show RPM brackets adjusted by country & category.",
+          "estimatedWatchTime is based on recent 50 videos (approx 60% retention).",
+          "videoAnalytics includes avgEngagement, uploadFrequency, and topPerformer.",
         ],
       }),
       { status: 200, headers: finalHeaders() }

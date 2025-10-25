@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-export default function Page({ data }) {
+export default function Page({ data, role }) {
 
 
   if (!data || data?.length === 0) {

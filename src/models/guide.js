@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
 
+const faqSchema = new mongoose.Schema({
+  question: { type: String, required: true },
+  answer: { type: String, required: true },
+});
+
+// 🔹 Main Guide Schema
 const guideSchema = new mongoose.Schema(
   {
     // 🔹 Basic Info
@@ -15,6 +21,9 @@ const guideSchema = new mongoose.Schema(
     category: { type: String, index: true },
     summary: { type: String },
     keywords: [String],
+
+    // 🔹 FAQs
+    faqs: [faqSchema], // ✅ Add FAQs array
 
     // 🔹 Author & Publish Info
     author: { type: String, default: "Admin" },

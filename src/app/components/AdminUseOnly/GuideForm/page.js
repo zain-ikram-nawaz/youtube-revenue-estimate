@@ -20,7 +20,28 @@ export default function GuideForm() {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+// ✅ New FAQs State
+const [faqs, setFaqs] = useState([
+  { question: "", answer: "" } // Initially one FAQ
+]);
 
+// Function to add new FAQ
+const addFaq = () => {
+  setFaqs([...faqs, { question: "", answer: "" }]);
+};
+
+// Function to remove FAQ
+const removeFaq = (index) => {
+  const updatedFaqs = faqs.filter((_, i) => i !== index);
+  setFaqs(updatedFaqs);
+};
+
+// Function to update FAQ
+const updateFaq = (index, field, value) => {
+  const updatedFaqs = [...faqs];
+  updatedFaqs[index][field] = value;
+  setFaqs(updatedFaqs);
+};
   // Input handlers
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -56,14 +77,16 @@ export default function GuideForm() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-
     try {
       const formData = new FormData();
       Object.keys(form).forEach((key) => formData.append(key, form[key]));
       formData.append("tags", JSON.stringify(tags.filter((t) => t.trim() !== "")));
       formData.append("keywords", JSON.stringify(keywords.filter((k) => k.trim() !== "")));
+// Assuming faqs = [{question: "", answer: ""}, ...]
+formData.append("faqs", JSON.stringify(faqs));
 
       if (imageFile) formData.append("image", imageFile);
+
 
       const res = await fetch("/api/guide", {
         method: "POST",
@@ -253,6 +276,41 @@ export default function GuideForm() {
           onChange={handleChange}
           className="w-full border p-2 rounded-md"
         />
+        <div>
+  <h3>FAQs</h3>
+  {faqs.map((faq, index) => (
+    <div key={index} className="mb-4 border p-3 rounded">
+      <input
+        type="text"
+        placeholder="Question"
+        value={faq.question}
+        onChange={(e) => updateFaq(index, "question", e.target.value)}
+        className="w-full mb-2 p-2 border rounded"
+      />
+      <textarea
+        placeholder="Answer"
+        value={faq.answer}
+        onChange={(e) => updateFaq(index, "answer", e.target.value)}
+        className="w-full p-2 border rounded"
+      />
+      <button
+        type="button"
+        onClick={() => removeFaq(index)}
+        className="mt-2 text-red-600"
+      >
+        Remove
+      </button>
+    </div>
+  ))}
+  <button
+    type="button"
+    onClick={addFaq}
+    className="mt-2 bg-blue-600 text-white px-3 py-1 rounded"
+  >
+    Add FAQ
+  </button>
+</div>
+
 
         <button
           type="submit"

@@ -27,14 +27,17 @@ export async function POST(req) {
     const summary = formData.get("summary");
     const readTime = Number(formData.get("readTime")) || undefined;
 
-    // Parse JSON arrays
+    // ✅ Parse JSON arrays
     const tags = JSON.parse(formData.get("tags") || "[]");
     const keywords = JSON.parse(formData.get("keywords") || "[]");
 
+    // ✅ Parse FAQs
+    const faqs = JSON.parse(formData.get("faqs") || "[]");
+
+    // ✅ Handle image upload
     const file = formData.get("image");
     let imageUrl = "";
 
-    // ✅ Upload to Cloudinary
     if (file && file.size > 0) {
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
@@ -73,6 +76,7 @@ export async function POST(req) {
       keywords,
       readTime,
       author,
+      faqs, // ✅ Save FAQs array
     });
 
     return NextResponse.json({ success: true, guide });
@@ -82,12 +86,38 @@ export async function POST(req) {
   }
 }
 
-// ✅ GET — All guides
-export async function GET() {
+
+export async function GET(req) {
   try {
     await connectDB();
-    const guides = await Guide.find().sort({ createdAt: -1 });
-    return NextResponse.json({ success: true, guides });
+
+    // ✅ Query params
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get("page")) || 1;
+    const limit = parseInt(searchParams.get("limit")) || 1;
+
+    // ✅ Count total guides
+    const totalGuides = await Guide.countDocuments();
+
+    // ✅ Fetch paginated guides
+    const guides = await Guide.find()
+      .sort({ createdAt: -1 })      // newest first
+      .skip((page - 1) * limit)     // skip previous pages
+      .limit(limit)                  // limit per page
+      .lean();
+
+    const totalPages = Math.ceil(totalGuides / limit);
+
+    return NextResponse.json({
+      success: true,
+      guides,
+      pagination: {
+        totalGuides,
+        totalPages,
+        currentPage: page,
+        perPage: limit,
+      },
+    });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
   }

@@ -1,9 +1,15 @@
-# *
+# ChannelIncome Robots.txt
 User-agent: *
+Disallow: /src/
+Disallow: /components/
+Disallow: /node_modules/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /dashboard/
 Allow: /
 
-# Host
-Host: https://channelincome.com
-
-# Sitemaps
+# Sitemap
 Sitemap: https://channelincome.com/sitemap.xml
+
+# Host (optional, for Bing/Yandex)
+Host: channelincome.com
