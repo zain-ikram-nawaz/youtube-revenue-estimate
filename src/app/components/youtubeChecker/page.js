@@ -40,6 +40,7 @@ export default function ChannelEstimator({ seoSections }) {
       MIN_VIDEOS: 3,
       MIN_CHANNEL_AGE: 30,
     };
+    
 
     const channelAgeDays = Math.floor(
       (new Date() - new Date(creationDate)) / (1000 * 60 * 60 * 24)

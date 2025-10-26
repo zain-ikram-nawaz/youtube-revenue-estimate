@@ -1,5 +1,7 @@
 "use client"
 import { useState } from 'react';
+import { ChevronDown, ChevronUp } from "lucide-react";
+
 import Link from 'next/link';
 
 
@@ -14,6 +16,11 @@ const ContactUs = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+    const [openIndex, setOpenIndex] = useState(null);
+
+  const toggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
 
   const guideFaqs = [
@@ -67,28 +74,35 @@ const ContactUs = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // Simulate form submission
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-        inquiryType: 'general'
-      });
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
+  try {
+    const response = await fetch("/api/send-support-mail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert("Your message has been sent successfully!");
+      setFormData({ name: "", email: "", inquiryType: "", subject: "", message: "" });
+    } else {
+      alert("Something went wrong. Please try again later.");
     }
-  };
+  } catch (error) {
+    console.error(error);
+    alert("Network error. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   return (
 
@@ -125,16 +139,8 @@ const ContactUs = () => {
               {/* Contact Methods */}
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Phone Support</h3>
-                    <p className="text-gray-600 text-sm mb-1">Coming Soon...</p>
-                    <p className="text-gray-500 text-xs">Mon-Fri, 9AM-6PM PSt</p>
-                  </div>
+
+
                 </div>
 
                 <div className="flex items-start">
@@ -145,7 +151,7 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
-                    <p className="text-gray-600 text-sm mb-1">Coming Soon...</p>
+                    <p className="text-gray-600 text-sm mb-1">support@channelincome.com</p>
                     <p className="text-gray-500 text-xs">24/7 email support</p>
                   </div>
                 </div>
@@ -357,14 +363,29 @@ const ContactUs = () => {
     <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
       Frequently Asked Questions
     </h2>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {guideFaqs.map((faq, index) => (
-        <div key={index} className="space-y-6">
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
-            <p className="text-gray-600 text-sm">{faq.a}</p>
-          </div>
+        <div
+          key={index}
+          className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm"
+        >
+          <button
+            onClick={() => toggle(index)}
+            className="flex justify-between items-center w-full text-left"
+          >
+            <h3 className="font-semibold text-gray-900">{faq.q}</h3>
+            {openIndex === index ? (
+              <ChevronUp className="w-5 h-5 text-gray-600" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-gray-600" />
+            )}
+          </button>
+
+          {openIndex === index && (
+            <p className="mt-3 text-gray-600 text-sm leading-relaxed">
+              {faq.a}
+            </p>
+          )}
         </div>
       ))}
     </div>

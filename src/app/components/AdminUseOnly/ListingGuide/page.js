@@ -33,50 +33,51 @@ export default function Page({ data, role }) {
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {data?.map((guide) => (
-            <Link href={`/guide/${guide.slug}`} key={guide._id}>
-              <div className="group relative bg-white/70 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:bg-white/90 hover:shadow-2xl hover:shadow-blue-100/50 rounded-3xl overflow-hidden">
-                {/* Gradient Border Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-200/50 via-transparent to-purple-200/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+     <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+  {data?.slice(0,8).toReversed()?.map((guide) => (
+    <Link href={`/guide/${guide.slug}`} key={guide._id}>
+      <div className="group relative bg-white/70 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:bg-white/90 hover:shadow-2xl hover:shadow-blue-100/50 rounded-3xl overflow-hidden">
+        {/* Gradient Border Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-200/50 via-transparent to-purple-200/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
 
-                {/* Image Container */}
-                <div className="relative w-full h-48 overflow-hidden">
-                  <Image
-                    src={guide?.image || "/icon.png"}
-                    alt={guide?.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  />
-                  {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h2 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2 leading-tight group-hover:text-gray-900 transition-colors">
-                    {guide?.title}
-                  </h2>
-                  <p className="text-gray-500 text-sm mb-4 line-clamp-2 leading-relaxed">
-                    {guide?.metaDescription}
-                  </p>
-
-                  {/* Footer Info */}
-                  <div className="flex items-center justify-between border-gray-100/80">
-                    <div className="flex items-center space-x-2"></div>
-                    <div className="text-gray-400 text-xs font-medium">
-                      {new Date(guide?.createdAt).toLocaleDateString("en-US", {
-                        day: "2-digit",
-                        month: "short",
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+        {/* Image Container */}
+        <div className="relative w-full h-48 overflow-hidden">
+          <Image
+            src={guide?.image || "/icon.png"}
+            alt={guide?.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          />
+          {/* Overlay Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
         </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <h2 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2 leading-tight group-hover:text-gray-900 transition-colors">
+            {guide?.title}
+          </h2>
+          <p className="text-gray-500 text-sm mb-4 line-clamp-2 leading-relaxed">
+            {guide?.metaDescription}
+          </p>
+
+          {/* Footer Info */}
+          <div className="flex items-center justify-between border-gray-100/80">
+            <div className="flex items-center space-x-2"></div>
+            <div className="text-gray-400 text-xs font-medium">
+              {new Date(guide?.createdAt).toLocaleDateString("en-US", {
+                day: "2-digit",
+                month: "short",
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  ))}
+</div>
+
 
         {/* ✅ Explore Button */}
         <div className="flex justify-center mt-16">
