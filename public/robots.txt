@@ -5,11 +5,16 @@ Disallow: /components/
 Disallow: /src/
 Disallow: /_next/
 Disallow: /api/
-Disallow: middleware
-Disallow: models
+Disallow: /middleware/
+Disallow: /models/
+Disallow: /login
+Disallow: /unauthorized
+Disallow: /form
 
 # Host
 Host: https://channelincome.com
 
 # Sitemaps
-Sitemap: https://channelincome.com/sitemap.xml
+Sitemap: https://channelincome.com/api/sitemap.xml
+Host: https://channelincome.com
+

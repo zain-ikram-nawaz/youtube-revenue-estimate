@@ -4,6 +4,6 @@ export async function getGuides(page = 1, limit = 6) {
     { cache: "no-store" }
   );
  const data = await res.json();
-  // console.log("API response:", data); // 👈 Add this line for testing
+   // 👈 Add this line for testing
   return data;
 }

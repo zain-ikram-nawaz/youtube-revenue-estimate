@@ -2,8 +2,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Page({ data, role }) {
+export default function Page({ data }) {
   if (!data || data?.length === 0) {
+    console.log(data)
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50/30">
         <div className="text-center">
@@ -43,7 +44,7 @@ export default function Page({ data, role }) {
         {/* Image Container */}
         <div className="relative w-full h-48 overflow-hidden">
           <Image
-            src={guide?.image || "/icon.png"}
+            src={guide?.thumbnail || "/icon.png"}
             alt={guide?.title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-110"
