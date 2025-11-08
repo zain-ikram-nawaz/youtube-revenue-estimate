@@ -1,11 +1,14 @@
-# *
 User-agent: *
 Allow: /
-Allow: /api/sitemap.xml
+Allow: /api/sitemap.xml/
+Disallow: /api/auth/
+Disallow: /api/channel-estimate/
+Disallow: /api/guide/
+Disallow: /api/send-support-mail/
+Disallow: /api/verify-captcha/
 Disallow: /components/
 Disallow: /src/
 Disallow: /_next/
-Disallow: /api/
 Disallow: /middleware/
 Disallow: /models/
 Disallow: /login
@@ -15,7 +18,5 @@ Disallow: /form
 # Host
 Host: https://channelincome.com
 
-# Sitemaps
-Sitemap: https://channelincome.com/api/sitemap.xml
-Host: https://channelincome.com
-
+# Sitemap
+Sitemap: https://channelincome.com/sitemap.xml

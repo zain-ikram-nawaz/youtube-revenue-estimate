@@ -1,5 +1,5 @@
-import { connectDB } from "../../lib/db"; // adjust path if needed
-import Guide from "../../../models/guide";
+import { connectDB } from "../lib/db"; // adjust path if needed
+import Guide from "../../models/guide";
 
 const BASE_URL = "https://channelincome.com";
 const CACHE_DURATION = 1000 * 60 * 60 * 24; // 24 hours
