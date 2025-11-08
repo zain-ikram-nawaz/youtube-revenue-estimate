@@ -1,6 +1,7 @@
 # *
 User-agent: *
 Allow: /
+Allow: /api/sitemap.xml
 Disallow: /components/
 Disallow: /src/
 Disallow: /_next/
