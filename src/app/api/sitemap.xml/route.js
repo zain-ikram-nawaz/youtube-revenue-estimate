@@ -2,30 +2,29 @@ import { connectDB } from "../../lib/db";
 import Guide from "../../../models/guide";
 
 const BASE_URL = "https://channelincome.com";
-// 24 hours cache
-const CACHE_DURATION = 1000 * 60 * 60 * 24;
+const CACHE_DURATION = 1000 * 60 * 60 * 24; // 24 hours
 
 let cachedSitemap = null;
 let lastGenerated = 0;
 
-export async function GET(req) {
+export async function GET() {
   const now = Date.now();
 
-  // ✅ Serve cached sitemap if within 24 hours
+  // ✅ Serve cached sitemap if not older than 24 hours
   if (cachedSitemap && now - lastGenerated < CACHE_DURATION) {
     return new Response(cachedSitemap, {
       headers: {
         "Content-Type": "application/xml",
-        "Cache-Control": `s-maxage=86400, stale-while-revalidate=59`,
+        "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=59",
       },
     });
   }
 
   await connectDB();
 
-  const guides = await Guide.find({}).sort({ updatedAt: -1 });
+  const guides = await Guide.find({}, "slug updatedAt").sort({ updatedAt: -1 });
 
-  // Static pages
+  // ✅ Static routes
   const staticPages = [
     "/",
     "/guide",
@@ -36,46 +35,43 @@ export async function GET(req) {
     "/disclaimer",
   ];
 
-  // Start XML
-  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>`;
-  sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-                     xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-                     xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
-                     xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">`;
-
-  // Add static pages
-  staticPages.forEach((page) => {
-    sitemap += `
+  // ✅ Build sitemap XML
+  const urls = [
+    ...staticPages.map(
+      (path) => `
       <url>
-        <loc>${BASE_URL}${page}</loc>
+        <loc>${BASE_URL}${path}</loc>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
-      </url>
-    `;
-  });
-
-  // Add dynamic guides
-  guides.forEach((guide) => {
-    sitemap += `
+      </url>`
+    ),
+    ...guides.map(
+      (guide) => `
       <url>
         <loc>${BASE_URL}/guide/${guide.slug}</loc>
         <lastmod>${guide.updatedAt.toISOString()}</lastmod>
         <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-      </url>
-    `;
-  });
+        <priority>0.9</priority>
+      </url>`
+    ),
+  ].join("");
 
-  sitemap += `</urlset>`;
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+          xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+          xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+          xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+    ${urls}
+  </urlset>`;
 
-  // Cache sitemap
+  // ✅ Cache sitemap in memory
   cachedSitemap = sitemap;
   lastGenerated = now;
 
   return new Response(sitemap, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": `s-maxage=86400, stale-while-revalidate=59`,
+      "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=59",
     },
   });
 }
