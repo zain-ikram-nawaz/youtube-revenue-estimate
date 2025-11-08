@@ -19,4 +19,4 @@ Disallow: /form
 Host: https://channelincome.com
 
 # Sitemap
-Sitemap: https://channelincome.com/sitemap.xml
+Sitemap: https://channelincome.com/api/sitemap.xml
