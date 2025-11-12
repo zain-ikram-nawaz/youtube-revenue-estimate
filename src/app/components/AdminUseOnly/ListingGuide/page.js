@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Page({ data }) {
   if (!data || data?.length === 0) {
-    console.log(data)
+    // console.log(data)
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50/30">
         <div className="text-center">

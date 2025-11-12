@@ -33,6 +33,10 @@ export async function GET() {
     "/privacy-policy",
     "/terms-of-service",
     "/disclaimer",
+    "/tool/youtube-revenue-estimator",
+    "/tool"
+
+
   ];
 
   // Build XML

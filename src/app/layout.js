@@ -15,41 +15,39 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ Complete SEO + Social + Brand Metadata
+// ✅ Complete SEO + Social + Brand Metadata (10/10 Optimized)
 export const metadata = {
   metadataBase: new URL("https://channelincome.com"),
   title: {
+    // Shorter, Brand-Focused Default Title
     default:
-      "YouTube Channel Revenue Estimator | YouTube Analytics & Monetization Tool",
-    template: "%s | YouTube Channel Revenue Estimator",
+      "ChannelIncome | Free YouTube Revenue Estimator, Analytics & Growth Tool",
+    // Clean Template
+    template: "%s | ChannelIncome",
   },
+  // Brand name included, strong value proposition
   description:
-    "Free YouTube Channel Revenue Estimator — analyze monetization, earnings, CPM, RPM, subscribers, and engagement in one advanced YouTube analytics tool.",
+    "ChannelIncome: Free YouTube Revenue Estimator — analyze monetization, earnings, CPM, RPM, subscribers, and engagement in one advanced YouTube analytics tool.",
   keywords: [
-    "youtube income",
+    "youtube revenue estimator",
     "youtube income calculator",
     "youtube earnings check",
-    "YouTube money calculator",
     "YouTube Channel Analytics",
-    "YouTube Revenue Estimator",
     "YouTube Monetization Checker",
-    "youtube earnings",
-    "youtube income checker",
     "youtube view money",
-    "YouTube Earnings Calculator",
     "YouTube SEO Tool",
     "YouTube Growth Tracker",
-    "YouTube Channel Insights",
-    "YouTube Performance Report",
+    "CPM RPM calculator",
+    "youtube money calculator",
   ],
   authors: [
     {
-      name: "YouTube Channel Revenue Estimator Team",
+      name: "ChannelIncome Team",
       url: "https://channelincome.com",
     },
   ],
-  creator: "YouTube Channel Revenue Estimator",
-  publisher: "YouTube Channel Revenue Estimator",
+  creator: "ChannelIncome",
+  publisher: "ChannelIncome",
   robots: {
     index: true,
     follow: true,
@@ -66,36 +64,30 @@ export const metadata = {
     apple: "/icon.png",
   },
   openGraph: {
+    // Brand name used consistently
     title:
-      "YouTube Channel Revenue Estimator | Free YouTube Analytics Dashboard",
+      "ChannelIncome | Free YouTube Analytics Tool: Revenue, CPM, & Growth",
     description:
-      "Analyze YouTube monetization, earnings, CPM, RPM, and subscriber growth. Get instant channel analytics and performance insights.",
+      "Analyze YouTube monetization, earnings, CPM, RPM, and subscriber growth. Get instant channel analytics and performance insights with ChannelIncome.",
     url: "https://channelincome.com",
-    siteName: "YouTube Channel Revenue Estimator",
+    siteName: "ChannelIncome",
     images: [
       {
         url: "/icon.png",
         width: 1200,
         height: 630,
-        alt: "YouTube Channel Revenue Estimator Preview",
+        alt: "ChannelIncome - YouTube Analytics Tool Preview",
       },
     ],
     locale: "en_US",
     type: "website",
   },
-  // twitter: {
-  //   card: "summary_large_image",
-  //   title: "YouTube Channel Revenue Estimator",
-  //   description:
-  //     "Estimate YouTube revenue, CPM, and monetization status — all in one free analytics tool for creators.",
-  //   creator: "@YourTwitterHandle",
-  //   images: ["/icon.png"],
-  // },
+  // twitter: { ... (Uncomment and update with your handle when ready) },
   category: "technology",
-  applicationName: "YouTube Channel Revenue Estimator",
+  applicationName: "ChannelIncome",
   generator: "Next.js",
   verification: {
-    google: "ceGH6h4gKdjlKm13KVCK5w3B6H-4X24LNgFnyrGUl44", // 🔹 Add your Google Search Console code
+    google: "ceGH6h4gKdjlKm13KVCK5w3B6H-4X24LNgFnyrGUl44", // 🔹 Keep your Google Search Console code
   },
 };
 
@@ -112,31 +104,35 @@ export default function RootLayout({ children }) {
         {/* Theme Color */}
         <meta name="theme-color" content="#ffffff" />
 
-        {/* Additional meta for structured data */}
+        {/* 1. ✅ WebSite Schema - Separate for clarity */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "YouTube Channel Revenue Estimator",
+              name: "ChannelIncome",
               url: "https://channelincome.com/",
               potentialAction: {
                 "@type": "SearchAction",
-                target:
-                  "https://channelincome.com/?query={search_term_string}",
+                target: "https://channelincome.com/search?q={search_term_string}", // Use /search for cleaner URLs
                 "query-input": "required name=search_term_string",
               },
-              description:
-                "Analyze YouTube channel analytics, monetization, and CPM instantly with our free revenue estimator tool.",
-              publisher: {
-                "@type": "Organization",
-                name: "YouTube Channel Revenue Estimator",
-                logo: {
-                  "@type": "ImageObject",
-                  url: "https://channelincome.com/icon.png",
-                },
-              },
+            }),
+          }}
+        />
+
+        {/* 2. ✅ Organization Schema - Added for Brand Authority */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "ChannelIncome",
+              url: "https://channelincome.com/",
+              logo: "https://channelincome.com/icon.png",
+              description: "Free YouTube Revenue Estimator and Channel Analytics Tool.",
             }),
           }}
         />

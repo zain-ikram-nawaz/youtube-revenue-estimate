@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-export default function Page({ data, role }) {
+export default function Page({ data }) {
 
 
   if (!data || data?.length === 0) {
@@ -44,7 +44,7 @@ export default function Page({ data, role }) {
               {/* Image Container */}
               <div className="relative w-full h-48 overflow-hidden">
                 <Image
-                  src={guide?.image || "/icon.png"}
+                  src={guide?.thumbnail || "/icon.png"}
                   alt={guide?.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"

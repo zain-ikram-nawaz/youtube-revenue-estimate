@@ -1,169 +1,210 @@
-import YoutubeAnalyzer from "./components/youtubeChecker/page";
-import FAQ from "./components/FAQ/page";
-import ListingGuide from "./components/AdminUseOnly/ListingGuide/page"
-import SeoText from "./components/SeoText/page"
+import HomeIntroduction from "./components/SeoText/homeText";
+import ListingGuide from "./components/AdminUseOnly/ListingGuide/page";
+import HomeFAQ from "./components/FAQ/page";
 
-export const metadata = {
-  title: "Free YouTube Channel Revenue Estimator | ChannelIncome",
-  description:
-    "Use our free YouTube Revenue Estimator to calculate YouTube earnings, CPM, RPM, and monetization eligibility. Track subscribers, views, and engagement in real-time.",
-  keywords: [
-    "YouTube Revenue Estimator",
-    "YouTube Earnings Calculator",
-    "YouTube Channel Analytics",
-    "YouTube CPM Calculator",
-    "YouTube Monetization Checker",
-    "Free YouTube Analytics Tool",
-    "YouTube Channel Income",
-    "YouTube RPM Estimator",
-  ],
-  alternates: {
-    canonical: "https://channelincome.com/",
+// ✅ Fetch Guides from API
+
+async function getGuides() {
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/guide`, { cache: "no-store" });
+
+  return res.json();
+
+}
+
+// ✅ FAQ Data (Optimized for AEO)
+const homeFaqData = [
+  {
+    q: "What is ChannelIncome?",
+    a: "ChannelIncome is a free analytics and learning platform for creators. It helps you estimate YouTube & TikTok earnings, analyze crucial metrics like View Velocity, and provides expert guides to grow your channel.",
   },
+  {
+    q: "Is the YouTube Revenue Estimator 100% free to use?",
+    a: "Yes, our YouTube Revenue Estimator is 100% free. You can instantly check estimated earnings, CPM/RPM, and detailed monetization compliance metrics without any hidden costs.",
+  },
+  {
+    q: "What is 'Monetization Compliance' and how does your tool help?",
+    a: "Monetization Compliance shows your progress towards the YouTube Partner Program requirements (1000 subscribers and 4000 watch hours). Our tool calculates your Compliance Score and shows exactly the Subscribers Needed and Watch Hours Needed.",
+  },
+  {
+    q: "What kind of guides are available on ChannelIncome?",
+    a: "We publish weekly expert-level guides on YouTube SEO, content strategy, retention analysis, monetization tutorials, and future TikTok growth insights to help you succeed as a digital creator.",
+  },
+];
+
+
+// ==========================================================
+// ✅ Metadata (10/10 SEO/AEO Optimized)
+// ==========================================================
+export const metadata = {
+  title:
+    "ChannelIncome | Free YouTube Revenue Calculator, Channel Analytics & Growth Tools",
+  description:
+    "ChannelIncome is the ultimate free tool for creators: Instantly estimate YouTube earnings, analyze View Velocity, track Monetization Compliance, and get expert SEO & content strategy guides.",
+  keywords: [
+    "YouTube revenue calculator",
+    "YouTube earnings estimator",
+    "channel analytics tool",
+    "monetization compliance score",
+    "view velocity tracker",
+    "YouTube growth tips",
+    "YouTube SEO guide",
+    "CPM RPM calculator",
+    "content frequency analysis",
+    "TikTok earnings estimator", // Future focus included
+    "ChannelIncome",
+  ],
+  alternates: { canonical: "https://channelincome.com/" },
   openGraph: {
-    title: "Free YouTube Revenue Estimator | ChannelIncome",
+    title:
+      "Free YouTube Analytics Tool: Revenue Estimation & Monetization Compliance Check | ChannelIncome",
     description:
-      "Check YouTube channel earnings, CPM, RPM, and engagement instantly. ChannelIncome offers a free analytics tool for creators and marketers.",
+      "Get deep YouTube channel analysis for free. Check lifetime revenue, view velocity, monetization status, and get strategies from our expert growth guides.",
     url: "https://channelincome.com/",
     siteName: "ChannelIncome",
     images: [
       {
-        url: "/icon.png",
+        url: "https://channelincome.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Free YouTube Channel Revenue Estimator Preview",
+        alt: "ChannelIncome - Creator Analytics & Growth Tools",
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free YouTube Channel Revenue Estimator",
+    title: "ChannelIncome | Free YouTube Analytics Tool for Creators",
     description:
-      "Instantly estimate YouTube channel earnings, CPM, RPM, and engagement metrics for free.",
-    images: ["/icon.png"],
+      "Master creator growth with free tools: revenue estimation, compliance tracking, and expert guides for YouTube and TikTok.",
+    images: ["https://channelincome.com/og-image.png"],
   },
 };
 
+// ==========================================================
+// ✅ JSON-LD Schemas (10/10 AEO Optimized)
+// ==========================================================
 
+// ✅ JSON-LD: Organization Schema
+function JsonLdOrg() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "ChannelIncome",
+    url: "https://channelincome.com/",
+    logo: "https://channelincome.com/logo.png",
+    sameAs: [
+      "https://www.youtube.com/@channelincome",
+      "https://twitter.com/channelincome",
+      "https://www.linkedin.com/company/channelincome"
+    ],
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
+}
 
-async function getGuides() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/guide`, {
-    cache: "no-store",
-  });
-  return res.json();
+// ✅ JSON-LD: Website Schema
+function JsonLdWebsite() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "ChannelIncome",
+    url: "https://channelincome.com/",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://channelincome.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
+}
+
+// ✅ JSON-LD: WebPage Schema (Updated keywords)
+function JsonLdWebPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Free YouTube Revenue Estimator & Channel Analytics Tool | ChannelIncome",
+    description:
+      "Discover the best free creator analytics tools. Use our YouTube Revenue Calculator to check estimated earnings, monetization compliance, View Velocity, and access expert growth guides for SEO and content strategy.",
+    url: "https://channelincome.com/",
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+// ✅ JSON-LD: FAQ Schema
+function JsonLdFAQ() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: homeFaqData.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />;
+}
+
+// ✅ JSON-LD: Guides Schema (dynamic from API)
+function JsonLdGuides({ guides }) {
+  const guideSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Creator Guides - YouTube Growth Tips & Tricks",
+    itemListElement: guides?.map((guide, index) => ({
+      "@type": "ListItem", // Changed from CreativeWork to ListItem for proper ItemList structure
+      position: index + 1,
+      name: guide.title,
+      description: guide.description || "Expert guide for YouTube SEO, growth, and content strategy.",
+      url: `https://channelincome.com/guides/${guide.slug}`,
+    })),
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSchema) }} />;
 }
 
 
-
+// ==========================================================
+// ✅ Home Component
+// ==========================================================
 export default async function Home() {
+  // Fetch data (This is an async function in Next.js)
   const { guides } = await getGuides();
-  const seoSections = {
-    "faq": [
-      {
-        "q": "What is YouTube CPM?",
-        "a": "CPM stands for Cost Per Mille — it represents how much advertisers pay YouTube for every 1,000 ad impressions on videos. For example, if a video has a CPM of $5, it means advertisers are paying $5 for every 1,000 ad views. However, creators only receive a portion of this amount after YouTube’s revenue share is deducted."
-      },
-      {
-        "q": "What is YouTube RPM?",
-        "a": "RPM stands for Revenue Per Mille — it shows how much actual revenue a YouTube creator earns per 1,000 video views after YouTube takes its share. RPM gives a clearer idea of how much money you truly make from your content, including ads, memberships, and other monetized features."
-      }
-,
-      {
-        "q": "What are the requirements for YouTube monetization?",
-        "a": "You need at least 1,000 subscribers and 4,000 watch hours in the past 12 months to qualify for the YouTube Partner Program (YPP)."
-      },
-      {
-        "q": "What type of content is eligible for monetization?",
-        "a": "Your content must be original and authentic. AI-generated or repetitive content may be disallowed from monetization."
-      },
-      {
-        "q": "How long does it take to become eligible for monetization?",
-        "a": "The time varies depending on your channel growth. Consistent uploads, audience engagement, and watch hours will help you reach monetization faster."
-      },
-      {
-        "q": "What factors affect YouTube earnings?",
-        "a": "Earnings depend on multiple factors, including: CPM (Cost Per Mille), RPM (Revenue Per Mille), content niche, audience demographics, and viewer engagement/retention."
-      },
-      {
-        "q": "Are the revenue estimates exact?",
-        "a": "No. Revenue calculations are estimates based on publicly available data and industry averages. Actual earnings may vary depending on real watch time, advertiser demand, and your channel specifics."
-      },
-      {
-        "q": "How can I grow my channel to monetize faster?",
-        "a": "Focus on consistent uploads, high-quality content, engaging with your audience, optimizing video titles/descriptions/thumbnails, and analyzing performance metrics to improve your content strategy."
-      }
-    ]
-  }
-
-
-  // ✅ JSON-LD for Software Application
-  function JsonLdApp() {
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "YouTube Channel Revenue Estimator",
-      operatingSystem: "Web",
-      applicationCategory: "UtilityApplication",
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-      },
-      description:
-        "Free YouTube analytics tool that estimates revenue, monetization eligibility, and channel performance based on subscribers, views, and engagement.",
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        reviewCount: "1482",
-      },
-      creator: {
-        "@type": "Organization",
-        name: "YouTube Channel Revenue Estimator",
-        url: "https://channelincome.com/",
-      },
-    };
-
-    return (
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    );
-  }
-
-  // ✅ JSON-LD for FAQ Schema
-  function JsonLdFAQ() {
-    const faqData = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: seoSections.faq.map((item) => ({
-        "@type": "Question",
-        name: item.q,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.a,
-        },
-      })),
-    };
-
-    return (
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
-      />
-    );
-  }
 
   return (
     <>
-      <JsonLdApp />
+      {/* 1. Structured Data */}
+      <JsonLdOrg />
+      <JsonLdWebsite />
+      <JsonLdWebPage />
       <JsonLdFAQ />
-      <YoutubeAnalyzer seoSections={seoSections} />
-      <SeoText />
+      <JsonLdGuides guides={guides} />
+
+      {/* 2. Main Sections */}
+      {/* HomeIntroduction contains the H1, H2, CTAs, and detailed feature list */}
+      <HomeIntroduction />
+      {/* ListingGuide (To display recent guides) */}
       <ListingGuide data={guides} />
-      <FAQ faq={seoSections.faq} />
+      {/* HomeFAQ (Renders the FAQ data, supporting the JsonLdFAQ) */}
+      <HomeFAQ faq={homeFaqData} />
+
+      {/* 3. AEO Snippet Section (Answers the "Best X" question) */}
+      <section className="max-w-5xl mx-auto px-6 py-12 text-center">
+        {/* H2: Direct AEO Question */}
+        <h2 className="text-3xl font-bold mb-4">
+          Why is ChannelIncome the best free YouTube analytics tool?
+        </h2>
+        <p className="text-lg text-gray-700 leading-relaxed">
+          ChannelIncome provides a full suite of creator metrics: not just
+          estimated revenue, but critical data like Monetization Compliance,
+          View Velocity, Content Frequency, and Average Engagement.
+          Paired with our exclusive growth guides on YouTube SEO and monetization,
+          it&apos;s your complete roadmap from creator to entrepreneur.
+        </p>
+      </section>
     </>
   );
 }
