@@ -29,32 +29,32 @@ export default function Navbar() {
           <div className="hidden md:flex space-x-8 font-medium">
             <Link
               href="/"
-              className="text-red-900 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
             >
               Home
             </Link>
               <Link
               href="/guide"
-              className="text-red-900 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
             >
               Guide
             </Link>
               <Link
               href="/tool/youtube-revenue-estimator"
-              className="text-red-900 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
             >
               Tool
             </Link>
-           
+
             <Link
               href="/about-us"
-              className="text-red-900 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
             >
               About Us
             </Link>
             <Link
               href="/contact-us"
-              className="text-red-900 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
             >
               Contact Us
             </Link>
@@ -84,28 +84,28 @@ export default function Navbar() {
           <div className="py-4 space-y-3 border-t border-red-100 mt-3">
             <Link
               href="/"
-              className="block text-red-900 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/guide"
-              className="block text-red-900 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Guide
             </Link>
             <Link
               href="/about-us"
-              className="block text-red-900 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               About Us
             </Link>
             <Link
               href="/contact-us"
-              className="block text-red-900 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact Us
