@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
 
         {/* Theme Color */}
         <meta name="theme-color" content="#ffffff" />
-
+<script src="https://analytics.ahrefs.com/analytics.js" data-key="NIdfnJ32uBKcHx+IqKcQWg" async></script>
         {/* 1. ✅ WebSite Schema - Separate for clarity */}
         <script
           type="application/ld+json"
