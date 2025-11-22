@@ -545,3 +545,301 @@
     padding: 10px;
   }
 }
+
+/* === General Form & Layout Enhancements === */
+.guide-form-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /* Extra padding at the bottom so content isn't hidden by the sticky bar */
+    padding-bottom: 100px;
+}
+
+.form-header-main h1 {
+    color: #1a1a4c;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.form-section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    border-left: 5px solid #007bff;
+}
+
+.form-section h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.form-row-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* === Tags/Keywords Styling === */
+.tag-input {
+    display: flex;
+    gap: 10px;
+}
+
+.tag-input input {
+    flex-grow: 1;
+}
+
+.add-btn-tag {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tag {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.tag.keyword {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.remove-tag-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* === Collapsible Content Block Styling === */
+.blocks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.content-block {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.content-block.open {
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.15);
+    border-color: #007bff;
+}
+
+.block-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #f7f9fc;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.block-type {
+    background-color: #007bff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.block-title {
+    flex-grow: 1;
+    font-weight: 600;
+    color: #333;
+}
+
+.block-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.remove-block-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-icon {
+    font-size: 0.8em;
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+.toggle-icon.rotated {
+    transform: rotate(180deg);
+}
+
+.block-content-panel {
+    padding: 0 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+.block-content-panel.expanded {
+    max-height: 1000px; /* Adjust this value for block content height */
+    padding: 15px;
+    border-top: none;
+}
+
+/* Table Editor inside Content Block */
+.table-editor table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.table-editor td {
+    padding: 5px;
+    border: 1px solid #eee;
+}
+
+.table-editor input {
+    border: none;
+    padding: 5px;
+}
+
+/* === Sticky Block Adder Footer === */
+.sticky-block-adder {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #343a40; /* Darker background */
+    border-top: 3px solid #007bff;
+    padding: 10px 20px;
+    z-index: 1000;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+}
+
+.block-options-footer {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.block-options-footer span {
+    font-weight: bold;
+    color: #fff; /* White text for contrast */
+    margin-right: 10px;
+}
+
+.btn-block-add {
+    background-color: #28a745; /* Green for 'Add' */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9em;
+}
+
+.btn-block-add:hover {
+    background-color: #1e7e34;
+}
+
+/* Submit Bar */
+.form-actions.submit-bar {
+    text-align: right;
+    padding: 20px 0;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.submit-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Empty State Styling */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    color: #6c757d;
+    background-color: #fcfcfc;
+}
+
+.empty-state i {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}

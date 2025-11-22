@@ -102,7 +102,7 @@ export default async function GuideListingPage({ searchParams }) {
                 )}
 
                 <span className="font-medium flex items-center">
-                    Page **{page}** of **{totalPages}**
+                    Page {page} of {totalPages}
                 </span>
 
                 {page < totalPages ? (
