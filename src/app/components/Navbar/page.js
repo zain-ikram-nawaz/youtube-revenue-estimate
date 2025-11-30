@@ -17,8 +17,8 @@ export default function Navbar() {
     <Image
       src="/icon.png"
       alt="Logo"
-      width={60}
-      height={30}
+      width={80}
+      height={80}
       className="object-cover"
     />
   </div>
@@ -50,20 +50,15 @@ export default function Navbar() {
               href="/about-us"
               className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
             >
-              About Us
+              About
             </Link>
             <Link
               href="/contact-us"
               className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
             >
-              Contact Us
+              Contact
             </Link>
-            {/* <Link
-              href="/tool"
-              className="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-lg transition-all duration-200 shadow-md"
-            >
-              Tool
-            </Link> */}
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -101,22 +96,16 @@ export default function Navbar() {
               className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
-              About Us
+              About
             </Link>
             <Link
               href="/contact-us"
               className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
-              Contact Us
+              Contact
             </Link>
-            {/* <Link
-              href="/tool"
-              className="block bg-red-600 text-white hover:bg-red-700 px-4 py-3 rounded-lg transition-all duration-200 font-medium text-center shadow-md"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Tool
-            </Link> */}
+         
           </div>
         </div>
       </div>
