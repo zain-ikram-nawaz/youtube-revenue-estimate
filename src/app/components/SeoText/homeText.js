@@ -15,7 +15,7 @@ export default function HomeIntroduction() {
           {/* Left Text */}
           <div className="md:w-1/2 text-white mb-10 md:mb-0">
             <div className="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
-              ✨ Free Creator Growth Platform..
+              ✨ Free Creator Growth Platform.....
             </div>
             {/* H1: Focuses on core value + analytics */}
             <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
