@@ -7,9 +7,21 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl;
   const token = req.cookies.get("ycresttoken")?.value;
 
-  // ========= AUTH SYSTEM =========
+  // ========= BLOCK COMPONENT PAGES =========
+  // Component pages ko homepage redirect karo
+  if (pathname.startsWith("/components/")) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
 
-  // Guest blocked routes
+  // Block other internal pages
+  if (pathname === "/login" || pathname === "/unauthorized" || pathname === "/form") {
+    // Agar token hai aur login pe jaana chahte hain
+    if (token && pathname === "/login") {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+    // Baki cases mein allow (unauthorized page dikhana hai)
+  }
+
   const guestBlockedPaths = ["/admin", "/dashboard", "/register"];
 
   // If no token → Guest
@@ -41,10 +53,7 @@ export async function middleware(req) {
     }
   }
 
-
-  // ========= REAL 404 HANDLING (WORKS WITH DYNAMIC PAGES) =========
-
-  // Allow internal Next.js files
+  // Skip middleware for static files
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -54,12 +63,6 @@ export async function middleware(req) {
     return NextResponse.next();
   }
 
-  /**
-   * If the matched route DOES NOT exist in Next.js,
-   * we rewrite to our custom 404 page.
-   *
-   * This ALWAYS returns real HTTP 404.
-   */
   try {
     // This triggers Next.js route matching
     return NextResponse.next();
