@@ -1,15 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-// ✅ Metadata for About Us Page (Best practice: add this in a separate file if using Next.js 13/14 app router)
-/*
-export const metadata = {
-    title: "About ChannelIncome - Mission, Vision, and Creator Story",
-    description: "Learn about ChannelIncome's mission to provide free YouTube revenue estimation, deep channel analytics, Monetization Compliance tracking, and expert growth guides.",
-    keywords: ["About ChannelIncome", "YouTube analytics company", "creator vision", "data privacy tool", "free YouTube growth platform"],
-    // ... other standard metadata
-};
-*/
 
 export default function AboutUsPage() {
     return (

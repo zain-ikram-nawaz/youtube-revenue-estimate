@@ -4,16 +4,15 @@ import Guide from "../../../models/guide";
 import Image from "next/image";
 import { Clock, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-// import SEO from "../../components/SEO/SEO"; // ⚠️ Removed custom SEO component
 import ContentBlockRenderer from "../../components/ContentBlockRenderer/ContentBlockRenderer";
 import { calculateReadTime } from "../../hooks/readTime";
-import Script from "next/script"; // ✅ Added Script for JSON-LD
+import Script from "next/script";
 
 // ✅ Metadata Function: Next.js Best Practice
 export async function generateMetadata({ params }) {
     await connectDB();
     const guide = await Guide.findOne({ slug: params.slug }).lean();
-
+// console.log(guide)
     if (!guide) {
         return {
             title: "Not Found",

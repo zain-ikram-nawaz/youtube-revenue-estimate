@@ -8,13 +8,7 @@ import Script from "next/script"; // Import Script for JSON-LD
 export async function generateMetadata({ searchParams }) {
     const page = Number(searchParams.page) || 1;
     const isFirstPage = page === 1;
-
-    // 🔗 Canonical URL Logic:
-    // This tells search engines that page 1 is the main URL,
-    // and subsequent pages are just for navigation.
-    const canonicalUrl = isFirstPage
-        ? 'https://channelincome.com/guide'
-        : `https://channelincome.com/guide/?page=${page}`;
+    const canonicalUrl = 'https://channelincome.com/guide';
 
     return {
         title: isFirstPage
@@ -34,10 +28,7 @@ export async function generateMetadata({ searchParams }) {
         ],
 
         alternates: {
-            canonical: canonicalUrl, // Crucial for Pagination SEO
-            // 💡 Optional: Add next/prev for older search engines
-            // next: page < totalPages ? `https://channelincome.com/guide/?page=${page + 1}` : undefined,
-            // prev: page > 1 ? `https://channelincome.com/guide/?page=${page - 1}` : undefined,
+            canonical: canonicalUrl,
         },
     };
 }
@@ -56,24 +47,26 @@ export default async function GuideListingPage({ searchParams }) {
         "@type": "CollectionPage",
         name: `YouTube Growth Guides - Page ${page}`,
         description: `Listing of expert guides on YouTube growth, SEO, and monetization strategy.`,
-        url: `https://channelincome.com/guide/?page=${page}`,
-        // Optionally list the items for richer results, if required
-        // mainEntity: guides.map(guide => ({
-        //     "@type": "CreativeWork",
-        //     name: guide.title,
-        //     url: `https://channelincome.com/guides/${guide.slug}`
-        // })),
-        hasPart: {
-            "@type": "ItemList",
-            numberOfItems: guides.length,
-            itemListOrder: "http://schema.org/ItemListOrderDescending",
-        }
+        url: "https://channelincome.com/guide",
+
+      hasPart: {
+  "@type": "ItemList",
+  numberOfItems: guides.length,
+  itemListOrder: "http://schema.org/ItemListOrderDescending",
+  itemListElement: guides.map((guide, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    url: `https://channelincome.com/guide/${guide.slug}`,
+    name: guide.title,
+  })),
+}
+
     };
 
     return (
         <div className="flex flex-col items-center">
 
-            {/* ✅ SEO JSON-LD Structured Data */}
+
             <Script
                 id="collection-page-schema"
                 type="application/ld+json"
@@ -87,7 +80,7 @@ export default async function GuideListingPage({ searchParams }) {
             <div className="flex gap-4 mt-6">
                 {page > 1 ? (
                     <Link
-                        href={`guide/?page=${page - 1}`}
+                        href={`/guide/?page=${page - 1}`}
                         className="px-4 py-2 rounded-xl font-semibold bg-red-600 text-white hover:bg-red-700 transition-colors"
                     >
                         Previous
@@ -107,7 +100,7 @@ export default async function GuideListingPage({ searchParams }) {
 
                 {page < totalPages ? (
                     <Link
-                        href={`guide/?page=${page + 1}`}
+                        href={`/guide/?page=${page + 1}`}
                         className="px-4 py-2 rounded-xl font-semibold bg-red-600 text-white hover:bg-red-700 transition-colors"
                     >
                         Next

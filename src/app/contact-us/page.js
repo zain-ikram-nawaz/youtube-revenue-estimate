@@ -1,43 +1,52 @@
 import React from "react";
 import ContactUs from "../components/contact/page";
 
+// ✅ Page-level metadata for Next.js App Router
 export const metadata = {
-  title: "Contact Us | YouTube Channel Revenue Estimator",
+  title: "Contact Us | ChannelIncome",
   description:
     "Get in touch with our YouTube analytics experts. Contact us for inquiries, support, or partnerships.",
+  keywords: [
+    "Contact ChannelIncome",
+    "YouTube analytics support",
+    "creator tools help",
+    "monetization guidance",
+  ],
+  alternates: { canonical: "https://channelincome.com/contact-us" },
 };
 
 export default function Page() {
+  // ✅ JSON-LD structured data for ContactPage
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact YT Revenue Pro",
-    "description":
+    name: "Contact ChannelIncome",
+    description:
       "Get in touch with our YouTube analytics experts to maximize your channel's revenue potential.",
-    "url": "https://channelincome.com/contact-us",
-    "publisher": {
+    url: "https://channelincome.com/contact-us",
+    publisher: {
       "@type": "Organization",
-      "name": "YT Revenue Pro",
-      "url": "https://channelincome.com",
-      "logo": "https://channelincome.com/images/logoo.png",
-      "sameAs": [
-        "https://twitter.com/",
-        "https://www.linkedin.com/",
-        "https://www.youtube.com/",
+      name: "ChannelIncome",
+      url: "https://channelincome.com",
+      logo: "https://channelincome.com/images/logoo.png",
+      sameAs: [
+        "https://twitter.com/channelincome",
+        "https://www.linkedin.com/company/channelincome",
+        "https://www.youtube.com/@channelincome",
       ],
-      "contactPoint": [
+      contactPoint: [
         {
           "@type": "ContactPoint",
-          "telephone": "+92-308-2821704",
-          "contactType": "customer support",
-          "areaServed": "Worldwide",
-          "availableLanguage": ["English"],
+          telephone: "+92-308-2821704",
+          contactType: "customer support",
+          areaServed: "Worldwide",
+          availableLanguage: ["English"],
         },
         {
           "@type": "ContactPoint",
-          "email": "Zainikram704@gmail.com",
-          "contactType": "customer support",
-          "availableLanguage": ["English"],
+          email: "Zainikram704@gmail.com",
+          contactType: "customer support",
+          availableLanguage: ["English"],
         },
       ],
     },

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ContentBlockRenderer({ block, index }) {
   switch (block.type) {
@@ -46,7 +47,16 @@ export default function ContentBlockRenderer({ block, index }) {
           ></iframe>
         </div>
       );
-
+  case "link":
+            return (
+                <div className="my-8">
+                    <Link href={block.url} target="_blank">
+                        <button className="px-6 py-3 bg-red-600 text-white font-semibold rounded-xl shadow-lg hover:bg-red-700 transition">
+                            Aap check kar sakty hain hamare advance analytics se apna data
+                        </button>
+                    </Link>
+                </div>
+            );
     case "faq":
       return (
         <div key={index} className="my-6 bg-red-50 border border-red-100 rounded-xl p-6">

@@ -20,11 +20,14 @@ export const metadata = {
     "Check if my YouTube channel is monetized",
     "Estimate earnings for small channels"
   ],
-  alternates: { canonical: "https://channelincome.com/" },
+  alternates: {
+    canonical: "https://channelincome.com/youtube-revenue-estimator",
+  },
+
   openGraph: {
     title: "Free YouTube Revenue Estimator: Calculate Income, CPM, RPM & Growth | ChannelIncome",
     description: "Estimate YouTube earnings, check monetization eligibility, and track channel metrics with ChannelIncome's free tool.",
-    url: "https://channelincome.com/",
+    url: "https://channelincome.com/youtube-revenue-estimator",
     siteName: "ChannelIncome",
     images: [{ url: "/icon.png", width: 1200, height: 630, alt: "YouTube Revenue Estimator Preview" }],
     locale: "en_US",
@@ -56,25 +59,30 @@ export default async function YouTubeRevenueEstimateor() {
 
 
 
-  function JsonLdApp() {
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "YouTube Channel Revenue Estimator",
-      operatingSystem: "Web",
-      applicationCategory: "UtilityApplication",
-        // ✅ Added image for better rich results
-        image: "/tool.png", // Path to a screenshot of your tool
-      description: "Free YouTube analytics tool that estimates revenue, monetization eligibility, and channel performance. See views, subscribers, total videos, average monthly views, channel age, monetization status, engagement metrics, upload frequency, view velocity, top-performing videos, and performance insights.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "1482" },
-      creator: { "@type": "Organization", name: "ChannelIncome", url: "https://channelincome.com/" },
-    url: "https://channelincome.com/",
-    };
-    return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
-  }
+  function JsonLdApp() {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "YouTube Channel Revenue Estimator",
+      operatingSystem: "Web",
+     applicationCategory: "WebApplication",
+      keywords: "YouTube revenue estimator, YouTube earnings calculator, YouTube CPM calculator, YouTube RPM estimator, YouTube monetization checker",
+      creator: { "@type": "Organization", name: "ChannelIncome", url: "https://channelincome.com/youtube-revenue-estimator" },
+      sameAs: [
+        "https://www.youtube.com/@channelincome",
+      ],
+      // ✅ Added image for better rich results
+      image: "/tool.png", // Path to a screenshot of your tool
+      description: "Free YouTube analytics tool that estimates revenue, monetization eligibility, and channel performance. See views, subscribers, total videos, average monthly views, channel age, monetization status, engagement metrics, upload frequency, view velocity, top-performing videos, and performance insights.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "1482" },
+      url: "https://channelincome.com/youtube-revenue-estimator",
 
-// ... rest of the code is excellent ...
+    };
+    return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
+  }
+
+  // ... rest of the code is excellent ...
 
   function JsonLdFAQ() {
     const faqSchema = {
@@ -100,23 +108,10 @@ export default async function YouTubeRevenueEstimateor() {
     return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(guidesSchema) }} />;
   }
 
-  function JsonLdSeoText() {
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: "Free YouTube Revenue Estimator: Calculate Income, CPM, RPM & Growth",
-      description: "A comprehensive guide and tool to estimate YouTube earnings, understand CPM/RPM, and plan channel growth.",
-      author: { "@type": "Organization", name: "ChannelIncome" },
-      publisher: { "@type": "Organization", name: "ChannelIncome", logo: { "@type": "ImageObject", url: "https://channelincome.com/logo.png" } },
-      mainEntityOfPage: { "@type": "WebPage", "@id": "https://channelincome.com/" },
-    };
-    return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
-  }
 
   return (
     <>
       <JsonLdApp />
-      <JsonLdSeoText />
       <JsonLdGuides />
       <JsonLdFAQ />
 

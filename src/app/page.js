@@ -33,9 +33,6 @@ const homeFaqData = [
 ];
 
 
-// ==========================================================
-// ✅ Metadata (10/10 SEO/AEO Optimized)
-// ==========================================================
 export const metadata = {
   title:
     "ChannelIncome | Free YouTube Revenue Calculator, Channel Analytics & Growth Tools",
@@ -51,7 +48,7 @@ export const metadata = {
     "YouTube SEO guide",
     "CPM RPM calculator",
     "content frequency analysis",
-    "TikTok earnings estimator", // Future focus included
+    "TikTok earnings estimator",
     "ChannelIncome",
   ],
   alternates: { canonical: "https://channelincome.com/" },
@@ -80,10 +77,6 @@ export const metadata = {
   },
 };
 
-// ==========================================================
-// ✅ JSON-LD Schemas (10/10 AEO Optimized)
-// ==========================================================
-
 // ✅ JSON-LD: Organization Schema
 function JsonLdOrg() {
   const jsonLd = {
@@ -92,27 +85,11 @@ function JsonLdOrg() {
     name: "ChannelIncome",
     url: "https://channelincome.com/",
     logo: "https://channelincome.com/logo.png",
-    sameAs: [
-      "https://www.youtube.com/@channelincome",
-      "https://twitter.com/channelincome",
-      "https://www.linkedin.com/company/channelincome"
-    ],
-  };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
-}
-
-// ✅ JSON-LD: Website Schema
-function JsonLdWebsite() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "ChannelIncome",
-    url: "https://channelincome.com/",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://channelincome.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
+    // sameAs: [
+    //   "https://www.youtube.com/@channelincome",
+    //   "https://twitter.com/channelincome",
+    //   "https://www.linkedin.com/company/channelincome"
+    // ],
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
 }
@@ -156,7 +133,7 @@ function JsonLdGuides({ guides }) {
     "@type": "ItemList",
     name: "Creator Guides - YouTube Growth Tips & Tricks",
     itemListElement: guides?.map((guide, index) => ({
-      "@type": "ListItem", // Changed from CreativeWork to ListItem for proper ItemList structure
+      "@type": "ListItem",
       position: index + 1,
       name: guide.title,
       description: guide.description || "Expert guide for YouTube SEO, growth, and content strategy.",
@@ -166,10 +143,6 @@ function JsonLdGuides({ guides }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSchema) }} />;
 }
 
-
-// ==========================================================
-// ✅ Home Component
-// ==========================================================
 export default async function Home() {
   // Fetch data (This is an async function in Next.js)
   const { guides } = await getGuides();
@@ -178,7 +151,6 @@ export default async function Home() {
     <>
       {/* 1. Structured Data */}
       <JsonLdOrg />
-      <JsonLdWebsite />
       <JsonLdWebPage />
       <JsonLdFAQ />
       <JsonLdGuides guides={guides} />

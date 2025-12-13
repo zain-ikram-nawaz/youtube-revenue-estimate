@@ -1,38 +1,6 @@
-// Remove 'Head' import
-// import Head from "next/head";
+
 import React from "react";
 import Link from "next/link";
-
-// ✅ 1. Use 'metadata' export for Next.js App Router (Replaces all Head tags)
-export const metadata = {
-    title: "YouTube Revenue Estimator: Calculate Earnings, CPM, RPM & Growth | ChannelIncome",
-    description:
-        "Accurately estimate your YouTube channel earnings, check CPM and RPM, and verify monetization eligibility using our free and smart YouTube Revenue Estimator.",
-    keywords: [
-        "YouTube revenue estimator",
-        "YouTube earning calculator",
-        "YouTube CPM checker",
-        "YouTube RPM estimator",
-        "YouTube income analysis",
-        "monetization eligibility",
-        "channel performance tool",
-    ],
-    robots: "index, follow",
-    alternates: {
-        // ✅ CANONICAL: Tool Page ka URL
-        canonical: "https://channelincome.com/tool/youtube-revenue-estimator",
-    },
-    openGraph: {
-        title: "YouTube Revenue Estimator: Calculate Earnings, CPM, RPM & Growth | ChannelIncome",
-        description:
-            "Estimate your YouTube income instantly. Our tool provides data-driven insights into monetization, CPM, and content strategy for faster growth.",
-        url: "https://channelincome.com/tool/youtube-revenue-estimator",
-        siteName: "ChannelIncome",
-        type: "website",
-    },
-    // Optional: Add Twitter metadata if needed
-    // twitter: { ... }
-};
 
 
 export default function YouTubeRevenueContent() {

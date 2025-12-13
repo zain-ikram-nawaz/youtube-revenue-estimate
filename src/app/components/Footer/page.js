@@ -78,37 +78,7 @@ export default function Footer() {
         </ul>
       </div>
 
-      {/* Resources */}
-      {/* <div className="lg:col-span-1">
-        <h3 className="text-lg font-semibold mb-4">Resources</h3>
-        <ul className="space-y-2">
-          <li>
-            <a href="/blog" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Blog & Articles
-            </a>
-          </li>
-          <li>
-            <a href="/youtube-case-studies" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Case Studies
-            </a>
-          </li>
-          <li>
-            <a href="/youtube-tools" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Creator Tools
-            </a>
-          </li>
-          <li>
-            <a href="/faq" className="text-gray-300 hover:text-white transition-colors text-sm">
-              FAQ
-            </a>
-          </li>
-          <li>
-            <a href="/youtube-glossary" className="text-gray-300 hover:text-white transition-colors text-sm">
-              YouTube Glossary
-            </a>
-          </li>
-        </ul>
-      </div> */}
+     
 
       {/* Newsletter */}
       <div className="lg:col-span-1">
@@ -131,42 +101,6 @@ export default function Footer() {
         </form>
       </div>
     </div>
-
-    {/* YouTube SEO Keywords Section */}
-    {/* <div className="border-t border-gray-700 pt-8 mb-6">
-      <h3 className="text-lg font-semibold mb-4 text-center">YouTube Monetization & Analytics Topics</h3>
-      <div className="flex flex-wrap justify-center gap-2">
-        {[
-          "YouTube Revenue Calculator",
-          "CPM Rates 2024",
-          "YouTube Partner Program",
-          "Channel Monetization",
-          "YouTube Analytics",
-          "Subscriber Growth",
-          "Watch Time Optimization",
-          "Ad Revenue Calculator",
-          "YouTube SEO",
-          "Video Marketing",
-          "Content Strategy",
-          "Audience Engagement",
-          "YouTube Algorithm",
-          "Creator Economy",
-          "Digital Marketing",
-          "Social Media Analytics",
-          "Video SEO",
-          "YouTube Statistics",
-          "Earnings Calculator",
-          "Monetization Tips"
-        ].map((keyword) => (
-          <span
-            key={keyword}
-            className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-xs hover:bg-gray-700 transition-colors cursor-pointer"
-          >
-            {keyword}
-          </span>
-        ))}
-      </div>
-    </div> */}
 
     {/* Legal & Bottom Section */}
     <div className="border-t border-gray-700 pt-8">
