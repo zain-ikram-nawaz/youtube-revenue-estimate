@@ -10,9 +10,10 @@ import Script from "next/script";
 
 // ✅ Metadata Function: Next.js Best Practice
 export async function generateMetadata({ params }) {
+    const { slug } = await params; // 👈 AWAIT ADD KIYA
     await connectDB();
-    const guide = await Guide.findOne({ slug: params.slug }).lean();
-// console.log(guide)
+    const guide = await Guide.findOne({ slug }).lean();
+
     if (!guide) {
         return {
             title: "Not Found",
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }) {
             title: guide.metaTitle || guide.title,
             description: guide.metaDescription || guide.summary,
             url: canonicalUrl,
-            type: "article", // It's an article/guide
+            type: "article",
             images: [
                 {
                     url: guide.thumbnail || 'https://channelincome.com/default-guide-image.jpg',
@@ -48,8 +49,9 @@ export async function generateMetadata({ params }) {
 
 
 export default async function GuidePage({ params }) {
+    const { slug } = await params; // 👈 AWAIT ADD KIYA
     await connectDB();
-    const guide = await Guide.findOne({ slug: params.slug }).lean();
+    const guide = await Guide.findOne({ slug }).lean();
     if (!guide) notFound();
 
     const readTime = calculateReadTime(guide);
@@ -61,8 +63,8 @@ export default async function GuidePage({ params }) {
         headline: guide.title,
         description: guide.summary || guide.metaDescription,
         image: guide.thumbnail ? [guide.thumbnail] : ["https://channelincome.com/default-guide-image.jpg"],
-        datePublished: guide.createdAt || new Date().toISOString(), // Assuming createdAt exists
-        dateModified: guide.updatedAt || new Date().toISOString(), // Assuming updatedAt exists
+        datePublished: guide.createdAt || new Date().toISOString(),
+        dateModified: guide.updatedAt || new Date().toISOString(),
         author: {
             "@type": "Organization",
             name: "ChannelIncome Team",
@@ -97,9 +99,7 @@ export default async function GuidePage({ params }) {
 
     return (
         <>
-            {/* 🛑 Removed custom <SEO> component */}
-
-            {/* ✅ 2. JSON-LD Scripts Added */}
+            {/* ✅ JSON-LD Scripts Added */}
             <Script
                 id="article-schema"
                 type="application/ld+json"
@@ -115,7 +115,7 @@ export default async function GuidePage({ params }) {
             )}
 
             <div className="min-h-screen bg-gradient-to-br from-white to-red-50/30">
-                {/* Header (No changes here) */}
+                {/* Header */}
                 <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-100">
                     <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
                         <Link href="/" className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold">
@@ -129,7 +129,7 @@ export default async function GuidePage({ params }) {
                     </div>
                 </header>
 
-                {/* Main Content (No changes here) */}
+                {/* Main Content */}
                 <main className="max-w-3xl mx-auto px-4 py-8">
                     <article>
                         <span className="inline-block px-4 py-2 bg-red-500 text-white text-sm font-semibold rounded-full mb-6 shadow-lg">
@@ -154,7 +154,6 @@ export default async function GuidePage({ params }) {
                             <section className="mt-12">
                                 <h2 className="text-3xl font-bold mb-6">FAQs</h2>
                                 {guide.faqs.map((faq, i) => (
-                                    // 💡 Ensure ContentBlockRenderer can handle the 'faq' type correctly for rendering
                                     <ContentBlockRenderer key={i} block={{ type: "faq", ...faq }} />
                                 ))}
                             </section>

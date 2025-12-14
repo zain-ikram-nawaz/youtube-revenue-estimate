@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['yt3.googleusercontent.com','yt3.ggpht.com','channelincome.com','res.cloudinary.com',],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'yt3.googleusercontent.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'yt3.ggpht.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'channelincome.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+            },
+        ],
     },
     async redirects() {
         return [
@@ -9,7 +26,7 @@ const nextConfig = {
             {
                 source: '/components/:path*',
                 destination: '/',
-                permanent: false, 
+                permanent: false,
             },
             // Old youtube-guides redirects
             {

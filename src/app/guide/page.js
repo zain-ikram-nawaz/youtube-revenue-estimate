@@ -2,11 +2,12 @@ import React from "react";
 import HomeListing from "../components/HomeListing/page";
 import { getGuides } from "../hooks/getGuides";
 import Link from "next/link";
-import Script from "next/script"; // Import Script for JSON-LD
+import Script from "next/script";
 
 // ✅ Metadata (SEO Optimized for a Listing Page)
 export async function generateMetadata({ searchParams }) {
-    const page = Number(searchParams.page) || 1;
+    const resolvedSearchParams = await searchParams; // 👈 FIX
+    const page = Number(resolvedSearchParams.page) || 1;
     const isFirstPage = page === 1;
     const canonicalUrl = 'https://channelincome.com/guide';
 
@@ -35,10 +36,10 @@ export async function generateMetadata({ searchParams }) {
 
 
 export default async function GuideListingPage({ searchParams }) {
-    const page = Number(searchParams.page) || 1;
+    const resolvedSearchParams = await searchParams; // 👈 FIX
+    const page = Number(resolvedSearchParams.page) || 1;
     const limit = 6;
 
-    // Assuming getGuides returns the data structure as provided in the prompt
     const { guides, pagination: { totalPages } } = await getGuides(page, limit);
 
     // ✅ JSON-LD for Collection Page (Listing Page Schema)
@@ -49,24 +50,21 @@ export default async function GuideListingPage({ searchParams }) {
         description: `Listing of expert guides on YouTube growth, SEO, and monetization strategy.`,
         url: "https://channelincome.com/guide",
 
-      hasPart: {
-  "@type": "ItemList",
-  numberOfItems: guides.length,
-  itemListOrder: "http://schema.org/ItemListOrderDescending",
-  itemListElement: guides.map((guide, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    url: `https://channelincome.com/guide/${guide.slug}`,
-    name: guide.title,
-  })),
-}
-
+        hasPart: {
+            "@type": "ItemList",
+            numberOfItems: guides.length,
+            itemListOrder: "http://schema.org/ItemListOrderDescending",
+            itemListElement: guides.map((guide, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                url: `https://channelincome.com/guide/${guide.slug}`,
+                name: guide.title,
+            })),
+        }
     };
 
     return (
         <div className="flex flex-col items-center">
-
-
             <Script
                 id="collection-page-schema"
                 type="application/ld+json"

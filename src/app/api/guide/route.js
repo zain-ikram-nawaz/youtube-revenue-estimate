@@ -3,19 +3,9 @@ import { connectDB } from "../../lib/db";
 import Guide from "../../../models/guide";
 import cloudinary from "../../lib/cloudinary";
 
-// ⚠️ Next.js Configuration
-// Yeh configuration 'Request Entity Too Large' (413) error ko theek karta hai.
-// Yeh Next.js ko batata hai ki body ko khud parse na kare, balki FormData streaming use kare.
-export const config = {
-  runtime: 'nodejs',
-  api: {
-    bodyParser: false, // 👈 Yeh main fix hai 413 error ke liye
-  },
-};
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-
-// 🔹 Safe JSON parser
-// JSON string ko array/object mein badalta hai. Agar error ho toh default value deta hai.
 function safeParse(value, fallback = []) {
   try {
     return JSON.parse(value);
