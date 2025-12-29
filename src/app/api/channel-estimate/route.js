@@ -1,14 +1,4 @@
 import axios from "axios";
-import { Ratelimit } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
-
-// --- Redis & Rate Limiting Setup ---
-const redis = Redis.fromEnv();
-const rateLimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(5, "10 s"),
-});
-
 // --- Config ---
 const CORS_ORIGIN = process.env.NEXT_PUBLIC_CORS_ORIGIN || "*";
 
@@ -52,13 +42,6 @@ function extractVideoId(url) {
 
 // --- Main API Handler ---
 export async function POST(req) {
-  const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
-  const { success } = await rateLimit.limit(ip);
-  if (!success)
-    return new Response(JSON.stringify({ error: "Too many requests" }), {
-      status: 429,
-      headers: corsHeaders(),
-    });
 
   try {
     const body = await req.json();
@@ -70,7 +53,7 @@ export async function POST(req) {
       const videoRes = await axios.get(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${videoId}&key=${process.env.YOUTUBE_API_KEY}`
       );
-      const video = videoRes.data.items[0];
+      const video = videoRes.data?.items?.[0]; // Added optional chaining
       if (!video)
         return new Response(JSON.stringify({ error: "Video not found" }), {
           status: 404,
@@ -125,7 +108,7 @@ export async function POST(req) {
       const handleRes = await axios.get(
         `https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=${channelIdentifier}&key=${process.env.YOUTUBE_API_KEY}`
       );
-      if (handleRes.data.items.length > 0)
+      if (handleRes.data?.items?.length > 0) // Added optional chaining
         channelId = handleRes.data.items[0].id;
     } else {
       channelId = channelIdentifier;
@@ -139,7 +122,7 @@ export async function POST(req) {
     const ytRes = await axios.get(
       `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${process.env.YOUTUBE_API_KEY}`
     );
-    const channel = ytRes.data.items[0];
+    const channel = ytRes.data?.items?.[0]; // Added optional chaining
     if (!channel)
       return new Response(JSON.stringify({ error: "Channel not found" }), {
         status: 404,
@@ -217,15 +200,23 @@ export async function POST(req) {
     const searchRes = await axios.get(
       `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&channelId=${channelId}&part=id,snippet&maxResults=50&order=date&type=video`
     );
-    const videoIds = searchRes.data.items.map((v) => v.id.videoId).join(",");
+
+    // FIX: Guarded against undefined items
+    const searchItems = searchRes.data?.items || [];
+    const videoIds = searchItems.map((v) => v.id.videoId).filter(Boolean).join(",");
+
     let shortsRatio = null;
     let videoAnalytics = null;
     let estimatedWatchTime = null;
 
-    if (videoIds.length > 0) {
+    // FIX: Guarded against empty videoIds
+    if (videoIds && videoIds.length > 0) {
       const videosRes = await axios.get(
         `https://www.googleapis.com/youtube/v3/videos?key=${process.env.YOUTUBE_API_KEY}&id=${videoIds}&part=contentDetails,statistics,snippet`
       );
+
+      const videosDataItems = videosRes.data?.items || [];
+
       let shortsCount = 0,
         longCount = 0,
         engagementRatios = [],
@@ -233,7 +224,7 @@ export async function POST(req) {
         totalWatchSec = 0,
         totalViewsAll = 0;
 
-      const videosData = videosRes.data.items.map((v) => {
+      const videosData = videosDataItems.map((v) => {
         const views = parseInt(v.statistics.viewCount || 0);
         const likes = parseInt(v.statistics.likeCount || 0);
         const comments = parseInt(v.statistics.commentCount || 0);
@@ -274,19 +265,19 @@ export async function POST(req) {
         };
 
       const avgEngagement =
-        engagementRatios.length > 0
+        engagementRatios?.length > 0
           ? (
               100 *
               engagementRatios.reduce((a, b) => a + b, 0) /
-              engagementRatios.length
+              engagementRatios?.length
             ).toFixed(1) + "%"
           : "N/A";
 
-      const dates = searchRes.data.items
+      const dates = searchItems
         .map((v) => new Date(v.snippet.publishedAt))
         .sort((a, b) => b - a);
       const gaps = [];
-      for (let i = 1; i < dates.length; i++)
+      for (let i = 1; i < dates?.length; i++)
         gaps.push((dates[i - 1] - dates[i]) / (1000 * 60 * 60 * 24));
       const avgGap =
         gaps.length > 0 ? gaps.reduce((a, b) => a + b, 0) / gaps.length : 0;
@@ -333,7 +324,7 @@ export async function POST(req) {
         revenueEstimates,
         avgMonthlyViews: Math.round(avgMonthlyViews),
         avgMonthlyRevenue: `$${avgMonthlyRevenue} (approx)`,
-        estimatedWatchTime, // ✅ Added
+        estimatedWatchTime,
         shortsRatio,
         videoAnalytics,
         notes: [

@@ -4,6 +4,7 @@ import React from "react";
 export default function page({ data }) {
   const analytics = data?.videoAnalytics;
   if (!analytics) return null;
+  // console.log(data)
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
