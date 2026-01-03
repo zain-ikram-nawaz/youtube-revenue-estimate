@@ -38,7 +38,7 @@ export async function generateMetadata({ searchParams }) {
 export default async function GuideListingPage({ searchParams }) {
     const resolvedSearchParams = await searchParams; // 👈 FIX
     const page = Number(resolvedSearchParams.page) || 1;
-    const limit = 6;
+    const limit = 8;
 
     const { guides, pagination: { totalPages } } = await getGuides(page, limit);
 

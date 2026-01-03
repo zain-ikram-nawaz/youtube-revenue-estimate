@@ -6,7 +6,7 @@ if (!MONGODB_URI) {
   throw new Error("⚠️ Please add your MongoDB URI to .env.local file");
 }
 
-// Global caching — prevent multiple DB connections during dev
+// ✅ Global cache to prevent multiple DB connections in Dev or Serverless
 let cached = global.mongoose;
 
 if (!cached) {
@@ -14,14 +14,24 @@ if (!cached) {
 }
 
 export async function connectDB() {
+  // ✅ If connection exists, return it
   if (cached.conn) return cached.conn;
 
+  // ✅ If connection is in progress, wait for it
   if (!cached.promise) {
     cached.promise = mongoose
-      .connect(MONGODB_URI, { bufferCommands: false })
-      .then((mongoose) => {
+      .connect(MONGODB_URI, {
+        bufferCommands: false, // Recommended for serverless
+        // optional, remove if default
+      })
+      .then((mongooseInstance) => {
         console.log("✅ MongoDB Connected Successfully");
-        return mongoose;
+        return mongooseInstance;
+      })
+      .catch((err) => {
+        cached.promise = null; // reset promise if failed
+        console.error("❌ MongoDB Connection Error:", err);
+        throw err;
       });
   }
 

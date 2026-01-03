@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectDB } from "../../lib/db";
 import Guide from "../../../models/guide";
 import cloudinary from "../../lib/cloudinary";
+import { getGuides } from "../../hooks/getGuides";
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -168,35 +169,10 @@ export async function POST(req) {
 // ✅ GET — Fetch all guides
 // Sabhi guides ko fetch karne ka function (pagination ke saath).
 export async function GET(req) {
-  try {
-    await connectDB(); // Database se connect karna
+  const { searchParams } = new URL(req.url);
+  const page = Number(searchParams.get("page") || 1);
+  const limit = Number(searchParams.get("limit") || 8);
 
-    const { searchParams } = new URL(req.url);
-    // Pagination parameters
-    const page = parseInt(searchParams.get("page")) || 1;
-    const limit = parseInt(searchParams.get("limit")) || 6;
-
-    // Guides count karna aur fetch karna
-    const totalGuides = await Guide.countDocuments();
-    const guides = await Guide.find()
-      .sort({ createdAt: -1 })
-      .skip((page - 1) * limit)
-      .limit(limit)
-      .lean();
-
-    // Response mein guides aur pagination data bhejna
-    return NextResponse.json({
-      success: true,
-      guides,
-      pagination: {
-        totalGuides,
-        totalPages: Math.ceil(totalGuides / limit),
-        currentPage: page,
-        perPage: limit,
-      },
-    });
-  } catch (error) {
-    console.error("GET Error:", error);
-    return NextResponse.json({ success: false, error: error.message });
-  }
+  const data = await getGuides(page, limit);  // ← shared function
+  return Response.json(data);
 }

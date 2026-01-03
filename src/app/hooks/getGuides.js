@@ -1,9 +1,24 @@
-export async function getGuides(page = 1, limit = 6) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/guide?page=${page}&limit=${limit}`,
-    { cache: "no-store" }
-  );
- const data = await res.json();
-   // 👈 Add this line for testing
-  return data;
+import { connectDB } from "../lib/db"; // aapka DB connect function
+import Guide from "../../models/guide";
+
+// ✅ Ye function DB se guides fetch karega
+export async function getGuides(page = 1, limit = 8) {
+  await connectDB(); // DB connect
+
+  const totalGuides = await Guide.countDocuments();
+  const guides = await Guide.find()
+    .sort({ createdAt: -1 })
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .lean();
+
+  return {
+    guides,
+    pagination: {
+      totalGuides,
+      totalPages: Math.ceil(totalGuides / limit),
+      currentPage: page,
+      perPage: limit,
+    },
+  };
 }

@@ -1,16 +1,20 @@
 import HomeIntroduction from "./components/SeoText/homeText";
 import ListingGuide from "./components/AdminUseOnly/ListingGuide/page";
 import HomeFAQ from "./components/FAQ/page";
+import { getGuides } from "./hooks/getGuides";
 
 // ✅ Fetch Guides from API
 
-async function getGuides() {
+// async function getGuides() {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/guide`, { cache: "no-store" });
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/guide`,  {
+//       next: { revalidate: 1800 } // 30 minutes
 
-  return res.json();
+//     });
 
-}
+//   return res.json();
+
+// }
 
 // ✅ FAQ Data (Optimized for AEO)
 const homeFaqData = [
@@ -85,11 +89,7 @@ function JsonLdOrg() {
     name: "ChannelIncome",
     url: "https://channelincome.com/",
     logo: "https://channelincome.com/logo.png",
-    // sameAs: [
-    //   "https://www.youtube.com/@channelincome",
-    //   "https://twitter.com/channelincome",
-    //   "https://www.linkedin.com/company/channelincome"
-    // ],
+
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
 }
@@ -147,6 +147,7 @@ export default async function Home() {
   // Fetch data (This is an async function in Next.js)
   const { guides } = await getGuides();
 
+  // console.log(guides,"guides")
   return (
     <>
       {/* 1. Structured Data */}
