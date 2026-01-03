@@ -5,10 +5,9 @@ export default function Footer() {
   return (
     <div>
 
-{/* Footer Section */}
 <footer className="bg-gray-900 text-white mt-12 md:mt-16">
   <div className="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8">
-    {/* Main Footer Content */}
+   
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
       {/* Company Info */}
       <div className="lg:col-span-2">
@@ -78,7 +77,7 @@ export default function Footer() {
         </ul>
       </div>
 
-     
+
 
       {/* Newsletter */}
       <div className="lg:col-span-1">
