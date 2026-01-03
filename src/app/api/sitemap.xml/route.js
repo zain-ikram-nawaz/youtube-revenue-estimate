@@ -34,7 +34,6 @@ export async function GET() {
     "/terms-of-service",
     "/disclaimer",
     "/tool/youtube-revenue-estimator",
-    "/tool"
 
 
   ];

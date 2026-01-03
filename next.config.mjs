@@ -34,6 +34,11 @@ const nextConfig = {
                 destination: '/guide/youtube-monetization-rpm-cpm-guide',
                 permanent: true,
             },
+              {
+                source: '/youtube-revenue-estimator',
+                destination: '/tool/youtube-revenue-estimator',
+                permanent: true,
+            },
             {
                 source: '/youtube-guides/how-to-grow-on-youtube-2025-tips-trends-mistakes',
                 destination: '/guide/how-to-grow-on-youtube-2025-tips-trends-mistakes',
