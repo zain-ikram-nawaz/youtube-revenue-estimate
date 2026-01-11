@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google/genai": "^1.35.0",
     "@upstash/ratelimit": "^2.0.6",
     "axios": "^1.12.2",
     "bcryptjs": "^3.0.2",
@@ -16,6 +17,7 @@
     "cookie": "^1.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
+    "groq-sdk": "^0.37.0",
     "ioredis": "^5.8.0",
     "jose": "^6.1.0",
     "jsonwebtoken": "^9.0.2",

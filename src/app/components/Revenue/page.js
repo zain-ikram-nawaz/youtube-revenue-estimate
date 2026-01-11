@@ -1,104 +1,63 @@
-import React from 'react'
-
-export default function Revenue({ data }) {
-  const revenueEstimates = data?.revenueEstimates || {};
+export default function Revenue({ data, aiData }) {
+  const estimates = data?.revenueEstimates || {};
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-
-      {/* Revenue Highlights */}
-      <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-        <div className="bg-gradient-to-br from-red-600 to-red-700 text-white p-4 sm:p-6 rounded-xl md:rounded-2xl shadow-xl">
-          <div className="text-2xl sm:text-3xl font-bold mb-2">
-            {data?.estimatedRevenue?.toLocaleString?.() || 0}
-          </div>
-          <div className="text-red-100 text-sm sm:text-base">Lifetime Estimated Revenue</div>
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-gradient-to-r from-gray-900 to-slate-800 p-8 rounded-3xl text-white shadow-2xl relative">
+          <div className="text-xs font-black uppercase tracking-widest text-red-500 mb-2">Lifetime Earnings</div>
+          <div className="text-4xl font-black">${data?.estimatedRevenue?.toLocaleString() || 0}</div>
+          <div className="absolute top-4 right-6 text-slate-700 text-4xl font-bold">01</div>
         </div>
-        <div className="bg-gradient-to-br from-red-500 to-red-600 text-white p-4 sm:p-6 rounded-xl md:rounded-2xl shadow-xl">
-          <div className="text-2xl sm:text-3xl font-bold mb-2">
-            {data?.avgMonthlyRevenue?.toLocaleString?.() || 0}
-          </div>
-          <div className="text-red-100 text-sm sm:text-base">Avg Monthly Revenue</div>
+        <div className="bg-white p-8 rounded-3xl border-2 border-gray-100 shadow-sm relative">
+          <div className="text-xs font-black uppercase tracking-widest text-red-600 mb-2">Monthly Average</div>
+          <div className="text-4xl font-black text-gray-900">${data?.avgMonthlyRevenue?.toLocaleString() || 0}</div>
+          <div className="absolute top-4 right-6 text-gray-100 text-4xl font-bold">02</div>
         </div>
       </div>
 
-      {/* Monthly Stats */}
-      <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-        <h4 className="font-semibold text-gray-900 mb-3">Monthly Performance</h4>
-        <div className="space-y-3">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="p-6 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
           <div>
-            <div className="text-2xl font-bold text-red-600">
-              {data?.avgMonthlyViews?.toLocaleString?.() || 0}
-            </div>
-            <div className="text-sm text-gray-600">Average Monthly Views</div>
+            <h3 className="font-bold text-gray-900">RPM Bracket Forecast</h3>
+            <p className="text-xs text-gray-500 mt-1">Projected earnings across different niche CPMs</p>
           </div>
-          <div>
-            <div className="text-xl font-bold text-gray-900">
-              {data?.avgMonthlyRevenue?.toLocaleString?.() || 0}
-            </div>
-            <div className="text-sm text-gray-600">Estimated Monthly Revenue</div>
-          </div>
-        </div>
-      </div>
-
-      {/* RPM Table - Full Width */}
-      <div className="lg:col-span-3 bg-white rounded-xl shadow-lg overflow-hidden">
-        <div className="p-4 sm:p-6 border-b border-gray-200">
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900">
-            Revenue Estimates by RPM Brackets
-          </h3>
-          <p className="text-gray-600 mt-1 text-sm sm:text-base">
-            Estimated monthly revenue based on different RPM ranges
-          </p>
+          <span className="bg-white px-3 py-1 rounded-full text-[10px] font-bold border border-gray-200">DYNAMIC DATA</span>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[500px]">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 sm:px-6 py-3 text-left font-semibold text-gray-700 text-sm">
-                  RPM Bracket
-                </th>
-                <th className="px-4 sm:px-6 py-3 text-right font-semibold text-gray-700 text-sm">
-                  Estimated Monthly Revenue
-                </th>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">
+                <th className="px-6 py-4">Market Bracket</th>
+                <th className="px-6 py-4 text-right">Potential Monthly</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
-              {Object.entries(revenueEstimates).map(([label, value], index) => (
-                <tr key={label} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-4 sm:px-6 py-3">
-                    <div className="flex items-center gap-2">
-                      <div
-                        className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
-                          index === 0
-                            ? 'bg-green-500'
-                            : index === 1
-                            ? 'bg-yellow-500'
-                            : 'bg-red-500'
-                        }`}
-                      ></div>
-                      <span className="font-medium text-sm sm:text-base">{label}</span>
-                    </div>
+            <tbody className="divide-y divide-gray-50">
+              {Object.entries(estimates).map(([label, value], i) => (
+                <tr key={i} className="group hover:bg-red-50/30 transition-colors">
+                  <td className="px-6 py-4 font-bold text-gray-700 text-sm flex items-center gap-3">
+                    <div className={`w-2 h-2 rounded-full ${i === 0 ? 'bg-green-400' : i === 1 ? 'bg-yellow-400' : 'bg-red-400'}`} />
+                    {label}
                   </td>
-                  <td className="px-4 sm:px-6 py-3 text-right font-semibold text-gray-900 text-sm sm:text-base">
-                    {value?.toLocaleString?.() || 0}
+                  <td className="px-6 py-4 text-right font-black text-gray-900 text-sm">
+                    ${value?.toLocaleString() || 0}
                   </td>
                 </tr>
               ))}
-              {Object.keys(revenueEstimates).length === 0 && (
-                <tr>
-                  <td
-                    colSpan={2}
-                    className="px-4 sm:px-6 py-3 text-center text-gray-500 text-sm"
-                  >
-                    No revenue estimates available
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
         </div>
       </div>
+
+      {aiData && (
+        <div className="p-5 bg-yellow-50 border-2 border-yellow-100 rounded-2xl flex gap-4 items-start">
+          <div className="text-2xl mt-1">💰</div>
+          <div>
+            <h4 className="font-black text-yellow-800 text-xs uppercase tracking-tighter">AI Profit Strategy</h4>
+            <p className="text-sm text-yellow-900 leading-relaxed mt-1">{aiData}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

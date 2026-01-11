@@ -1,4 +1,5 @@
 import axios from "axios";
+import { main } from "../../hooks/aiAnalysis"
 // --- Config ---
 const CORS_ORIGIN = process.env.NEXT_PUBLIC_CORS_ORIGIN || "*";
 
@@ -42,7 +43,6 @@ function extractVideoId(url) {
 
 // --- Main API Handler ---
 export async function POST(req) {
-
   try {
     const body = await req.json();
     const { channelUrl } = body;
@@ -309,8 +309,91 @@ export async function POST(req) {
       };
     }
 
+
+let aiInsights = {
+      overview: "Analysis pending...",
+      revenue: "Analysis pending...",
+      performance: "Analysis pending...",
+      monetization: "Analysis pending...",
+      advanced: "Analysis pending..."
+    };
+    let aiSummary = "AI is processing..."; // Backup variable
+
+try {
+  const channelContext = `
+    Channel: ${channel.snippet.title}
+    Stats: ${subscribers} subs, ${totalViews} total views, ${videoCount} videos.
+    Performance: ${Math.round(avgMonthlyViews)} views/month, ${videoAnalytics?.avgEngagement || "N/A"} engagement.
+    Activity: ${videoAnalytics?.uploadFrequency || "N/A"}, View Velocity: ${videoAnalytics?.viewVelocity || "N/A"}.
+    Content Mix: ${shortsRatio?.shortsPercent || "0"}% Shorts, ${shortsRatio?.longsPercent || "0"}% Long-form.
+    Estimated RPM/Revenue: $${avgMonthlyRevenue}/mo based on ${country} region.
+  `;
+
+const prompt = `
+  Act as a Senior YouTube Strategist at a top MCN.
+  CRITICAL: Do NOT give generic advice like "be consistent" or "engage with audience."
+  Use the SPECIFIC numbers provided below to identify 1 hidden failure and 1 growth hack.
+
+  [CHANNEL DATA]:
+  - Name: ${channel.snippet.title}
+  - Scale: ${subscribers} subs / ${totalViews} total views
+  - Velocity: ${Math.round(avgMonthlyViews)} views per month
+  - Engagement: ${videoAnalytics?.avgEngagement || "N/A"}
+  - Format Mix: ${shortsRatio?.shortsPercent}% Shorts vs ${shortsRatio?.longsPercent}% Long
+  - Market: ${country} region (RPM focus)
+
+  Provide analysis in this STRICT format:
+
+  OVERVIEW_START
+  DATA_OBSERVATION: [Mention a specific number from the data]
+  THE_PROBLEM: [Why this number is bad for a channel of ${subscribers} subs]
+  THE_FIX: [1 specific technical change to the channel]
+  OVERVIEW_END
+
+  REVENUE_START
+  [Analyze how ${country} audience impacts their $${avgMonthlyRevenue}/mo revenue and suggest 1 specific sponsorship niche for ${channel.snippet.title}]
+  REVENUE_END
+
+  PERFORMANCE_START
+  [Analyze the ${videoAnalytics?.viewVelocity} velocity. Is it lagging? If yes, give a thumbnail or title hook strategy]
+  PERFORMANCE_END
+
+  MONETIZATION_START
+  [Based on ${subscribers} subs, give 1 revenue source that is NOT Adsense or Merch]
+  MONETIZATION_END
+
+  ADVANCED_START
+  [Verdict: Should they stick to ${shortsRatio?.shortsPercent}% Shorts or pivot? Why?]
+  ADVANCED_END
+`;
+
+  const rawAiResponse = await main(prompt) || "";
+
+  // --- Safe Parsing Helper ---
+  const extract = (start, end) => {
+    const regex = new RegExp(`${start}\\s*([\\s\\S]*?)\\s*${end}`);
+    const match = rawAiResponse.match(regex);
+    return match ? match[1].trim() : "Analysis pending for this section.";
+  };
+
+  aiInsights = {
+    overview: extract("OVERVIEW_START", "OVERVIEW_END"),
+    revenue: extract("REVENUE_START", "REVENUE_END"),
+    performance: extract("PERFORMANCE_START", "PERFORMANCE_END"),
+    monetization: extract("MONETIZATION_START", "MONETIZATION_END"),
+    advanced: extract("ADVANCED_START", "ADVANCED_END"),
+  };
+
+} catch (aiErr) {
+  console.error("AI Analysis Error:", aiErr.message);
+  aiSummary = "AI is currently analyzing. Please refresh in a moment.";
+}
+
+
+
     return new Response(
       JSON.stringify({
+        aiAnalysis: aiInsights,
         channelName: channel.snippet.title,
         channelId,
         subscribers,

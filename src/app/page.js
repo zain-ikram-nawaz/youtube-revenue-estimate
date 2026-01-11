@@ -3,20 +3,6 @@ import ListingGuide from "./components/AdminUseOnly/ListingGuide/page";
 import HomeFAQ from "./components/FAQ/page";
 import { getGuides } from "./hooks/getGuides";
 
-// ✅ Fetch Guides from API
-
-// async function getGuides() {
-
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/guide`,  {
-//       next: { revalidate: 1800 } // 30 minutes
-
-//     });
-
-//   return res.json();
-
-// }
-
-// ✅ FAQ Data (Optimized for AEO)
 const homeFaqData = [
   {
     q: "What is ChannelIncome?",
@@ -38,11 +24,12 @@ const homeFaqData = [
 
 
 export const metadata = {
-  title:
-    "ChannelIncome | Free YouTube Revenue Calculator, Channel Analytics & Growth Tools",
-  description:
-    "ChannelIncome is the ultimate free tool for creators: Instantly estimate YouTube earnings, analyze View Velocity, track Monetization Compliance, and get expert SEO & content strategy guides.",
+  title: "ChannelIncome | AI YouTube Revenue Calculator & CPM vs RPM Analyzer",
+  description: "The ultimate free tool for creators. Estimate YouTube earnings, analyze View Velocity, compare CPM vs RPM, and get AI-powered content strategy guides instantly.",
   keywords: [
+    "CPM vs RPM difference", // GSC Winner keyword
+    "AI YouTube strategist", // Naya
+    "ChannelIncome",
     "YouTube revenue calculator",
     "YouTube earnings estimator",
     "channel analytics tool",
@@ -51,14 +38,10 @@ export const metadata = {
     "YouTube growth tips",
     "YouTube SEO guide",
     "CPM RPM calculator",
-    "content frequency analysis",
-    "TikTok earnings estimator",
-    "ChannelIncome",
   ],
   alternates: { canonical: "https://channelincome.com/" },
   openGraph: {
-    title:
-      "Free YouTube Analytics Tool: Revenue Estimation & Monetization Compliance Check | ChannelIncome",
+    title: "AI YouTube Analytics & Revenue Estimator | ChannelIncome",
     description:
       "Get deep YouTube channel analysis for free. Check lifetime revenue, view velocity, monetization status, and get strategies from our expert growth guides.",
     url: "https://channelincome.com/",
@@ -145,6 +128,7 @@ function JsonLdGuides({ guides }) {
 
 export default async function Home() {
   // Fetch data (This is an async function in Next.js)
+
   const { guides } = await getGuides();
 
   // console.log(guides,"guides")
@@ -158,6 +142,7 @@ export default async function Home() {
 
       {/* 2. Main Sections */}
       {/* HomeIntroduction contains the H1, H2, CTAs, and detailed feature list */}
+
       <HomeIntroduction />
       {/* ListingGuide (To display recent guides) */}
       <ListingGuide data={guides} />

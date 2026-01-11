@@ -40,7 +40,7 @@ export default function ChannelEstimator({ seoSections }) {
       MIN_VIDEOS: 3,
       MIN_CHANNEL_AGE: 30,
     };
-    
+
 
     const channelAgeDays = Math.floor(
       (new Date() - new Date(creationDate)) / (1000 * 60 * 60 * 24)
@@ -153,8 +153,6 @@ export default function ChannelEstimator({ seoSections }) {
       if (!res.ok) throw new Error("Failed to fetch estimates");
 
       const json = await res.json();
-      console.log(json, "json")
-
       const monetizationData = calculateMonetizationStatus(json);
 
       setData({
@@ -216,99 +214,118 @@ export default function ChannelEstimator({ seoSections }) {
   if (loading) {
     return <Loader />;
   }
+      console.log(data, "data")
+
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-red-50 py-4 md:py-8 px-3 sm:px-4 lg:px-6">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl mx-auto">
-        {/* Header and SEO content */}
-        <div className="lg:col-span-12 text-center mb-8 md:mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            YouTube Channel Revenue Estimator
-          </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto px-2">
-            Get accurate revenue estimates and monetization status for any YouTube channel
-          </p>
-        </div>
+ <div className="min-h-screen bg-[#f8fafc] py-4 md:py-8 px-3 sm:px-4 lg:px-6">
+  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl mx-auto">
 
-        {/* Input Form */}
-        <Form
-          channelUrl={channelUrl}
-          setChannelUrl={setChannelUrl}
-          loading={loading}
-          error={error}
-          handleSubmit={handleSubmit}
-          setCaptchaToken={setCaptchaToken}
-        />
+    {/* Header Section */}
+    <div className="lg:col-span-12 text-center mb-8">
+      <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+        YouTube <span className="text-red-600">Revenue</span> Estimator
+      </h1>
+      <p className="text-slate-500 mt-3 max-w-xl mx-auto font-medium">
+        Professional analytics and AI-powered growth insights for creators.
+      </p>
+    </div>
 
-        {/* Modal */}
-        {isModalOpen && data && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-70">
-            <div className="bg-white rounded-xl p-6 max-w-5xl w-full relative max-h-[95vh] overflow-hidden flex flex-col">
-              <button
-                className="absolute right-2 text-white bg-red-500 px-3 py-1 hover:text-red-500 hover:bg-white rounded-full font-bold text-lg z-10"
-                onClick={() => setIsModalOpen(false)}
-              >
-                X
-              </button>
+    {/* Form Component */}
+    <Form
+      channelUrl={channelUrl}
+      setChannelUrl={setChannelUrl}
+      loading={loading}
+      error={error}
+      handleSubmit={handleSubmit}
+      setCaptchaToken={setCaptchaToken}
+    />
 
-              {/* Scrollable Content */}
-              <div className="overflow-y-auto flex-1 modal-scroll">
-                {data?.bannerImage && (
-                  <Image
-                    src={data?.bannerImage}
-                    width={1280}
-                    height={720}
-                    alt="Channel Banner"
-                    className="w-full h-32 sm:h-40 md:h-78 object-cover rounded-lg mb-4"
-                  />
-                )}
+    {/* Side Drawer Overlay */}
+    {isModalOpen && (
+      <div
+        className="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm transition-opacity"
+        onClick={() => setIsModalOpen(false)}
+      />
+    )}
 
-                <h2 className="text-xl font-bold mb-2">{data?.channelName}</h2>
-                <p className="text-gray-600 mb-4">{data?.subscribers?.toLocaleString()} subscribers</p>
+    {/* Right Side Drawer */}
+    <div className={`fixed top-0 right-0 h-full z-[70] w-full max-w-4xl bg-white shadow-2xl transform transition-transform duration-500 ease-in-out ${isModalOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 
-                {data?.monetization && (
-                  <MonetizationStatusBar
-                    data={data?.monetization}
-                    getMonetizationConfig={getMonetizationConfig}
-                  />
-                )}
+      {data && (
+        <div className="flex flex-col h-full">
+          {/* Drawer Header */}
+          <div className="p-4 border-b flex items-center justify-between bg-slate-50">
+            <div className="flex items-center gap-3">
+               <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold">Ci</div>
+               <h2 className="font-bold text-slate-800 truncate max-w-[200px]">{data?.channelName}</h2>
+            </div>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="p-2 hover:bg-red-100 text-red-600 rounded-full transition-colors font-bold"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+          </div>
 
-                <div className="bg-gray-100 rounded-lg overflow-hidden mt-4">
-                  {/* ✅ Auto-wrap tabs when overflow */}
-                  <div className="flex-wrap border-b border-gray-300">
-                    {["overview", "revenue", "performance", "monetization", "analytics"].map((tab) => (
-                      <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab)}
-                        className={`py-2 px-3 text-sm font-semibold transition-all m-1 rounded-md ${activeTab === tab
-                            ? "bg-red-600 text-white"
-                            : "text-gray-700 hover:bg-red-100"
-                          }`}
-                      >
-                        {tab === "performance" && "Channel Performance"}
-                        {tab === "overview" && "Channel Overview"}
-                        {tab === "revenue" && "Revenue Analysis"}
-                        {tab === "monetization" && "Monetization Status"}
-                        {tab === "analytics" && "Advanced Analytics"}
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="p-4">
-                    {activeTab === "performance" && <ChannelPerformance data={data} />}
-                    {activeTab === "overview" && <StatsCards data={data} />}
-                    {activeTab === "revenue" && <Revenue data={data} />}
-                    {activeTab === "monetization" && data.monetization && <Monetization data={data} />}
-                    {activeTab === "analytics" && <Analytics data={data} />}
-                  </div>
+          {/* Scrollable Body */}
+          <div className="flex-1 overflow-y-auto custom-scrollbar p-6">
+            {data?.bannerImage && (
+              <div className="relative h-32 mb-6 rounded-xl overflow-hidden shadow-inner">
+                <img
+                  src={data.bannerImage}
+                  alt="Banner"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                   <p className="text-white text-sm font-semibold">{data?.subscribers?.toLocaleString()} Subscribers</p>
                 </div>
-
-
               </div>
+            )}
+
+            {/* Monetization Quick Status */}
+            {data?.monetization && (
+              <div className="mb-6">
+                <MonetizationStatusBar
+                  data={data?.monetization}
+                  getMonetizationConfig={getMonetizationConfig}
+                />
+              </div>
+            )}
+
+            {/* Navigation Tabs (Vertical/Compact style for Drawer) */}
+            <div className="flex flex-wrap gap-2 mb-6 p-1 bg-slate-100 rounded-xl">
+              {["overview", "revenue", "performance", "monetization", "analytics"].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`flex-1 py-2 px-2 text-[10px] uppercase tracking-wider font-black rounded-lg transition-all ${
+                    activeTab === tab ? "bg-white text-red-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            {/* Tab Content Rendering */}
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+              {activeTab === "performance" && <ChannelPerformance data={data} aiData={data.aiAnalysis.performance}/>}
+              {activeTab === "overview" && <StatsCards data={data} aiData={data.aiAnalysis.overview}/>}
+              {activeTab === "revenue" && <Revenue data={data} aiData={data.aiAnalysis.revenue}/>}
+              {activeTab === "monetization" && data.monetization && <Monetization data={data} aiData={data.aiAnalysis.monetization}/>}
+              {activeTab === "analytics" && <Analytics data={data} aiData={data.aiAnalysis.advanced}/>}
             </div>
           </div>
-        )}
-      </div>
+
+          {/* Drawer Footer */}
+          <div className="p-4 border-t bg-slate-50 text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">
+            AI Analysis Powered by Channel income 2026
+          </div>
+        </div>
+      )}
     </div>
+  </div>
+</div>
   );
 }

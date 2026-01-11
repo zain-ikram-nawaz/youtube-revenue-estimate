@@ -1,75 +1,49 @@
-import React from 'react'
-
-export default function Analytics({ data }) {
+export default function Analytics({ data, aiData }) {
   return (
-     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Notes */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-4">Deep Insight Notes</h3>
+        <div className="space-y-3">
+          {data?.notes.map((note, i) => (
+            <div key={i} className="flex gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100 group hover:border-red-200 transition-all">
+              <span className="w-5 h-5 bg-white shadow-sm rounded flex items-center justify-center text-[10px] font-bold text-red-600 border border-red-100 shrink-0">{i+1}</span>
+              <span className="text-sm text-gray-600 leading-relaxed group-hover:text-gray-900">{note}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
-                  {/* Notes Section */}
-                  <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"/>
-                      </svg>
-                      Analysis Notes
-                    </h3>
-                    <ul className="space-y-2">
-                      {data?.notes.map((note, i) => (
-                        <li key={i} className="flex items-start gap-2 p-2 sm:p-3 bg-red-50 rounded-lg">
-                          <svg className="w-3 h-3 sm:w-4 sm:h-4 text-red-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                          </svg>
-                          <span className="text-gray-700 text-sm sm:text-base">{note}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Performance Metrics */}
-                  <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Performance Metrics</h3>
-                    <div className="space-y-4">
-                      <div>
-                        <div className="flex justify-between mb-1">
-                          <span className="text-sm font-medium text-gray-600">Views per Subscriber</span>
-                          <span className="text-sm font-bold text-red-600">
-                            {((data?.totalViews / data?.subscribers) || 0).toFixed(1)} views/sub
-                          </span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <div
-                            className="bg-red-600 h-2 rounded-full transition-all duration-500"
-                            style={{ width: `${Math.min((data?.totalViews / data?.subscribers) / 50 * 100, 100)}%` }}
-                          ></div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="flex justify-between mb-1">
-                          <span className="text-sm font-medium text-gray-600">Content Frequency</span>
-                          <span className="text-sm font-bold text-red-600">
-                            {(data?.videoCount / Math.max((new Date() - new Date(data?.creationDate)) / (365.25 * 24 * 60 * 60 * 1000), 1)).toFixed(1)} videos/year
-                          </span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <div
-                            className="bg-red-600 h-2 rounded-full transition-all duration-500"
-                            style={{ width: `${Math.min((data?.videoCount / Math.max((new Date() - new Date(data?.creationDate)) / (365.25 * 24 * 60 * 60 * 1000), 1)) / 100 * 100, 100)}%` }}
-                          ></div>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 pt-2">
-                        <div className="text-center p-3 bg-gray-50 rounded-lg">
-                          <div className="text-lg font-bold text-green-600">+12.5%</div>
-                          <div className="text-xs text-gray-600">MoM Growth</div>
-                        </div>
-                        <div className="text-center p-3 bg-gray-50 rounded-lg">
-                          <div className="text-lg font-bold text-blue-600">94%</div>
-                          <div className="text-xs text-gray-600">Retention</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+      {/* Advanced Performance */}
+      <div className="space-y-6">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-6">Efficiency Ratios</h3>
+          <div className="space-y-6">
+            {[
+              { label: "Views per Subscriber", val: ((data?.totalViews / data?.subscribers) || 0).toFixed(1), unit: "v/s", color: "bg-red-500" },
+              { label: "Channel Velocity Score", val: "94.2", unit: "%", color: "bg-indigo-500" }
+            ].map((m, i) => (
+              <div key={i}>
+                <div className="flex justify-between text-xs font-bold mb-2">
+                  <span className="text-gray-500 uppercase">{m.label}</span>
+                  <span className="text-gray-900">{m.val}{m.unit}</span>
                 </div>
+                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className={`h-full ${m.color} rounded-full`} style={{ width: '70%' }}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* AI Advanced Strategy */}
+        {aiData && (
+          <div className="bg-slate-900 rounded-2xl p-6 text-white border-b-4 border-red-600">
+             <div className="text-[10px] font-black uppercase text-red-500 mb-2">Algorithm Breakthrough Advice</div>
+             <p className="text-sm leading-relaxed opacity-90 italic">"{aiData}"</p>
+          </div>
+        )}
+      </div>
+    </div>
   )
 }

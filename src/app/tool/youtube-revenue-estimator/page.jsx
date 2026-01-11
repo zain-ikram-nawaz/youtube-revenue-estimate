@@ -5,10 +5,12 @@ import SeoText from "../../components/SeoText/page";
 
 // ✅ Metadata (Optimized for CTR & Mobile truncation)
 export const metadata = {
-  title: "Free YouTube Revenue Estimator: Calculate Income, CPM, RPM & Growth | ChannelIncome",
-  description:
-    "Instantly estimate YouTube earnings, check monetization, CPM & RPM with our free YouTube Revenue Estimator. Track views, subscribers, and channel growth today!",
-  keywords: [
+title: "Free YouTube Revenue Estimator [2026] - Accuracy-Driven CPM & RPM Tool",
+description: "Calculate accurate YouTube income, check monetization eligibility, and track RPM/CPM rates by country. Get real-time channel growth insights with ChannelIncome.",
+ keywords: [
+  "YouTube RPM Estimator 2026", // Year update
+    "YouTube CPM Rates by Country", // GSC specific
+    "check if channel is monetized", // GSC specific
     "YouTube Revenue Estimator",
     "YouTube Earnings Calculator",
     "YouTube Channel Income",
@@ -17,8 +19,6 @@ export const metadata = {
     "YouTube Monetization Checker",
     "Free YouTube Analytics Tool",
     "YouTube Growth Tracker",
-    "Check if my YouTube channel is monetized",
-    "Estimate earnings for small channels"
   ],
   alternates: {
     canonical: "https://channelincome.com/youtube-revenue-estimator",

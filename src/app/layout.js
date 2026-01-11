@@ -27,16 +27,18 @@ export const metadata = {
   },
   // Brand name included, strong value proposition
   description:
-    "ChannelIncome: Free YouTube Revenue Estimator — analyze monetization, earnings, CPM, RPM, subscribers, and engagement in one advanced YouTube analytics tool.",
+    "ChannelIncome: AI-Powered YouTube Revenue Estimator. Analyze monetization, real-time earnings, CPM, RPM, and subscriber growth with our advanced growth engine.",
   keywords: [
+    "AI YouTube analytics", // Naya
+    "CPM RPM calculator 2026",
+    "YouTube Growth Tracker AI", // Naya
+    "channel audit tool", // Naya
     "youtube revenue estimator",
     "youtube income calculator",
     "youtube earnings check",
     "YouTube Channel Analytics",
     "YouTube Monetization Checker",
-    "youtube view money",
     "YouTube SEO Tool",
-    "YouTube Growth Tracker",
     "CPM RPM calculator",
     "youtube money calculator",
   ],
@@ -103,7 +105,7 @@ export default function RootLayout({ children }) {
 
         {/* Theme Color */}
         <meta name="theme-color" content="#ffffff" />
-<script src="https://analytics.ahrefs.com/analytics.js" data-key="NIdfnJ32uBKcHx+IqKcQWg" async></script>
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="NIdfnJ32uBKcHx+IqKcQWg" async></script>
         {/* 1. ✅ WebSite Schema - Separate for clarity */}
         <script
           type="application/ld+json"
