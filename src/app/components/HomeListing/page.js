@@ -1,7 +1,16 @@
-import React from "react";
+import React,{useMemo} from "react";
 import Image from "next/image";
 import Link from "next/link";
 export default function Page({ data }) {
+
+    const safeData = useMemo(() => {
+      if (!data) return [];
+      // Pehle data ko JSON string bana kar wapis parse karein taake Dates/ObjectIds plain strings ban jayen
+      const parsed = JSON.parse(JSON.stringify(data));
+      return [...parsed].reverse().slice(0, 12);
+    }, [data]);
+
+
   if (!data || data?.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50/30">
@@ -30,52 +39,53 @@ export default function Page({ data }) {
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {data?.map((guide) => (
-            <Link href={`/guide/${guide.slug}`} key={guide._id}>
-            <div
-              className="group relative bg-white/70 backdrop-blur-sm  transition-all duration-500 hover:scale-105 hover:bg-white/90 hover:shadow-2xl hover:shadow-blue-100/50"
-            >
-              {/* Gradient Border Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-200/50 via-transparent to-purple-200/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
+      {safeData.map((guide) => (
+        <div key={guide._id} className="group relative bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300">
 
-              {/* Image Container */}
-              <div className="relative w-full h-48 overflow-hidden">
-                <Image
-                  src={guide?.thumbnail || "/icon.png"}
-                  alt={guide?.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                />
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
-              </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h2 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2 leading-tight group-hover:text-gray-900 transition-colors">
-                  {guide?.title}
-                </h2>
-                <p className="text-gray-500 text-sm mb-4 line-clamp-2 leading-relaxed">
-                  {guide?.metaDescription}
-                </p>
-
-                {/* Footer Info */}
-                <div className="flex items-center justify-between border-gray-100/80">
-                  <div className="flex items-center space-x-2">                  </div>
-                  <div className="text-gray-400 text-xs font-medium">
-                    {new Date(guide?.createdAt).toLocaleDateString("en-US", {
-                      day: "2-digit",
-                      month: "short",
-                    })}
-                  </div>
-                </div>
-              </div>
+          {/* Image Section */}
+          <div className="relative h-40 w-full bg-slate-100 overflow-hidden">
+            <Image
+              src={guide?.thumbnail || "/icon.png"}
+              alt={guide?.title}
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+            <div className="absolute bottom-2 left-2">
+              <span className="bg-slate-900/80 backdrop-blur-md text-[8px] font-black text-white px-2 py-0.5 rounded uppercase tracking-widest">
+                {guide?.category || "General"}
+              </span>
             </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="p-4">
+            <Link href={`/guide/${guide.slug}`}>
+              <h3 className="text-sm font-bold text-slate-800 leading-tight mb-2 hover:text-blue-600 transition-colors line-clamp-2 uppercase tracking-tight">
+                {guide?.title}
+              </h3>
             </Link>
-          ))}
+
+            <p className="text-[11px] text-slate-500 line-clamp-2 mb-4 leading-relaxed">
+              {guide?.metaDescription}
+            </p>
+
+            <div className="flex items-center justify-between pt-3 border-t border-slate-50">
+              <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
+                {new Date(guide?.createdAt).toLocaleDateString("en-GB")}
+              </span>
+              <Link
+                href={`/guide/${guide.slug}`}
+                className="text-[9px] font-black text-blue-500 uppercase tracking-widest hover:underline"
+              >
+                View Guide →
+              </Link>
+            </div>
+          </div>
         </div>
+      ))}
+    </div>
       </div>
     </div>
   );
