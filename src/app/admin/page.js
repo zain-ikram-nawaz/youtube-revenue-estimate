@@ -3,34 +3,40 @@ import GuideForm from "../components/AdminUseOnly/GuideForm/page";
 import { useState, useEffect } from "react";
 import ListingGuide from "../components/AdminUseOnly/ListingGuide/page"
 // import { getGuides } from "../hooks/getGuides";
-
+import Link from "next/link";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("analytics");
   const [editData,setEditData] = useState()
-  const [guides, setGuides] = useState()
+  const [guides, setGuides] = useState([])
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/guide?page=1&limit=6`, {
-          cache: "no-store",
-        });
+  const fetchData = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/guide?page=${page}&limit=6`,
+        { cache: "no-store" }
+      );
 
-        if (!res.ok) {
-          console.error("❌ API Error:", res.status, res.statusText);
-          return;
-        }
-
-        const data = await res.json();
-        setGuides(data.guides)
-
-      } catch (err) {
-        console.error("❌ Fetch failed:", err);
+      if (!res.ok) {
+        console.error("❌ API Error:", res.status, res.statusText);
+        return;
       }
-    };
 
-    fetchData();
-  }, []);
+      const data = await res.json();
+      setGuides(data.guides);
+      setTotalPages(data.pagination.totalPages); // ✅ ADD
+
+    } catch (err) {
+      console.error("❌ Fetch failed:", err);
+    }
+  };
+
+  fetchData();
+}, [page]); // ✅ ADD
+
 // console.log(editData,"edit")
   return (
     <div className="min-h-screen flex bg-gray-100">
@@ -91,6 +97,38 @@ export default function AdminDashboard() {
           {activeTab === "analytics" && (
             <div className="text-gray-600 text-lg"><ListingGuide data={guides} role={true} setEditData={setEditData} setActiveTab={setActiveTab}/></div>
           )}
+
+      <div className="flex items-center gap-6 mt-12 bg-gray-50 px-6 py-3 rounded-2xl shadow-sm">
+  <button
+    onClick={() => setPage((p) => Math.max(1, p - 1))}
+    disabled={page === 1}
+    className={`px-5 py-2 rounded-xl font-bold transition-all shadow-sm ${
+      page === 1
+        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+        : "bg-white text-red-600 border border-red-100 hover:bg-red-600 hover:text-white"
+    }`}
+  >
+    ← Previous
+  </button>
+
+  <span className="font-bold text-gray-700">
+    Page <span className="text-red-600">{page}</span> of {totalPages}
+  </span>
+
+  <button
+    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+    disabled={page === totalPages}
+    className={`px-5 py-2 rounded-xl font-bold transition-all shadow-md ${
+      page === totalPages
+        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+        : "bg-red-600 text-white hover:bg-red-700"
+    }`}
+  >
+    Next →
+  </button>
+</div>
+
+
 
         </section>
       </main>
