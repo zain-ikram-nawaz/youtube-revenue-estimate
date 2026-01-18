@@ -90,15 +90,15 @@ export default function Page({ data, setEditData, setActiveTab, setGuides }) {
           {/* ACTION BUTTONS (Floating) */}
           <div className="absolute top-3 right-3 z-10 flex gap-2">
             {/* Edit Button */}
-            <button
+            {/* <button
               onClick={() => SaveEditData(guide)}
               className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
             >
               Edit
-            </button>
+            </button> */}
 
             {/* Delete Button */}
-            <button
+            {/* <button
               onClick={() => handleDelete(guide._id)}
               disabled={deletingId === guide._id}
               className={`px-3 py-1 text-xs text-white rounded-lg transition-colors shadow-lg ${
@@ -106,7 +106,7 @@ export default function Page({ data, setEditData, setActiveTab, setGuides }) {
               }`}
             >
               {deletingId === guide._id ? "..." : "Delete"}
-            </button>
+            </button> */}
           </div>
         </div>
       ))}
