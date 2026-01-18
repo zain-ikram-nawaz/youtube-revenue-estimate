@@ -3,7 +3,7 @@
     {
       "source": "/(.*)",
       "has": [
-        { "type": "host", "value": "channelincome.com" }
+        { "type": "host", "value": "www.channelincome.com" }
       ],
       "destination": "https://channelincome.com/$1",
       "permanent": true
