@@ -28,12 +28,12 @@ export default function Page() {
       "@type": "Organization",
       name: "ChannelIncome",
       url: "https://channelincome.com",
-      logo: "https://channelincome.com/images/logoo.png",
-      sameAs: [
-        "https://twitter.com/channelincome",
-        "https://www.linkedin.com/company/channelincome",
-        "https://www.youtube.com/@channelincome",
-      ],
+      logo: "https://channelincome.com/icon.png",
+      // sameAs: [
+      //   "https://twitter.com/channelincome",
+      //   "https://www.linkedin.com/company/channelincome",
+      //   "https://www.youtube.com/@channelincome",
+      // ],
       contactPoint: [
         {
           "@type": "ContactPoint",

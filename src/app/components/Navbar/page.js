@@ -91,6 +91,13 @@ export default function Navbar() {
             >
               Guide
             </Link>
+              <Link
+              href="/tool/youtube-revenue-estimator"
+              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Tool
+            </Link>
             <Link
               href="/about-us"
               className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
@@ -105,7 +112,7 @@ export default function Navbar() {
             >
               Contact
             </Link>
-         
+
           </div>
         </div>
       </div>

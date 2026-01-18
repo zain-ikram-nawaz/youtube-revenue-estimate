@@ -4,28 +4,29 @@ import { getGuides } from "../hooks/getGuides";
 import Link from "next/link";
 import Script from "next/script";
 
-// ✅ Metadata (SEO Optimized for a Listing Page)
+// ✅ Metadata (SEO Optimized for CTR)
 export async function generateMetadata({ searchParams }) {
-    const resolvedSearchParams = await searchParams; // 👈 FIX
+    const resolvedSearchParams = await searchParams;
     const page = Number(resolvedSearchParams.page) || 1;
     const isFirstPage = page === 1;
     const canonicalUrl = 'https://channelincome.com/guide';
 
     return {
+        // Targeted Title for higher CTR
         title: isFirstPage
-            ? "YouTube Growth Guides: SEO, Monetization, and Analytics | ChannelIncome"
-            : `YouTube Growth Guides - Page ${page} | ChannelIncome`,
+            ? "YouTube Growth Guides 2026: Master RPM, CPM & SEO Secrets"
+            : `Expert YouTube Growth Tips - Page ${page} | ChannelIncome`,
 
         description: isFirstPage
-            ? "Access our free, in-depth guides on YouTube SEO, content strategy, monetization secrets, and advanced channel analytics. Grow your channel with expert tips."
-            : `Page ${page} of our expert YouTube Growth Guides. Continue reading about SEO, CPM, RPM, and Monetization Compliance.`,
+            ? "Master YouTube monetization with our free 2026 guides. Learn the difference between RPM and CPM, increase your earnings, and grow your channel organically."
+            : `Explore more expert YouTube growth strategies on page ${page}. Learn about monetization and analytics.`,
 
         keywords: [
-            "YouTube growth guides",
-            "YouTube SEO guide",
-            "Monetization tips",
-            "Channel analytics learning",
-            `Guide page ${page}`,
+            "YouTube growth guides 2026",
+            "YouTube RPM vs CPM guide",
+            "How to increase YouTube revenue",
+            "YouTube SEO strategy",
+            "Monetization compliance tips",
         ],
 
         alternates: {
@@ -34,81 +35,80 @@ export async function generateMetadata({ searchParams }) {
     };
 }
 
-
 export default async function GuideListingPage({ searchParams }) {
-    const resolvedSearchParams = await searchParams; // 👈 FIX
+    const resolvedSearchParams = await searchParams;
     const page = Number(resolvedSearchParams.page) || 1;
     const limit = 8;
 
     const { guides, pagination: { totalPages } } = await getGuides(page, limit);
 
-    // ✅ JSON-LD for Collection Page (Listing Page Schema)
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        name: `YouTube Growth Guides - Page ${page}`,
-        description: `Listing of expert guides on YouTube growth, SEO, and monetization strategy.`,
-        url: "https://channelincome.com/guide",
-
-        hasPart: {
+        "name": `YouTube Growth Guides - Page ${page}`,
+        "description": `Expert guides on YouTube growth, SEO, and revenue optimization.`,
+        "url": `https://channelincome.com/guide${page > 1 ? `?page=${page}` : ''}`,
+        "hasPart": {
             "@type": "ItemList",
-            numberOfItems: guides.length,
-            itemListOrder: "http://schema.org/ItemListOrderDescending",
-            itemListElement: guides.map((guide, index) => ({
+            "numberOfItems": guides.length,
+            "itemListOrder": "http://schema.org/ItemListOrderDescending",
+            "itemListElement": guides.map((guide, index) => ({
                 "@type": "ListItem",
-                position: index + 1,
-                url: `https://channelincome.com/guide/${guide.slug}`,
-                name: guide.title,
+                "position": index + 1,
+                "url": `https://channelincome.com/guide/${guide.slug}`,
+                "name": guide.title,
             })),
         }
     };
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center py-10">
             <Script
                 id="collection-page-schema"
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            <h1 className="text-4xl font-bold text-gray-900 mb-8">YouTube Growth Guides</h1>
+            <div className="text-center mb-12">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                    YouTube Growth Guides <span className="text-red-600">(2026)</span>
+                </h1>
+                <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                    Proven strategies to boost your RPM, understand CPM, and scale your channel revenue.
+                </p>
+            </div>
 
             <HomeListing data={guides} />
 
-            <div className="flex gap-4 mt-6">
+            {/* Pagination Controls */}
+            <div className="flex items-center gap-6 mt-12 bg-gray-50 px-6 py-3 rounded-2xl shadow-sm">
                 {page > 1 ? (
                     <Link
                         href={`/guide/?page=${page - 1}`}
-                        className="px-4 py-2 rounded-xl font-semibold bg-red-600 text-white hover:bg-red-700 transition-colors"
+                        className="px-5 py-2 rounded-xl font-bold bg-white text-red-600 border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm"
                     >
-                        Previous
+                        ← Previous
                     </Link>
                 ) : (
-                    <button
-                        disabled
-                        className="px-4 py-2 rounded-xl font-semibold bg-gray-300 cursor-not-allowed"
-                    >
-                        Previous
+                    <button disabled className="px-5 py-2 rounded-xl font-bold bg-gray-200 text-gray-400 cursor-not-allowed">
+                        ← Previous
                     </button>
                 )}
 
-                <span className="font-medium flex items-center">
-                    Page {page} of {totalPages}
+                <span className="font-bold text-gray-700">
+                    Page <span className="text-red-600">{page}</span> of {totalPages}
                 </span>
 
                 {page < totalPages ? (
                     <Link
                         href={`/guide/?page=${page + 1}`}
-                        className="px-4 py-2 rounded-xl font-semibold bg-red-600 text-white hover:bg-red-700 transition-colors"
+                        className="px-5 py-2 rounded-xl font-bold bg-red-600 text-white hover:bg-red-700 transition-all shadow-md"
                     >
-                        Next
+                        Next →
                     </Link>
                 ) : (
-                    <button
-                        disabled
-                        className="px-4 py-2 rounded-xl font-semibold bg-gray-300 cursor-not-allowed"
-                    >
-                        Next
+                    <button disabled className="px-5 py-2 rounded-xl font-bold bg-gray-200 text-gray-400 cursor-not-allowed">
+                        Next →
                     </button>
                 )}
             </div>

@@ -54,7 +54,7 @@ export default function page() {
         name: "Channel Income",
         // The URL should ideally point to the canonical/homepage URL
         url: "https://channelincome.com/",
-        logo: "https://channelincome.com/images/logo.png",
+        logo: "https://channelincome.com/icon.png",
         description:
             "Channel Income provides free YouTube analytics tools, including a Revenue Estimator, Monetization Compliance Tracker, and View Velocity analysis for content creators.",
         foundingDate: "2024",
@@ -62,17 +62,8 @@ export default function page() {
             "@type": "Person",
             name: "Channel Income Team",
         },
-        // contactPoint: {
-        //   "@type": "ContactPoint",
-        //   contactType: "Customer Support",
-        //   email: "support@channelincome.com",
-        // },
-        sameAs: [
-            // Add later when you have social links
-            // "https://www.facebook.com/channelincome",
-            // "https://www.linkedin.com/company/channelincome",
-            // "https://www.instagram.com/channelincome",
-        ],
+
+
     };
 
     return (

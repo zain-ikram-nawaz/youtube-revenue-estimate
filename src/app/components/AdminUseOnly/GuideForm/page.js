@@ -1,6 +1,5 @@
 "use client";
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 // Font Awesome icons ke liye, main standard class names use kar raha hoon. Agar aap Font Awesome use nahi kar rahe to inko hata dejiye.
 
@@ -16,9 +15,10 @@ import { handleSubmitGuide } from '@/app/hooks/handleSubmit';
 
 // === COLLAPSIBLE BLOCK COMPONENT (For Cleaner Content Section) ===
 // Iste'maal ke liye ise isi file mein ya ek separate file mein define kiya ja sakta hai.
-const CollapsibleContentBlock = ({ block, index, formData, setFormData, children, updateContentBlockHandler, removeContentBlockHandler }) => {
+const CollapsibleContentBlock = ({ block, index, formData, setFormData, children, updateContentBlockHandler, removeContentBlockHandler, addContentBlockAtPosition }) => {
     // Har block ke liye alag state. Shuru mein sab band rakhen.
     const [isOpen, setIsOpen] = useState(false);
+    const [showAddMenu, setShowAddMenu] = useState(false);
 
     const getBlockTitle = (block) => {
         switch (block.type) {
@@ -35,36 +35,151 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
         }
     };
 
+    const handleAddBlockAtPosition = (blockType) => {
+        addContentBlockAtPosition(blockType, index + 1);
+        setShowAddMenu(false);
+    };
+
     return (
-        <div className={`content-block ${isOpen ? 'open' : ''}`}>
-            <div className="block-header" onClick={() => setIsOpen(!isOpen)}>
-                <span className="block-type">{block.type.toUpperCase()}</span>
-                <span className="block-title">{getBlockTitle(block)}</span>
-                <div className="block-actions">
-                    <button
-                        type="button"
-                        onClick={(e) => {
-                            e.stopPropagation(); // Prevents collapse/expand
-                            removeContentBlockHandler(index, formData, setFormData);
-                        }}
-                        className="remove-block-btn"
-                        title="Remove Block"
-                    >
-                        <i className="fas fa-trash"></i>
-                    </button>
-                    <i className={`fas fa-chevron-down toggle-icon ${isOpen ? 'rotated' : ''}`}></i>
+        <>
+            <div className={`content-block ${isOpen ? 'open' : ''}`}>
+                <div className="block-header" onClick={() => setIsOpen(!isOpen)}>
+                    <span className="block-type">{block.type.toUpperCase()}</span>
+                    <span className="block-title">{getBlockTitle(block)}</span>
+                    <div className="block-actions">
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevents collapse/expand
+                                removeContentBlockHandler(index, formData, setFormData);
+                            }}
+                            className="remove-block-btn"
+                            title="Remove Block"
+                        >
+                            <i className="fas fa-trash"></i>
+                        </button>
+                        <i className={`fas fa-chevron-down toggle-icon ${isOpen ? 'rotated' : ''}`}></i>
+                    </div>
+                </div>
+
+                <div className={`block-content-panel ${isOpen ? 'expanded' : 'collapsed'}`}>
+                    {children}
                 </div>
             </div>
 
-            <div className={`block-content-panel ${isOpen ? 'expanded' : 'collapsed'}`}>
-                {children}
+            {/* Add Block Here Button - Har block ke neeche */}
+            <div className="add-block-between">
+                {/* <button
+                    type="button"
+                    className="add-block-here-btn"
+                    onClick={() => setShowAddMenu(!showAddMenu)}
+                >
+                    <i className="fas fa-plus-circle"></i> Add Block Here
+                </button> */}
+                {!showAddMenu && (
+                    <div
+                        className="
+      inline-block-menu
+      flex flex-wrap gap-2
+      p-3
+      bg-white
+      border border-slate-200
+      rounded-xl
+      shadow-lg
+      max-w-xl
+    "
+                    >
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('heading')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-heading text-xs text-slate-500" />
+                            Heading
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('subheading')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-heading text-xs text-slate-500" />
+                            Subheading
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('paragraph')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-paragraph text-xs text-slate-500" />
+                            Paragraph
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('list')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-list-ul text-xs text-slate-500" />
+                            List
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('table')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-table text-xs text-slate-500" />
+                            Table
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('image')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-image text-xs text-slate-500" />
+                            Image
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('video')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-video text-xs text-slate-500" />
+                            Video
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('link')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-link text-xs text-slate-500" />
+                            Link
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => handleAddBlockAtPosition('faq')}
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                        >
+                            <i className="fas fa-question-circle text-xs text-slate-500" />
+                            FAQ
+                        </button>
+                    </div>
+                )}
+
             </div>
-        </div>
+        </>
     );
 };
 
 // === MAIN GUIDE FORM COMPONENT ===
-const GuideForm = () => {
+const GuideForm = ({ editData }) => {
+    console.log(editData, "edit")
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -93,6 +208,32 @@ const GuideForm = () => {
             [name]: value
         }));
     };
+    useEffect(() => {
+        if (editData && Object.keys(editData).length > 0) {
+            setFormData({
+                title: editData.title || '',
+                category: editData.category || '',
+                author: editData.author || 'Admin',
+                // IMPORTANT: Hum original URL ko rakhenge,
+                // handleSubmit function check karega ke ye String hai ya File
+                thumbnail: editData.thumbnail || null,
+                metaTitle: editData.metaTitle || '',
+                metaDescription: editData.metaDescription || '',
+                summary: editData.summary || '',
+                excerpt: editData.excerpt || '',
+                tags: editData.tags || [],
+                keywords: editData.keywords || [],
+                // Blocks ko properly map karein taake edit ke waqt UI mein masla na ho
+                blocks: editData.blocks ? [...editData.blocks] : [],
+                faqs: editData.faqs ? [...editData.faqs] : []
+            });
+
+            // Preview set karein (Ye Cloudinary ka URL dikhayega)
+            if (editData.thumbnail) {
+                setThumbnailPreview(editData.thumbnail);
+            }
+        }
+    }, [editData]);// Jab bhi editData change hoga, form fill ho jayega
 
     const handleSubmit = (e) => handleSubmitGuide({
         e,
@@ -101,7 +242,8 @@ const GuideForm = () => {
         setMessage,
         setThumbnailPreview,
         fileInputRef,
-        setIsSubmitting
+        setIsSubmitting,
+        editId: editData?._id // Pass the ID here
     });
 
     // Content Block Update Handler, passing it down to the Collapsible component
@@ -114,8 +256,32 @@ const GuideForm = () => {
         removeContentBlock(index, formData, setFormData);
     };
 
+    // NEW: Add content block at specific position
+    const addContentBlockAtPosition = (type, position) => {
+        const newBlock = {
+            type,
+            text: '',
+            items: type === 'list' ? [''] : undefined,
+            rows: type === 'table' ? [['', '']] : undefined,
+            url: type === 'video' || type === 'link' ? '' : undefined,
+            caption: type === 'image' ? '' : undefined,
+            file: type === 'image' ? null : undefined,
+            question: type === 'faq' ? '' : undefined,
+            answer: type === 'faq' ? '' : undefined
+        };
+
+        setFormData(prev => {
+            const newBlocks = [...prev.blocks];
+            newBlocks.splice(position, 0, newBlock);
+            return {
+                ...prev,
+                blocks: newBlocks
+            };
+        });
+    };
+
     return (
-        <div className="guide-form-wrapper"> {/* New wrapper class for padding at the bottom */}
+        <div className="guide-form-wrapper">
             <div className="guide-form-container">
                 <div className="form-header-main">
                     <h1>📝 Create New Guide</h1>
@@ -307,13 +473,12 @@ const GuideForm = () => {
                     <div className="form-section content-builder-section">
                         <div className="section-header">
                             <h2><i className="fas fa-drafting-compass"></i> Guide Content Blocks</h2>
-                            {/* NOTE: Block buttons moved to sticky footer */}
                         </div>
 
                         {formData.blocks.length === 0 ? (
                             <div className="empty-state">
                                 <i className="fas fa-plus-circle"></i>
-                                <p>No content blocks added yet. Use the **Sticky Bar** at the bottom to add your first block.</p>
+                                <p>No content blocks added yet. Click "Add Block Here" below to add your first block.</p>
                             </div>
                         ) : (
                             <div className="blocks-container">
@@ -326,6 +491,7 @@ const GuideForm = () => {
                                         setFormData={setFormData}
                                         updateContentBlockHandler={updateBlock}
                                         removeContentBlockHandler={removeBlock}
+                                        addContentBlockAtPosition={addContentBlockAtPosition}
                                     >
                                         {/* Block-specific content is rendered here */}
                                         <div className="block-content">
@@ -482,13 +648,95 @@ const GuideForm = () => {
                                 ))}
                             </div>
                         )}
+
+                        {/* Add first block button when no blocks exist */}
+                        {formData.blocks.length === 0 && (
+                            <div className="flex flex-col items-center gap-4 mt-6">
+
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const showMenu = document.querySelector('.first-block-menu');
+                                        showMenu.style.display =
+                                            showMenu.style.display === 'flex' ? 'none' : 'flex';
+                                    }}
+                                    className="
+        flex items-center gap-2
+        px-5 py-2
+        text-sm font-semibold
+        text-indigo-600
+        bg-indigo-50
+        border border-indigo-200
+        rounded-full
+        hover:bg-indigo-100
+        hover:border-indigo-400
+        transition-all
+        shadow-sm
+      "
+                                >
+                                    <i className="fas fa-plus-circle text-indigo-500" />
+                                    Add First Block
+                                </button>
+
+                                <div
+                                    className="
+        inline-block-menu first-block-menu
+        hidden
+        flex flex-wrap justify-center gap-2
+        p-4
+        bg-white
+        border border-slate-200
+        rounded-xl
+        shadow-lg
+        max-w-2xl
+      "
+                                    style={{ display: 'none' }}
+                                >
+                                    {[
+                                        ['heading', 'fa-heading', 'Heading'],
+                                        ['subheading', 'fa-heading', 'Subheading'],
+                                        ['paragraph', 'fa-paragraph', 'Paragraph'],
+                                        ['list', 'fa-list-ul', 'List'],
+                                        ['table', 'fa-table', 'Table'],
+                                        ['image', 'fa-image', 'Image'],
+                                        ['video', 'fa-video', 'Video'],
+                                        ['link', 'fa-link', 'Link'],
+                                        ['faq', 'fa-question-circle', 'FAQ'],
+                                    ].map(([type, icon, label]) => (
+                                        <button
+                                            key={type}
+                                            type="button"
+                                            onClick={() => addContentBlockAtPosition(type, 0)}
+                                            className="
+            flex items-center gap-2
+            px-3 py-1.5
+            text-sm font-medium
+            text-slate-700
+            bg-slate-50
+            border border-slate-200
+            rounded-full
+            hover:bg-indigo-50
+            hover:text-indigo-600
+            hover:border-indigo-400
+            transition-all
+            active:scale-95
+            whitespace-nowrap
+          "
+                                        >
+                                            <i className={`fas ${icon} text-xs text-slate-500`} />
+                                            {label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
                     </div>
 
                     {/* Separate FAQs Section - No major changes, keeping it simple */}
                     <div className="form-section card-style">
                         <div className="section-header">
                             <h2><i className="fas fa-question-circle"></i> Schema FAQs (Separate)</h2>
-                            {/* Add FAQ button moved to sticky footer, or keep this one: */}
                             <button type="button" onClick={() => addFAQ(formData, setFormData)} className="add-faq-btn-inline">
                                 <i className="fas fa-plus"></i> Add FAQ
                             </button>
@@ -535,12 +783,12 @@ const GuideForm = () => {
                     </div>
                 </form>
 
-                {/* Submit Button Section (Kept at the bottom, but the main block adder is lower) */}
+                {/* Submit Button Section */}
                 <div className="form-actions submit-bar">
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        onClick={handleSubmit} // Using onClick for form-actions outside form
+                        onClick={handleSubmit}
                         className="submit-btn"
                     >
                         {isSubmitting ? (
@@ -556,21 +804,6 @@ const GuideForm = () => {
 
                     <div className="form-info">
                         <p><i className="fas fa-info-circle"></i> Slug, published date, and read time will be auto-generated</p>
-                    </div>
-                </div>
-
-                {/* === STICKY BLOCK ADDER FOOTER (The requested feature) === */}
-                <div className="sticky-block-adder">
-                    <div className="block-options-footer">
-                        <span>➕ **Add Content Block:**</span>
-                        <button type="button" onClick={() => addContentBlock('heading', formData, setFormData)} className="btn-block-add"><i className="fas fa-heading"></i> Heading</button>
-                        <button type="button" onClick={() => addContentBlock('paragraph', formData, setFormData)} className="btn-block-add"><i className="fas fa-paragraph"></i> Paragraph</button>
-                        <button type="button" onClick={() => addContentBlock('list', formData, setFormData)} className="btn-block-add"><i className="fas fa-list-ul"></i> List</button>
-                        <button type="button" onClick={() => addContentBlock('table', formData, setFormData)} className="btn-block-add"><i className="fas fa-table"></i> Table</button>
-                        <button type="button" onClick={() => addContentBlock('image', formData, setFormData)} className="btn-block-add"><i className="fas fa-image"></i> Image</button>
-                        <button type="button" onClick={() => addContentBlock('video', formData, setFormData)} className="btn-block-add"><i className="fas fa-video"></i> Video</button>
-                        <button type="button" onClick={() => addContentBlock('link', formData, setFormData)} className="btn-block-add"><i className="fas fa-link"></i> Link</button>
-                        {/* Note: Schema FAQ button is kept separate, but you can add it here too if you wish */}
                     </div>
                 </div>
             </div>

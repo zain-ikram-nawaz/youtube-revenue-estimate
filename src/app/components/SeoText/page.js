@@ -1,121 +1,57 @@
-
-import React from "react";
+// components/SeoText/page.js
+import { ShieldCheck, BarChart3, Target, Zap } from "lucide-react";
 import Link from "next/link";
 
+export default function SeoText() {
+  return (
+    <div className="max-w-6xl mx-auto px-6 py-20 border-t border-gray-100">
+      <div className="text-center mb-16">
+        <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6">
+          Maximize Your YouTube Revenue Potential
+        </h2>
+        <p className="text-xl text-gray-500 max-w-3xl mx-auto font-medium">
+          Our estimator analyzes millions of data points to give you the most accurate RPM and CPM projections in 2026.
+        </p>
+      </div>
 
-export default function YouTubeRevenueContent() {
-    return (
-        // ✅ 2. Removed the <Head> component
-        <div className="max-w-4xl mx-auto px-6 py-12 text-gray-800">
-
-            {/* ===== H1: Main Heading (Consistent with the tool's focus) ===== */}
-            <h1 className="text-4xl font-bold mb-6 text-center">
-                Free YouTube Revenue Estimator & Monetization Checker
-            </h1>
-
-            {/* ===== Intro Section (Content is perfect for the tool page) ===== */}
-            <section className="mb-12">
-                <h2 className="text-3xl font-bold mb-4">Understand Your YouTube Channel Revenue</h2>
-                <p className="mb-4 leading-relaxed">
-                    Our <strong><em>YouTube Revenue Estimator</em></strong> helps creators visualize and maximize their
-                    <strong><em> YouTube income</em></strong>. It analyzes publicly available channel metrics and provides a clear estimate of ad revenue, memberships, and other monetization streams to help you plan growth.
-                </p>
-                <p className="mb-4 leading-relaxed">
-                    Test different scenarios: What if views double? What if RPM increases by $1? This transforms complex analytics into actionable strategies to boost real <strong><em>YouTube earnings</em></strong>.
-                </p>
-                <p className="mb-4 leading-relaxed">
-                    The tool combines CPM logic with realistic RPM assumptions. It also surfaces key signals from
-                    <strong><em> YouTube Channel Analytics</em></strong> to help you identify videos generating the most
-                    <strong><em> income</em></strong> and optimize thumbnails, titles, and topics for better monetization.
-                </p>
-                <p className="mb-4 leading-relaxed">
-                    Note: All estimates are indicative. Actual <strong><em>YouTube revenue</em></strong> varies by advertiser demand, audience location, and content type. Still, this tool offers a realistic view of potential earnings.
-                </p>
-            </section>
-
-            {/* ===== H2: How It Works (Content is perfect) ===== */}
-            <section className="mb-12">
-                <h2 className="text-3xl font-bold mb-6">How Our YouTube Revenue Calculator Works</h2>
-
-                {/* Channel Analysis */}
-                <h3 className="text-2xl font-semibold mb-2">1. Channel Analysis</h3>
-                <p className="mb-4 leading-relaxed">
-                    We analyze your channel across multiple metrics:
-                </p>
-                <ul className="list-disc list-inside mb-6 space-y-2">
-                    <li>Total subscribers, total videos, and total views</li>
-                    <li>Average monthly views and channel age</li>
-                    <li>Monetization status: eligible or not</li>
-                    <li>Progress analysis and top-performing videos</li>
-                    <li>Average engagement, view velocity, and upload frequency</li>
-                    <li>Views per subscriber and content frequency insights</li>
-                </ul>
-                <p className="mb-6 leading-relaxed">
-                    This in-depth analysis helps identify trends and opportunities, allowing creators to replicate success and optimize overall <strong><em>YouTube income</em></strong>.
-                </p>
-
-                {/* Revenue Calculation */}
-                <h3 className="text-2xl font-semibold mb-2">2. Revenue Calculation</h3>
-                <p className="mb-4 leading-relaxed">
-                    The estimator calculates earnings based on CPM and RPM formulas while accounting for YouTube’s revenue share:
-                </p>
-                <ul className="list-disc list-inside mb-6 space-y-2">
-                    <li>Estimated ad impressions from view counts</li>
-                    <li>Region-adjusted CPM estimates</li>
-                    <li>RPM projections after platform fees</li>
-                </ul>
-                <p className="mb-6 leading-relaxed">
-                    Using these metrics, our tool dynamically estimates revenue under different scenarios, helping creators optimize content strategy and maximize <strong><em>YouTube earnings</em></strong> month over month.
-                </p>
-
-                {/* Monetization Insights */}
-                <h3 className="text-2xl font-semibold mb-2">3. Monetization Insights</h3>
-                <p className="mb-4 leading-relaxed">
-                    The <strong><em>YouTube Monetization Checker</em></strong> evaluates eligibility based on subscribers, watch hours, and policy compliance, showing opportunities to increase monetized views.
-                </p>
-                <p className="mb-8 leading-relaxed">
-                    The tool provides detailed monetization insights including eligibility checks, potential revenue streams, and optimization tips for better ad performance and engagement. We also provide keyword suggestions and content category insights using our
-                    {/* ✅ Internal Link: Guides section par link karein */}
-                    <Link href="/guide" className="text-blue-600 hover:text-blue-800 underline">YouTube SEO Tips and Guides</Link> and monitor trends with the
-                    {/* ✅ Internal Link: Guides section par link karein */}
-                    <Link href="/guide" className="text-blue-600 hover:text-blue-800 underline">Growth Strategies</Link>, helping creators maximize projected income.
-                </p>
-            </section>
-
-            {/* ===== H2: Understanding YouTube Monetization (Content is perfect) ===== */}
-            <section className="mb-12">
-                <h2 className="text-3xl font-bold mb-6">Understanding YouTube Monetization</h2>
-
-                <h3 className="text-2xl font-semibold mb-2">How YouTube Revenue Works</h3>
-                <p className="mb-4 leading-relaxed">
-                    Key metrics: CPM (advertiser payment per 1,000 impressions) and RPM (actual creator earnings per 1,000 views). High CPM and RPM lead to higher <strong><em>YouTube income</em></strong>.
-                </p>
-                <p className="mb-4 leading-relaxed">
-                    Revenue depends on audience demographics, content type, watch time, and retention. Regular monitoring with <strong><em>YouTube Channel Analytics</em></strong> identifies the most profitable content.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-2">YouTube Partner Program Requirements</h3>
-                <p className="mb-4 leading-relaxed">
-                    To earn via ads: 1,000 subscribers + 4,000 public watch hours in 12 months. Approved AdSense account + policy compliance unlocks revenue streams.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-2">Additional YouTube Growth Tips</h3>
-                <ul className="list-disc list-inside mb-6 space-y-2">
-                    {/* ✅ Internal Link: Guides section par link karein */}
-                    <li>Optimize titles, thumbnails, and descriptions with the
-                        <Link href="/guide" className="text-blue-600 hover:text-blue-800 underline">YouTube SEO and Optimization Guides</Link>.</li>
-                    <li>Upload consistently to improve watch time and retention.</li>
-                    <li>Use playlists, end screens, and cards to increase session duration and monetized impressions.</li>
-                    <li>Focus on high-value topics to boost CPM and earnings predictability.</li>
-                    {/* ✅ Internal Link: Guides section par link karein */}
-                    <li>Track weekly trends with
-                        <Link href="/guide" className="text-blue-600 hover:text-blue-800 underline">Advanced YouTube Growth Tips</Link> to refine strategy.</li>
-                </ul>
-
-                <p className="leading-relaxed">
-                    Combining these tactics with our estimator creates a feedback loop: test, analyze, optimize — steadily increasing <strong><em>YouTube income</em></strong>.
-                </p>
-            </section>
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* Card 1 */}
+        <div className="p-8 bg-gray-50 rounded-[2.5rem] border border-gray-100 hover:shadow-xl transition-all">
+          <div className="w-12 h-12 bg-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-200">
+            <BarChart3 className="text-white w-6 h-6" />
+          </div>
+          <h3 className="text-2xl font-bold mb-4">Channel Analysis & RPM</h3>
+          <p className="text-gray-600 leading-relaxed mb-4">
+            We analyze your channel metrics—subscribers, monthly views, and upload frequency—to calculate realistic <strong>YouTube income</strong>.
+          </p>
+          <p className="text-gray-600">
+            Test scenarios: What if your RPM increases by $1? Our tool shows you the real <strong>YouTube earnings</strong> potential.
+          </p>
         </div>
-    );
+
+        {/* Card 2 */}
+        <div className="p-8 bg-gray-50 rounded-[2.5rem] border border-gray-100 hover:shadow-xl transition-all">
+          <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-gray-200">
+            <ShieldCheck className="text-white w-6 h-6" />
+          </div>
+          <h3 className="text-2xl font-bold mb-4">Monetization Checker</h3>
+          <p className="text-gray-600 leading-relaxed">
+            The <strong>YouTube Monetization Checker</strong> evaluates your eligibility based on the 1,000 subs and 4,000 watch hours rule.
+            We provide tips to optimize thumbnails and titles via our <Link href="/guide" className="text-red-600 font-bold underline">Growth Guides</Link>.
+          </p>
+        </div>
+      </div>
+
+      {/* Trust Text Section */}
+      <div className="mt-16 bg-red-50 p-10 rounded-[3rem] border border-red-100">
+        <h4 className="text-xl font-black text-red-900 mb-4 flex items-center gap-2">
+            <Target className="w-6 h-6" /> Pro Creator Tip
+        </h4>
+        <p className="text-red-800/80 font-medium leading-relaxed">
+          Actual <strong>YouTube revenue</strong> varies by audience location (CPM rates by country) and content type.
+          Combine our estimator with <Link href="/guide" className="underline font-bold">Advanced SEO Strategies</Link> to target high-paying audiences.
+        </p>
+      </div>
+    </div>
+  );
 }

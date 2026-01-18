@@ -52,7 +52,7 @@ export default function ContentBlockRenderer({ block, index }) {
                 <div className="my-8">
                     <Link href={block.url} target="_blank">
                         <button className="px-6 py-3 bg-red-600 text-white font-semibold rounded-xl shadow-lg hover:bg-red-700 transition">
-                            Aap check kar sakty hain hamare advance analytics se apna data
+                            {block.text}
                         </button>
                     </Link>
                 </div>
