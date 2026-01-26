@@ -1,5 +1,5 @@
-import YoutubeAnalyzer from "../../components/youtubeChecker/page";
-import FAQ from "../../components/FAQ/page";
+import YoutubeAnalyzer from "../../components/YoutubeChecker/YoutubeChecker";
+import FAQ from "../../components/FAQ/FAQ";
 import ListingGuide from "../../components/AdminUseOnly/ListingGuide/page";
 import SeoText from "../../components/SeoText/page";
 import Script from "next/script";

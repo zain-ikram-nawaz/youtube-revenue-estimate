@@ -1,7 +1,7 @@
 // app/page.js (Home Page)
 import HomeIntroduction from "./components/SeoText/homeText";
 import ListingGuide from "./components/AdminUseOnly/ListingGuide/page";
-import HomeFAQ from "./components/FAQ/page";
+import HomeFAQ from "./components/FAQ/FAQ";
 import { getGuides } from "./hooks/getGuides";
 
 const homeFaqData = [

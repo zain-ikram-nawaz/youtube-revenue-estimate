@@ -1,8 +1,8 @@
 // app/layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar/page";
-import Footer from "./components/Footer/page";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -100,7 +100,7 @@ export default function RootLayout({ children }) {
         </Script>
         {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54N955N7"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+          height="0" width="0"></iframe></noscript>
         {/* <!-- End Google Tag Manager (noscript) --> */}
 
         <Navbar />

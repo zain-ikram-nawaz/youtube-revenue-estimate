@@ -1,5 +1,5 @@
 import React from "react";
-import HomeListing from "../components/HomeListing/page";
+import HomeListing from "../components/HomeListing/HomeListing";
 import { getGuides } from "../hooks/getGuides";
 import Link from "next/link";
 import Script from "next/script";

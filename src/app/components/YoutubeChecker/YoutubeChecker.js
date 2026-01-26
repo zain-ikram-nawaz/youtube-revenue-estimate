@@ -2,14 +2,14 @@
 
 import { useState, useRef, useEffect } from "react";
 import MonetizationStatusBar from "../MonitizationStatusBar/page";
-import StatsCards from "../StatsCards/page";
-import Revenue from "../Revenue/page";
-import Monetization from "../Monetization/page";
-import Analytics from "../Analytics/page";
+import StatsCards from "../StatsCards/StatsCards";
+import Revenue from "../Revenue/Revenue";
+import Monetization from "../Monetization/Monetiztion";
+import Analytics from "../Analytics/Analytics";
 import Image from "next/image";
 import Form from "../Form/page";
-import Loader from "../Loader/page";
-import ChannelPerformance from "../ChannelPerformance/page"
+import Loader from "../Loader/Loader";
+import ChannelPerformance from "../ChannelPerformance/ChannelPerformance"
 
 export default function ChannelEstimator({ seoSections }) {
 

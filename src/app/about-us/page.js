@@ -1,5 +1,5 @@
 import React from "react";
-import About from "../components/About/page";
+import About from "../components/About/About";
 
 // ✅ Metadata (10/10 Optimized)
 export const metadata = {
@@ -73,8 +73,6 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-
-            {/* ✅ About Section */}
             <About />
         </>
     );
