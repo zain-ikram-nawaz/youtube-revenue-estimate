@@ -47,10 +47,26 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ffffff" />
 
+  {/* Google Tag Manager - Head Snippet */}
+        <Script
+          id="gtm-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-54N955N7');`,
+          }}
+        />
+
         {/* Ahrefs Analytics */}
         <script src="https://analytics.ahrefs.com/analytics.js" data-key="NIdfnJ32uBKcHx+IqKcQWg" async></script>
 
         {/* ✅ Global Organization Schema (Branding ke liye) */}
+
+
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -82,6 +98,10 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-E89R0241YL');
           `}
         </Script>
+        {/* <!-- Google Tag Manager (noscript) --> */}
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54N955N7"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        {/* <!-- End Google Tag Manager (noscript) --> */}
 
         <Navbar />
         <main className="container mx-auto px-4 py-6">
