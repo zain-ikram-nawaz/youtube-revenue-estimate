@@ -1,33 +1,37 @@
-import { cache } from 'react'
-import { connectDB } from '../lib/db'; // ← Ye line check karein, path sahi hona chahiye
-import Guide from '../../models/guide'; // Guide model ka import bhi lazmi hai
+import { cache } from 'react';
+import { connectDB } from '../lib/db';
+import Guide from '../../models/guide';
 
-export const getGuides = cache(async (page = 1, limit = 8) => {  await connectDB();
+export const getGuides = cache(async (page = 1, limit = 8) => {
+  try {
+    await connectDB();
 
-  // Dono kaam aik sath shuru karein
-  const [totalGuides, rawGuides] = await Promise.all([
-    Guide.countDocuments(),
-    Guide.find()
-      .sort({ createdAt: -1 })
-      .skip((page - 1) * limit)
-      .limit(limit)
-      .lean()
-  ]);
+    // Parallel execution: Dono kaam ek sath honge
+    const [totalGuides, rawGuides] = await Promise.all([
+      Guide.countDocuments(),
+      Guide.find()
+        .sort({ createdAt: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .lean()
+    ]);
 
-  const guides = rawGuides.map((g) => ({
-    ...g,
-    _id: g._id.toString(),
-    createdAt: g.createdAt?.toISOString(),
-    updatedAt: g.updatedAt?.toISOString(),
-  }));
-
-  return {
-    guides,
-    pagination: {
-      totalGuides,
-      totalPages: Math.ceil(totalGuides / limit),
-      currentPage: page,
-      perPage: limit,
-    },
-  };
-})
+    return {
+      guides: rawGuides.map((g) => ({
+        ...g,
+        _id: g._id.toString(),
+        createdAt: g.createdAt?.toISOString(),
+        updatedAt: g.updatedAt?.toISOString(),
+      })),
+      pagination: {
+        totalGuides,
+        totalPages: Math.ceil(totalGuides / limit),
+        currentPage: page,
+        perPage: limit,
+      },
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    return { guides: [], pagination: { totalPages: 0, currentPage: 1 } };
+  }
+});

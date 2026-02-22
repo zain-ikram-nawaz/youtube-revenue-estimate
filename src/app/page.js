@@ -1,8 +1,11 @@
 // app/page.js (Home Page)
+import { Suspense } from "react";
 import HomeIntroduction from "./components/SeoText/homeText";
 import ListingGuide from "./components/AdminUseOnly/ListingGuide/page";
 import HomeFAQ from "./components/FAQ/FAQ";
 import { getGuides } from "./hooks/getGuides";
+
+export const revalidate = 3600; // Har 1 ghante baad update hoga
 
 const homeFaqData = [
   {
@@ -74,9 +77,13 @@ function JsonLdFAQ() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />;
 }
 
+// Ek alag component banayein fetch ke liye
+async function GuidesSection() {
+  const { guides } = await getGuides(1, 8);
+  return <ListingGuide data={guides} />;
+}
 export default async function Home() {
-  const { guides } = await getGuides();
-
+const { guides } = await getGuides(1, 8);
   return (
     <>
       <JsonLdApp />
@@ -87,11 +94,13 @@ export default async function Home() {
       {/* 2026 Highlight Section (New for SEO) */}
       <section className="bg-blue-50 py-10 px-6 rounded-xl my-8 text-center max-w-5xl mx-auto">
          <h2 className="text-2xl font-bold text-gray-800">New: 2026 AI Growth Engine Integrated</h2>
-         <p className="mt-2 text-gray-600">Don't just calculate your revenue. Use our AI tips to understand the **RPM vs CPM difference** and grow your earnings.</p>
+         <p className="mt-2 text-gray-600">Dont just calculate your revenue. Use our AI tips to understand the **RPM vs CPM difference** and grow your earnings.</p>
       </section>
 
-      <ListingGuide data={guides} />
-      <HomeFAQ faq={homeFaqData} />
+{/* Guides ko Suspense mein rakhein taake upar wala content foran load ho */}
+      <Suspense fallback={<div className="h-64 flex items-center justify-center">Loading Guides...</div>}>
+         <GuidesSection />
+      </Suspense>      <HomeFAQ faq={homeFaqData} />
     </>
   );
 }

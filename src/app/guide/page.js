@@ -3,17 +3,18 @@ import HomeListing from "../components/HomeListing/HomeListing";
 import { getGuides } from "../hooks/getGuides";
 import Link from "next/link";
 import Script from "next/script";
-
+export const revalidate = 3600;
 // ✅ Metadata (SEO Optimized for CTR)
 export async function generateMetadata({ searchParams }) {
     const resolvedSearchParams = await searchParams;
     const page = Number(resolvedSearchParams.page) || 1;
     const isFirstPage = page === 1;
-    const canonicalUrl = 'https://channelincome.com/guide';
+    const canonicalUrl = page === 1
+        ? 'https://channelincome.com/guide'
+        : `https://channelincome.com/guide?page=${page}`;
 
     return {
-        // Targeted Title for higher CTR
-        title: isFirstPage
+    title: page === 1
             ? "YouTube Growth Guides 2026: Master RPM, CPM & SEO Secrets"
             : `Expert YouTube Growth Tips - Page ${page} | ChannelIncome`,
 
@@ -29,9 +30,7 @@ export async function generateMetadata({ searchParams }) {
             "Monetization compliance tips",
         ],
 
-        alternates: {
-            canonical: canonicalUrl,
-        },
+       alternates: { canonical: canonicalUrl },
     };
 }
 
