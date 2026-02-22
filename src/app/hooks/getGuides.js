@@ -1,17 +1,20 @@
-import { connectDB } from "../lib/db"; // aapka DB connect function
-import Guide from "../../models/guide";
+import { cache } from 'react'
+import { connectDB } from '../lib/db'; // ← Ye line check karein, path sahi hona chahiye
+import Guide from '../../models/guide'; // Guide model ka import bhi lazmi hai
 
-export async function getGuides(page = 1, limit = 8) {
-  await connectDB();
+export const getGuides = cache(async (page = 1, limit = 8) => {  await connectDB();
 
-  const totalGuides = await Guide.countDocuments();
+  // Dono kaam aik sath shuru karein
+  const [totalGuides, rawGuides] = await Promise.all([
+    Guide.countDocuments(),
+    Guide.find()
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .lean()
+  ]);
 
-  const guides = (await Guide.find()
-    .sort({ createdAt: -1 })
-    .skip((page - 1) * limit)
-    .limit(limit)
-    .lean()
-  ).map((g) => ({
+  const guides = rawGuides.map((g) => ({
     ...g,
     _id: g._id.toString(),
     createdAt: g.createdAt?.toISOString(),
@@ -27,4 +30,4 @@ export async function getGuides(page = 1, limit = 8) {
       perPage: limit,
     },
   };
-}
+})
