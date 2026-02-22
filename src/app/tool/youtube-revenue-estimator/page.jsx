@@ -13,12 +13,10 @@ export const metadata = {
     "YouTube RPM Estimator 2026", "YouTube CPM Rates by Country", "check if channel is monetized",
     "YouTube Revenue Estimator", "YouTube Earnings Calculator", "YouTube Channel Income"
   ],
-  alternates: { canonical: "https://channelincome.com/youtube-revenue-estimator" },
-  openGraph: {
+  alternates: { canonical: "https://channelincome.com/tool/youtube-revenue-estimator" }, openGraph: {
     title: "Free YouTube Revenue Estimator: Calculate Income, CPM, RPM & Growth | ChannelIncome",
     description: "Estimate YouTube earnings, check monetization eligibility, and track channel metrics with ChannelIncome's free tool.",
-    url: "https://channelincome.com/youtube-revenue-estimator",
-    type: "website",
+    url: "https://channelincome.com/tool/youtube-revenue-estimator", // Yahan bhi naya URL    type: "website",
     images: [{ url: "/icon.png" }],
   },
 };
@@ -55,12 +53,12 @@ export default async function YouTubeRevenueEstimateor() {
       "mainEntity": faqData.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
     },
     breadcrumb: {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://channelincome.com" },
-            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://channelincome.com/youtube-revenue-estimator" }
-        ]
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://channelincome.com" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://channelincome.com/tool/youtube-revenue-estimator" } // Corrected
+      ]
     }
   };
 
@@ -84,30 +82,30 @@ export default async function YouTubeRevenueEstimateor() {
         {/* Guides Library */}
         <section id="guides" className="py-20 bg-white border-y border-gray-100 px-4">
           <div className="max-w-6xl mx-auto">
-             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                <div>
-                    <h2 className="text-4xl font-black text-gray-900 mb-2">Growth Library</h2>
-                    <p className="text-gray-500 font-medium">Expert strategies to increase your CPM and RPM.</p>
-                </div>
-                <Link href="/guide" className="text-red-600 font-bold hover:underline">Browse All Guides →</Link>
-             </div>
-             <ListingGuide data={guides} />
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+              <div>
+                <h2 className="text-4xl font-black text-gray-900 mb-2">Growth Library</h2>
+                <p className="text-gray-500 font-medium">Expert strategies to increase your CPM and RPM.</p>
+              </div>
+              <Link href="/guide" className="text-red-600 font-bold hover:underline">Browse All Guides →</Link>
+            </div>
+            <ListingGuide data={guides} />
           </div>
         </section>
 
         {/* FAQ Section */}
         <section id="faq" className="py-20 bg-gray-50 px-4">
           <div className="max-w-4xl mx-auto">
-             <h2 className="text-3xl font-black mb-10 text-center">Frequently Asked Questions</h2>
-             <FAQ faq={faqData} />
+            <h2 className="text-3xl font-black mb-10 text-center">Frequently Asked Questions</h2>
+            <FAQ faq={faqData} />
           </div>
         </section>
 
         {/* Floating Mobile CTA */}
         <div className="fixed bottom-6 right-6 md:hidden z-50">
-            <Link href="#youtube-tool" className="bg-red-600 text-white px-6 py-4 rounded-full shadow-2xl font-black flex items-center gap-2">
-                <Zap className="w-4 h-4" /> ESTIMATE NOW
-            </Link>
+          <Link href="#youtube-tool" className="bg-red-600 text-white px-6 py-4 rounded-full shadow-2xl font-black flex items-center gap-2">
+            <Zap className="w-4 h-4" /> ESTIMATE NOW
+          </Link>
         </div>
       </main>
     </>

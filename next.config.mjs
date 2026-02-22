@@ -1,49 +1,31 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // 1. Slash handling fix karein
+    trailingSlash: false,
+
     images: {
         remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'yt3.googleusercontent.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'yt3.ggpht.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'channelincome.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'res.cloudinary.com',
-            },
+            { protocol: 'https', hostname: 'yt3.googleusercontent.com' },
+            { protocol: 'https', hostname: 'yt3.ggpht.com' },
+            { protocol: 'https', hostname: 'channelincome.com' },
+            { protocol: 'https', hostname: 'res.cloudinary.com' },
         ],
     },
     async redirects() {
         return [
-            // Component pages ko homepage pe redirect
+            // Component pages ko homepage pe permanent redirect karein (301)
             {
                 source: '/components/:path*',
                 destination: '/',
-                permanent: false,
-            },
-            // Old youtube-guides redirects
-            {
-                source: '/youtube-guides/youtube-monetization-rpm-cpm-guide',
-                destination: '/guide/youtube-monetization-rpm-cpm-guide',
                 permanent: true,
             },
-              {
+            // Specific redirects ko pehle rakhein
+            {
                 source: '/youtube-revenue-estimator',
                 destination: '/tool/youtube-revenue-estimator',
                 permanent: true,
             },
-            {
-                source: '/youtube-guides/how-to-grow-on-youtube-2025-tips-trends-mistakes',
-                destination: '/guide/how-to-grow-on-youtube-2025-tips-trends-mistakes',
-                permanent: true,
-            },
+            // Pattern based redirects
             {
                 source: '/youtube-guides/:slug*',
                 destination: '/guide/:slug*',
