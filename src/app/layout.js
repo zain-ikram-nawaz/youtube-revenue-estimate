@@ -1,28 +1,20 @@
-// app/layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Script from "next/script";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-// ✅ Global Metadata (Sirf wo cheezein jo poori site ke liye same hain)
 export const metadata = {
   metadataBase: new URL("https://channelincome.com"),
   title: {
     default: "ChannelIncome | AI YouTube Revenue & Growth Tools",
-    template: "%s | ChannelIncome",
+    template: "%s | ChannelIncome", // Har page ka apna title is %s ki jagah fit ho jayega
   },
   description: "Advanced AI tools for YouTube creators. Estimate revenue, calculate RPM/CPM, and get growth insights.",
+  viewport: "width=device-width, initial-scale=1",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
@@ -30,9 +22,6 @@ export const metadata = {
   },
   verification: {
     google: "ceGH6h4gKdjlKm13KVCK5w3B6H-4X24LNgFnyrGUl44",
-  },
-  alternates: {
-    canonical: "./",
   },
   robots: {
     index: true,
@@ -44,10 +33,27 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#ffffff" />
+        {/* Ahrefs Analytics (Isse Script tag mein bhi daal sakte hain) */}
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="NIdfnJ32uBKcHx+IqKcQWg" async></script>
 
-  {/* Google Tag Manager - Head Snippet */}
+        {/* Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "ChannelIncome",
+              "url": "https://channelincome.com",
+              "logo": "https://channelincome.com/icon.png",
+              "sameAs": ["https://www.youtube.com/@channelincome"],
+            }),
+          }}
+        />
+      </head>
+
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F5F5F0] text-[#001F3D]`}>
+        {/* GTM Script */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -60,36 +66,8 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* Ahrefs Analytics */}
-        <script src="https://analytics.ahrefs.com/analytics.js" data-key="NIdfnJ32uBKcHx+IqKcQWg" async></script>
-
-        {/* ✅ Global Organization Schema (Branding ke liye) */}
-
-
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "ChannelIncome",
-              "url": "https://channelincome.com/",
-              "logo": "https://channelincome.com/icon.png",
-              "sameAs": [
-                "https://www.youtube.com/@channelincome" // Agar social media hai toh yahan add karein
-              ],
-            }),
-          }}
-        />
-      </head>
-
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}>
-        {/* ✅ Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-E89R0241YL"
-          strategy="afterInteractive"
-        />
+        {/* Google Analytics */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-E89R0241YL" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -98,13 +76,13 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-E89R0241YL');
           `}
         </Script>
-        {/* <!-- Google Tag Manager (noscript) --> */}
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54N955N7"
-          height="0" width="0"></iframe></noscript>
-        {/* <!-- End Google Tag Manager (noscript) --> */}
+
+        <noscript>
+          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54N955N7" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>
+        </noscript>
 
         <Navbar />
-        <main className="container mx-auto px-4 py-6">
+        <main className="container mx-auto px-4 py-6" style={{ borderRadius: '8px' }}>
           {children}
         </main>
         <Footer />

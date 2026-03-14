@@ -53,7 +53,7 @@ export default function page() {
         "@type": "Organization",
         name: "Channel Income",
         // The URL should ideally point to the canonical/homepage URL
-        url: "https://channelincome.com/",
+        url: "https://channelincome.com",
         logo: "https://channelincome.com/icon.png",
         description:
             "Channel Income provides free YouTube analytics tools, including a Revenue Estimator, Monetization Compliance Tracker, and View Velocity analysis for content creators.",

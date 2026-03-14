@@ -51,7 +51,7 @@ export default function HomeIntroduction() {
               <Image
                 width={800}
                 height={800}
-                src="/hero.png"
+                src="/hero.webp"
                 alt="AI YouTube Revenue Estimator Dashboard showing RPM and CPM analytics"
                 className="relative rounded-xl shadow-2xl w-full max-w-md h-auto object-cover border-4 border-white"
               />
@@ -113,7 +113,7 @@ export default function HomeIntroduction() {
               <Image
                 width={1000}
                 height={1000}
-                src="/tool.png"
+                src="/tool.webp"
                 alt="Detailed YouTube Channel Analytics and Revenue Dashboard"
                 className="relative rounded-xl shadow-lg w-full h-auto object-cover border-2 border-white"
               />
@@ -148,7 +148,7 @@ export default function HomeIntroduction() {
               <Image
                 width={600}
                 height={600}
-                src="/tiktok.png"
+                src="/tiktok.webp"
                 alt="TikTok Growth Tool Placeholder"
                 className="relative rounded-xl shadow-lg w-full h-auto object-cover border-2 border-white opacity-60"
               />
@@ -186,7 +186,7 @@ export default function HomeIntroduction() {
           </div>
           <div className="md:w-1/2 p-4 flex justify-center">
              <Image
-                src="/guide.png"
+                src="/guide.webp"
                 alt="YouTube SEO Guides and Content Strategy Tips for 2026"
                 width={1000}
                 height={1000}

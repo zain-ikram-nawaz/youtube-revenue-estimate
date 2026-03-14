@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Terms of Service | ChannelIncome",
+  title: "Terms of Service ",
   description:
     "Read our terms of service before using the ChannelIncome YouTube Revenue Estimator and analytics tools.",
   keywords: [

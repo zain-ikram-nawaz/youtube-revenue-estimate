@@ -1,7 +1,7 @@
 import React from "react";
 
 export const metadata = {
-  title: "Disclaimer | Channel Income - YouTube Revenue Estimator",
+  title: "Disclaimer | YouTube Revenue Estimator",
   description:
     "Disclaimer: Channel Income provides estimated analytics and is not affiliated with YouTube or Google. Actual YouTube earnings may vary.",
   keywords: [
@@ -11,7 +11,7 @@ export const metadata = {
     "YouTube analytics disclaimer",
   ],
   openGraph: {
-    title: "Disclaimer | Channel Income",
+    title:"Disclaimer | YouTube Revenue Estimator",
     description:
       "Channel Income provides estimated YouTube analytics for informational purposes only. We are not affiliated with YouTube or Google.",
     url: "https://channelincome.com/disclaimer",

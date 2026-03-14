@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Privacy Policy | ChannelIncome",
+  title: "Privacy Policy",
   description:
     "We value your privacy. Learn how ChannelIncome handles your data and ensures your information is safe and anonymous.",
   keywords: [

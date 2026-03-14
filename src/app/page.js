@@ -39,11 +39,11 @@ export const metadata = {
     "YouTube income checker",
     "YouTube growth tips AI",
   ],
-  alternates: { canonical: "https://channelincome.com/" },
+  alternates: { canonical: "https://channelincome.com" },
   openGraph: {
-    title: "AI YouTube Revenue Calculator & Growth Insights | ChannelIncome",
+    title: "AI YouTube Revenue Calculator & Growth Insights",
     description: "Master your YouTube growth with AI. Estimate revenue, calculate RPM, and get expert guides for 2026.",
-    url: "https://channelincome.com/",
+    url: "https://channelincome.com",
     images: [{ url: "https://channelincome.com/icon.png", width: 1200, height: 630 }],
   },
 };

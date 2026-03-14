@@ -16,7 +16,7 @@ export async function generateMetadata({ searchParams }) {
     return {
     title: page === 1
             ? "YouTube Growth Guides 2026: Master RPM, CPM & SEO Secrets"
-            : `Expert YouTube Growth Tips - Page ${page} | ChannelIncome`,
+            : `Expert YouTube Growth Tips - Page ${page}`,
 
         description: isFirstPage
             ? "Master YouTube monetization with our free 2026 guides. Learn the difference between RPM and CPM, increase your earnings, and grow your channel organically."

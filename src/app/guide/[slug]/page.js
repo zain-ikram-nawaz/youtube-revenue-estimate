@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
     const canonicalUrl = `https://channelincome.com/guide/${guide.slug}`;
 
     return {
-        title: guide.metaTitle || `${guide.title} | ChannelIncome`,
+        title: guide.metaTitle || `${guide.title}`,
         description: guide.metaDescription || guide.summary,
         keywords: guide.keywords || [],
         alternates: { canonical: canonicalUrl },

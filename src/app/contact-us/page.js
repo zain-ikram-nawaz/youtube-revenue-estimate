@@ -3,7 +3,7 @@ import ContactUs from "../components/Contact/Contact";
 
 // ✅ Page-level metadata for Next.js App Router
 export const metadata = {
-  title: "Contact Us | ChannelIncome",
+  title: "Contact Us",
   description:
     "Get in touch with our YouTube analytics experts. Contact us for inquiries, support, or partnerships.",
   keywords: [

@@ -14,7 +14,7 @@ export const metadata = {
     "YouTube Revenue Estimator", "YouTube Earnings Calculator", "YouTube Channel Income"
   ],
   alternates: { canonical: "https://channelincome.com/tool/youtube-revenue-estimator" }, openGraph: {
-    title: "Free YouTube Revenue Estimator: Calculate Income, CPM, RPM & Growth | ChannelIncome",
+    title: "Free YouTube Revenue Estimator: Calculate Income, CPM, RPM & Growth ",
     description: "Estimate YouTube earnings, check monetization eligibility, and track channel metrics with ChannelIncome's free tool.",
     url: "https://channelincome.com/tool/youtube-revenue-estimator", // Yahan bhi naya URL    type: "website",
     images: [{ url: "/icon.png" }],
