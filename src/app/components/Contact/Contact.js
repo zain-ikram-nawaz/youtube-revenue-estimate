@@ -4,7 +4,6 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 import Link from 'next/link';
 
-
 const ContactUs = () => {
 
   const [formData, setFormData] = useState({
@@ -21,7 +20,6 @@ const ContactUs = () => {
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-
 
   const guideFaqs = [
   {
@@ -66,7 +64,6 @@ const ContactUs = () => {
   }
 ];
 
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -103,17 +100,16 @@ const handleSubmit = async (e) => {
   }
 };
 
-
   return (
 
-    <div className="min-h-screen bg-gradient-to-br from-white to-red-50 py-8 md:py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-secondary py-8 px-4">
+      <div className="max-w-5xl mx-auto space-y-4">
 
         {/* Header Section */}
-        <div className="text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-red-600 rounded-full mb-4 md:mb-6 shadow-lg">
+        <div className="bg-background rounded-md shadow-sm border border-border p-5 text-center">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-md mb-3 shadow-sm">
             <svg
-              className="w-8 h-8 md:w-10 md:h-10 text-white"
+              className="w-6 h-6 text-background"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -121,304 +117,278 @@ const handleSubmit = async (e) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Contact YouTube Channel Revenue Estimator
+          <h1 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-snug">
+            Contact YouTube Channel Revenue Estimator & Analytics Support
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-            Get in touch with our YouTube analytics experts. We&apos;re here to help
-            you maximize your channel&apos;s revenue potential.
+          <p className="text-xs text-muted leading-relaxed">
+            Get in touch with our YouTube analytics experts. We're here to help you maximize your channel's revenue potential and growth strategy.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
+        {/* Contact Information & Form Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {/* Contact Information */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 h-full">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h2>
-
-              {/* Contact Methods */}
-              <div className="space-y-6">
-                <div className="flex items-start">
-
-
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
-                    <p className="text-gray-600 text-sm mb-1">support@channelincome.com</p>
-                    <p className="text-gray-500 text-xs">24/7 email support</p>
-                  </div>
-                </div>
-
-
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Response Time</h3>
-                    <p className="text-gray-600 text-sm mb-1">Within 24 hours</p>
-                    <p className="text-gray-500 text-xs">For all inquiries</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <h3 className="font-semibold text-gray-900 mb-4">Follow Us</h3>
-                <div className="flex space-x-4">
-                  <Link href="#" className="text-gray-400 hover:text-red-600 transition-colors">
-                    <span className="sr-only">Twitter</span>
-                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                    </svg>
-                  </Link>
-                  <Link href="#" className="text-gray-400 hover:text-red-600 transition-colors">
-                    <span className="sr-only">YouTube</span>
-                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                    </svg>
-                  </Link>
-                  <Link href="#" className="text-gray-400 hover:text-red-600 transition-colors">
-                    <span className="sr-only">LinkedIn</span>
-                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" clipRule="evenodd" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
+          <div className="bg-background rounded-md shadow-sm border border-border p-4">
+            <div className="w-8 h-8 bg-accent rounded-md flex items-center justify-center mb-3">
+              <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
             </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Send us a Message</h2>
-              <p className="text-gray-600 mb-6">
-                Have questions about YouTube revenue estimation? Need help with your channel analysis? We&apos;re here to help!
-              </p>
-
-              {/* Submission Status */}
-              {submitStatus === 'success' && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                  <div className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p className="text-green-800 font-medium">Thank you for your message! We&apos;ll get back to you within 24 hours.</p>
-                  </div>
-                </div>
-              )}
-
-              {submitStatus === 'error' && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                  <div className="flex items-center">
-                    <svg className="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p className="text-red-800 font-medium">There was an error sending your message. Please try again.</p>
-                  </div>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Name Field */}
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-
-                  {/* Email Field */}
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Inquiry Type */}
-                  <div>
-                    <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-2">
-                      Inquiry Type *
-                    </label>
-                    <select
-                      id="inquiryType"
-                      name="inquiryType"
-                      value={formData.inquiryType}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
-                    >
-                      <option value="general">General Inquiry</option>
-                      <option value="technical">Technical Support</option>
-                      <option value="partnership">Partnership</option>
-                      <option value="feature">Feature Request</option>
-                      <option value="bug">Bug Report</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  {/* Subject Field */}
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
-                      placeholder="Brief subject of your message"
-                    />
-                  </div>
-                </div>
-
-                {/* Message Field */}
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors resize-vertical"
-                    placeholder="Please describe your inquiry in detail..."
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`w-full md:w-auto px-8 py-4 bg-red-600 text-white font-semibold rounded-lg transition-colors ${
-                      isSubmitting
-                        ? 'opacity-50 cursor-not-allowed'
-                        : 'hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
-                    }`}
-                  >
-                    {isSubmitting ? (
-                      <div className="flex items-center justify-center">
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Sending Message...
-                      </div>
-                    ) : (
-                      'Send Message'
-                    )}
-                  </button>
-                </div>
-
-                <p className="text-gray-500 text-sm">
-                  * Required fields. We respect your privacy and will never share your information with third parties.
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
-
-
-<div className="mt-16">
-  <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-      Frequently Asked Questions
-    </h2>
- <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {guideFaqs.map((faq, index) => (
-        <div
-          key={index}
-          className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm"
-        >
-          <button
-            onClick={() => toggle(index)}
-            className="flex justify-between items-center w-full text-left"
-          >
-            <h3 className="font-semibold text-gray-900">{faq.q}</h3>
-            {openIndex === index ? (
-              <ChevronUp className="w-5 h-5 text-gray-600" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-600" />
-            )}
-          </button>
-
-          {openIndex === index && (
-            <p className="mt-3 text-gray-600 text-sm leading-relaxed">
-              {faq.a}
+            <h2 className="text-sm font-bold text-foreground mb-2">Get In Touch with Our Team</h2>
+            <p className="text-xs text-muted leading-relaxed mb-2">
+              Have questions about YouTube revenue estimation, channel analytics, or need help with your monetization strategy? Our experts are here to assist you.
             </p>
-          )}
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+            <div className="space-y-3 mt-4">
+              <div className="flex items-center text-xs">
+                <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span className="text-muted">support@channelincome.com</span>
+              </div>
+              <div className="flex items-center text-xs">
+                <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-muted">Response within 24 hours</span>
+              </div>
+            </div>
+          </div>
 
+          {/* Quick Contact Form */}
+          <div className="bg-background rounded-md shadow-sm border border-border p-4">
+            <div className="w-8 h-8 bg-accent rounded-md flex items-center justify-center mb-3">
+              <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </div>
+            <h2 className="text-sm font-bold text-foreground mb-2">Send us a Quick Message</h2>
+            <p className="text-xs text-muted leading-relaxed mb-3">
+              Need help with YouTube revenue calculations, channel optimization, or have technical questions? Fill out the form below and we'll get back to you.
+            </p>
+            <Link
+              href="#contact-form"
+              className="inline-flex items-center text-xs font-semibold text-primary hover:text-primary-hover transition-colors"
+            >
+              Fill Contact Form Below
+              <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+
+        {/* Detailed Contact Form */}
+        <div id="contact-form" className="bg-background rounded-md shadow-sm border border-border p-5">
+          <h2 className="text-base font-bold text-foreground mb-3 text-center border-l-2 border-primary pl-3">
+            Contact Form: YouTube Revenue Estimator Support
+          </h2>
+
+          {/* Submission Status */}
+          {submitStatus === 'success' && (
+            <div className="bg-accent border border-primary rounded-md p-3 mb-4">
+              <div className="flex items-center">
+                <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-primary font-medium text-xs">Thank you for your message! We'll get back to you within 24 hours.</p>
+              </div>
+            </div>
+          )}
+
+          {submitStatus === 'error' && (
+            <div className="bg-accent border border-primary rounded-md p-3 mb-4">
+              <div className="flex items-center">
+                <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-primary font-medium text-xs">There was an error sending your message. Please try again.</p>
+              </div>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Name Field */}
+              <div>
+                <label htmlFor="name" className="block text-xs font-bold text-foreground mb-1">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              {/* Email Field */}
+              <div>
+                <label htmlFor="email" className="block text-xs font-bold text-foreground mb-1">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Inquiry Type */}
+              <div>
+                <label htmlFor="inquiryType" className="block text-xs font-bold text-foreground mb-1">
+                  Inquiry Type *
+                </label>
+                <select
+                  id="inquiryType"
+                  name="inquiryType"
+                  value={formData.inquiryType}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
+                >
+                  <option value="general">General Inquiry</option>
+                  <option value="technical">Technical Support</option>
+                  <option value="partnership">Partnership</option>
+                  <option value="feature">Feature Request</option>
+                  <option value="bug">Bug Report</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              {/* Subject Field */}
+              <div>
+                <label htmlFor="subject" className="block text-xs font-bold text-foreground mb-1">
+                  Subject *
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
+                  placeholder="Brief subject of your message"
+                />
+              </div>
+            </div>
+
+            {/* Message Field */}
+            <div>
+              <label htmlFor="message" className="block text-xs font-bold text-foreground mb-1">
+                Message *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={4}
+                className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors resize-vertical"
+                placeholder="Please describe your inquiry in detail..."
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex flex-col sm:flex-row items-start gap-3">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`px-6 py-2 bg-primary text-background font-semibold rounded-md text-xs transition-colors ${
+                  isSubmitting
+                    ? 'opacity-50 cursor-not-allowed'
+                    : 'hover:bg-primary-hover focus:ring-2 focus:ring-accent'
+                }`}
+              >
+                {isSubmitting ? (
+                  <div className="flex items-center">
+                    <svg className="animate-spin -ml-1 mr-2 h-3 w-3 text-background" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                  </div>
+                ) : (
+                  'Send Message'
+                )}
+              </button>
+              <p className="text-muted text-xs leading-relaxed">
+                * Required fields. We respect your privacy and will never share your information with third parties.
+              </p>
+            </div>
+          </form>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="bg-background rounded-md shadow-sm border border-border p-5">
+          <h2 className="text-base font-bold text-foreground mb-4 text-center">
+            Frequently Asked Questions About YouTube Revenue & Analytics
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {guideFaqs.map((faq, index) => (
+              <div
+                key={index}
+                className="border border-border rounded-md p-3 bg-secondary"
+              >
+                <button
+                  onClick={() => toggle(index)}
+                  className="flex justify-between items-center w-full text-left"
+                >
+                  <h3 className="font-semibold text-foreground text-xs">{faq.q}</h3>
+                  {openIndex === index ? (
+                    <ChevronUp className="w-4 h-4 text-muted flex-shrink-0 ml-2" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-muted flex-shrink-0 ml-2" />
+                  )}
+                </button>
+
+                {openIndex === index && (
+                  <p className="mt-2 text-muted text-xs leading-relaxed">
+                    {faq.a}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-12">
-          <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl p-8 md:p-12 text-white">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Boost Your YouTube Revenue?</h2>
-            <p className="text-red-100 mb-6 max-w-2xl mx-auto text-lg">
-              Start using our free YouTube revenue estimator today and get instant insights into your channel&apos;s earning potential.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/"
-                className="inline-flex items-center px-6 py-3 bg-white text-red-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                  Try Revenue Estimator
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-              <Link
-                href="/about-us"
-                className="inline-flex items-center px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-red-600 transition-colors"
-              >
-                Learn More About Us
-              </Link>
-            </div>
+        <div className="bg-background rounded-md shadow-sm border border-border p-5 text-center">
+          <h2 className="text-base font-bold text-foreground mb-2">Ready to Analyze Your YouTube Channel Revenue?</h2>
+          <p className="text-xs text-muted mb-4 max-w-lg mx-auto leading-relaxed">
+            Use ChannelIncome's free YouTube revenue estimator to optimize your content strategy, track earning potential, and achieve your financial goals with accurate revenue projections.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/"
+              className="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary-hover text-background text-xs font-medium rounded-md transition-colors shadow-sm"
+            >
+              Try Revenue Estimator Now
+              <svg className="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+            <Link
+              href="/about-us"
+              className="inline-flex items-center px-4 py-2 bg-transparent border border-border text-foreground text-xs font-medium rounded-md hover:bg-secondary transition-colors"
+            >
+              Learn More About Us
+            </Link>
           </div>
         </div>
+
       </div>
     </div>
   );

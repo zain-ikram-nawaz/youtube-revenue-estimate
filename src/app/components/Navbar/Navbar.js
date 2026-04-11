@@ -7,112 +7,109 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 left-0 w-full bg-white shadow-lg z-50 border-b border-red-100">
-      <div className="max-w-7xl mx-auto px-4 py-3">
+    <nav className="sticky top-0 left-0 w-full bg-background shadow-sm z-50 border-b border-border">
+      <div className="max-w-4xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
 
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-  <div className=" overflow-hidden">
-    <Image
-      src="/icon.png"
-      alt="Logo"
-      width={80}
-      height={80}
-      className="object-cover"
-    />
-  </div>
-  {/* <span className="font-bold text-xl text-red-800">MyWebsite</span> */}
-</Link>
+            <div className="overflow-hidden">
+              <Image
+                src="/icon.png"
+                alt="YouTube Revenue Estimator Logo"
+                width={60}
+                height={60}
+                className="object-cover"
+              />
+            </div>
+          </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex space-x-8 font-medium">
+          <div className="hidden md:flex space-x-1 font-medium">
             <Link
               href="/"
-              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 text-sm"
             >
               Home
             </Link>
-              <Link
+            <Link
               href="/guide"
-              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 text-sm"
             >
               Guide
             </Link>
-              <Link
-              href="/tool/youtube-revenue-estimator"
-              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+            <Link
+              href="/tool/youtube-revenue-calculator"
+              className="text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 text-sm"
             >
               Tool
             </Link>
-
             <Link
               href="/about-us"
-              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 text-sm"
             >
               About
             </Link>
             <Link
               href="/contact-us"
-              className="text-red-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200"
+              className="text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 text-sm"
             >
               Contact
             </Link>
-
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-red-50 transition-colors"
+            className="md:hidden p-2 rounded-md hover:bg-accent transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle mobile menu"
           >
-            <div className="w-6 h-6 flex flex-col justify-center space-y-1">
-              <span className={`block h-0.5 w-6 bg-red-600 transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-              <span className={`block h-0.5 w-6 bg-red-600 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-              <span className={`block h-0.5 w-6 bg-red-600 transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+            <div className="w-5 h-5 flex flex-col justify-center space-y-1">
+              <span className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+              <span className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+              <span className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
             </div>
           </button>
         </div>
 
         {/* Mobile Menu */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="py-4 space-y-3 border-t border-red-100 mt-3">
+          <div className="py-3 space-y-1 border-t border-border mt-3">
             <Link
               href="/"
-              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              className="block text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 font-medium text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/guide"
-              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              className="block text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 font-medium text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
               Guide
             </Link>
-              <Link
-              href="/tool/youtube-revenue-estimator"
-              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+            <Link
+              href="/tool/youtube-revenue-calculator"
+              className="block text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 font-medium text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
               Tool
             </Link>
             <Link
               href="/about-us"
-              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              className="block text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 font-medium text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="/contact-us"
-              className="block text-red-600 hover:text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
+              className="block text-foreground hover:text-primary hover:bg-accent px-3 py-2 rounded-md transition-all duration-200 font-medium text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
             </Link>
-
           </div>
         </div>
       </div>

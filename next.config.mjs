@@ -22,7 +22,7 @@ const nextConfig = {
             // Specific redirects ko pehle rakhein
             {
                 source: '/youtube-revenue-estimator',
-                destination: '/tool/youtube-revenue-estimator',
+                destination: '/tool/youtube-revenue-calculator',
                 permanent: true,
             },
             // Pattern based redirects

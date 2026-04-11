@@ -86,7 +86,7 @@ export default async function GuidePage({ params }) {
                                 <Clock className="w-3.5 h-3.5 text-red-500" />
                                 <span>{readTime} MIN READ</span>
                             </div>
-                            <Link href="/tool/youtube-revenue-estimator" className="bg-black text-white px-4 py-2 rounded-full text-xs font-black hover:bg-red-600 transition-all shadow-md">
+                            <Link href="/tool/youtube-revenue-calculator" className="bg-black text-white px-4 py-2 rounded-full text-xs font-black hover:bg-red-600 transition-all shadow-md">
                                 REVENUE TOOL
                             </Link>
                         </div>
@@ -183,7 +183,7 @@ export default async function GuidePage({ params }) {
                                 <p className="text-gray-500 font-medium text-lg mb-8">
                                     Don't just get views. Use our revenue estimator to see how much your 4000 hours are worth in different countries.
                                 </p>
-                                <Link href="/tool/youtube-revenue-estimator" className="inline-block px-10 py-5 bg-red-600 text-white font-black rounded-2xl hover:bg-black transition-all shadow-xl hover:-translate-y-1">
+                                <Link href="/tool/youtube-revenue-calculator" className="inline-block px-10 py-5 bg-red-600 text-white font-black rounded-2xl hover:bg-black transition-all shadow-xl hover:-translate-y-1">
                                     OPEN ANALYTICS TOOL
                                 </Link>
                             </div>

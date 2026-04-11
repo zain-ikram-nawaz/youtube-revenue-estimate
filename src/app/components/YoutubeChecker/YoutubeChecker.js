@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import MonetizationStatusBar from "../MonitizationStatusBar/page";
 import StatsCards from "../StatsCards/StatsCards";
 import Revenue from "../Revenue/Revenue";
@@ -8,7 +8,7 @@ import Monetization from "../Monetization/Monetiztion";
 import Analytics from "../Analytics/Analytics";
 import Image from "next/image";
 import Form from "../Form/page";
-import Loader from "../Loader/Loader";
+import StepLoader from "../StepLoader/StepLoader";
 import ChannelPerformance from "../ChannelPerformance/ChannelPerformance"
 
 export default function ChannelEstimator({ seoSections }) {
@@ -139,10 +139,9 @@ export default function ChannelEstimator({ seoSections }) {
     };
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e, filters = { niche: 'auto', location: 'auto' }) => {
+    if (e) e.preventDefault();
 
-    // Enhanced input validation
     const validation = validateInput(channelUrl);
     if (!validation.valid) {
       setError(validation.message);
@@ -172,11 +171,15 @@ export default function ChannelEstimator({ seoSections }) {
         throw new Error("Captcha verification failed!");
       }
 
-      // Make API call
+      // 2. Forward niche and location to your API
       const res = await fetch(`/api/channel-estimate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ channelUrl: channelUrl.trim() }),
+        body: JSON.stringify({
+          channelUrl: channelUrl.trim(),
+          niche: filters.niche,       // Added this
+          location: filters.location  // Added this
+        }),
       });
 
       const json = await res.json();
@@ -251,21 +254,15 @@ export default function ChannelEstimator({ seoSections }) {
   };
 
   if (loading) {
-    return <Loader />;
+    return <StepLoader />;
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] py-4 md:py-8 px-3 sm:px-4 lg:px-6">
+   <div className="min-h-screen bg-secondary py-4 md:py-8 px-3 sm:px-4 lg:px-6">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl mx-auto">
 
         {/* Header Section */}
         <div className="lg:col-span-12 text-center mb-8">
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-            YouTube <span className="text-red-600">Revenue</span> Estimator
-          </h1>
-          <p className="text-slate-500 mt-3 max-w-xl mx-auto font-medium">
-            Professional analytics and AI-powered growth insights for creators.
-          </p>
 
           {/* Enhanced Input Type Indicator */}
           {channelUrl && (
@@ -274,7 +271,7 @@ export default function ChannelEstimator({ seoSections }) {
                 const validation = validateInput(channelUrl);
                 if (validation.valid) {
                   return (
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium">
                       <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
                       {validation.message}
                     </div>
@@ -292,7 +289,7 @@ export default function ChannelEstimator({ seoSections }) {
           setChannelUrl={handleInputChange}
           loading={loading}
           error={error}
-          handleSubmit={handleSubmit}
+          handleSubmit={handleSubmit} // Now accepts the object from Form.js
           setCaptchaToken={setCaptchaToken}
         />
 
@@ -305,33 +302,33 @@ export default function ChannelEstimator({ seoSections }) {
         )}
 
         {/* Right Side Drawer */}
-        <div className={`fixed top-0 right-0 h-full z-[70] w-full max-w-4xl bg-white shadow-2xl transform transition-transform duration-500 ease-in-out ${isModalOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`fixed top-0 right-0 h-full z-[70] w-full max-w-4xl bg-background shadow-2xl transform transition-transform duration-500 ease-in-out ${isModalOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 
           {data && (
             <div className="flex flex-col h-full">
               {/* Enhanced Drawer Header */}
-              <div className="p-4 border-b flex items-center justify-between bg-slate-50">
+              <div className="p-4 border-b border-border flex items-center justify-between bg-secondary">
                 <div className="flex items-center gap-3">
                   {data?.bannerImage ? (
                     <Image
-                    width={1000}
-                    height={1000}
+                      width={1000}
+                      height={1000}
                       src={data.bannerImage}
                       alt="Channel"
                       className="w-10 h-10 rounded-lg object-cover"
                     />
                   ) : (
-                    <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold">
+                    <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-background font-bold">
                       {data?.channelName?.charAt(0) || 'C'}
                     </div>
                   )}
                   <div>
-                    <h2 className="font-bold text-slate-800 truncate max-w-[200px]">
+                    <h2 className="font-bold text-foreground truncate max-w-[200px]">
                       {data?.channelName}
                     </h2>
                     {/* Show input type and message */}
                     {data.message && (
-                      <p className="text-xs text-slate-500 truncate max-w-[250px]">
+                      <p className="text-xs text-muted truncate max-w-[250px]">
                         {data.message}
                       </p>
                     )}
@@ -344,7 +341,7 @@ export default function ChannelEstimator({ seoSections }) {
                 </div>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="p-2 hover:bg-red-100 text-red-600 rounded-full transition-colors font-bold"
+                  className="p-2 hover:bg-accent text-primary rounded-lg transition-colors font-bold"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -356,16 +353,16 @@ export default function ChannelEstimator({ seoSections }) {
               <div className="flex-1 overflow-y-auto custom-scrollbar p-6">
                 {/* Enhanced Banner Section */}
                 {data?.bannerImage && (
-                  <div className="relative h-32 mb-6 rounded-xl overflow-hidden shadow-inner">
+                  <div className="relative h-32 mb-6 rounded-lg overflow-hidden shadow-inner">
                     <Image
-                    width={10000}
-                    height={200000}
+                      width={10000}
+                      height={200000}
                       src={data.bannerImage}
                       alt="Banner"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
-                      <div className="text-white">
+                      <div className="text-background">
                         <p className="text-sm font-semibold">
                           {data?.subscribers?.toLocaleString()} Subscribers
                         </p>
@@ -381,9 +378,9 @@ export default function ChannelEstimator({ seoSections }) {
 
                 {/* Video Info Card (if redirected from video) */}
                 {data?.videoInfo && (
-                  <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                  <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-sm font-bold">
+                      <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-background text-sm font-bold">
                         📹
                       </div>
                       <div className="flex-1">
@@ -413,7 +410,7 @@ export default function ChannelEstimator({ seoSections }) {
                 )}
 
                 {/* Enhanced Navigation Tabs */}
-                <div className="flex flex-wrap gap-2 mb-6 p-1 bg-slate-100 rounded-xl">
+                <div className="flex flex-wrap gap-2 mb-6 p-1 bg-secondary rounded-lg">
                   {[
                     { key: "overview", label: "Overview", icon: "📊" },
                     { key: "revenue", label: "Revenue", icon: "💰" },
@@ -424,11 +421,10 @@ export default function ChannelEstimator({ seoSections }) {
                     <button
                       key={tab.key}
                       onClick={() => setActiveTab(tab.key)}
-                      className={`flex-1 py-2 px-2 text-[10px] uppercase tracking-wider font-black rounded-lg transition-all flex items-center justify-center gap-1 ${
-                        activeTab === tab.key
-                          ? "bg-white text-red-600 shadow-sm"
-                          : "text-slate-500 hover:text-slate-700"
-                      }`}
+                      className={`flex-1 py-2 px-2 text-xs uppercase tracking-wider font-black rounded-md transition-all flex items-center justify-center gap-1 ${activeTab === tab.key
+                          ? "bg-background text-primary shadow-sm"
+                          : "text-muted hover:text-foreground"
+                        }`}
                     >
                       <span className="text-xs">{tab.icon}</span>
                       <span className="hidden sm:inline">{tab.label}</span>
@@ -472,12 +468,12 @@ export default function ChannelEstimator({ seoSections }) {
               </div>
 
               {/* Enhanced Drawer Footer */}
-              <div className="p-4 border-t bg-slate-50">
-                <div className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mb-2">
+              <div className="p-4 border-t border-border bg-secondary">
+                <div className="text-center text-xs text-muted font-bold uppercase tracking-[0.2em] mb-2">
                   AI Analysis Powered by Channel Income 2026
                 </div>
                 {data.inputType && (
-                  <div className="text-center text-xs text-slate-500">
+                  <div className="text-center text-xs text-muted">
                     Input type: {data.inputType.replace('_', ' ')}
                     {data.inputType === 'channel_name' && ' (searched by name)'}
                     {data.inputType === 'video_redirected' && ' (redirected from video)'}
@@ -491,17 +487,17 @@ export default function ChannelEstimator({ seoSections }) {
         {/* Enhanced Error Display */}
         {error && !loading && (
           <div className="lg:col-span-12 mt-4">
-            <div className="max-w-2xl mx-auto p-4 bg-red-50 border border-red-200 rounded-xl">
+            <div className="max-w-2xl mx-auto p-4 bg-accent border border-accent-hover rounded-lg">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">
+                <div className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center text-background text-sm font-bold flex-shrink-0 mt-0.5">
                   !
                 </div>
                 <div>
-                  <h3 className="font-semibold text-red-900 mb-1">Error</h3>
-                  <p className="text-red-700 text-sm mb-3">{error}</p>
+                  <h3 className="font-semibold text-primary mb-1">Error</h3>
+                  <p className="text-primary text-sm mb-3">{error}</p>
 
                   {/* Helpful suggestions */}
-                  <div className="text-xs text-red-600">
+                  <div className="text-xs text-primary">
                     <p className="font-medium mb-1">Try these formats:</p>
                     <ul className="list-disc list-inside space-y-1 ml-2">
                       <li>Channel URL: https://youtube.com/@channelname</li>

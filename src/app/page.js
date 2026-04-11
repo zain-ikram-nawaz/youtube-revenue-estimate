@@ -1,16 +1,33 @@
 // app/page.js (Home Page)
-import { Suspense } from "react";
 import HomeIntroduction from "./components/SeoText/homeText";
-import ListingGuide from "./components/AdminUseOnly/ListingGuide/page";
 import HomeFAQ from "./components/FAQ/FAQ";
-import { getGuides } from "./hooks/getGuides";
 
 export const revalidate = 3600; // Har 1 ghante baad update hoga
 
 const homeFaqData = [
+{
+    q: "Can I earn money by watching YouTube videos?",
+    a: "While there are third-party apps that claim to pay for views, YouTube itself does not pay users to watch videos. Our tool focuses on helping creators estimate their potential earnings from content creation and ad revenue.",
+  },
+  {
+    q: "When do you start earning money from YouTube?",
+    a: "You can start earning once you join the YouTube Partner Program (YPP). Generally, this requires 1,000 subscribers and either 4,000 valid public watch hours in the past year or 10 million public Shorts views in the last 90 days.",
+  },
+  {
+    q: "What is the average 1 million subscribers YouTube income per month?",
+    a: "A channel with 1 million subscribers typically earns between $5,000 and $50,000 per month from AdSense. However, most creators at this level earn 3-5x more through sponsorships, affiliate marketing, and merchandise.",
+  },
+  {
+    q: "What is the typical YouTube income per 1,000 views?",
+    a: "The income per 1,000 views (RPM) varies by niche and location, usually ranging from $0.50 to $7.00. For example, finance channels see much higher rates than gaming or comedy channels.",
+  },
   {
     q: "What is the difference between CPM and RPM on YouTube?",
     a: "CPM (Cost Per Mille) is what advertisers pay for 1,000 views, while RPM (Revenue Per Mille) is what you actually earn after YouTube's cut and other deductions. Our tool calculates both instantly.",
+  },
+  {
+    q: "Is there any low income relief for YouTubers?",
+    a: "YouTube doesn't offer direct 'relief' for low earnings, but creators can boost income by diversifying into channel memberships, Super Chats, and YouTube Shopping to supplement their AdSense revenue.",
   },
   {
     q: "How does the AI YouTube Revenue Estimator work?",
@@ -78,12 +95,12 @@ function JsonLdFAQ() {
 }
 
 // Ek alag component banayein fetch ke liye
-async function GuidesSection() {
-  const { guides } = await getGuides(1, 8);
-  return <ListingGuide data={guides} />;
-}
+// async function GuidesSection() {
+//   const { guides } = await getGuides(1, 8);
+//   return <ListingGuide data={guides} />;
+// }
 export default async function Home() {
-const { guides } = await getGuides(1, 8);
+// const { guides } = await getGuides(1, 8);
   return (
     <>
       <JsonLdApp />
@@ -92,15 +109,16 @@ const { guides } = await getGuides(1, 8);
       <HomeIntroduction />
 
       {/* 2026 Highlight Section (New for SEO) */}
-      <section className="bg-blue-50 py-10 px-6 rounded-xl my-8 text-center max-w-5xl mx-auto">
+      {/* <section className="bg-blue-50 py-10 px-6 rounded-xl my-8 text-center max-w-5xl mx-auto">
          <h2 className="text-2xl font-bold text-gray-800">New: 2026 AI Growth Engine Integrated</h2>
          <p className="mt-2 text-gray-600">Dont just calculate your revenue. Use our AI tips to understand the **RPM vs CPM difference** and grow your earnings.</p>
-      </section>
+      </section> */}
 
 {/* Guides ko Suspense mein rakhein taake upar wala content foran load ho */}
-      <Suspense fallback={<div className="h-64 flex items-center justify-center">Loading Guides...</div>}>
+      {/* <Suspense fallback={<div className="h-64 flex items-center justify-center">Loading Guides...</div>}>
          <GuidesSection />
-      </Suspense>      <HomeFAQ faq={homeFaqData} />
+      </Suspense> */}
+        <HomeFAQ faq={homeFaqData} />
     </>
   );
 }

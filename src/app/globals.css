@@ -1,14 +1,50 @@
 @import "tailwindcss";
 
 
+@theme {
+  /* ========== COLORS ========== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Primary (Modern Red) */
+  --color-primary: #E53935;
+  --color-primary-hover: #c62828;
+
+  /* Secondary (Soft Background) */
+  --color-secondary: #FFF5F5;
+
+  /* Accent (Light Red/Pink tone for UI elements) */
+  --color-accent: #FFCDD2;
+  --color-accent-hover: #EF9A9A;
+
+  /* Background & Text */
+  --color-background: #FFFFFF;
+  --color-foreground: #2D2D2D;
+
+  /* Borders / Muted */
+  --color-border: #F0EAEA;
+  --color-muted: #6B6B6B;
+
+  /* ========== FONTS ========== */
+
+  /* Modern, clean & highly readable */
+  --font-sans: 'Inter', 'Poppins', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ========== RADIUS ========= */
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 6px;
+  --radius-xl: 6px;
+
+  /* ========== FONT SIZES ========== */
+
+  --text-xs: 0.75rem;   /* 12px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.25rem;   /* 20px */
+  --text-2xl: 1.5rem;   /* 24px */
 }
-
 
 /* styles/globals.css ya kisi imported CSS me */
 .nextjs-progress-bar {

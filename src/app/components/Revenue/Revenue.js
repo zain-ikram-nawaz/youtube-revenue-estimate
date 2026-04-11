@@ -11,7 +11,7 @@ export default function Revenue({ data, aiData }) {
         </div>
         <div className="bg-white p-8 rounded-3xl border-2 border-gray-100 shadow-sm relative">
           <div className="text-xs font-black uppercase tracking-widest text-red-600 mb-2">Monthly Average</div>
-          <div className="text-4xl font-black text-gray-900">${data?.avgMonthlyRevenue?.toLocaleString() || 0}</div>
+          <div className="text-4xl font-black text-gray-900">{data?.avgMonthlyRevenue?.toLocaleString() || 0}</div>
           <div className="absolute top-4 right-6 text-gray-100 text-4xl font-bold">02</div>
         </div>
       </div>
