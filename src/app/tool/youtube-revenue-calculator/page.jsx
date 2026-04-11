@@ -149,7 +149,6 @@ export default async function YouTubeRevenueEstimateor() {
         {/* FAQ Section */}
         <section id="faq" className="py-10 bg-[#fafafa] px-4">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-lg font-bold mb-5 text-center text-gray-900">Frequently Asked Questions</h2>
             <FAQ faq={faqData} />
           </div>
         </section>
