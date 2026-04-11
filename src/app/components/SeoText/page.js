@@ -3,7 +3,7 @@ export default function SeoText() {
     <div className="bg-secondary min-h-screen py-10 px-4">
       <div className="max-w-5xl mx-auto space-y-4">
 
-        {/* Header Section */}
+       
         <div className="bg-background rounded-md shadow-sm border border-border p-5 text-center">
           <h2 className="text-lg md:text-xl font-bold text-foreground mb-3">
             Maximise Your YouTube Revenue Potential
