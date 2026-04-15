@@ -1,5 +1,5 @@
 import React from "react";
-import About from "../components/About/About";
+import About from "../../components/About/About";
 
 // ✅ Metadata (10/10 Optimized)
 export const metadata = {

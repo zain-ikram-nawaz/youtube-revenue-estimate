@@ -1,5 +1,5 @@
 import React from "react";
-import ContactUs from "../components/Contact/Contact";
+import ContactUs from "../../components/Contact/Contact";
 
 // ✅ Page-level metadata for Next.js App Router
 export const metadata = {

@@ -1,7 +1,7 @@
 "use client";
-import GuideForm from "../components/AdminUseOnly/GuideForm/page";
+import GuideForm from "../../components/AdminUseOnly/GuideForm/page";
 import { useState, useEffect } from "react";
-import ListingGuide from "../components/AdminUseOnly/ListingGuide/page"
+import ListingGuide from "../../components/AdminUseOnly/ListingGuide/page"
 // import { getGuides } from "../hooks/getGuides";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default function AdminDashboard() {
   const [guides, setGuides] = useState([])
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  
+
   useEffect(() => {
   const fetchData = async () => {
     try {

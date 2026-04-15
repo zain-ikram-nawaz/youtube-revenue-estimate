@@ -1,6 +1,6 @@
 // app/page.js (Home Page)
-import HomeIntroduction from "./components/SeoText/homeText";
-import HomeFAQ from "./components/FAQ/FAQ";
+import HomeIntroduction from "../components/SeoText/homeText";
+import HomeFAQ from "../components/FAQ/FAQ";
 
 export const revalidate = 3600; // Har 1 ghante baad update hoga
 

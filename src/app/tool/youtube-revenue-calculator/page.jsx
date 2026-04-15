@@ -1,7 +1,7 @@
-import YoutubeAnalyzer from "../../components/YoutubeChecker/YoutubeChecker";
-import FAQ from "../../components/FAQ/FAQ";
-import ListingGuide from "../../components/AdminUseOnly/ListingGuide/page";
-import SeoText from "../../components/SeoText/page";
+import YoutubeAnalyzer from "../../../components/YoutubeChecker/YoutubeChecker";
+import FAQ from "../../../components/FAQ/FAQ";
+import ListingGuide from "../../../components/AdminUseOnly/ListingGuide/page";
+import SeoText from "../../../components/SeoText/page";
 import Script from "next/script";
 import Link from "next/link";
 import { Zap } from "lucide-react";

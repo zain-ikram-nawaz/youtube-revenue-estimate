@@ -4,7 +4,7 @@ import Guide from "../../../models/guide";
 import Image from "next/image";
 import { Clock, ArrowLeft, TrendingUp, Calendar, Tag, ChevronRight, Search } from "lucide-react";
 import Link from "next/link";
-import ContentBlockRenderer from "../../components/ContentBlockRenderer/ContentBlockRenderer";
+import ContentBlockRenderer from "../../../components/ContentBlockRenderer/ContentBlockRenderer";
 import { calculateReadTime } from "../../hooks/readTime";
 import Script from "next/script";
 
