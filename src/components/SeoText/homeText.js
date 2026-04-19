@@ -13,7 +13,7 @@ export default function HomeIntroduction() {
           {/* Left Text */}
           <div className="md:w-1/2 text-background mb-6 md:mb-0">
             <div className="inline-block px-3 py-1 rounded-md bg-secondary text-xs font-medium mb-3 tracking-wide text-foreground">
-              ✨ Most Accurate YouTube Income Estimator
+              ✨ Most Accurate YouTube Income Estimator,,,,
             </div>
             <h1 className="text-2xl md:text-2xl font-bold mb-3 leading-snug">
               YouTube Income Estimator - Calculate Your Real Earnings (2026)

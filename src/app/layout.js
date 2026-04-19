@@ -1,20 +1,22 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import Script from "next/script";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+// 1. Viewport ko metadata se alag export karna zaroori hai (Next.js 15+ standard)
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#F5F5F0", // Optional: Browser bar color
+};
 
 export const metadata = {
   metadataBase: new URL("https://channelincome.com"),
   title: {
     default: "ChannelIncome | AI YouTube Revenue & Growth Tools",
-    template: "%s | ChannelIncome", // Har page ka apna title is %s ki jagah fit ho jayega
+    template: "%s | ChannelIncome",
   },
   description: "Advanced AI tools for YouTube creators. Estimate revenue, calculate RPM/CPM, and get growth insights.",
-  viewport: "width=device-width, initial-scale=1",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
@@ -32,27 +34,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        {/* Ahrefs Analytics (Isse Script tag mein bhi daal sakte hain) */}
-        <script src="https://analytics.ahrefs.com/analytics.js" data-key="NIdfnJ32uBKcHx+IqKcQWg" async></script>
+      <body className={`antialiased`}>
 
-        {/* Organization Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "ChannelIncome",
-              "url": "https://channelincome.com",
-              "logo": "https://channelincome.com/icon.png",
-              "sameAs": ["https://www.youtube.com/@channelincome"],
-            }),
-          }}
+        {/* Ahrefs Analytics - Script component use karna behtar hai */}
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="NIdfnJ32uBKcHx+IqKcQWg"
+          strategy="afterInteractive"
         />
-      </head>
 
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F5F5F0] text-[#001F3D]`}>
         {/* GTM Script */}
         <Script
           id="gtm-script"
@@ -77,14 +67,36 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
+        {/* Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "ChannelIncome",
+              "url": "https://channelincome.com",
+              "logo": "https://channelincome.com/icon.png",
+              "sameAs": ["https://www.youtube.com/@channelincome"],
+            }),
+          }}
+        />
+
         <noscript>
-          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54N955N7" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-54N955N7"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
         </noscript>
 
         <Navbar />
-        <main className="container mx-auto px-4 py-6" style={{ borderRadius: '8px' }}>
+
+        <main className="container mx-auto px-4 py-6" style={{ minHeight: '80vh' }}>
           {children}
         </main>
+
         <Footer />
       </body>
     </html>
