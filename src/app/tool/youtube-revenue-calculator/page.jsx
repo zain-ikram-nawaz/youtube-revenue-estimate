@@ -194,7 +194,7 @@ export default async function YouTubeRevenueEstimateor() {
             href="#youtube-tool"
             className="bg-red-600 text-white px-4 py-3 rounded-[6px] shadow-lg text-xs font-semibold flex items-center gap-2 active:scale-95 transition-transform"
           >
-            <Zap className="w-3 h-3" /> ESTIMATE NOW
+            <Zap className="w-3 h-3" /> ESTIMATE NOW.
           </Link>
         </div>
 
