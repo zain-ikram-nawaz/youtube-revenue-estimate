@@ -3,14 +3,17 @@ import ContactUs from "../../components/Contact/Contact";
 
 // ✅ Page-level metadata for Next.js App Router
 export const metadata = {
-  title: "Contact Us",
+  title: "Contact ChannelIncome | YouTube Analytics Support & Partnership Inquiries",
   description:
-    "Get in touch with our YouTube analytics experts. Contact us for inquiries, support, or partnerships.",
+    "Get in touch with the ChannelIncome team for YouTube revenue calculator support, growth strategy questions, or partnership opportunities. Fast response time — contact us today for YouTube analytics help.",
   keywords: [
     "Contact ChannelIncome",
     "YouTube analytics support",
-    "creator tools help",
-    "monetization guidance",
+    "YouTube revenue calculator help",
+    "creator tools support",
+    "ChannelIncome partnership",
+    "YouTube growth strategy inquiry",
+    "YouTube monetization guidance",
   ],
   alternates: { canonical: "https://channelincome.com/contact-us" },
 };

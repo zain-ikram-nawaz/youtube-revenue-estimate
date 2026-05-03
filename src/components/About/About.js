@@ -57,21 +57,21 @@ export default function AboutUsPage() {
                 {/* Our Story Section */}
                 <div className="bg-background rounded-md shadow-sm border border-border p-5">
                     <h2 className="text-base font-bold text-foreground mb-3 text-center border-l-2 border-primary pl-3">
-                        The ChannelIncome Story: Building the Ultimate YouTube Income Estimator
+                        The ChannelIncome Story: Building the Most Trusted YouTube Revenue Calculator
                     </h2>
                     <h3 className="text-sm font-semibold text-foreground mb-3">
-                        From Creator Frustration to Revolutionary Analytics Solution
+                        From Creator Challenges to the Leading YouTube Analytics Platform
                     </h3>
 
                     <div className="text-xs text-muted leading-relaxed space-y-3">
                         <p>
-                            ChannelIncome was born when its founder, a YouTube enthusiast and developer, grew frustrated with the lack of accurate YouTube earnings calculators and transparent revenue estimation tools available in the market.
+                            ChannelIncome started with a real problem: creators had no simple, reliable way to estimate YouTube earnings. Whether checking their own channel's potential or comparing niches, most tools were either inaccurate, outdated, or required paying subscription fees.
                         </p>
                         <p>
-                            After struggling to find reliable data about potential YouTube income and watching fellow creators make important decisions based on incomplete information, the decision was made to build a comprehensive YouTube money estimator that offers deep channel analysis instantly.
+                            The founder, a YouTube analytics expert, realized that understanding CPM, RPM, and how audience geography affects revenue should be free and accessible to all creators. After extensive research into creator needs and YouTube monetization patterns, ChannelIncome was built to deliver quick, accurate revenue estimates based on real market data and industry patterns.
                         </p>
                         <p>
-                            What started as a personal project is now evolving into a comprehensive YouTube growth platform. Our goal is to serve thousands of creators with the most accurate YouTube revenue calculator and provide them with data-driven insights to help them grow and master <Link href="/guide" className="text-primary font-semibold underline hover:no-underline">YouTube optimization with our expert guides</Link>.
+                            Today, thousands of creators worldwide use ChannelIncome to plan content strategy, compare niches, and optimize revenue potential. We've built the most trusted free YouTube revenue calculator available. Our mission is to continue expanding tools and providing creators with actionable, data-driven insights through our <Link href="/guide" className="text-primary font-semibold underline hover:no-underline\">expert YouTube growth guides</Link> and analytics platform.
                         </p>
                     </div>
                 </div>

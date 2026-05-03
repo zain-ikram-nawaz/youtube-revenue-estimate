@@ -118,10 +118,10 @@ const handleSubmit = async (e) => {
             </svg>
           </div>
           <h1 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-snug">
-            Contact YouTube Channel Revenue Estimator & Analytics Support
+            Contact ChannelIncome | YouTube Revenue Calculator Support & Partnerships
           </h1>
           <p className="text-xs text-muted leading-relaxed">
-            Get in touch with our YouTube analytics experts. We're here to help you maximize your channel's revenue potential and growth strategy.
+            Have questions about YouTube revenue estimates, channel optimization, or growth strategy? Our ChannelIncome experts respond within 24 hours. Also available for partnership and media inquiries.
           </p>
         </div>
 
@@ -134,9 +134,9 @@ const handleSubmit = async (e) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
-            <h2 className="text-sm font-bold text-foreground mb-2">Get In Touch with Our Team</h2>
+            <h2 className="text-sm font-bold text-foreground mb-2">Contact ChannelIncome Directly</h2>
             <p className="text-xs text-muted leading-relaxed mb-2">
-              Have questions about YouTube revenue estimation, channel analytics, or need help with your monetization strategy? Our experts are here to assist you.
+              Questions about YouTube revenue calculation, channel growth strategy, or feature requests? We value every inquiry and respond promptly. You can also reach out for media inquiries, partnerships, or business development opportunities.
             </p>
             <div className="space-y-3 mt-4">
               <div className="flex items-center text-xs">
@@ -161,9 +161,9 @@ const handleSubmit = async (e) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </div>
-            <h2 className="text-sm font-bold text-foreground mb-2">Send us a Quick Message</h2>
+            <h2 className="text-sm font-bold text-foreground mb-2">Send a Quick Message</h2>
             <p className="text-xs text-muted leading-relaxed mb-3">
-              Need help with YouTube revenue calculations, channel optimization, or have technical questions? Fill out the form below and we'll get back to you.
+              Use the form below to ask about YouTube revenue estimates, channel optimization tips, partnership ideas, or any feature suggestions. We'll respond within 24 hours during business hours.
             </p>
             <Link
               href="#contact-form"
@@ -180,7 +180,7 @@ const handleSubmit = async (e) => {
         {/* Detailed Contact Form */}
         <div id="contact-form" className="bg-background rounded-md shadow-sm border border-border p-5">
           <h2 className="text-base font-bold text-foreground mb-3 text-center border-l-2 border-primary pl-3">
-            Contact Form: YouTube Revenue Estimator Support
+            ChannelIncome Support & Inquiry Form
           </h2>
 
           {/* Submission Status */}

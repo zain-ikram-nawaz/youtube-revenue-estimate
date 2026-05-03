@@ -12,21 +12,20 @@ export default function HomeIntroduction() {
           </h1>
 
           <p className="text-sm text-muted leading-relaxed max-w-2xl mx-auto">
-            Check how much a YouTube channel is earning in seconds. This
-            <strong> YouTube money calculator </strong> helps you estimate earnings based on views, CPM, RPM, niche, and country.
+            Estimate YouTube revenue with a fast, free tool built for creators, marketers, and channel owners. This
+            <strong> YouTube money calculator</strong> uses views, CPM, RPM, niche, and country to help you understand realistic earnings.
           </p>
 
           <div className="mt-6 text-xs text-muted">
             No signup. Free to use. Fast results.
           </div>
 
-          {/* INTERNAL LINK TO TOOL */}
           <div className="mt-6">
             <Link
               href="/tool/youtube-revenue-calculator"
               className="text-primary font-semibold underline text-sm"
             >
-              Try YouTube Money Calculator →
+              Try the YouTube Revenue Calculator →
             </Link>
           </div>
         </section>
@@ -38,8 +37,7 @@ export default function HomeIntroduction() {
           </h2>
 
           <p className="text-xs text-muted leading-relaxed">
-            This tool works as a <strong>YouTube view money calculator</strong> that helps you estimate real income based on views, CPM, RPM, and audience location.
-            Whether you're a creator or just exploring channels, you can quickly check earning potential without confusion.
+            ChannelIncome is a practical <strong>YouTube revenue estimator</strong> built to show how views, CPM, RPM, niche, and audience location combine to shape real income potential.
           </p>
         </section>
 
@@ -55,6 +53,22 @@ export default function HomeIntroduction() {
             <li>CPM & RPM breakdown</li>
             <li>Country and audience impact</li>
             <li>Channel growth insights</li>
+          </ul>
+        </section>
+
+        {/* METHODOLOGY */}
+        <section className="bg-background border border-border rounded-md shadow-sm p-6">
+          <h2 className="text-lg font-bold text-foreground mb-3">
+            How this calculator works
+          </h2>
+          <p className="text-xs text-muted leading-relaxed">
+            Enter views, CPM, RPM, niche, and country to generate a revenue estimate. The calculator adjusts the result based on realistic YouTube ad value and creator revenue patterns.
+          </p>
+          <ul className="text-xs text-muted list-disc pl-5 space-y-2 mt-4">
+            <li>Views estimate ad impressions and total reach.</li>
+            <li>CPM reflects advertiser spend per 1,000 impressions.</li>
+            <li>RPM shows actual creator earnings after YouTube's share.</li>
+            <li>Niche and country adjust the estimate for likely ad rates.</li>
           </ul>
         </section>
 

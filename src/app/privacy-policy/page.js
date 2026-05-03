@@ -1,13 +1,22 @@
 export const metadata = {
-  title: "Privacy Policy",
+  title: "Privacy Policy | ChannelIncome YouTube Revenue Calculator",
   description:
-    "We value your privacy. Learn how ChannelIncome handles your data and ensures your information is safe and anonymous.",
+    "Privacy Policy for ChannelIncome — the free YouTube Revenue Estimator. Learn how we protect your data, handle user information, and maintain privacy while using our YouTube analytics tools.",
   keywords: [
     "ChannelIncome privacy policy",
-    "YouTube analytics privacy",
-    "data protection",
+    "YouTube calculator privacy",
+    "data protection YouTube tools",
     "user data security",
+    "YouTube analytics privacy",
+    "GDPR compliance",
   ],
+  openGraph: {
+    title: "Privacy Policy | ChannelIncome YouTube Revenue Calculator",
+    description:
+      "Learn about ChannelIncome's privacy practices and how we protect your information when using our free YouTube revenue estimator and channel analytics tools.",
+    url: "https://channelincome.com/privacy-policy",
+    type: "website",
+  },
   alternates: { canonical: "https://channelincome.com/privacy-policy" },
 };
 
@@ -62,27 +71,36 @@ export default function PrivacyPolicy() {
             </svg>
           </div>
           <h2 className="text-sm font-bold text-foreground mb-3 border-l-2 border-primary pl-3">
-            Data Protection & Privacy Commitment
+            Privacy & Data Protection Policy
           </h2>
 
           <div className="space-y-3 text-xs text-muted leading-relaxed">
             <p>
               At <strong className="text-foreground">ChannelIncome</strong>, your privacy is our top priority.
-              We do not collect, store, or share any personal data from our users.
+              We are committed to protecting your personal information and ensuring transparency in how we handle data.
             </p>
             <p>
-              This website uses Google APIs (such as YouTube Data API and reCAPTCHA)
-              only to fetch public YouTube channel information and to protect against spam.
-              We do not keep any of the data you enter on our servers.
+              <strong className="text-foreground">What data we don't collect:</strong> We do not collect, store, or share personal data from users. When you use our YouTube revenue calculator, we do not save your name, email, or YouTube channel information on our servers after your session ends.
             </p>
             <p>
-              By using our website, you agree to this Privacy Policy.
-              We may update it from time to time without prior notice.
+              <strong className="text-foreground">Third-party services:</strong> ChannelIncome uses Google APIs (YouTube Data API and reCAPTCHA) only to fetch publicly available YouTube channel data and to protect against bot abuse. These requests comply with Google's terms of service.
+            </p>
+            <p>
+              <strong className="text-foreground">Analytics:</strong> We use Google Analytics and other analytics services to track site performance and user behavior. This helps us improve the tool but does not personally identify you.
+            </p>
+            <p>
+              <strong className="text-foreground">Cookies:</strong> ChannelIncome uses standard cookies to maintain your session. You can control cookie settings in your browser at any time.
+            </p>
+            <p>
+              <strong className="text-foreground">Data deletion:</strong> By design, your YouTube channel data is not retained after each calculator session. We keep no database of your searches or estimates.
+            </p>
+            <p>
+              By using ChannelIncome, you agree to this Privacy Policy. We may update it to reflect changes in our practices or legal requirements. Continued use of the site means you accept any updates.
             </p>
           </div>
 
           <div className="mt-4 pt-3 border-t border-border">
-            <p className="text-xs text-muted">Last updated: December 2025</p>
+            <p className="text-xs text-muted">Last updated: May 2026 | <strong>GDPR Compliant</strong></p>
           </div>
         </div>
 

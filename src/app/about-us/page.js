@@ -3,30 +3,31 @@ import About from "../../components/About/About";
 
 // ✅ Metadata (10/10 Optimized)
 export const metadata = {
-    title: "About Channel Income | Free YouTube Analytics & Monetization Compliance Tool",
+    title: "About ChannelIncome | YouTube Revenue Calculator & Channel Analytics Platform",
     description:
-        "Learn about Channel Income — the team behind the free YouTube Revenue Estimator. We help creators understand **Monetization Compliance**, **View Velocity**, CPM/RPM, and earning potential with real data insights.",
+        "Learn about ChannelIncome — the team behind the free YouTube Revenue Estimator. We help creators understand monetization compliance, view velocity, CPM/RPM, and earning potential with data-driven YouTube analytics and growth insights.",
     keywords: [
-        "About Channel Income",
+        "About ChannelIncome",
         "YouTube Revenue Estimator team",
         "YouTube monetization compliance",
         "View Velocity tracker",
-        "YouTube income analytics",
-        "creator growth platform",
+        "YouTube channel analytics platform",
+        "YouTube creator growth tools",
         "channelincome.com",
+        "YouTube revenue calculator creator"
     ],
     openGraph: {
-        title: "About Channel Income | YouTube Analytics & View Velocity Tracker",
+        title: "About ChannelIncome | YouTube Analytics & Revenue Estimator Platform",
         description:
-            "Channel Income helps creators and marketers estimate YouTube revenue, track **Monetization Compliance**, and analyze channel performance accurately using data-driven insights.",
+            "ChannelIncome is a free YouTube revenue calculator and channel analytics platform trusted by thousands of creators. Learn our mission to help YouTubers estimate earnings and grow faster.",
         url: "https://channelincome.com/about-us",
-        siteName: "Channel Income",
+        siteName: "ChannelIncome",
         images: [
             {
-                url: "https://channelincome.com/images/about-banner.jpg",
+                url: "https://channelincome.com/icon.png",
                 width: 1200,
                 height: 630,
-                alt: "About Channel Income - YouTube Revenue Estimator",
+                alt: "About ChannelIncome - Free YouTube Revenue Estimator & Analytics",
             },
         ],
         locale: "en_US",
@@ -34,12 +35,10 @@ export const metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "About Channel Income | Free Creator Analytics Tool",
+        title: "About ChannelIncome | Free YouTube Revenue Calculator",
         description:
-            "Meet the creators behind Channel Income — building free tools that help YouTubers estimate revenue, track growth, and understand monetization.",
-        // site: "@yourtwitterhandle", // 🔹 Add later when you create one
-        // creator: "@yourtwitterhandle",
-        images: ["https://channelincome.com/images/about-banner.jpg"],
+            "Meet the creators behind ChannelIncome — building free YouTube analytics tools that help creators estimate revenue, track growth, and understand channel monetization.",
+        images: ["https://channelincome.com/icon.png"],
     },
     alternates: {
         canonical: "https://channelincome.com/about-us",
@@ -51,19 +50,16 @@ export default function page() {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: "Channel Income",
-        // The URL should ideally point to the canonical/homepage URL
+        name: "ChannelIncome",
         url: "https://channelincome.com",
         logo: "https://channelincome.com/icon.png",
         description:
-            "Channel Income provides free YouTube analytics tools, including a Revenue Estimator, Monetization Compliance Tracker, and View Velocity analysis for content creators.",
+            "ChannelIncome is a free YouTube revenue calculator and analytics platform that helps creators estimate earnings, track channel performance, and understand monetization.",
         foundingDate: "2024",
         founder: {
             "@type": "Person",
-            name: "Channel Income Team",
+            name: "ChannelIncome Team",
         },
-
-
     };
 
     return (

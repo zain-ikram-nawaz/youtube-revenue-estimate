@@ -1,12 +1,14 @@
 export const metadata = {
-  title: "Terms of Service ",
+  title: "Terms of Service | ChannelIncome YouTube Revenue Calculator",
   description:
-    "Read our terms of service before using the ChannelIncome YouTube Revenue Estimator and analytics tools.",
+    "Read ChannelIncome's Terms of Service before using our free YouTube revenue estimator and channel analytics tools. Understand user rights, restrictions, and liability disclaimers.",
   keywords: [
     "ChannelIncome terms of service",
-    "YouTube revenue estimator terms",
+    "YouTube revenue calculator terms",
     "user agreement",
-    "legal information",
+    "service terms",
+    "YouTube analytics terms",
+    "legal disclaimer",
   ],
   alternates: { canonical: "https://channelincome.com/terms-of-service" },
 };
@@ -67,22 +69,37 @@ export default function TermsOfService() {
 
           <div className="space-y-3 text-xs text-muted leading-relaxed">
             <p>
-              By using <strong className="text-foreground">ChannelIncome</strong>, you agree to use the tool responsibly.
-              The data shown is an <strong className="text-foreground">approximation</strong> based on public YouTube metrics and does not represent
-              official YouTube or Google values.
+              By accessing and using <strong className="text-foreground">ChannelIncome</strong>, you agree to comply with these Terms of Service. If you do not agree, please do not use this site.
             </p>
             <p>
-              You are not allowed to misuse, clone, or scrape this platform or its data.
-              All calculations, tools, and blog content are part of our independent research and for educational purposes only.
+              <strong className="text-foreground">Data accuracy:</strong> The data shown, including estimated revenue, CPM, RPM, and analytics, is an <strong className="text-foreground">approximation</strong> based on public YouTube metrics and industry patterns. ChannelIncome does not represent official YouTube or Google values, and we strongly recommend verifying any important decisions with official YouTube Analytics.
             </p>
             <p>
-              The platform and all content are provided <strong className="text-foreground">as-is</strong> without warranties of any kind. ChannelIncome
-              is not responsible for errors, inaccuracies, or any decisions made based on the estimated data.
+              <strong className="text-foreground">Responsible use:</strong> You agree to use ChannelIncome responsibly and legally. You are not allowed to:
+            </p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Clone, scrape, or copy the platform or its data in bulk</li>
+              <li>Use automated tools to extract information without permission</li>
+              <li>Misrepresent ChannelIncome data as official YouTube information</li>
+              <li>Attempt to bypass security measures or access restricted areas</li>
+              <li>Use the site for illegal, harmful, or deceptive purposes</li>
+            </ul>
+            <p>
+              <strong className="text-foreground">Intellectual property:</strong> All calculations, tools, blog content, guides, and educational materials on ChannelIncome are our independent research and property. They may not be reproduced or distributed without permission.
+            </p>
+            <p>
+              <strong className="text-foreground">No liability:</strong> The platform and all content are provided <strong className="text-foreground">as-is</strong> without warranties of any kind. ChannelIncome is not responsible for errors, inaccuracies, omissions, or any decisions or losses made based on estimated data.
+            </p>
+            <p>
+              <strong className="text-foreground">Third-party links:</strong> ChannelIncome may link to third-party sites. We are not responsible for their content, accuracy, or practices.
+            </p>
+            <p>
+              <strong className="text-foreground">Changes to terms:</strong> ChannelIncome reserves the right to modify these terms at any time. Changes are effective immediately upon posting.
             </p>
           </div>
 
           <div className="mt-4 pt-3 border-t border-border">
-            <p className="text-xs text-muted">Last updated: December 2025</p>
+            <p className="text-xs text-muted">Last updated: May 2026 | For inquiries: support@channelincome.com</p>
           </div>
         </div>
 

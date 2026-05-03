@@ -1,23 +1,24 @@
 import React from "react";
 
 export const metadata = {
-  title: "Disclaimer | YouTube Revenue Estimator",
+  title: "Disclaimer | ChannelIncome YouTube Revenue Estimator",
   description:
-    "Disclaimer: Channel Income provides estimated analytics and is not affiliated with YouTube or Google. Actual YouTube earnings may vary.",
+    "Disclaimer for ChannelIncome: Our YouTube revenue estimates are approximations based on industry patterns. We are not affiliated with YouTube or Google. Actual earnings may vary significantly.",
   keywords: [
     "YouTube earnings disclaimer",
     "YouTube revenue estimator disclaimer",
-    "Channel Income disclaimer",
-    "YouTube analytics disclaimer",
+    "ChannelIncome disclaimer",
+    "YouTube analytics accuracy",
+    "estimate accuracy disclosure",
   ],
   openGraph: {
-    title:"Disclaimer | YouTube Revenue Estimator",
+    title: "Disclaimer | ChannelIncome YouTube Revenue Estimator",
     description:
-      "Channel Income provides estimated YouTube analytics for informational purposes only. We are not affiliated with YouTube or Google.",
+      "Important disclaimer: ChannelIncome provides estimated analytics for informational purposes. We are not affiliated with YouTube or Google. Actual earnings may differ.",
     url: "https://channelincome.com/disclaimer",
-    siteName: "Channel Income",
+    siteName: "ChannelIncome",
     locale: "en_US",
-    type: "article",
+    type: "website",
   },
   alternates: {
     canonical: "https://channelincome.com/disclaimer",
@@ -57,26 +58,30 @@ export default function Disclaimer() {
 
           <div className="space-y-3 text-xs text-muted leading-relaxed">
             <p>
-              The information provided on <strong className="text-foreground">Channel Income</strong> (YouTube Channel Revenue
-              Estimator) is for general informational purposes only.
+              The information and estimates provided on <strong className="text-foreground">ChannelIncome</strong> (YouTube Channel Revenue
+              Estimator) are for general informational and educational purposes only. They should not be relied upon as a definitive source for financial decisions.
             </p>
             <p>
-              All data shown, including estimated revenue, CPM, RPM, or analytics, are{" "}
-              <strong className="text-foreground">approximations based on internal calculations and publicly available data</strong>.
-              Actual YouTube earnings may differ significantly depending on niche, region, and advertiser demand.
+              <strong className="text-foreground">Estimate accuracy:</strong> All revenue estimates, including CPM, RPM, monthly income, and annual projections, are{" "}
+              <strong className="text-foreground">approximations based on internal algorithms, publicly available YouTube data, and industry trends</strong>.
+              Actual YouTube earnings can differ significantly based on factors including audience niche, viewer geography, advertiser demand, content category, engagement rates, watch time, and YouTube's algorithm changes.
             </p>
             <p>
-              This site is not affiliated, associated, authorized, endorsed by, or in any way officially
-              connected with YouTube or Google LLC.
+              <strong className="text-foreground">Not an official tool:</strong> ChannelIncome is an independent, third-party service. This site is not affiliated, authorized, endorsed by, or connected with YouTube, Google LLC, or any of their subsidiaries. YouTube and Google are trademarks of Google LLC.
             </p>
             <p>
-              Any blog articles or guides published on this site are based on independent research and may
-              not reflect real-world results or official YouTube data.
+              <strong className="text-foreground">Content & guides:</strong> Blog articles, growth guides, and educational content published on ChannelIncome are based on independent creator research and industry experience. They do not represent official YouTube policies or guaranteed results. YouTube's algorithm, revenue rules, and monetization policies change frequently.
+            </p>
+            <p>
+              <strong className="text-foreground">No financial advice:</strong> ChannelIncome does not provide financial, investment, or legal advice. Always verify earnings claims with official YouTube Analytics or contact YouTube support directly.
+            </p>
+            <p>
+              <strong className="text-foreground">Use at your own risk:</strong> By using ChannelIncome, you acknowledge that estimates are approximate and may not accurately reflect your actual channel earnings or growth potential. ChannelIncome is not responsible for any decisions made based on our estimates.
             </p>
           </div>
 
           <div className="mt-4 pt-3 border-t border-border">
-            <p className="text-xs text-muted">Last updated: April 2026</p>
+            <p className="text-xs text-muted">Last updated: May 2026 | Not officially affiliated with YouTube</p>
           </div>
         </div>
 

@@ -7,7 +7,7 @@ import { Zap } from "lucide-react";
 export const metadata = {
   title: "YouTube Revenue Calculator 2026 | Channel Earnings, RPM & CPM",
   description:
-    "Free YouTube revenue calculator to estimate earnings using views, CPM, RPM, niche, and country. Check how much a YouTube channel makes in 2026 with accurate insights.",
+    "Free YouTube revenue calculator to estimate realistic earnings using views, CPM, RPM, niche, and country. Discover a 2026 earnings range for YouTube channels and creators.",
   keywords: [
     "YouTube revenue calculator",
     "YouTube channel revenue calculator",
@@ -22,23 +22,15 @@ export const metadata = {
   openGraph: {
     title: "YouTube Revenue Calculator – Check Channel Earnings Instantly",
     description:
-      "Estimate YouTube earnings based on views, CPM, RPM, niche, and audience location. Free and accurate revenue calculator for creators.",
+      "Estimate YouTube earnings based on views, CPM, RPM, niche, and audience location. Free, realistic revenue estimates for creators and channels.",
     url: "https://channelincome.com/tool/youtube-revenue-calculator",
     type: "website",
-    images: [{ url: "/icon.png" }]
+    images: [{ url: "https://channelincome.com/icon.png" }]
   }
 };
 
-async function getGuides() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/guide`,
-    { cache: "no-store" }
-  );
-  return res.json();
-}
 
 export default async function YouTubeRevenueEstimateor() {
-  const { guides } = await getGuides();
 
   const faqData = [
     {
@@ -56,6 +48,14 @@ export default async function YouTubeRevenueEstimateor() {
     {
       q: "What is YouTube RPM?",
       a: "RPM is the actual revenue a creator earns per 1,000 views after YouTube’s share."
+    },
+    {
+      q: "Can this estimate include Shorts revenue?",
+      a: "This calculator focuses on ad revenue and typical CPM/RPM ranges. Shorts and non-ad income may vary and are not fully captured by the core estimate."
+    },
+    {
+      q: "How accurate are these YouTube revenue estimates?",
+      a: "Estimates are based on average CPM and RPM values and should be used as a planning guide. Actual earnings may vary depending on your channel, audience, and niche."
     },
     {
       q: "How can I increase YouTube earnings?",
@@ -160,17 +160,30 @@ export default async function YouTubeRevenueEstimateor() {
             <div className="bg-background rounded-md shadow-sm border border-border p-5">
               <p className="text-sm text-muted leading-relaxed space-y-3">
                 Our <strong>YouTube revenue calculator</strong> helps you
-                estimate real channel earnings using views, CPM, RPM, and
-                country data. Whether you're checking your own channel or
-                competitors, it gives fast and accurate insights into YouTube
-                income.
+                estimate reliable channel earnings using views, CPM, RPM,
+                niche, and audience location. Ideal for creators who want a
+                more realistic projection than a basic views-only calculator.
               </p>
 
               <p className="text-sm text-muted leading-relaxed mt-3">
-                You can also compare earnings across different countries and
-                niches to understand how creators make money on YouTube in
-                2026.
+                Compare earnings across countries and niches to understand how
+                YouTube revenue changes with ad value, geography, and content type.
               </p>
+            </div>
+
+            <div className="bg-background rounded-md shadow-sm border border-border p-5 mt-5">
+              <h2 className="text-base font-bold text-foreground mb-3">
+                How the calculator works
+              </h2>
+              <p className="text-xs text-muted leading-relaxed">
+                Enter views, CPM, RPM, niche, and audience location to get an estimated monthly and annual revenue range. This tool uses realistic creator revenue patterns to help you make better channel decisions.
+              </p>
+              <ul className="list-disc pl-5 mt-4 space-y-2 text-xs text-muted">
+                <li>Views measure potential ad impressions.</li>
+                <li>CPM shows advertiser spend per 1,000 impressions.</li>
+                <li>RPM reveals creator income after YouTube’s share.</li>
+                <li>Niche and country adjust the estimate for typical ad value.</li>
+              </ul>
             </div>
 
           </div>
@@ -179,6 +192,19 @@ export default async function YouTubeRevenueEstimateor() {
         {/* TOOL */}
         <section id="youtube-tool" className="bg-white border-y border-gray-100">
           <YoutubeAnalyzer seoSections={{ faq: faqData }} />
+        </section>
+
+        <section className="bg-[#fafafa] px-4 py-10">
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-background rounded-md shadow-sm border border-border p-5">
+              <h2 className="text-base font-bold text-foreground mb-3">
+                Sample YouTube earnings example
+              </h2>
+              <p className="text-xs text-muted leading-relaxed">
+                Example: A video with 100,000 views in a high-value niche could earn between $400 and $1,200 depending on CPM and RPM. A similar video in a lower-value niche may earn substantially less, so understanding both audience and topic is essential.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* FAQ */}
