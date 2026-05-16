@@ -5,32 +5,37 @@ import Link from "next/link";
 import { Zap } from "lucide-react";
 
 export const metadata = {
-  title: "YouTube Revenue Calculator 2026 | Channel Earnings, RPM & CPM",
+  title: "YouTube Revenue Calculator 2026 | Estimate RPM, CPM & Channel Earnings",
   description:
-    "Free YouTube revenue calculator to estimate realistic earnings using views, CPM, RPM, niche, and country. Discover a 2026 earnings range for YouTube channels and creators.",
-  keywords: [
-    "YouTube revenue calculator",
-    "YouTube channel revenue calculator",
-    "YouTube earnings calculator",
-    "YouTube CPM calculator",
-    "YouTube RPM calculator"
-  ],
+    "Use our free YouTube revenue calculator to estimate how much your channel earns. Enter your views, RPM, CPM, niche & country for a realistic 2026 earnings estimate.",
   alternates: {
-    canonical:
-      "https://channelincome.com/tool/youtube-revenue-calculator"
+    canonical: "https://channelincome.com/tool/youtube-revenue-calculator",
   },
   openGraph: {
-    title: "YouTube Revenue Calculator – Check Channel Earnings Instantly",
+    title: "YouTube Revenue Calculator 2026 – Estimate RPM, CPM & Earnings",
     description:
-      "Estimate YouTube earnings based on views, CPM, RPM, niche, and audience location. Free, realistic revenue estimates for creators and channels.",
+      "Free YouTube earnings calculator. Enter your views, CPM, RPM, niche & country to get a realistic revenue estimate. Trusted by creators in 2026.",
     url: "https://channelincome.com/tool/youtube-revenue-calculator",
     type: "website",
-    images: [{ url: "https://channelincome.com/icon.png" }]
-  }
+    images: [
+      {
+        url: "https://channelincome.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "YouTube Revenue Calculator – ChannelIncome",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "YouTube Revenue Calculator 2026 – Free RPM & CPM Estimator",
+    description:
+      "Calculate how much your YouTube channel earns based on views, RPM, CPM, niche and country. Free tool by ChannelIncome.",
+    images: ["https://channelincome.com/og-image.png"],
+  },
 };
 
-
-export default async function YouTubeRevenueEstimateor() {
+export default async function YouTubeRevenueCalculator() {
 
   const faqData = [
     {
@@ -47,7 +52,7 @@ export default async function YouTubeRevenueEstimateor() {
     },
     {
       q: "What is YouTube RPM?",
-      a: "RPM is the actual revenue a creator earns per 1,000 views after YouTube’s share."
+      a: "RPM is the actual revenue a creator earns per 1,000 views after YouTube's share."
     },
     {
       q: "Can this estimate include Shorts revenue?",
@@ -60,7 +65,11 @@ export default async function YouTubeRevenueEstimateor() {
     {
       q: "How can I increase YouTube earnings?",
       a: "Focus on high-CPM niches, improve watch time, and target Tier-1 audience countries for better revenue."
-    }
+    },
+    {
+      q: "What is a good RPM on YouTube in 2026?",
+      a: "A good RPM in 2026 ranges from $2–$15 depending on niche. Finance, tech, and business channels tend to have the highest RPMs, while entertainment and gaming are typically lower."
+    },
   ];
 
   const schemas = {
@@ -68,8 +77,7 @@ export default async function YouTubeRevenueEstimateor() {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       name: "YouTube Revenue Calculator",
-      url:
-        "https://channelincome.com/tool/youtube-revenue-calculator",
+      url: "https://channelincome.com/tool/youtube-revenue-calculator",
       applicationCategory: "FinanceApplication",
       operatingSystem: "Web",
       description:
@@ -77,10 +85,9 @@ export default async function YouTubeRevenueEstimateor() {
       offers: {
         "@type": "Offer",
         price: "0",
-        priceCurrency: "USD"
-      }
+        priceCurrency: "USD",
+      },
     },
-
     faq: {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -89,11 +96,10 @@ export default async function YouTubeRevenueEstimateor() {
         name: f.q,
         acceptedAnswer: {
           "@type": "Answer",
-          text: f.a
-        }
-      }))
+          text: f.a,
+        },
+      })),
     },
-
     breadcrumb: {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -102,17 +108,16 @@ export default async function YouTubeRevenueEstimateor() {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://channelincome.com"
+          item: "https://channelincome.com",
         },
         {
           "@type": "ListItem",
           position: 2,
-          name: "YouTube Revenue Calculator Tool",
-          item:
-            "https://channelincome.com/tool/youtube-revenue-calculator"
-        }
-      ]
-    }
+          name: "YouTube Revenue Calculator",
+          item: "https://channelincome.com/tool/youtube-revenue-calculator",
+        },
+      ],
+    },
   };
 
   return (
@@ -120,23 +125,17 @@ export default async function YouTubeRevenueEstimateor() {
       <Script
         id="app-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.app)
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.app) }}
       />
       <Script
         id="faq-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.faq)
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
       />
       <Script
         id="breadcrumb-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.breadcrumb)
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
       />
 
       <main className="min-h-screen bg-[#fafafa]">
@@ -148,11 +147,11 @@ export default async function YouTubeRevenueEstimateor() {
             {/* H1 */}
             <div className="bg-background rounded-md shadow-sm border border-border p-5 text-center">
               <h1 className="text-lg md:text-xl font-bold text-foreground mb-3">
-                YouTube Revenue Calculator
+                YouTube Revenue Calculator 2026
               </h1>
               <p className="text-sm text-muted leading-relaxed">
                 Estimate how much a YouTube channel earns based on views,
-                CPM, RPM, niche, and audience location.
+                CPM, RPM, niche, and audience location. Free and updated for 2026.
               </p>
             </div>
 
@@ -164,7 +163,6 @@ export default async function YouTubeRevenueEstimateor() {
                 niche, and audience location. Ideal for creators who want a
                 more realistic projection than a basic views-only calculator.
               </p>
-
               <p className="text-sm text-muted leading-relaxed mt-3">
                 Compare earnings across countries and niches to understand how
                 YouTube revenue changes with ad value, geography, and content type.
@@ -173,15 +171,15 @@ export default async function YouTubeRevenueEstimateor() {
 
             <div className="bg-background rounded-md shadow-sm border border-border p-5 mt-5">
               <h2 className="text-base font-bold text-foreground mb-3">
-                How the calculator works
+                How the YouTube Revenue Calculator Works
               </h2>
               <p className="text-xs text-muted leading-relaxed">
-                Enter views, CPM, RPM, niche, and audience location to get an estimated monthly and annual revenue range. This tool uses realistic creator revenue patterns to help you make better channel decisions.
+                Enter your views, CPM, RPM, niche, and audience location to get an estimated monthly and annual revenue range. This tool uses realistic creator revenue patterns to help you make better channel decisions.
               </p>
               <ul className="list-disc pl-5 mt-4 space-y-2 text-xs text-muted">
                 <li>Views measure potential ad impressions.</li>
                 <li>CPM shows advertiser spend per 1,000 impressions.</li>
-                <li>RPM reveals creator income after YouTube’s share.</li>
+                <li>RPM reveals creator income after YouTube's share.</li>
                 <li>Niche and country adjust the estimate for typical ad value.</li>
               </ul>
             </div>
@@ -198,7 +196,7 @@ export default async function YouTubeRevenueEstimateor() {
           <div className="max-w-5xl mx-auto">
             <div className="bg-background rounded-md shadow-sm border border-border p-5">
               <h2 className="text-base font-bold text-foreground mb-3">
-                Sample YouTube earnings example
+                Sample YouTube Earnings Example
               </h2>
               <p className="text-xs text-muted leading-relaxed">
                 Example: A video with 100,000 views in a high-value niche could earn between $400 and $1,200 depending on CPM and RPM. A similar video in a lower-value niche may earn substantially less, so understanding both audience and topic is essential.

@@ -17,17 +17,26 @@ export async function generateMetadata({ params }) {
 
     const canonicalUrl = `https://channelincome.com/guide/${guide.slug}`;
 
+    const ogImage = guide.thumbnail && guide.thumbnail !== ''
+        ? guide.thumbnail
+        : 'https://channelincome.com/og-image.png';
+
     return {
-        title: guide.metaTitle || `${guide.title}`,
+        title: guide.metaTitle || `${guide.title} | ChannelIncome`,
         description: guide.metaDescription || guide.summary,
-        keywords: guide.keywords || [],
         alternates: { canonical: canonicalUrl },
         openGraph: {
             title: guide.metaTitle || guide.title,
             description: guide.metaDescription || guide.summary,
             url: canonicalUrl,
             type: "article",
-            images: [{ url: guide.thumbnail || 'https://channelincome.com/icon.png' }],
+            images: [{ url: ogImage, width: 1200, height: 630, alt: guide.metaTitle || guide.title }],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: guide.metaTitle || guide.title,
+            description: guide.metaDescription || guide.summary,
+            images: [ogImage],
         },
     };
 }

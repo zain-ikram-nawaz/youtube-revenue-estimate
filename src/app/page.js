@@ -2,7 +2,7 @@
 import HomeIntroduction from "../components/SeoText/homeText";
 import HomeFAQ from "../components/FAQ/FAQ";
 
-export const revalidate = 3600; // 1 hour cache refresh
+export const revalidate = 3600;
 
 const homeFaqData = [
   {
@@ -23,7 +23,7 @@ const homeFaqData = [
   },
   {
     q: "What is the difference between CPM and RPM on YouTube?",
-    a: "CPM is what advertisers pay per 1,000 impressions, while RPM is what creators actually earn after YouTube’s share and adjustments."
+    a: "CPM is what advertisers pay per 1,000 impressions, while RPM is what creators actually earn after YouTube's share and adjustments."
   },
   {
     q: "How can I increase my YouTube earnings?",
@@ -40,32 +40,34 @@ const homeFaqData = [
 ];
 
 export const metadata = {
-  title: "YouTube Money Calculator 2026 | Check Channel Earnings Instantly",
+  title: "YouTube Revenue Calculator 2026 | Free Earnings Estimator – ChannelIncome",
   description:
-    "Free YouTube money calculator to estimate earnings from views, CPM, RPM, niche, and country. Learn how YouTube channels make money and compare income insights in 2026.",
-  keywords: [
-    "YouTube money calculator",
-    "YouTube view money calculator",
-    "YouTube channel money calculator",
-    "YouTube monetization guide",
-    "RPM vs CPM explained"
-  ],
+    "Calculate your YouTube earnings instantly. Enter your views, niche, and country to get a free RPM & CPM-based revenue estimate. Trusted by creators in 2026.",
   alternates: {
-    canonical: "https://channelincome.com"
+    canonical: "https://channelincome.com",
   },
   openGraph: {
-    title: "YouTube Money Calculator – Estimate Earnings & Growth",
+    title: "YouTube Revenue Calculator 2026 – Free Earnings Estimator",
     description:
-      "Check YouTube earnings based on views, CPM, RPM, niche, and country. Learn how creators make money and grow faster in 2026.",
+      "Find out how much your YouTube channel can earn. Free calculator based on real RPM & CPM data by niche and country. Used by thousands of creators.",
     url: "https://channelincome.com",
+    type: "website",
     images: [
       {
-        url: "https://channelincome.com/icon.png",
+        url: "https://channelincome.com/og-image.png",
         width: 1200,
-        height: 630
-      }
-    ]
-  }
+        height: 630,
+        alt: "ChannelIncome YouTube Revenue Calculator",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "YouTube Revenue Calculator 2026 – Free Earnings Estimator",
+    description:
+      "Calculate how much your YouTube channel earns. Free RPM & CPM based tool by ChannelIncome.",
+    images: ["https://channelincome.com/og-image.png"],
+  },
 };
 
 // ✅ SoftwareApplication Schema
@@ -78,7 +80,7 @@ function JsonLdApp() {
     applicationCategory: "BusinessApplication",
     brand: {
       "@type": "Brand",
-      name: "ChannelIncome"
+      name: "ChannelIncome",
     },
     description:
       "Free YouTube revenue calculator to estimate channel earnings using views, CPM, RPM, niche, and country.",
@@ -86,8 +88,8 @@ function JsonLdApp() {
     offers: {
       "@type": "Offer",
       price: "0",
-      priceCurrency: "USD"
-    }
+      priceCurrency: "USD",
+    },
   };
 
   return (
@@ -108,9 +110,9 @@ function JsonLdFAQ() {
       name: item.q,
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.a
-      }
-    }))
+        text: item.a,
+      },
+    })),
   };
 
   return (
@@ -126,7 +128,6 @@ export default async function Home() {
     <>
       <JsonLdApp />
       <JsonLdFAQ />
-
       <HomeIntroduction />
       <HomeFAQ faq={homeFaqData} />
     </>
