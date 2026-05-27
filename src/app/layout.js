@@ -3,20 +3,20 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import Script from "next/script";
 
-// 1. Viewport ko metadata se alag export karna zaroori hai (Next.js 15+ standard)
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F5F5F0", // Optional: Browser bar color
+  themeColor: "#F5F5F0",
 };
 
 export const metadata = {
   metadataBase: new URL("https://channelincome.com"),
   title: {
-    default: "ChannelIncome | AI YouTube Revenue & Growth Tools",
+    default: "ChannelIncome | Free YouTube Revenue & RPM/CPM Tools for Creators",
     template: "%s | ChannelIncome",
   },
-  description: "Advanced AI tools for YouTube creators. Estimate revenue, calculate RPM/CPM, and get growth insights.",
+  description:
+    "Free tools for YouTube creators to estimate revenue, calculate RPM and CPM, and grow their channel. Trusted by creators worldwide.",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
@@ -28,6 +28,20 @@ export const metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  // Global Twitter Card fallback
+  twitter: {
+    card: "summary_large_image",
+    site: "@channelincome",
+    creator: "@channelincome",
+    images: ["https://channelincome.com/og-image.png"],
   },
 };
 
@@ -36,7 +50,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`antialiased`}>
 
-        {/* Ahrefs Analytics - Script component use karna behtar hai */}
+        {/* Ahrefs Analytics */}
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="NIdfnJ32uBKcHx+IqKcQWg"
@@ -67,9 +81,11 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        {/* Organization Schema */}
-        <script
+        {/* Organization Schema — moved to Script component for correct hydration */}
+        <Script
+          id="org-schema"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -87,15 +103,15 @@ export default function RootLayout({ children }) {
             src="https://www.googletagmanager.com/ns.html?id=GTM-54N955N7"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
 
         <Navbar />
 
-    <main className="pt-16">
-  {children}
-</main>
+        <main className="container mx-auto px-4 py-6" style={{ minHeight: '80vh' }}>
+          {children}
+        </main>
 
         <Footer />
       </body>
