@@ -98,11 +98,11 @@ export default function AdminDashboard() {
             <div className="text-gray-600 text-lg"><ListingGuide data={guides} role={true} setEditData={setEditData} setActiveTab={setActiveTab}/></div>
           )}
 
-      <div className="flex items-center gap-6 mt-12 bg-gray-50 px-6 py-3 rounded-2xl shadow-sm">
+      <div className="flex items-center gap-6 mt-12 bg-gray-50 px-6 py-3 rounded-lg shadow-sm">
   <button
     onClick={() => setPage((p) => Math.max(1, p - 1))}
     disabled={page === 1}
-    className={`px-5 py-2 rounded-xl font-bold transition-all shadow-sm ${
+    className={`px-5 py-2 rounded-lg font-bold transition-all shadow-sm ${
       page === 1
         ? "bg-gray-200 text-gray-400 cursor-not-allowed"
         : "bg-white text-red-600 border border-red-100 hover:bg-red-600 hover:text-white"
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
   <button
     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
     disabled={page === totalPages}
-    className={`px-5 py-2 rounded-xl font-bold transition-all shadow-md ${
+    className={`px-5 py-2 rounded-lg font-bold transition-all shadow-md ${
       page === totalPages
         ? "bg-gray-200 text-gray-400 cursor-not-allowed"
         : "bg-red-600 text-white hover:bg-red-700"

@@ -28,7 +28,7 @@ export default function Page({ data }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {safeData.map((guide) => (
-            <div key={guide._id} className="bg-white border rounded-2xl overflow-hidden">
+            <div key={guide._id} className="bg-white border rounded-lg overflow-hidden">
               <div className="relative h-40 w-full bg-gray-100">
                 <Image
                   src={guide?.thumbnail || "/icon.png"}

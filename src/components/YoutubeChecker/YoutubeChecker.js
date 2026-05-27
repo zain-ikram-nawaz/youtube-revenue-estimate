@@ -258,7 +258,7 @@ export default function ChannelEstimator({ seoSections }) {
   }
 
   return (
-   <div className="min-h-screen bg-secondary py-4 md:py-8 px-3 sm:px-4 lg:px-6">
+   <div className="min-h-screen bg-background py-4 md:py-8 px-3 sm:px-4 lg:px-6">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl mx-auto">
 
         {/* Header Section */}
@@ -271,8 +271,8 @@ export default function ChannelEstimator({ seoSections }) {
                 const validation = validateInput(channelUrl);
                 if (validation.valid) {
                   return (
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-secondary text-foreground rounded-lg text-sm font-medium">
+                      <span className="w-2 h-2 bg-accent rounded-lg"></span>
                       {validation.message}
                     </div>
                   );
@@ -307,7 +307,7 @@ export default function ChannelEstimator({ seoSections }) {
           {data && (
             <div className="flex flex-col h-full">
               {/* Enhanced Drawer Header */}
-              <div className="p-4 border-b border-border flex items-center justify-between bg-secondary">
+              <div className="p-4 border-b border-border flex items-center justify-between bg-background">
                 <div className="flex items-center gap-3">
                   {data?.bannerImage ? (
                     <Image
@@ -333,7 +333,7 @@ export default function ChannelEstimator({ seoSections }) {
                       </p>
                     )}
                     {data.videoInfo && (
-                      <p className="text-xs text-blue-600 truncate max-w-[250px]">
+                      <p className="text-xs text-accent truncate max-w-[250px]">
                         From video: {data.videoInfo.title}
                       </p>
                     )}
@@ -378,19 +378,19 @@ export default function ChannelEstimator({ seoSections }) {
 
                 {/* Video Info Card (if redirected from video) */}
                 {data?.videoInfo && (
-                  <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="mb-6 p-4 bg-secondary border border-border rounded-lg">
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-background text-sm font-bold">
+                      <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-background text-sm font-bold">
                         📹
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-blue-900 text-sm mb-1">
+                        <h3 className="font-semibold text-foreground text-sm mb-1">
                           Video Analysis Redirected
                         </h3>
-                        <p className="text-blue-700 text-xs mb-2 line-clamp-2">
+                        <p className="text-muted text-xs mb-2 line-clamp-2">
                           {data.videoInfo.title}
                         </p>
-                        <div className="flex gap-4 text-xs text-blue-600">
+                        <div className="flex gap-4 text-xs text-accent">
                           <span>{data.videoInfo.views} views</span>
                           <span>{data.videoInfo.likes} likes</span>
                         </div>
@@ -421,7 +421,7 @@ export default function ChannelEstimator({ seoSections }) {
                     <button
                       key={tab.key}
                       onClick={() => setActiveTab(tab.key)}
-                      className={`flex-1 py-2 px-2 text-xs uppercase tracking-wider font-black rounded-md transition-all flex items-center justify-center gap-1 ${activeTab === tab.key
+                      className={`flex-1 py-2 px-2 text-xs uppercase tracking-wider font-black rounded-lg transition-all flex items-center justify-center gap-1 ${activeTab === tab.key
                           ? "bg-background text-primary shadow-sm"
                           : "text-muted hover:text-foreground"
                         }`}
@@ -468,7 +468,7 @@ export default function ChannelEstimator({ seoSections }) {
               </div>
 
               {/* Enhanced Drawer Footer */}
-              <div className="p-4 border-t border-border bg-secondary">
+              <div className="p-4 border-t border-border bg-background">
                 <div className="text-center text-xs text-muted font-bold uppercase tracking-[0.2em] mb-2">
                   AI Analysis Powered by Channel Income 2026
                 </div>

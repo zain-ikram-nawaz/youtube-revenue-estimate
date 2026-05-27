@@ -4,7 +4,7 @@ export default function SeoText() {
       <div className="max-w-5xl mx-auto space-y-4">
 
         Intro
-        <div className="bg-background rounded-md shadow-sm border border-border p-5 text-center">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
           <h2 className="text-lg md:text-xl font-bold text-foreground mb-3">
             Understand Your YouTube Earnings in Seconds
           </h2>
@@ -14,7 +14,7 @@ export default function SeoText() {
         </div>
 
         {/* What affects earnings */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5">
           <h2 className="text-base font-bold text-foreground mb-3 border-l-2 border-primary pl-3">
             What Actually Affects YouTube Earnings?
           </h2>
@@ -33,7 +33,7 @@ export default function SeoText() {
         </div>
 
         {/* CPM vs RPM */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5">
           <h2 className="text-base font-bold text-foreground mb-3 border-l-2 border-primary pl-3">
             CPM vs RPM (Simple Explanation)
           </h2>
@@ -51,7 +51,7 @@ export default function SeoText() {
         </div>
 
         {/* Tool purpose */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5">
           <h2 className="text-base font-bold text-foreground mb-3 border-l-2 border-primary pl-3">
             What This Calculator Helps You Do
           </h2>
@@ -69,7 +69,7 @@ export default function SeoText() {
         </div>
 
         {/* Closing */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5">
           <h2 className="text-base font-bold text-foreground mb-3 border-l-2 border-primary pl-3">
             Simple, Fast, and Free
           </h2>

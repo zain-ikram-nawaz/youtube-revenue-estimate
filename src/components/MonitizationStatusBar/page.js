@@ -3,7 +3,7 @@ import React from "react";
 export default function MonetizationStatusBar({ data, getMonetizationConfig }) {
   if (!data || !data.status) {
     return (
-      <div className="rounded-xl md:rounded-2xl shadow-lg border p-4 sm:p-6 bg-gray-50 border-gray-300">
+      <div className="rounded-lg md:rounded-lg shadow-lg border p-4 sm:p-6 bg-gray-50 border-gray-300">
         <p className="text-gray-600 text-sm">Monetization data not available yet.</p>
       </div>
     );
@@ -13,7 +13,7 @@ export default function MonetizationStatusBar({ data, getMonetizationConfig }) {
 
   return (
     <div
-      className={`rounded-xl md:rounded-2xl shadow-lg border-l-4 p-4 sm:p-6 ${config?.bgColor} ${config?.borderColor}`}
+      className={`rounded-lg md:rounded-lg shadow-lg border-l-4 p-4 sm:p-6 ${config?.bgColor} ${config?.borderColor}`}
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">

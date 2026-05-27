@@ -54,7 +54,7 @@ export default async function GuidePage({ params }) {
             "publisher": {
                 "@type": "Organization",
                 "name": "ChannelIncome",
-                "logo": { "@type": "ImageObject", "url": "https://channelincome.com/logo.png" }
+                "logo": { "@type": "ImageObject", "url": "https://channelincome.com/icon.png" }
             }
         },
         {
@@ -86,7 +86,7 @@ export default async function GuidePage({ params }) {
                                 <Clock className="w-3.5 h-3.5 text-red-500" />
                                 <span>{readTime} MIN READ</span>
                             </div>
-                            <Link href="/tool/youtube-revenue-calculator" className="bg-black text-white px-4 py-2 rounded-full text-xs font-black hover:bg-red-600 transition-all shadow-md">
+                            <Link href="/tool/youtube-revenue-calculator" className="bg-black text-white px-4 py-2 rounded-lg text-xs font-black hover:bg-red-600 transition-all shadow-md">
                                 REVENUE TOOL
                             </Link>
                         </div>
@@ -97,7 +97,7 @@ export default async function GuidePage({ params }) {
                     <article>
                         {/* Heading & Badge */}
                         <div className="text-center mb-10">
-                            <span className="inline-block px-4 py-1.5 bg-red-50 text-red-600 text-[10px] font-black rounded-full uppercase tracking-[0.2em] mb-6 border border-red-100">
+                            <span className="inline-block px-4 py-1.5 bg-red-50 text-red-600 text-[10px] font-black rounded-lg uppercase tracking-[0.2em] mb-6 border border-red-100">
                                 {guide.category}
                             </span>
                             <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-[1.1] tracking-tight mb-6">
@@ -117,7 +117,7 @@ export default async function GuidePage({ params }) {
 
                         {/* Summary Block */}
                         <div className="max-w-3xl mx-auto mb-16">
-                            <div className="p-8 bg-gray-50 rounded-[2rem] border border-gray-100 relative">
+                            <div className="p-8 bg-gray-50 rounded-lg border border-gray-100 relative">
                                 <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium">
                                     {guide.summary}
                                 </p>
@@ -126,7 +126,7 @@ export default async function GuidePage({ params }) {
 
                         {/* Hero Image */}
                         {guide.thumbnail && (
-                            <div className="relative w-full aspect-video mb-16 rounded-[2.5rem] overflow-hidden shadow-2xl group">
+                            <div className="relative w-full aspect-video mb-16 rounded-lg overflow-hidden shadow-2xl group">
                                 <Image
                                     src={guide.thumbnail}
                                     alt={guide.title}
@@ -143,7 +143,7 @@ export default async function GuidePage({ params }) {
                             prose-headings:text-gray-900 prose-headings:font-black
                             prose-p:text-gray-700 prose-p:leading-relaxed
                             prose-strong:text-red-600 prose-strong:font-bold
-                            prose-img:rounded-3xl prose-img:shadow-2xl">
+                            prose-img:rounded-lg prose-img:shadow-2xl">
 
                             {guide.blocks.map((block, i) => (
                                 <ContentBlockRenderer key={i} block={block} index={i} />
@@ -153,7 +153,7 @@ export default async function GuidePage({ params }) {
                     {guide.keywords && (
                         <div className="flex flex-wrap gap-2 my-10">
                             {guide.keywords.map((kw, i) => (
-                                <span key={i} className="flex items-center gap-1 text-sm font-semibold text-gray-400 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+                                <span key={i} className="flex items-center gap-1 text-sm font-semibold text-gray-400 bg-gray-50 px-3 py-1 rounded-lg border border-gray-100">
                                     <Search className="w-3 h-3 text-red-400" /> {kw}
                                 </span>
                             ))}
@@ -166,7 +166,7 @@ export default async function GuidePage({ params }) {
                                 <h5 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Focus Keywords</h5>
                                 <div className="flex flex-wrap gap-2">
                                     {guide.tags.map((tag, idx) => (
-                                        <span key={idx} className="px-4 py-2 bg-gray-50 text-gray-600 text-xs font-bold rounded-xl border border-gray-100 hover:border-red-200 transition-colors">
+                                        <span key={idx} className="px-4 py-2 bg-gray-50 text-gray-600 text-xs font-bold rounded-lg border border-gray-100 hover:border-red-200 transition-colors">
                                             #{tag.replace(/\s+/g, '')}
                                         </span>
                                     ))}
@@ -175,7 +175,7 @@ export default async function GuidePage({ params }) {
                         )}
 
                         {/* Final CTA Box - The Revenue Push */}
-                        <div className="max-w-3xl mx-auto mt-24 relative p-1 bg-gradient-to-br from-red-500 to-black rounded-[3rem] shadow-2xl">
+                        <div className="max-w-3xl mx-auto mt-24 relative p-1 bg-gradient-to-br from-red-500 to-black rounded-lg shadow-2xl">
                             <div className="bg-white rounded-[2.9rem] p-10 text-center">
                                 <h3 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">
                                     Turn Your Watch Time Into <span className="text-red-600">Passive Income</span>
@@ -183,7 +183,7 @@ export default async function GuidePage({ params }) {
                                 <p className="text-gray-500 font-medium text-lg mb-8">
                                     Don't just get views. Use our revenue estimator to see how much your 4000 hours are worth in different countries.
                                 </p>
-                                <Link href="/tool/youtube-revenue-calculator" className="inline-block px-10 py-5 bg-red-600 text-white font-black rounded-2xl hover:bg-black transition-all shadow-xl hover:-translate-y-1">
+                                <Link href="/tool/youtube-revenue-calculator" className="inline-block px-10 py-5 bg-red-600 text-white font-black rounded-lg hover:bg-black transition-all shadow-xl hover:-translate-y-1">
                                     OPEN ANALYTICS TOOL
                                 </Link>
                             </div>
@@ -197,7 +197,7 @@ export default async function GuidePage({ params }) {
                                 </h2>
                                 <div className="space-y-4">
                                     {guide.faqs.map((faq, i) => (
-                                        <details key={i} className="group border border-gray-100 rounded-2xl overflow-hidden">
+                                        <details key={i} className="group border border-gray-100 rounded-lg overflow-hidden">
                                             <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-gray-900 hover:bg-gray-50 list-none">
                                                 {faq.question}
                                                 <span className="text-red-500 group-open:rotate-180 transition-transform">↓</span>

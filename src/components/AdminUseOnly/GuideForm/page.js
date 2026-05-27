@@ -84,7 +84,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
       p-3
       bg-white
       border border-slate-200
-      rounded-xl
+      rounded-lg
       shadow-lg
       max-w-xl
     "
@@ -92,7 +92,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('heading')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-heading text-xs text-slate-500" />
                             Heading
@@ -101,7 +101,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('subheading')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-heading text-xs text-slate-500" />
                             Subheading
@@ -110,7 +110,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('paragraph')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-paragraph text-xs text-slate-500" />
                             Paragraph
@@ -119,7 +119,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('list')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-list-ul text-xs text-slate-500" />
                             List
@@ -128,7 +128,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('table')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-table text-xs text-slate-500" />
                             Table
@@ -137,7 +137,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('image')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-image text-xs text-slate-500" />
                             Image
@@ -146,7 +146,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('video')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-video text-xs text-slate-500" />
                             Video
@@ -155,7 +155,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('link')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-link text-xs text-slate-500" />
                             Link
@@ -164,7 +164,7 @@ const CollapsibleContentBlock = ({ block, index, formData, setFormData, children
                         <button
                             type="button"
                             onClick={() => handleAddBlockAtPosition('faq')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
+                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
                         >
                             <i className="fas fa-question-circle text-xs text-slate-500" />
                             FAQ
@@ -667,7 +667,7 @@ const GuideForm = ({ editData }) => {
         text-indigo-600
         bg-indigo-50
         border border-indigo-200
-        rounded-full
+        rounded-lg
         hover:bg-indigo-100
         hover:border-indigo-400
         transition-all
@@ -686,7 +686,7 @@ const GuideForm = ({ editData }) => {
         p-4
         bg-white
         border border-slate-200
-        rounded-xl
+        rounded-lg
         shadow-lg
         max-w-2xl
       "
@@ -714,7 +714,7 @@ const GuideForm = ({ editData }) => {
             text-slate-700
             bg-slate-50
             border border-slate-200
-            rounded-full
+            rounded-lg
             hover:bg-indigo-50
             hover:text-indigo-600
             hover:border-indigo-400

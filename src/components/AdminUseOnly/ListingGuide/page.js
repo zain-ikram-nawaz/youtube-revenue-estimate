@@ -41,7 +41,7 @@ export default function ListingGuide({ data, role, setEditData, setActiveTab, se
 
   if (!safeData || safeData.length === 0) {
     return (
-      <div className="py-20 text-center bg-white rounded-3xl border border-dashed border-slate-200">
+      <div className="py-20 text-center bg-white rounded-lg border border-dashed border-slate-200">
         <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">No Guides Found</p>
       </div>
     );
@@ -50,7 +50,7 @@ export default function ListingGuide({ data, role, setEditData, setActiveTab, se
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
       {safeData.map((guide) => (
-        <div key={guide._id} className="group relative bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300">
+        <div key={guide._id} className="group relative bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300">
 
           {/* Action Buttons (Floating) - Clean BigBear Style */}
           {role && (

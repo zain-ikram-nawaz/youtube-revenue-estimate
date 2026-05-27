@@ -2,55 +2,50 @@
 
 
 @theme {
-  /* ========== COLORS ========== */
 
-  /* Primary (Modern Red) */
-  --color-primary: #E53935;
-  --color-primary-hover: #c62828;
+  /* ========== BRAND COLORS ========== */
+  --color-primary:        #0D530E;   /* dark forest green — buttons, CTAs */
+  --color-primary-hover:  #306D29;   /* medium green on hover */
 
-  /* Secondary (Soft Background) */
-  --color-secondary: #FFF5F5;
+  --color-accent:         #306D29;   /* medium green — highlights, tags, icons */
+  --color-accent-hover:   #0D530E;   /* dark green on hover */
 
-  /* Accent (Light Red/Pink tone for UI elements) */
-  --color-accent: #FFCDD2;
-  --color-accent-hover: #EF9A9A;
+  /* ========== SURFACE COLORS ========== */
+  --color-background:     #FBF5DD;   /* warm cream — main page background */
+  --color-secondary:      #E7E1B1;   /* straw/tan — card & section backgrounds */
 
-  /* Background & Text */
-  --color-background: #FFFFFF;
-  --color-foreground: #2D2D2D;
+  /* ========== TEXT COLORS ========== */
+  --color-foreground:     #0D530E;   /* dark green — primary text on cream bg */
+  --color-muted:          #4A7A44;   /* softer green — secondary / subtle text */
 
-  /* Borders / Muted */
-  --color-border: #F0EAEA;
-  --color-muted: #6B6B6B;
+  /* ========== UTILITY ========== */
+  --color-border:         #C8C090;   /* warm beige — dividers and borders */
 
-  /* ========== FONTS ========== */
-
-  /* Modern, clean & highly readable */
-  --font-sans: 'Inter', 'Poppins', sans-serif;
+  /* ========== FONT & SHAPE ========== */
   --font-mono: 'JetBrains Mono', monospace;
-
-  /* ========== RADIUS ========= */
-
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 6px;
-  --radius-xl: 6px;
+  --radius-lg: 3px;
 
   /* ========== FONT SIZES ========== */
-
-  --text-xs: 0.75rem;   /* 12px */
-  --text-sm: 0.875rem;  /* 14px */
-  --text-base: 1rem;    /* 16px */
-  --text-lg: 1.125rem;  /* 18px */
-  --text-xl: 1.25rem;   /* 20px */
-  --text-2xl: 1.5rem;   /* 24px */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
 }
 
-/* styles/globals.css ya kisi imported CSS me */
+/* Base defaults */
+@layer base {
+  html, body {
+    background-color: #FBF5DD;
+    color: #0D530E;
+  }
+}
+
 .nextjs-progress-bar {
-  background-color: #ff0000; /* color change */
-  height: 5px;              /* thickness */
-  border-radius: 3px;       /* rounded ends */
+  background-color: #0D530E;
+  height: 5px;
+  border-radius: 3px;
 }
 
 

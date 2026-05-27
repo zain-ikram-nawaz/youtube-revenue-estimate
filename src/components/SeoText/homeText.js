@@ -6,7 +6,7 @@ export default function HomeIntroduction() {
       <div className="max-w-5xl mx-auto space-y-8">
 
         {/* HERO SECTION */}
-        <section className="text-center bg-background border border-border rounded-md shadow-sm p-8">
+        <section className="text-center bg-background border border-border rounded-lg shadow-sm p-8">
           <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
             YouTube Money Calculator – Check Channel Earnings Instantly
           </h1>
@@ -31,7 +31,7 @@ export default function HomeIntroduction() {
         </section>
 
         {/* WHAT IT DOES */}
-        <section className="bg-background border border-border rounded-md shadow-sm p-6">
+        <section className="bg-background border border-border rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-bold text-foreground mb-3">
             Understand YouTube Earnings Easily
           </h2>
@@ -42,7 +42,7 @@ export default function HomeIntroduction() {
         </section>
 
         {/* FEATURES */}
-        <section className="bg-background border border-border rounded-md shadow-sm p-6">
+        <section className="bg-background border border-border rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-bold text-foreground mb-4">
             What You Can Check
           </h2>
@@ -57,7 +57,7 @@ export default function HomeIntroduction() {
         </section>
 
         {/* METHODOLOGY */}
-        <section className="bg-background border border-border rounded-md shadow-sm p-6">
+        <section className="bg-background border border-border rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-bold text-foreground mb-3">
             How this calculator works
           </h2>
@@ -73,7 +73,7 @@ export default function HomeIntroduction() {
         </section>
 
         {/* GUIDE SECTION LINK */}
-        <section className="bg-background border border-border rounded-md shadow-sm p-6">
+        <section className="bg-background border border-border rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-bold text-foreground mb-3">
             Learn How YouTube Earnings Work
           </h2>
@@ -91,7 +91,7 @@ export default function HomeIntroduction() {
         </section>
 
         {/* WHY SECTION */}
-        <section className="bg-background border border-border rounded-md shadow-sm p-6">
+        <section className="bg-background border border-border rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-bold text-foreground mb-3">
             Why This Matters
           </h2>
@@ -103,7 +103,7 @@ export default function HomeIntroduction() {
         </section>
 
         {/* CTA */}
-        <section className="text-center bg-primary text-background rounded-md p-8">
+        <section className="text-center bg-primary text-background rounded-lg p-8">
           <h2 className="text-lg font-bold mb-2">
             Start Checking Any YouTube Channel
           </h2>

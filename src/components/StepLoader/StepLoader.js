@@ -15,7 +15,7 @@ export default function StepLoader() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
-    }, 2000); // Har 2 second baad step badlega
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -24,13 +24,13 @@ export default function StepLoader() {
     <div className="flex flex-col items-center justify-center p-8 min-h-[400px] w-full max-w-md mx-auto">
       {/* Main Spinning Icon */}
       <div className="relative mb-8">
-        <div className="absolute inset-0 rounded-full bg-red-100 animate-ping opacity-20"></div>
-        <div className="relative bg-white p-4 rounded-full shadow-xl border border-red-50">
-          <Loader2 className="w-12 h-12 text-red-600 animate-spin" />
+        <div className="absolute inset-0 rounded-lg bg-primary/20 animate-ping opacity-20"></div>
+        <div className="relative bg-background p-4 rounded-lg shadow-xl border border-border">
+          <Loader2 className="w-12 h-12 text-primary animate-spin" />
         </div>
       </div>
 
-      <h2 className="text-xl font-black text-gray-900 mb-6 tracking-tight">
+      <h2 className="text-xl font-black text-foreground mb-6 tracking-tight">
         Analyzing Channel Data...
       </h2>
 
@@ -43,27 +43,27 @@ export default function StepLoader() {
           return (
             <div
               key={step.id}
-              className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 ${
+              className={`flex items-center gap-3 p-3 rounded-lg border transition-all duration-500 ${
                 isActive
-                  ? "bg-red-50 border-red-100 translate-x-2"
+                  ? "bg-secondary border-border translate-x-2"
                   : isCompleted
-                  ? "bg-white border-gray-100 opacity-60"
-                  : "bg-white border-transparent opacity-30"
+                  ? "bg-background border-border opacity-60"
+                  : "bg-background border-transparent opacity-30"
               }`}
             >
-              <div className={`shrink-0 ${isActive ? "text-red-600" : isCompleted ? "text-green-500" : "text-gray-400"}`}>
+              <div className={`shrink-0 ${isActive ? "text-primary" : isCompleted ? "text-accent" : "text-muted"}`}>
                 {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : step.icon}
               </div>
 
-              <span className={`text-sm font-bold ${isActive ? "text-red-900" : "text-gray-500"}`}>
+              <span className={`text-sm font-bold ${isActive ? "text-foreground" : "text-muted"}`}>
                 {step.label}
               </span>
 
               {isActive && (
                 <div className="ml-auto flex gap-1">
-                  <span className="w-1 h-1 bg-red-400 rounded-full animate-bounce"></span>
-                  <span className="w-1 h-1 bg-red-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                  <span className="w-1 h-1 bg-red-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                  <span className="w-1 h-1 bg-primary rounded-lg animate-bounce"></span>
+                  <span className="w-1 h-1 bg-primary rounded-lg animate-bounce [animation-delay:-0.15s]"></span>
+                  <span className="w-1 h-1 bg-primary rounded-lg animate-bounce [animation-delay:-0.3s]"></span>
                 </div>
               )}
             </div>
@@ -71,7 +71,7 @@ export default function StepLoader() {
         })}
       </div>
 
-      <p className="mt-8 text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 animate-pulse">
+      <p className="mt-8 text-[10px] font-black uppercase tracking-[0.2em] text-muted animate-pulse">
         Powered by ChannelIncome AI
       </p>
     </div>

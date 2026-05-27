@@ -3,46 +3,45 @@
 export default function Loader() {
   return (
     <>
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-white to-gray-50 flex-col gap-8">
+      <div className="flex justify-center items-center h-screen bg-background flex-col gap-8">
         {/* Main Spinner */}
         <div className="relative w-20 h-20">
-          {/* Outer Ring - Red */}
-          <div className="absolute w-full h-full border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+          {/* Outer Ring */}
+          <div className="absolute w-full h-full border-4 border-primary border-t-transparent rounded-lg animate-spin"></div>
 
-          {/* Middle Ring - Dark Red */}
-          <div className="absolute w-3/5 h-3/5 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-red-800 border-b-transparent rounded-full animate-spin-reverse"></div>
+          {/* Middle Ring */}
+          <div className="absolute w-3/5 h-3/5 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-primary-hover border-b-transparent rounded-lg animate-spin-reverse"></div>
 
-          {/* Inner Dot - Red Gradient */}
-          <div className="absolute w-1/5 h-1/5 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-red-500 to-red-800 rounded-full animate-pulse"></div>
+          {/* Inner Dot */}
+          <div className="absolute w-1/5 h-1/5 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary rounded-lg animate-pulse"></div>
 
           {/* Income Chart Bars */}
           <div className="absolute w-full h-full flex justify-center items-end pb-1">
             {[1,2,3,4].map((bar) => (
               <div
                 key={bar}
-                className={`w-1.5 bg-gradient-to-t from-red-500 to-red-400 mx-0.5 rounded-t-sm animate-grow-${bar}`}
+                className={`w-1.5 bg-primary mx-0.5 rounded-t-sm animate-grow-${bar}`}
               ></div>
             ))}
           </div>
         </div>
 
-        {/* Text with Modern Typography */}
+        {/* Text */}
         <div className="text-center font-sans">
-          <h3 className="text-red-800 text-xl font-semibold mb-2 bg-gradient-to-r from-red-800 to-red-500 bg-clip-text text-transparent">
+          <h3 className="text-primary text-xl font-semibold mb-2">
             Channel Income
           </h3>
-          <p className="text-gray-600 text-sm">
+          <p className="text-muted text-sm">
             Loading Guide...
           </p>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-48 h-1 bg-gray-200 rounded-sm overflow-hidden">
-          <div className="w-full h-full bg-gradient-to-r from-red-500 to-red-800 animate-progress origin-left"></div>
+        <div className="w-48 h-1 bg-secondary rounded-lg overflow-hidden">
+          <div className="w-full h-full bg-primary animate-progress origin-left"></div>
         </div>
       </div>
 
-      {/* Custom CSS for animations */}
       <style jsx>{`
         @keyframes spin-reverse {
           0% { transform: translate(-50%, -50%) rotate(0deg); }

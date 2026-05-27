@@ -26,13 +26,36 @@ export const metadata = {
 };
 
 export default function Disclaimer() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Disclaimer - YouTube Channel Revenue Estimator",
+    "url": "https://channelincome.com/disclaimer",
+    "description": "Important disclaimer about the accuracy of YouTube revenue estimates provided by ChannelIncome.",
+    "datePublished": "2025-10-01",
+    "dateModified": "2026-05-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ChannelIncome",
+      "url": "https://channelincome.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://channelincome.com/icon.png"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-secondary py-8 px-4">
       <div className="max-w-4xl mx-auto space-y-4">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
 
         {/* Header Section */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-md mb-3 shadow-sm">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-lg mb-3 shadow-sm">
             <svg className="w-6 h-6 text-background" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
@@ -46,8 +69,8 @@ export default function Disclaimer() {
         </div>
 
         {/* Main Content */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5">
-          <div className="w-8 h-8 bg-accent rounded-md flex items-center justify-center mb-3">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5">
+          <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
             <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>

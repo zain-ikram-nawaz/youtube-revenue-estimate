@@ -106,8 +106,8 @@ const handleSubmit = async (e) => {
       <div className="max-w-5xl mx-auto space-y-4">
 
         {/* Header Section */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-md mb-3 shadow-sm">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-lg mb-3 shadow-sm">
             <svg
               className="w-6 h-6 text-background"
               fill="none"
@@ -128,8 +128,8 @@ const handleSubmit = async (e) => {
         {/* Contact Information & Form Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {/* Contact Information */}
-          <div className="bg-background rounded-md shadow-sm border border-border p-4">
-            <div className="w-8 h-8 bg-accent rounded-md flex items-center justify-center mb-3">
+          <div className="bg-background rounded-lg shadow-sm border border-border p-4">
+            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
               <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
@@ -155,8 +155,8 @@ const handleSubmit = async (e) => {
           </div>
 
           {/* Quick Contact Form */}
-          <div className="bg-background rounded-md shadow-sm border border-border p-4">
-            <div className="w-8 h-8 bg-accent rounded-md flex items-center justify-center mb-3">
+          <div className="bg-background rounded-lg shadow-sm border border-border p-4">
+            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
               <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
@@ -178,14 +178,14 @@ const handleSubmit = async (e) => {
         </div>
 
         {/* Detailed Contact Form */}
-        <div id="contact-form" className="bg-background rounded-md shadow-sm border border-border p-5">
+        <div id="contact-form" className="bg-background rounded-lg shadow-sm border border-border p-5">
           <h2 className="text-base font-bold text-foreground mb-3 text-center border-l-2 border-primary pl-3">
             ChannelIncome Support & Inquiry Form
           </h2>
 
           {/* Submission Status */}
           {submitStatus === 'success' && (
-            <div className="bg-accent border border-primary rounded-md p-3 mb-4">
+            <div className="bg-accent border border-primary rounded-lg p-3 mb-4">
               <div className="flex items-center">
                 <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -196,7 +196,7 @@ const handleSubmit = async (e) => {
           )}
 
           {submitStatus === 'error' && (
-            <div className="bg-accent border border-primary rounded-md p-3 mb-4">
+            <div className="bg-accent border border-primary rounded-lg p-3 mb-4">
               <div className="flex items-center">
                 <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -220,7 +220,7 @@ const handleSubmit = async (e) => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
+                  className="w-full px-3 py-2 border border-border rounded-lg text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -237,7 +237,7 @@ const handleSubmit = async (e) => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
+                  className="w-full px-3 py-2 border border-border rounded-lg text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -255,7 +255,7 @@ const handleSubmit = async (e) => {
                   value={formData.inquiryType}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
+                  className="w-full px-3 py-2 border border-border rounded-lg text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
                 >
                   <option value="general">General Inquiry</option>
                   <option value="technical">Technical Support</option>
@@ -278,7 +278,7 @@ const handleSubmit = async (e) => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
+                  className="w-full px-3 py-2 border border-border rounded-lg text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors"
                   placeholder="Brief subject of your message"
                 />
               </div>
@@ -296,7 +296,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 required
                 rows={4}
-                className="w-full px-3 py-2 border border-border rounded-md text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors resize-vertical"
+                className="w-full px-3 py-2 border border-border rounded-lg text-xs focus:ring-2 focus:ring-accent focus:border-primary transition-colors resize-vertical"
                 placeholder="Please describe your inquiry in detail..."
               />
             </div>
@@ -306,7 +306,7 @@ const handleSubmit = async (e) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`px-6 py-2 bg-primary text-background font-semibold rounded-md text-xs transition-colors ${
+                className={`px-6 py-2 bg-primary text-background font-semibold rounded-lg text-xs transition-colors ${
                   isSubmitting
                     ? 'opacity-50 cursor-not-allowed'
                     : 'hover:bg-primary-hover focus:ring-2 focus:ring-accent'
@@ -332,7 +332,7 @@ const handleSubmit = async (e) => {
         </div>
 
         {/* FAQ Section */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5">
           <h2 className="text-base font-bold text-foreground mb-4 text-center">
             Frequently Asked Questions About YouTube Revenue & Analytics
           </h2>
@@ -340,7 +340,7 @@ const handleSubmit = async (e) => {
             {guideFaqs.map((faq, index) => (
               <div
                 key={index}
-                className="border border-border rounded-md p-3 bg-secondary"
+                className="border border-border rounded-lg p-3 bg-secondary"
               >
                 <button
                   onClick={() => toggle(index)}
@@ -365,7 +365,7 @@ const handleSubmit = async (e) => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-background rounded-md shadow-sm border border-border p-5 text-center">
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
           <h2 className="text-base font-bold text-foreground mb-2">Ready to Analyze Your YouTube Channel Revenue?</h2>
           <p className="text-xs text-muted mb-4 max-w-lg mx-auto leading-relaxed">
             Use ChannelIncome's free YouTube revenue estimator to optimize your content strategy, track earning potential, and achieve your financial goals with accurate revenue projections.
@@ -373,7 +373,7 @@ const handleSubmit = async (e) => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary-hover text-background text-xs font-medium rounded-md transition-colors shadow-sm"
+              className="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary-hover text-background text-xs font-medium rounded-lg transition-colors shadow-sm"
             >
               Try Revenue Estimator Now
               <svg className="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -382,7 +382,7 @@ const handleSubmit = async (e) => {
             </Link>
             <Link
               href="/about-us"
-              className="inline-flex items-center px-4 py-2 bg-transparent border border-border text-foreground text-xs font-medium rounded-md hover:bg-secondary transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-transparent border border-border text-foreground text-xs font-medium rounded-lg hover:bg-secondary transition-colors"
             >
               Learn More About Us
             </Link>

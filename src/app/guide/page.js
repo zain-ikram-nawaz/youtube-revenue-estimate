@@ -80,16 +80,16 @@ export default async function GuideListingPage({ searchParams }) {
             <HomeListing data={guides} />
 
             {/* Pagination Controls */}
-            <div className="flex items-center gap-6 mt-12 bg-gray-50 px-6 py-3 rounded-2xl shadow-sm">
+            <div className="flex items-center gap-6 mt-12 bg-gray-50 px-6 py-3 rounded-lg shadow-sm">
                 {page > 1 ? (
                     <Link
                         href={`/guide/?page=${page - 1}`}
-                        className="px-5 py-2 rounded-xl font-bold bg-white text-red-600 border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm"
+                        className="px-5 py-2 rounded-lg font-bold bg-white text-red-600 border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm"
                     >
                         ← Previous
                     </Link>
                 ) : (
-                    <button disabled className="px-5 py-2 rounded-xl font-bold bg-gray-200 text-gray-400 cursor-not-allowed">
+                    <button disabled className="px-5 py-2 rounded-lg font-bold bg-gray-200 text-gray-400 cursor-not-allowed">
                         ← Previous
                     </button>
                 )}
@@ -101,12 +101,12 @@ export default async function GuideListingPage({ searchParams }) {
                 {page < totalPages ? (
                     <Link
                         href={`/guide/?page=${page + 1}`}
-                        className="px-5 py-2 rounded-xl font-bold bg-red-600 text-white hover:bg-red-700 transition-all shadow-md"
+                        className="px-5 py-2 rounded-lg font-bold bg-red-600 text-white hover:bg-red-700 transition-all shadow-md"
                     >
                         Next →
                     </Link>
                 ) : (
-                    <button disabled className="px-5 py-2 rounded-xl font-bold bg-gray-200 text-gray-400 cursor-not-allowed">
+                    <button disabled className="px-5 py-2 rounded-lg font-bold bg-gray-200 text-gray-400 cursor-not-allowed">
                         Next →
                     </button>
                 )}
