@@ -109,9 +109,9 @@ export default function RootLayout({ children }) {
 
         <Navbar />
 
-        <main className="container mx-auto px-4 py-6" style={{ minHeight: '80vh' }}>
-          {children}
-        </main>
+    <main className="pt-16">
+  {children}
+</main>
 
         <Footer />
       </body>
