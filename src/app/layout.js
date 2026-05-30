@@ -102,7 +102,7 @@ export default function RootLayout({ children }) {
               "sameAs": ["https://www.youtube.com/@channelincome"],
               "contactPoint": {
                 "@type": "ContactPoint",
-                "email": "it@vankea.com",
+                "email": "support@channelincome.com",
                 "contactType": "customer support"
               }
             }),

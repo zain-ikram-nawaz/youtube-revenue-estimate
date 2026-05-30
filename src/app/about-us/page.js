@@ -58,7 +58,7 @@ export default function page() {
         foundingDate: "2024",
         founder: {
             "@type": "Person",
-            name: "Zain Ikram",
+            name: "Zain Ikram Nawaz",
             url: "https://pk.linkedin.com/in/zain-ikram-nawaz-65b5312a9",
             sameAs: [
                 "https://github.com/zain-ikram-nawaz",

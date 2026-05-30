@@ -95,7 +95,7 @@ export default function Footer() {
           <div className="p-4 rounded-lg border border-white/10 bg-primary hover:border-primary-hover transition group">
             <h3 className="text-white text-xs font-bold mb-3">Creator</h3>
             <div className="space-y-2">
-              <p className="text-white text-xs font-semibold">Zain Ikram</p>
+              <p className="text-white text-xs font-semibold">Zain Ikram Nawaz</p>
               <a
                 href="mailto:support@channelincome.com"
                 className="block text-white/60 hover:text-white text-xs transition"
@@ -149,7 +149,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-white/70 hover:text-white transition underline"
             >
-              Zain Ikram
+              Zain Ikram Nawaz
             </a>
             {" "}· All rights reserved
           </p>

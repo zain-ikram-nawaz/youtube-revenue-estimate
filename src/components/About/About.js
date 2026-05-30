@@ -138,7 +138,7 @@ export default function AboutUsPage() {
                             ZI
                         </div>
                         <div className="flex-1 text-center sm:text-left">
-                            <p className="text-sm font-bold text-foreground mb-1">Zain Ikram</p>
+                            <p className="text-sm font-bold text-foreground mb-1">Zain Ikram Nawaz</p>
                             <a
                                 href="mailto:support@channelincome.com"
                                 className="text-xs text-primary underline hover:opacity-80 transition"
