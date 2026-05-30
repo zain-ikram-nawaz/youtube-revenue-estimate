@@ -20,7 +20,7 @@ export const metadata = {
     locale: "en_US",
     type: "website",
     images: [{
-      url: "https://channelincome.com/og-image.png",
+      url: "https://channelincome.com/icon.png",
       width: 1200,
       height: 630,
       alt: "YouTube Revenue Calculator 2026 – ChannelIncome Free Tool"
@@ -31,7 +31,7 @@ export const metadata = {
     title: "YouTube Revenue Calculator 2026 | ChannelIncome",
     description:
       "Free YouTube revenue calculator. Enter views, niche & country for a realistic CPM/RPM-based earnings estimate.",
-    images: ["https://channelincome.com/og-image.png"],
+    images: ["https://channelincome.com/icon.png"],
     creator: "@channelincome"
   }
 };
