@@ -58,7 +58,12 @@ export default function page() {
         foundingDate: "2024",
         founder: {
             "@type": "Person",
-            name: "ChannelIncome Team",
+            name: "Zain Ikram",
+            url: "https://pk.linkedin.com/in/zain-ikram-nawaz-65b5312a9",
+            sameAs: [
+                "https://github.com/zain-ikram-nawaz",
+                "https://pk.linkedin.com/in/zain-ikram-nawaz-65b5312a9"
+            ]
         },
     };
 

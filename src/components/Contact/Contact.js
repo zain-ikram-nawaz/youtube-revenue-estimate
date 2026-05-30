@@ -1,8 +1,14 @@
 "use client"
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from "lucide-react";
-
 import Link from 'next/link';
+
+const contactSocials = [
+  { label: "GitHub", href: "https://github.com/zain-ikram-nawaz" },
+  { label: "LinkedIn", href: "https://pk.linkedin.com/in/zain-ikram-nawaz-65b5312a9" },
+  { label: "Instagram", href: "https://www.instagram.com/zain_ikram_nawaz/" },
+  { label: "Facebook", href: "https://www.facebook.com/zain.ikramnawaz" },
+];
 
 const ContactUs = () => {
 
@@ -140,16 +146,40 @@ const handleSubmit = async (e) => {
             </p>
             <div className="space-y-3 mt-4">
               <div className="flex items-center text-xs">
-                <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <svg className="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span className="text-muted">support@channelincome.com</span>
+                <span className="text-foreground font-semibold">Zain Ikram</span>
               </div>
               <div className="flex items-center text-xs">
-                <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <a href="mailto:support@channelincome.com" className="text-primary underline hover:opacity-80 transition">
+                  support@channelincome.com
+                </a>
+              </div>
+              <div className="flex items-center text-xs">
+                <svg className="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span className="text-muted">Response within 24 hours</span>
+              </div>
+              <div className="pt-1">
+                <p className="text-xs text-muted mb-2">Connect on social:</p>
+                <div className="flex flex-wrap gap-2">
+                  {contactSocials.map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold text-primary border border-border px-2 py-1 rounded hover:bg-secondary transition"
+                    >
+                      {s.label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
