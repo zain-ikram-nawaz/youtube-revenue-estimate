@@ -25,9 +25,12 @@ export async function generateMetadata({ searchParams }) {
         keywords: [
             "YouTube growth guides 2026",
             "YouTube RPM vs CPM guide",
-            "How to increase YouTube revenue",
-            "YouTube SEO strategy",
-            "Monetization compliance tips",
+            "how to increase YouTube revenue",
+            "YouTube SEO strategy 2026",
+            "YouTube monetization tips",
+            "how much does YouTube pay",
+            "YouTube earnings per view",
+            "youtube cpm rate guide",
         ],
 
        alternates: { canonical: canonicalUrl },

@@ -81,7 +81,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        {/* Organization Schema — moved to Script component for correct hydration */}
+        {/* Organization Schema */}
         <Script
           id="org-schema"
           type="application/ld+json"
@@ -92,8 +92,19 @@ export default function RootLayout({ children }) {
               "@type": "Organization",
               "name": "ChannelIncome",
               "url": "https://channelincome.com",
-              "logo": "https://channelincome.com/icon.png",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://channelincome.com/icon.png",
+                "width": 512,
+                "height": 512
+              },
+              "description": "Free YouTube revenue calculator and creator analytics tools. Estimate CPM, RPM, and channel earnings instantly.",
               "sameAs": ["https://www.youtube.com/@channelincome"],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "it@vankea.com",
+                "contactType": "customer support"
+              }
             }),
           }}
         />

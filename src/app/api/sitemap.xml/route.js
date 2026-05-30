@@ -3,6 +3,7 @@ import Guide from "../../../models/guide";
 
 const BASE_URL = "https://channelincome.com";
 const CACHE_DURATION = 1000 * 60 * 60 * 24; // 24 hours
+const LAST_UPDATED = "2026-05-30";
 
 let cachedSitemap = null;
 let lastGenerated = 0;
@@ -48,6 +49,7 @@ export async function GET() {
     sitemap += `
       <url>
         <loc>${BASE_URL}${path}</loc>
+        <lastmod>${LAST_UPDATED}</lastmod>
         <changefreq>${changefreq}</changefreq>
         <priority>${priority}</priority>
       </url>

@@ -5,45 +5,51 @@ import Link from "next/link";
 import { Zap } from "lucide-react";
 
 export const metadata = {
-  // layout.js template adds " | ChannelIncome" → final: "YouTube Revenue Calculator 2026 | ChannelIncome" (47 chars)
-  title: "YouTube Revenue Calculator 2026",
+  title: "YouTube Revenue Calculator 2026 | Free Earnings Estimator",
   description:
-    "Free YouTube revenue calculator. Estimate realistic earnings by views, CPM, RPM, niche & country. Get a 2026 earnings range for your channel.",
+    "Free YouTube revenue calculator. Enter views, niche & country to get a realistic 2026 earnings range. Based on real CPM/RPM data — not just view count.",
   keywords: [
     "YouTube revenue calculator",
     "YouTube channel revenue calculator",
     "YouTube earnings calculator",
     "YouTube CPM calculator",
     "YouTube RPM calculator",
-    "how much does YouTube pay",
+    "how much does YouTube pay per 1000 views",
     "YouTube income calculator",
-    "YouTube money calculator 2026"
+    "YouTube money calculator 2026",
+    "youtube earning checker free",
+    "youtube monetization calculator"
   ],
   alternates: {
     canonical: "https://channelincome.com/tool/youtube-revenue-calculator"
   },
   openGraph: {
-    title: "YouTube Revenue Calculator – Check Channel Earnings Instantly",
+    title: "YouTube Revenue Calculator 2026 – Check Channel Earnings Instantly",
     description:
       "Estimate YouTube earnings by views, CPM, RPM, niche & country. Free, realistic 2026 revenue estimates for creators.",
     url: "https://channelincome.com/tool/youtube-revenue-calculator",
     siteName: "ChannelIncome",
     locale: "en_US",
     type: "website",
-    images: [{ url: "https://channelincome.com/icon.png", width: 512, height: 512, alt: "ChannelIncome YouTube Revenue Calculator" }]
+    images: [{
+      url: "https://channelincome.com/og-image.png",
+      width: 1200,
+      height: 630,
+      alt: "YouTube Revenue Calculator 2026 – ChannelIncome Free Tool"
+    }]
   },
   twitter: {
     card: "summary_large_image",
     title: "YouTube Revenue Calculator 2026 | ChannelIncome",
     description:
       "Estimate realistic YouTube earnings by views, niche & country. Free CPM/RPM calculator for creators.",
-    images: ["https://channelincome.com/icon.png"],
+    images: ["https://channelincome.com/og-image.png"],
     creator: "@channelincome"
   }
 };
 
 
-export default async function YouTubeRevenueEstimateor() {
+export default async function YouTubeRevenueCalculator() {
 const niches = [
   ["Finance & Business",  "$8 – $15"],
   ["Technology / AI",     "$5 – $12"],
@@ -64,40 +70,44 @@ const countries = [
 ];
 
 const pills = [
-  {  title: "Views",           desc: "More views = more ad impressions = more revenue potential." },
-  {  title: "CPM",             desc: "What advertisers pay per 1,000 impressions — before YouTube's 45% cut." },
-  {  title: "RPM",             desc: "What you actually receive per 1,000 views after YouTube keeps its share." },
-  {  title: "Niche & Country", desc: "The two factors most calculators ignore — and the ones that matter most." },
+  { title: "Views",           desc: "More views = more ad impressions = more revenue potential." },
+  { title: "CPM",             desc: "What advertisers pay per 1,000 impressions — before YouTube's 45% cut." },
+  { title: "RPM",             desc: "What you actually receive per 1,000 views after YouTube keeps its share." },
+  { title: "Niche & Country", desc: "The two factors most calculators ignore — and the ones that matter most." },
 ];
 
   const faqData = [
     {
       q: "How to make money on YouTube?",
-      a: "You can earn money by joining the YouTube Partner Program and monetizing your videos through ads, memberships, and other features."
+      a: "Join the YouTube Partner Program (requires 1,000 subscribers + 4,000 watch hours or 10M Shorts views), then monetize through ads, channel memberships, Super Thanks, and brand sponsorships."
     },
     {
       q: "How much money per 1,000 views on YouTube?",
-      a: "On average, creators earn between $1 to $10 per 1,000 views depending on niche, audience location, and CPM rates."
+      a: "On average, creators earn between $1 and $10 per 1,000 views (RPM). Finance and tech channels in the US sit at the top ($8–$15 RPM). Gaming and entertainment in South Asia sit at the bottom ($0.50–$2 RPM)."
     },
     {
       q: "What is YouTube CPM?",
-      a: "CPM is the cost advertisers pay per 1,000 ad impressions on YouTube videos."
+      a: "CPM (Cost Per Mille) is the amount advertisers pay per 1,000 ad impressions. It's the advertiser-facing number. Creators don't receive the full CPM — they receive RPM, which is CPM minus YouTube's 45% share."
     },
     {
       q: "What is YouTube RPM?",
-      a: "RPM is the actual revenue a creator earns per 1,000 views after YouTube’s share."
+      a: "RPM (Revenue Per Mille) is what a creator actually earns per 1,000 video views after YouTube's revenue share. It is always lower than CPM and is the metric that directly impacts your channel income."
+    },
+    {
+      q: "YouTube se paise kab milte hain? (When does YouTube pay you?)",
+      a: "YouTube pays monthly through AdSense once your balance reaches $100. Payments are sent between the 21st and 26th of each month for the previous month's earnings. Indian and Pakistani creators receive payments via wire transfer or check."
     },
     {
       q: "Can this estimate include Shorts revenue?",
-      a: "This calculator focuses on ad revenue and typical CPM/RPM ranges. Shorts and non-ad income may vary and are not fully captured by the core estimate."
+      a: "This calculator focuses on long-form video ad revenue. YouTube Shorts monetization uses a different model (Shorts ad pool revenue share) with generally lower RPM. For Shorts, the actual revenue per 1,000 views is typically lower than for regular videos."
     },
     {
       q: "How accurate are these YouTube revenue estimates?",
-      a: "Estimates are based on average CPM and RPM values and should be used as a planning guide. Actual earnings may vary depending on your channel, audience, and niche."
+      a: "Estimates are based on real average CPM and RPM benchmarks across niches and countries. No external tool has access to your YouTube Studio data, so treat these as planning ranges. For exact figures, YouTube Studio Analytics is the only authoritative source."
     },
     {
       q: "How can I increase YouTube earnings?",
-      a: "Focus on high-CPM niches, improve watch time, and target Tier-1 audience countries for better revenue."
+      a: "Three high-impact strategies: (1) Shift to a higher-CPM niche like finance or tech; (2) Create content that attracts viewers in Tier-1 countries (US, UK, Canada); (3) Improve average view duration — longer watch time enables more mid-roll ads, increasing RPM."
     }
   ];
 
@@ -109,12 +119,12 @@ const pills = [
       url: "https://channelincome.com/tool/youtube-revenue-calculator",
       applicationCategory: "FinanceApplication",
       operatingSystem: "Web",
-      description: "Free YouTube revenue calculator to estimate realistic earnings using views, CPM, RPM, niche, and audience country. Updated 2026.",
+      description: "Free YouTube revenue calculator to estimate realistic earnings using views, CPM, RPM, niche, and audience country. Updated for 2026.",
       featureList: [
         "YouTube RPM estimation by niche",
         "YouTube CPM rates by country",
         "Channel revenue range calculator",
-        "YouTube Partner Program eligibility checker",
+        "Niche and country comparison tool",
         "AI-powered channel analysis"
       ],
       creator: {
@@ -142,23 +152,25 @@ const pills = [
       }))
     },
 
+    howTo: {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      name: "How to Calculate YouTube Revenue",
+      description: "Use the ChannelIncome YouTube Revenue Calculator to estimate your channel earnings in under 30 seconds.",
+      step: [
+        { "@type": "HowToStep", position: 1, name: "Enter your monthly views", text: "Type in your average monthly view count. You can find this in YouTube Studio under Analytics > Overview." },
+        { "@type": "HowToStep", position: 2, name: "Select your content niche", text: "Choose the category that best describes your content — Finance, Gaming, Education, etc. This sets the RPM range." },
+        { "@type": "HowToStep", position: 3, name: "Choose your audience country", text: "Select the country where most of your viewers are based. This adjusts the CPM for that market." },
+        { "@type": "HowToStep", position: 4, name: "Get your earnings estimate", text: "The calculator returns a realistic low-to-high monthly and yearly revenue range based on real RPM/CPM data." }
+      ]
+    },
+
     breadcrumb: {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://channelincome.com"
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "YouTube Revenue Calculator Tool",
-          item:
-            "https://channelincome.com/tool/youtube-revenue-calculator"
-        }
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://channelincome.com" },
+        { "@type": "ListItem", position: 2, name: "YouTube Revenue Calculator", item: "https://channelincome.com/tool/youtube-revenue-calculator" }
       ]
     }
   };
@@ -168,9 +180,25 @@ const pills = [
       {/* ── Schemas ── */}
       <Script id="app-schema"        type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.app) }} />
       <Script id="faq-schema"        type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }} />
+      <Script id="howto-schema"      type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.howTo) }} />
       <Script id="breadcrumb-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }} />
 
       <main className="min-h-screen bg-background text-foreground">
+
+        {/* ════════════════════════════
+            QUICK ANSWER (GEO + AEO)
+        ════════════════════════════ */}
+        <section
+          aria-label="Quick Answer"
+          className="bg-secondary border-b border-border px-4 py-4"
+        >
+          <div className="max-w-4xl mx-auto flex items-start gap-3">
+            <span className="flex-shrink-0 text-[11px] font-bold uppercase tracking-widest text-primary mt-0.5">TL;DR</span>
+            <p className="text-xs text-muted leading-relaxed">
+              YouTube pays <strong className="text-foreground">$0.50–$10 per 1,000 views (RPM)</strong>. Finance channels in the US earn the most. Gaming and kids content in South Asia earn the least. Enter your views, niche, and country below for a personalized estimate.
+            </p>
+          </div>
+        </section>
 
         {/* ════════════════════════════
             HERO — dark green bg
@@ -225,9 +253,8 @@ const pills = [
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {pills.map(({ icon, title, desc }) => (
+              {pills.map(({ title, desc }) => (
                 <div key={title} className="flex items-start gap-3 bg-secondary border border-border rounded-lg p-4">
-
                   <div>
                     <p className="text-sm font-semibold text-foreground mb-1">{title}</p>
                     <p className="text-xs text-muted leading-relaxed">{desc}</p>
@@ -252,7 +279,7 @@ const pills = [
           <div className="max-w-4xl mx-auto">
             <p className="text-[11px] font-semibold tracking-widest uppercase text-accent mb-2">2026 Rate Data</p>
             <h2 className="text-xl md:text-2xl font-bold text-foreground tracking-tight mb-2">
-              YouTube CPM & RPM rates — by niche and country
+              YouTube CPM &amp; RPM rates — by niche and country
             </h2>
             <p className="text-sm text-muted mb-8">
               These are the real numbers behind the calculator. Finance content in the US sits at the top.
@@ -320,22 +347,52 @@ const pills = [
         </section>
 
         {/* ════════════════════════════
+            EEAT — METHODOLOGY
+        ════════════════════════════ */}
+        <section className="bg-secondary border-b border-border px-4 py-12">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-[11px] font-semibold tracking-widest uppercase text-accent mb-2">Methodology</p>
+            <h2 className="text-xl md:text-2xl font-bold text-foreground tracking-tight mb-4">
+              How we calculate your estimate
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted leading-relaxed">
+              <div className="bg-background border border-border rounded-lg p-4">
+                <h3 className="text-sm font-semibold text-foreground mb-2">Data Sources</h3>
+                <p>Our CPM and RPM benchmarks come from publicly available industry data and cross-niche analysis. Rates are updated periodically to reflect current advertiser spending patterns.</p>
+              </div>
+              <div className="bg-background border border-border rounded-lg p-4">
+                <h3 className="text-sm font-semibold text-foreground mb-2">Revenue Formula</h3>
+                <p>Estimated earnings = (Monthly Views ÷ 1,000) × RPM. We apply niche and country multipliers based on real-world CPM differences between markets and content categories.</p>
+              </div>
+              <div className="bg-background border border-border rounded-lg p-4">
+                <h3 className="text-sm font-semibold text-foreground mb-2">YouTube's Revenue Share</h3>
+                <p>YouTube keeps 45% of ad revenue. Creators receive 55%. Our RPM figures already reflect this split, so the range you see is what lands in your AdSense account — not the gross advertiser spend.</p>
+              </div>
+              <div className="bg-background border border-border rounded-lg p-4">
+                <h3 className="text-sm font-semibold text-foreground mb-2">Privacy &amp; Data</h3>
+                <p>We don't store your inputs. The calculation runs client-side and nothing is saved to our servers. We only analyze publicly visible channel metrics when you enter a channel URL.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════
             FAQ
         ════════════════════════════ */}
-        <section id="faq" className="bg-secondary px-4 py-12">
+        <section id="faq" className="bg-background px-4 py-12">
           <div className="max-w-4xl mx-auto">
             <p className="text-[11px] font-semibold tracking-widest uppercase text-accent mb-2">FAQ</p>
             <h2 className="text-xl md:text-2xl font-bold text-foreground tracking-tight mb-2">
-              Common questions
+              Common questions about YouTube revenue
             </h2>
             <p className="text-sm text-muted mb-8">
-              Everything creators ask about YouTube revenue, RPM, and CPM in 2026.
+              Everything creators ask about YouTube earnings, RPM, CPM, and monetization in 2026.
             </p>
 
             <FAQ faq={faqData} />
 
             {/* Accuracy note */}
-            <div className="mt-8 flex gap-4 items-start bg-background border border-border rounded-lg p-5">
+            <div className="mt-8 flex gap-4 items-start bg-secondary border border-border rounded-lg p-5">
               <span className="text-xl flex-shrink-0 mt-0.5">✅</span>
               <div>
                 <h3 className="text-sm font-semibold text-foreground mb-1">A note on accuracy</h3>
@@ -346,12 +403,20 @@ const pills = [
                   Use it to compare potential across niches and plan your content strategy.
                   For exact figures, YouTube Studio is the only source.
                 </p>
-                <Link
-                  href="/guide"
-                  className="inline-flex items-center gap-1 mt-3 text-xs font-semibold text-primary hover:text-primary-hover transition-colors"
-                >
-                  Read our YouTube growth guides →
-                </Link>
+                <div className="flex flex-wrap gap-3 mt-3">
+                  <Link
+                    href="/guide"
+                    className="text-xs font-semibold text-primary hover:opacity-80 transition-opacity"
+                  >
+                    Read our YouTube growth guides →
+                  </Link>
+                  <Link
+                    href="/disclaimer"
+                    className="text-xs font-semibold text-muted hover:text-primary transition-colors"
+                  >
+                    See full disclaimer →
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

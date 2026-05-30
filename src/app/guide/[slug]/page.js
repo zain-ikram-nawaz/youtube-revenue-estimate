@@ -60,6 +60,7 @@ export default async function GuidePage({ params }) {
             "image": guide.thumbnail,
             "author": { "@type": "Organization", "name": "ChannelIncome Team" },
             "datePublished": guide.createdAt,
+            "dateModified": guide.updatedAt || guide.createdAt,
             "publisher": {
                 "@type": "Organization",
                 "name": "ChannelIncome",
@@ -172,7 +173,7 @@ export default async function GuidePage({ params }) {
                         {/* Tags Section */}
                         {guide.tags && (
                             <div className="max-w-3xl mx-auto mt-16 pt-8 border-t border-gray-100">
-                                <h5 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Focus Keywords</h5>
+                                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Focus Keywords</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {guide.tags.map((tag, idx) => (
                                         <span key={idx} className="px-4 py-2 bg-gray-50 text-gray-600 text-xs font-bold rounded-lg border border-gray-100 hover:border-red-200 transition-colors">

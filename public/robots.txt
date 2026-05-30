@@ -2,14 +2,11 @@ User-agent: *
 Allow: /
 Allow: /_next/static/
 Allow: /_next/image/
-Disallow: /api/auth/
-Disallow: /api/channel-estimate/
-Disallow: /api/send-support-mail/
-Disallow: /api/verify-captcha/
+Disallow: /api/
 Disallow: /admin
 Disallow: /login
+Disallow: /register
 Disallow: /unauthorized
-Disallow: /form
 
 # Host
 Host: https://channelincome.com

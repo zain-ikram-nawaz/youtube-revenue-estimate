@@ -24,7 +24,7 @@ export const metadata = {
         siteName: "ChannelIncome",
         images: [
             {
-                url: "https://channelincome.com/icon.png",
+                url: "https://channelincome.com/og-image.png",
                 width: 1200,
                 height: 630,
                 alt: "About ChannelIncome - Free YouTube Revenue Estimator & Analytics",
@@ -38,7 +38,7 @@ export const metadata = {
         title: "About ChannelIncome | Free YouTube Revenue Calculator",
         description:
             "Meet the creators behind ChannelIncome — building free YouTube analytics tools that help creators estimate revenue, track growth, and understand channel monetization.",
-        images: ["https://channelincome.com/icon.png"],
+        images: ["https://channelincome.com/og-image.png"],
     },
     alternates: {
         canonical: "https://channelincome.com/about-us",

@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Unauthorized | ChannelIncome",
+  robots: { index: false, follow: false },
+};
+
 export default function Unauthorized() {
   // ab tu hi bata de
   return (
