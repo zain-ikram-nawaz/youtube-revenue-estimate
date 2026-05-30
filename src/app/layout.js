@@ -41,7 +41,7 @@ export const metadata = {
     card: "summary_large_image",
     site: "@channelincome",
     creator: "@channelincome",
-    images: ["https://channelincome.com/og-image.png"],
+    images: ["https://channelincome.com/icon.png"],
   },
 };
 

@@ -72,7 +72,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://channelincome.com/og-image.png",
+        url: "https://channelincome.com/icon.png",
         width: 1200,
         height: 630,
         alt: "ChannelIncome YouTube Revenue Calculator – Free Earnings Estimator",
@@ -84,7 +84,7 @@ export const metadata = {
     title: "YouTube Revenue Calculator 2026 – Free Earnings Estimator",
     description:
       "Calculate how much your YouTube channel earns. Free RPM & CPM based tool by ChannelIncome.",
-    images: ["https://channelincome.com/og-image.png"],
+    images: ["https://channelincome.com/icon.png"],
   },
 };
 

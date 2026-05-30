@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
 
     const ogImage = guide.thumbnail && guide.thumbnail !== ''
         ? guide.thumbnail
-        : 'https://channelincome.com/og-image.png';
+        : 'https://channelincome.com/icon.png';
 
     return {
         title: guide.metaTitle || `${guide.title} | ChannelIncome`,
