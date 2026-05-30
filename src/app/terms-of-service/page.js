@@ -1,19 +1,13 @@
+import Link from "next/link";
+
 export const metadata = {
-  title: "Terms of Service | ChannelIncome YouTube Revenue Calculator",
+  title: "Terms of Service",
   description:
-    "Read ChannelIncome's Terms of Service before using our free YouTube revenue estimator and channel analytics tools. Understand user rights, restrictions, and liability disclaimers.",
-  keywords: [
-    "ChannelIncome terms of service",
-    "YouTube revenue calculator terms",
-    "user agreement",
-    "service terms",
-    "YouTube analytics terms",
-    "legal disclaimer",
-  ],
+    "Read ChannelIncome's terms before using our free YouTube revenue calculator. Covers acceptable use, accuracy disclaimers, and your responsibilities as a user.",
   openGraph: {
-    title: "Terms of Service | ChannelIncome YouTube Revenue Calculator",
+    title: "Terms of Service | ChannelIncome",
     description:
-      "Read ChannelIncome's Terms of Service before using our free YouTube revenue estimator and channel analytics tools.",
+      "ChannelIncome terms of service — covers acceptable use, data accuracy, intellectual property, and liability for our free YouTube revenue calculator.",
     url: "https://channelincome.com/terms-of-service",
     type: "website",
   },
@@ -21,24 +15,31 @@ export const metadata = {
 };
 
 export default function TermsOfService() {
-
-   const jsonLd = {
+  const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TermsOfService",
-    "name": "YouTube Channel Revenue Estimator Terms of Service",
-    "url": "https://channelincome.com/terms-of-service",
-    "datePublished": "2025-10-01",
-    "dateModified": "2025-12-14",
-    "publisher": {
+    name: "ChannelIncome Terms of Service",
+    url: "https://channelincome.com/terms-of-service",
+    datePublished: "2025-10-01",
+    dateModified: "2026-06-01",
+    publisher: {
       "@type": "Organization",
-      "name": "ChannelIncome",
-      "url": "https://channelincome.com",
-      "logo": {
+      name: "ChannelIncome",
+      url: "https://channelincome.com",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://channelincome.com/icon.png"
-      }
-    }
+        url: "https://channelincome.com/icon.png",
+      },
+    },
   };
+
+  const summary = [
+    { rule: "Use the tool for", allowed: "Personal research, channel planning, content strategy" },
+    { rule: "Do NOT", allowed: "Scrape the platform, misrepresent data as official YouTube data" },
+    { rule: "Data accuracy", allowed: "Estimates only — verify important decisions in YouTube Studio" },
+    { rule: "Liability", allowed: "Service provided as-is; ChannelIncome not liable for losses" },
+    { rule: "Content ownership", allowed: "All guides and tools are ChannelIncome's intellectual property" },
+  ];
 
   return (
     <div className="min-h-screen bg-secondary py-8 px-4">
@@ -48,7 +49,7 @@ export default function TermsOfService() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Header Section */}
+        {/* Header */}
         <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
           <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-lg mb-3 shadow-sm">
             <svg className="w-6 h-6 text-background" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,22 +57,42 @@ export default function TermsOfService() {
             </svg>
           </div>
           <h1 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-snug">
-            Terms of Service - YouTube Channel Revenue Estimator
+            Terms of Service
           </h1>
           <p className="text-xs text-muted leading-relaxed">
-            User agreement and terms for using our YouTube analytics and revenue estimation tools
+            User agreement and terms for using ChannelIncome&#39;s free YouTube revenue calculator and guides.
           </p>
         </div>
 
-        {/* Main Content */}
+        {/* At-a-Glance Table */}
         <div className="bg-background rounded-lg shadow-sm border border-border p-5">
-          <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
-            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+          <h2 className="text-sm font-bold text-foreground mb-4 border-l-2 border-primary pl-3">
+            Terms at a Glance
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-secondary">
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground">Topic</th>
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground">Summary</th>
+                </tr>
+              </thead>
+              <tbody>
+                {summary.map((row, i) => (
+                  <tr key={row.rule} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
+                    <td className="px-3 py-2 border border-border font-semibold text-foreground">{row.rule}</td>
+                    <td className="px-3 py-2 border border-border text-muted">{row.allowed}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
+        </div>
+
+        {/* Full Terms */}
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5">
           <h2 className="text-sm font-bold text-foreground mb-3 border-l-2 border-primary pl-3">
-            User Agreement & Service Terms
+            User Agreement &amp; Service Terms
           </h2>
 
           <div className="space-y-3 text-xs text-muted leading-relaxed">
@@ -79,34 +100,41 @@ export default function TermsOfService() {
               By accessing and using <strong className="text-foreground">ChannelIncome</strong>, you agree to comply with these Terms of Service. If you do not agree, please do not use this site.
             </p>
             <p>
-              <strong className="text-foreground">Data accuracy:</strong> The data shown, including estimated revenue, CPM, RPM, and analytics, is an <strong className="text-foreground">approximation</strong> based on public YouTube metrics and industry patterns. ChannelIncome does not represent official YouTube or Google values, and we strongly recommend verifying any important decisions with official YouTube Analytics.
+              <strong className="text-foreground">Data accuracy:</strong> All revenue estimates, CPM/RPM values, and analytics are{" "}
+              <strong className="text-foreground">approximations</strong> based on public YouTube metrics and industry patterns. They do not represent official YouTube or Google values. Verify any important decisions using official YouTube Analytics in YouTube Studio.
             </p>
             <p>
-              <strong className="text-foreground">Responsible use:</strong> You agree to use ChannelIncome responsibly and legally. You are not allowed to:
+              <strong className="text-foreground">Acceptable use:</strong> You agree to use ChannelIncome for personal, non-commercial research purposes. You may not:
             </p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Clone, scrape, or copy the platform or its data in bulk</li>
               <li>Use automated tools to extract information without permission</li>
-              <li>Misrepresent ChannelIncome data as official YouTube information</li>
+              <li>Misrepresent ChannelIncome estimates as official YouTube data</li>
               <li>Attempt to bypass security measures or access restricted areas</li>
               <li>Use the site for illegal, harmful, or deceptive purposes</li>
             </ul>
             <p>
-              <strong className="text-foreground">Intellectual property:</strong> All calculations, tools, blog content, guides, and educational materials on ChannelIncome are our independent research and property. They may not be reproduced or distributed without permission.
+              <strong className="text-foreground">Intellectual property:</strong> All calculations, tools, guides, and educational content on ChannelIncome are original works and may not be reproduced or distributed without written permission.
             </p>
             <p>
-              <strong className="text-foreground">No liability:</strong> The platform and all content are provided <strong className="text-foreground">as-is</strong> without warranties of any kind. ChannelIncome is not responsible for errors, inaccuracies, omissions, or any decisions or losses made based on estimated data.
+              <strong className="text-foreground">No liability:</strong> The platform is provided <strong className="text-foreground">as-is</strong> without warranties. ChannelIncome is not responsible for errors, inaccuracies, or any decisions or losses made based on estimated data.
             </p>
             <p>
-              <strong className="text-foreground">Third-party links:</strong> ChannelIncome may link to third-party sites. We are not responsible for their content, accuracy, or practices.
+              <strong className="text-foreground">Third-party links:</strong> We may link to third-party sites. We are not responsible for their content or practices.
             </p>
             <p>
-              <strong className="text-foreground">Changes to terms:</strong> ChannelIncome reserves the right to modify these terms at any time. Changes are effective immediately upon posting.
+              <strong className="text-foreground">Changes to terms:</strong> ChannelIncome may modify these terms at any time. Continued use of the site means you accept any updates.
             </p>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-border">
-            <p className="text-xs text-muted">Last updated: May 2026 | For inquiries: support@channelincome.com</p>
+          <div className="mt-4 pt-3 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <p className="text-xs text-muted">Last updated: June 2026 · Contact: support@channelincome.com</p>
+            <Link
+              href="/tool/youtube-revenue-calculator"
+              className="text-xs font-semibold text-primary hover:opacity-80 transition"
+            >
+              Back to the Revenue Calculator →
+            </Link>
           </div>
         </div>
 

@@ -116,7 +116,7 @@ export default async function GuidePage({ params }) {
                             <div className="flex items-center justify-center gap-6 text-gray-400 text-sm font-bold uppercase tracking-widest">
                                 <div className="flex items-center gap-2">
                                     <Calendar className="w-4 h-4" />
-                                    <span>JAN 2026</span>
+                                    <span>{new Date(guide.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <TrendingUp className="w-4 h-4 text-green-500" />

@@ -1,19 +1,13 @@
+import Link from "next/link";
+
 export const metadata = {
-  title: "Privacy Policy | ChannelIncome YouTube Revenue Calculator",
+  title: "Privacy Policy",
   description:
-    "Privacy Policy for ChannelIncome — the free YouTube Revenue Estimator. Learn how we protect your data, handle user information, and maintain privacy while using our YouTube analytics tools.",
-  keywords: [
-    "ChannelIncome privacy policy",
-    "YouTube calculator privacy",
-    "data protection YouTube tools",
-    "user data security",
-    "YouTube analytics privacy",
-    "GDPR compliance",
-  ],
+    "ChannelIncome does not store your personal data. Learn what we collect, what we don't, and how your privacy is protected when using our free YouTube revenue calculator.",
   openGraph: {
-    title: "Privacy Policy | ChannelIncome YouTube Revenue Calculator",
+    title: "Privacy Policy | ChannelIncome",
     description:
-      "Learn about ChannelIncome's privacy practices and how we protect your information when using our free YouTube revenue estimator and channel analytics tools.",
+      "ChannelIncome does not store your personal data. Learn exactly how your privacy is protected when using our free YouTube revenue calculator.",
     url: "https://channelincome.com/privacy-policy",
     type: "website",
   },
@@ -21,24 +15,32 @@ export const metadata = {
 };
 
 export default function PrivacyPolicy() {
-
-   const jsonLd = {
+  const jsonLd = {
     "@context": "https://schema.org",
     "@type": "PrivacyPolicy",
-    "name": "YouTube Channel Revenue Estimator Privacy Policy",
-    "url": "https://channelincome.com/privacy-policy",
-    "datePublished": "2025-10-01",
-    "dateModified": "2025-12-14",
-    "publisher": {
+    name: "ChannelIncome Privacy Policy",
+    url: "https://channelincome.com/privacy-policy",
+    datePublished: "2025-10-01",
+    dateModified: "2026-06-01",
+    publisher: {
       "@type": "Organization",
-      "name": "ChannelIncome",
-      "url": "https://channelincome.com",
-      "logo": {
+      name: "ChannelIncome",
+      url: "https://channelincome.com",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://channelincome.com/icon.png"
-      }
-    }
+        url: "https://channelincome.com/icon.png",
+      },
+    },
   };
+
+  const summary = [
+    { item: "Personal data collected", value: "None — we do not collect names, emails, or channel data" },
+    { item: "YouTube channel data", value: "Not stored after your session ends" },
+    { item: "Analytics", value: "Google Analytics tracks site usage (anonymous)" },
+    { item: "Cookies", value: "Standard session cookies only — no tracking cookies" },
+    { item: "Third-party sharing", value: "We do not sell or share your data" },
+    { item: "GDPR", value: "Compliant — you can use the tool without creating an account" },
+  ];
 
   return (
     <div className="min-h-screen bg-secondary py-8 px-4">
@@ -48,7 +50,7 @@ export default function PrivacyPolicy() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Header Section */}
+        {/* Header */}
         <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
           <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-lg mb-3 shadow-sm">
             <svg className="w-6 h-6 text-background" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,51 +58,77 @@ export default function PrivacyPolicy() {
             </svg>
           </div>
           <h1 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-snug">
-            Privacy Policy - YouTube Channel Revenue Estimator
+            Privacy Policy
           </h1>
           <p className="text-xs text-muted leading-relaxed">
-            How we protect your data and ensure your privacy while using our analytics tools
+            How ChannelIncome protects your data while you use our free YouTube revenue calculator.
           </p>
         </div>
 
-        {/* Main Content */}
+        {/* At-a-Glance Table (AEO-friendly) */}
         <div className="bg-background rounded-lg shadow-sm border border-border p-5">
-          <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
-            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
+          <h2 className="text-sm font-bold text-foreground mb-4 border-l-2 border-primary pl-3">
+            Privacy at a Glance
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-secondary">
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground">Topic</th>
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground">What ChannelIncome Does</th>
+                </tr>
+              </thead>
+              <tbody>
+                {summary.map((row, i) => (
+                  <tr key={row.item} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
+                    <td className="px-3 py-2 border border-border font-semibold text-foreground">{row.item}</td>
+                    <td className="px-3 py-2 border border-border text-muted">{row.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
+        </div>
+
+        {/* Full Policy */}
+        <div className="bg-background rounded-lg shadow-sm border border-border p-5">
           <h2 className="text-sm font-bold text-foreground mb-3 border-l-2 border-primary pl-3">
-            Privacy & Data Protection Policy
+            Privacy &amp; Data Protection Policy
           </h2>
 
           <div className="space-y-3 text-xs text-muted leading-relaxed">
             <p>
               At <strong className="text-foreground">ChannelIncome</strong>, your privacy is our top priority.
-              We are committed to protecting your personal information and ensuring transparency in how we handle data.
+              We are committed to protecting your personal information and ensuring full transparency in how we handle data.
             </p>
             <p>
-              <strong className="text-foreground">What data we don't collect:</strong> We do not collect, store, or share personal data from users. When you use our YouTube revenue calculator, we do not save your name, email, or YouTube channel information on our servers after your session ends.
+              <strong className="text-foreground">What data we don&#39;t collect:</strong> We do not collect, store, or share personal data from users. When you use our YouTube revenue calculator, we do not save your name, email, or YouTube channel information on our servers after your session ends.
             </p>
             <p>
-              <strong className="text-foreground">Third-party services:</strong> ChannelIncome uses Google APIs (YouTube Data API and reCAPTCHA) only to fetch publicly available YouTube channel data and to protect against bot abuse. These requests comply with Google's terms of service.
+              <strong className="text-foreground">Third-party services:</strong> ChannelIncome uses Google APIs (YouTube Data API and reCAPTCHA) only to fetch publicly available YouTube channel data and to protect against bot abuse. These requests comply with Google&#39;s terms of service.
             </p>
             <p>
-              <strong className="text-foreground">Analytics:</strong> We use Google Analytics and other analytics services to track site performance and user behavior. This helps us improve the tool but does not personally identify you.
+              <strong className="text-foreground">Analytics:</strong> We use Google Analytics to track site performance and usage patterns. This data is anonymous — it does not personally identify you and is used only to improve the tool.
             </p>
             <p>
-              <strong className="text-foreground">Cookies:</strong> ChannelIncome uses standard cookies to maintain your session. You can control cookie settings in your browser at any time.
+              <strong className="text-foreground">Cookies:</strong> ChannelIncome uses standard session cookies. No third-party tracking cookies are used. You can control cookie settings in your browser at any time.
             </p>
             <p>
               <strong className="text-foreground">Data deletion:</strong> By design, your YouTube channel data is not retained after each calculator session. We keep no database of your searches or estimates.
             </p>
             <p>
-              By using ChannelIncome, you agree to this Privacy Policy. We may update it to reflect changes in our practices or legal requirements. Continued use of the site means you accept any updates.
+              <strong className="text-foreground">Policy updates:</strong> We may update this policy to reflect changes in our practices or legal requirements. Continued use of the site means you accept any updates.
             </p>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-border">
-            <p className="text-xs text-muted">Last updated: May 2026 | <strong>GDPR Compliant</strong></p>
+          <div className="mt-4 pt-3 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <p className="text-xs text-muted">Last updated: June 2026 · <strong>GDPR Compliant</strong></p>
+            <Link
+              href="/tool/youtube-revenue-calculator"
+              className="text-xs font-semibold text-primary hover:opacity-80 transition"
+            >
+              Back to the Revenue Calculator →
+            </Link>
           </div>
         </div>
 

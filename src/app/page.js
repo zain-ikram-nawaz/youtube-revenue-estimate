@@ -48,43 +48,35 @@ const homeFaqData = [
 ];
 
 export const metadata = {
-  title: "YouTube Revenue Calculator 2026 | Free Earnings Estimator – ChannelIncome",
+  title: {
+    absolute: "YouTube Revenue Calculator 2026 | ChannelIncome",
+  },
   description:
-    "Calculate your YouTube earnings instantly. Enter views, niche & country to get a free RPM & CPM-based revenue estimate. Trusted by creators in 2026.",
-  keywords: [
-    "youtube revenue calculator",
-    "youtube earnings calculator",
-    "youtube money calculator",
-    "how much does youtube pay",
-    "youtube channel earnings",
-    "youtube rpm calculator",
-    "youtube cpm calculator",
-    "youtube income estimator 2026"
-  ],
+    "Calculate your YouTube earnings instantly. Enter views, niche & country to get a realistic RPM & CPM-based revenue estimate. Free, no signup needed.",
   alternates: {
     canonical: "https://channelincome.com",
   },
   openGraph: {
-    title: "YouTube Revenue Calculator 2026 – Free Earnings Estimator",
+    title: "YouTube Revenue Calculator 2026 | ChannelIncome",
     description:
-      "Find out how much your YouTube channel can earn. Free calculator based on real RPM & CPM data by niche and country. Used by thousands of creators.",
+      "Free YouTube earnings calculator. Enter views, niche & country for a realistic revenue range based on real CPM & RPM data.",
     url: "https://channelincome.com",
     type: "website",
     images: [
       {
-        url: "https://channelincome.com/icon.png",
+        url: "https://channelincome.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ChannelIncome YouTube Revenue Calculator – Free Earnings Estimator",
+        alt: "ChannelIncome YouTube Revenue Calculator",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "YouTube Revenue Calculator 2026 – Free Earnings Estimator",
+    title: "YouTube Revenue Calculator 2026 | ChannelIncome",
     description:
-      "Calculate how much your YouTube channel earns. Free RPM & CPM based tool by ChannelIncome.",
-    images: ["https://channelincome.com/icon.png"],
+      "Free YouTube revenue calculator. Enter views, niche & country for a realistic CPM & RPM-based earnings estimate.",
+    images: ["https://channelincome.com/og-image.png"],
   },
 };
 

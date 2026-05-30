@@ -5,34 +5,22 @@ import Link from "next/link";
 import { Zap } from "lucide-react";
 
 export const metadata = {
-  title: "YouTube Revenue Calculator 2026 | Free Earnings Estimator",
+  title: "YouTube Revenue Calculator 2026",
   description:
-    "Free YouTube revenue calculator. Enter views, niche & country to get a realistic 2026 earnings range. Based on real CPM/RPM data — not just view count.",
-  keywords: [
-    "YouTube revenue calculator",
-    "YouTube channel revenue calculator",
-    "YouTube earnings calculator",
-    "YouTube CPM calculator",
-    "YouTube RPM calculator",
-    "how much does YouTube pay per 1000 views",
-    "YouTube income calculator",
-    "YouTube money calculator 2026",
-    "youtube earning checker free",
-    "youtube monetization calculator"
-  ],
+    "Free YouTube revenue calculator. Enter views, niche & country for a realistic 2026 earnings range based on real CPM/RPM data. No signup required.",
   alternates: {
     canonical: "https://channelincome.com/tool/youtube-revenue-calculator"
   },
   openGraph: {
-    title: "YouTube Revenue Calculator 2026 – Check Channel Earnings Instantly",
+    title: "YouTube Revenue Calculator 2026 | ChannelIncome",
     description:
-      "Estimate YouTube earnings by views, CPM, RPM, niche & country. Free, realistic 2026 revenue estimates for creators.",
+      "Estimate YouTube earnings by views, CPM, RPM, niche & country. Free, realistic 2026 revenue estimates for creators worldwide.",
     url: "https://channelincome.com/tool/youtube-revenue-calculator",
     siteName: "ChannelIncome",
     locale: "en_US",
     type: "website",
     images: [{
-      url: "https://channelincome.com/icon.png",
+      url: "https://channelincome.com/og-image.png",
       width: 1200,
       height: 630,
       alt: "YouTube Revenue Calculator 2026 – ChannelIncome Free Tool"
@@ -42,8 +30,8 @@ export const metadata = {
     card: "summary_large_image",
     title: "YouTube Revenue Calculator 2026 | ChannelIncome",
     description:
-      "Estimate realistic YouTube earnings by views, niche & country. Free CPM/RPM calculator for creators.",
-    images: ["https://channelincome.com/icon.png"],
+      "Free YouTube revenue calculator. Enter views, niche & country for a realistic CPM/RPM-based earnings estimate.",
+    images: ["https://channelincome.com/og-image.png"],
     creator: "@channelincome"
   }
 };

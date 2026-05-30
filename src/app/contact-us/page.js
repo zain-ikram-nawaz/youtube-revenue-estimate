@@ -1,54 +1,39 @@
 import React from "react";
 import ContactUs from "../../components/Contact/Contact";
 
-// ✅ Page-level metadata for Next.js App Router
 export const metadata = {
-  title: "Contact ChannelIncome | YouTube Analytics Support & Partnership Inquiries",
+  title: "Contact Us",
   description:
-    "Get in touch with the ChannelIncome team for YouTube revenue calculator support, growth strategy questions, or partnership opportunities. Fast response time — contact us today for YouTube analytics help.",
-  keywords: [
-    "Contact ChannelIncome",
-    "YouTube analytics support",
-    "YouTube revenue calculator help",
-    "creator tools support",
-    "ChannelIncome partnership",
-    "YouTube growth strategy inquiry",
-    "YouTube monetization guidance",
-  ],
+    "Reach out to ChannelIncome for support, partnership inquiries, or feature requests. Email support@channelincome.com — response within 24 hours.",
   alternates: { canonical: "https://channelincome.com/contact-us" },
+  openGraph: {
+    title: "Contact ChannelIncome | YouTube Revenue Tool Support",
+    description:
+      "Questions about YouTube revenue estimates or feature requests? Contact ChannelIncome — email support@channelincome.com for a response within 24 hours.",
+    url: "https://channelincome.com/contact-us",
+    type: "website",
+  },
 };
 
 export default function Page() {
-  // ✅ JSON-LD structured data for ContactPage
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     name: "Contact ChannelIncome",
     description:
-      "Get in touch with our YouTube analytics experts to maximize your channel's revenue potential.",
+      "Get in touch with ChannelIncome for YouTube revenue calculator support or partnership opportunities.",
     url: "https://channelincome.com/contact-us",
     publisher: {
       "@type": "Organization",
       name: "ChannelIncome",
       url: "https://channelincome.com",
       logo: "https://channelincome.com/icon.png",
-      // sameAs: [
-      //   "https://twitter.com/channelincome",
-      //   "https://www.linkedin.com/company/channelincome",
-      //   "https://www.youtube.com/@channelincome",
-      // ],
       contactPoint: [
         {
           "@type": "ContactPoint",
-          telephone: "+92-308-2821704",
+          email: "support@channelincome.com",
           contactType: "customer support",
           areaServed: "Worldwide",
-          availableLanguage: ["English"],
-        },
-        {
-          "@type": "ContactPoint",
-          email: "Zainikram704@gmail.com",
-          contactType: "customer support",
           availableLanguage: ["English"],
         },
       ],

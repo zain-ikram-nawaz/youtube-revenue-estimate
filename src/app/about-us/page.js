@@ -1,33 +1,24 @@
 import React from "react";
 import About from "../../components/About/About";
 
-// ✅ Metadata (10/10 Optimized)
 export const metadata = {
-    title: "About ChannelIncome | YouTube Revenue Calculator & Channel Analytics Platform",
+    title: {
+        absolute: "About ChannelIncome – Free YouTube Revenue Calculator",
+    },
     description:
-        "Learn about ChannelIncome — the team behind the free YouTube Revenue Estimator. We help creators understand monetization compliance, view velocity, CPM/RPM, and earning potential with data-driven YouTube analytics and growth insights.",
-    keywords: [
-        "About ChannelIncome",
-        "YouTube Revenue Estimator team",
-        "YouTube monetization compliance",
-        "View Velocity tracker",
-        "YouTube channel analytics platform",
-        "YouTube creator growth tools",
-        "channelincome.com",
-        "YouTube revenue calculator creator"
-    ],
+        "ChannelIncome is a free YouTube revenue calculator built by Zain Ikram. Estimate channel earnings using real CPM & RPM data across all niches and countries.",
     openGraph: {
-        title: "About ChannelIncome | YouTube Analytics & Revenue Estimator Platform",
+        title: "About ChannelIncome – Free YouTube Revenue Calculator",
         description:
-            "ChannelIncome is a free YouTube revenue calculator and channel analytics platform trusted by thousands of creators. Learn our mission to help YouTubers estimate earnings and grow faster.",
+            "Free YouTube earnings estimator built on real CPM & RPM data. Learn about ChannelIncome's methodology and the creator behind the tool.",
         url: "https://channelincome.com/about-us",
         siteName: "ChannelIncome",
         images: [
             {
-                url: "https://channelincome.com/icon.png",
+                url: "https://channelincome.com/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "About ChannelIncome - Free YouTube Revenue Estimator & Analytics",
+                alt: "About ChannelIncome – Free YouTube Revenue Calculator",
             },
         ],
         locale: "en_US",
@@ -35,10 +26,10 @@ export const metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "About ChannelIncome | Free YouTube Revenue Calculator",
+        title: "About ChannelIncome – Free YouTube Revenue Calculator",
         description:
-            "Meet the creators behind ChannelIncome — building free YouTube analytics tools that help creators estimate revenue, track growth, and understand channel monetization.",
-        images: ["https://channelincome.com/icon.png"],
+            "Free YouTube revenue estimator built by Zain Ikram. Real CPM & RPM data for all niches and countries.",
+        images: ["https://channelincome.com/og-image.png"],
     },
     alternates: {
         canonical: "https://channelincome.com/about-us",
