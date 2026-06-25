@@ -19,9 +19,49 @@ const nextConfig = {
                 destination: '/',
                 permanent: true,
             },
-            // Specific redirects ko pehle rakhein
+            // ── Keyword URL variants → canonical tool page ──
             {
                 source: '/youtube-revenue-estimator',
+                destination: '/tool/youtube-revenue-calculator',
+                permanent: true,
+            },
+            {
+                source: '/youtube-cpm-calculator',
+                destination: '/tool/youtube-revenue-calculator',
+                permanent: true,
+            },
+            {
+                source: '/cpm-calculator',
+                destination: '/tool/youtube-revenue-calculator',
+                permanent: true,
+            },
+            {
+                source: '/youtube-rpm-estimator',
+                destination: '/tool/youtube-revenue-calculator',
+                permanent: true,
+            },
+            {
+                source: '/youtube-earnings-estimator',
+                destination: '/tool/youtube-revenue-calculator',
+                permanent: true,
+            },
+            {
+                source: '/youtube-income-estimator',
+                destination: '/tool/youtube-revenue-calculator',
+                permanent: true,
+            },
+            {
+                source: '/youtube-money-calculator',
+                destination: '/tool/youtube-revenue-calculator',
+                permanent: true,
+            },
+            {
+                source: '/youtube-earnings-calculator',
+                destination: '/tool/youtube-revenue-calculator',
+                permanent: true,
+            },
+            {
+                source: '/youtube-channel-earnings-calculator',
                 destination: '/tool/youtube-revenue-calculator',
                 permanent: true,
             },

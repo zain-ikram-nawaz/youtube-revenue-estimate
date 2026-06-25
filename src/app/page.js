@@ -10,6 +10,18 @@ const homeFaqData = [
     a: "YouTube pays creators between $0.50 and $10 per 1,000 views (RPM) depending on niche, audience country, and ad engagement. Finance and tech channels in the US typically earn $5–$10 RPM, while entertainment or gaming channels in South Asia may earn $0.50–$2 RPM."
   },
   {
+    q: "What is a YouTube RPM estimator?",
+    a: "A YouTube RPM estimator is a tool that calculates your Revenue Per Mille — the amount you earn per 1,000 video views after YouTube keeps its 45% share. RPM varies by niche: Finance channels in the US earn $8–$15 RPM, education earns $4–$10, and kids content earns $1–$3. Our calculator estimates your RPM based on your content niche and audience country, giving you a realistic earnings range."
+  },
+  {
+    q: "How do I use a YouTube CPM calculator?",
+    a: "To estimate YouTube CPM (Cost Per Mille), select your audience's primary country in our calculator. CPM reflects what advertisers pay per 1,000 ad impressions before YouTube's 45% cut. US audiences command $10–$20 CPM, UK earns $8–$15, India earns $1–$3, and Pakistan earns $0.50–$2. Enter your views, niche, and country to convert CPM into your actual creator earnings."
+  },
+  {
+    q: "Can I calculate YouTube earnings by channel name?",
+    a: "Yes. The ChannelIncome tool accepts YouTube channel names, channel URLs, and video URLs — not just raw view counts. Enter any channel name or paste its YouTube URL, and the tool analyzes publicly available data (subscribers, estimated views) combined with RPM benchmarks for your niche and country to estimate realistic monthly and lifetime earnings."
+  },
+  {
     q: "Can I earn money by watching YouTube videos?",
     a: "YouTube does not pay users for watching videos. Our tool is made for creators who want to estimate their YouTube earnings from content creation and ad revenue."
   },
@@ -49,17 +61,28 @@ const homeFaqData = [
 
 export const metadata = {
   title: {
-    absolute: "YouTube Revenue Calculator 2026 | ChannelIncome",
+    absolute: "Free YouTube Money Calculator — Check Any Channel's Earnings | ChannelIncome",
   },
   description:
-    "Calculate your YouTube earnings instantly. Enter views, niche & country to get a realistic RPM & CPM-based revenue estimate. Free, no signup needed.",
+    "Free YouTube money calculator. Enter any channel name, views, niche & country for an instant RPM & CPM-based earnings estimate. No signup — results in seconds.",
   alternates: {
     canonical: "https://channelincome.com",
   },
+  keywords: [
+    "youtube revenue calculator",
+    "youtube money calculator",
+    "youtube earnings calculator",
+    "youtube rpm estimator",
+    "youtube cpm calculator",
+    "youtube income estimator",
+    "youtube earnings calculator by channel name",
+    "youtube channel earnings calculator",
+    "cpm calculator youtube",
+  ],
   openGraph: {
-    title: "YouTube Revenue Calculator 2026 | ChannelIncome",
+    title: "Free YouTube Money Calculator — Check Any Channel's Earnings | ChannelIncome",
     description:
-      "Free YouTube earnings calculator. Enter views, niche & country for a realistic revenue range based on real CPM & RPM data.",
+      "Instant YouTube earnings estimate by channel name, views, niche & country. Real CPM & RPM data. Free, no signup needed.",
     url: "https://channelincome.com",
     type: "website",
     images: [
@@ -67,15 +90,15 @@ export const metadata = {
         url: "https://channelincome.com/icon.png",
         width: 1200,
         height: 630,
-        alt: "ChannelIncome YouTube Revenue Calculator",
+        alt: "ChannelIncome Free YouTube Money Calculator",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "YouTube Revenue Calculator 2026 | ChannelIncome",
+    title: "Free YouTube Money Calculator — Check Any Channel's Earnings",
     description:
-      "Free YouTube revenue calculator. Enter views, niche & country for a realistic CPM & RPM-based earnings estimate.",
+      "Instant YouTube earnings estimate by channel name, views, niche & country. Real CPM & RPM data. Free forever.",
     images: ["https://channelincome.com/icon.png"],
   },
 };
@@ -109,22 +132,26 @@ function JsonLdWebSite() {
 function JsonLdApp() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": ["SoftwareApplication", "WebApplication"],
     name: "YouTube Revenue Calculator",
+    alternateName: ["YouTube Money Calculator", "YouTube CPM Calculator", "YouTube RPM Estimator", "YouTube Earnings Estimator"],
     operatingSystem: "Web",
     applicationCategory: "FinanceApplication",
+    browserRequirements: "Requires JavaScript. Works on all modern browsers.",
     brand: {
       "@type": "Brand",
       name: "ChannelIncome",
     },
     description:
-      "Free YouTube revenue calculator to estimate channel earnings using views, CPM, RPM, niche, and country. Updated 2026.",
+      "Free YouTube revenue calculator to estimate channel earnings by channel name, views, CPM, RPM, niche, and audience country. Updated for 2026.",
     url: "https://channelincome.com/tool/youtube-revenue-calculator",
     featureList: [
-      "YouTube RPM estimation by niche",
-      "YouTube CPM rates by country",
+      "YouTube RPM estimator by niche",
+      "YouTube CPM calculator by country",
       "Earnings range calculator",
-      "Niche comparison tool"
+      "YouTube earnings by channel name lookup",
+      "YouTube income estimator",
+      "Niche and country comparison tool"
     ],
     offers: {
       "@type": "Offer",
@@ -138,6 +165,43 @@ function JsonLdApp() {
     }
   };
 
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+// ✅ Dataset Schema (AEO: makes CPM/RPM tables citable by AI)
+function JsonLdDataset() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: "YouTube CPM & RPM Rates by Niche and Country (2026)",
+    description: "Real-world YouTube CPM (Cost Per Mille) rates by country and RPM (Revenue Per Mille) rates by content niche, updated for 2026. Covers 7 niches and 7 countries/regions.",
+    url: "https://channelincome.com",
+    creator: {
+      "@type": "Organization",
+      name: "ChannelIncome",
+      url: "https://channelincome.com"
+    },
+    temporalCoverage: "2026",
+    variableMeasured: [
+      {
+        "@type": "PropertyValue",
+        name: "RPM by Niche",
+        description: "Revenue Per Mille (creator earnings per 1,000 views) segmented by content niche",
+        unitText: "USD"
+      },
+      {
+        "@type": "PropertyValue",
+        name: "CPM by Country",
+        description: "Cost Per Mille (advertiser spend per 1,000 impressions) segmented by audience country",
+        unitText: "USD"
+      }
+    ]
+  };
   return (
     <script
       type="application/ld+json"
@@ -174,6 +238,7 @@ export default async function Home() {
     <>
       <JsonLdWebSite />
       <JsonLdApp />
+      <JsonLdDataset />
       <JsonLdFAQ />
       <HomeIntroduction />
       <HomeFAQ faq={homeFaqData} />

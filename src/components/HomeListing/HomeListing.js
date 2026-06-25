@@ -31,8 +31,8 @@ export default function Page({ data }) {
             <div key={guide._id} className="bg-white border rounded-lg overflow-hidden">
               <div className="relative h-40 w-full bg-gray-100">
                 <Image
-                  src={guide?.thumbnail || "/icon.png"}
-                  alt={guide?.title || "Guide"}
+                  src={guide?.coverImage || guide?.thumbnail || "/icon.png"}
+                  alt={guide?.coverImageAlt || guide?.title || "Guide"}
                   fill
                   className="object-cover"
                 />

@@ -1,814 +1,408 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
-// Font Awesome icons ke liye, main standard class names use kar raha hoon. Agar aap Font Awesome use nahi kar rahe to inko hata dejiye.
+import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { handleSubmitGuide } from "@/app/hooks/handleSubmit";
+import { handleAddTag, handleRemoveTag } from "@/app/hooks/handleTag";
+import { handleAddKeyword, handleRemoveKeyword } from "@/app/hooks/handleKeyword";
+import { addFAQ, removeFAQ, updateFAQ } from "@/app/hooks/handleFaqs";
 
-// Assuming these custom hooks are defined elsewhere and work correctly
-import { handleAddTag, handleRemoveTag } from '@/app/hooks/handleTag';
-import { handleThumbnailChange } from '@/app/hooks/handleThumbnail';
-import { handleAddKeyword, handleRemoveKeyword } from '@/app/hooks/handleKeyword';
-import { addFAQ, removeFAQ, updateFAQ } from '@/app/hooks/handleFaqs';
-import { addListItem, updateListItem, removeListItem } from '@/app/hooks/handleList';
-import { addTableRow, removeTableRow, updateTableCell } from '@/app/hooks/handleTable';
-import { addContentBlock, updateContentBlock, removeContentBlock } from '@/app/hooks/handleContent';
-import { handleSubmitGuide } from '@/app/hooks/handleSubmit';
+const CATEGORIES = [
+  "Monetization Basics",
+  "Revenue Optimization",
+  "Channel Growth",
+  "YouTube Analytics",
+  "YouTube CPM & RPM",
+  "Creator Tools",
+];
 
-// === COLLAPSIBLE BLOCK COMPONENT (For Cleaner Content Section) ===
-// Iste'maal ke liye ise isi file mein ya ek separate file mein define kiya ja sakta hai.
-const CollapsibleContentBlock = ({ block, index, formData, setFormData, children, updateContentBlockHandler, removeContentBlockHandler, addContentBlockAtPosition }) => {
-    // Har block ke liye alag state. Shuru mein sab band rakhen.
-    const [isOpen, setIsOpen] = useState(false);
-    const [showAddMenu, setShowAddMenu] = useState(false);
-
-    const getBlockTitle = (block) => {
-        switch (block.type) {
-            case 'heading': return `Heading: ${block.text || 'Untitled'}`;
-            case 'subheading': return `Subheading: ${block.text || 'Untitled'}`;
-            case 'paragraph': return `Paragraph: ${block.text ? `${block.text.substring(0, 50)}...` : 'Empty'}`;
-            case 'list': return `List: (${block.items.length} items)`;
-            case 'table': return `Table: (${block.rows.length} rows)`;
-            case 'image': return `Image: ${block.caption || 'No Caption'}`;
-            case 'video': return `Video: ${block.url ? block.url.substring(0, 30) : 'No URL'}`;
-            case 'link': return `Link: ${block.text || 'No Text'}`;
-            case 'faq': return `FAQ: ${block.question || 'No Question'}`;
-            default: return 'Content Block';
-        }
-    };
-
-    const handleAddBlockAtPosition = (blockType) => {
-        addContentBlockAtPosition(blockType, index + 1);
-        setShowAddMenu(false);
-    };
-
-    return (
-        <>
-            <div className={`content-block ${isOpen ? 'open' : ''}`}>
-                <div className="block-header" onClick={() => setIsOpen(!isOpen)}>
-                    <span className="block-type">{block.type.toUpperCase()}</span>
-                    <span className="block-title">{getBlockTitle(block)}</span>
-                    <div className="block-actions">
-                        <button
-                            type="button"
-                            onClick={(e) => {
-                                e.stopPropagation(); // Prevents collapse/expand
-                                removeContentBlockHandler(index, formData, setFormData);
-                            }}
-                            className="remove-block-btn"
-                            title="Remove Block"
-                        >
-                            <i className="fas fa-trash"></i>
-                        </button>
-                        <i className={`fas fa-chevron-down toggle-icon ${isOpen ? 'rotated' : ''}`}></i>
-                    </div>
-                </div>
-
-                <div className={`block-content-panel ${isOpen ? 'expanded' : 'collapsed'}`}>
-                    {children}
-                </div>
-            </div>
-
-            {/* Add Block Here Button - Har block ke neeche */}
-            <div className="add-block-between">
-                {/* <button
-                    type="button"
-                    className="add-block-here-btn"
-                    onClick={() => setShowAddMenu(!showAddMenu)}
-                >
-                    <i className="fas fa-plus-circle"></i> Add Block Here
-                </button> */}
-                {!showAddMenu && (
-                    <div
-                        className="
-      inline-block-menu
-      flex flex-wrap gap-2
-      p-3
-      bg-white
-      border border-slate-200
-      rounded-lg
-      shadow-lg
-      max-w-xl
-    "
-                    >
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('heading')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-heading text-xs text-slate-500" />
-                            Heading
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('subheading')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-heading text-xs text-slate-500" />
-                            Subheading
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('paragraph')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-paragraph text-xs text-slate-500" />
-                            Paragraph
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('list')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-list-ul text-xs text-slate-500" />
-                            List
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('table')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-table text-xs text-slate-500" />
-                            Table
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('image')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-image text-xs text-slate-500" />
-                            Image
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('video')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-video text-xs text-slate-500" />
-                            Video
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('link')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-link text-xs text-slate-500" />
-                            Link
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => handleAddBlockAtPosition('faq')}
-                            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 hover:text-indigo-600 transition-all active:scale-95 whitespace-nowrap"
-                        >
-                            <i className="fas fa-question-circle text-xs text-slate-500" />
-                            FAQ
-                        </button>
-                    </div>
-                )}
-
-            </div>
-        </>
-    );
+const EMPTY_FORM = {
+  title: "",
+  category: "",
+  author: "ChannelIncome Team",
+  status: "published",
+  coverImage: null,
+  coverImageAlt: "",
+  content: "",
+  metaTitle: "",
+  metaDescription: "",
+  excerpt: "",
+  tags: [],
+  keywords: [],
+  faqs: [],
 };
 
-// === MAIN GUIDE FORM COMPONENT ===
-const GuideForm = ({ editData }) => {
-    console.log(editData, "edit")
-    const [formData, setFormData] = useState({
-        title: '',
-        category: '',
-        author: 'Admin',
-        thumbnail: null,
-        metaTitle: '',
-        metaDescription: '',
-        summary: '',
-        excerpt: '',
-        tags: [],
-        keywords: [],
-        blocks: [],
-        faqs: []
-    });
-    const [thumbnailPreview, setThumbnailPreview] = useState(null);
-    const [currentTag, setCurrentTag] = useState('');
-    const [currentKeyword, setCurrentKeyword] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [message, setMessage] = useState({ text: '', type: '' });
-    const fileInputRef = useRef(null);
+function insertMarkdown(textarea, before, after = "", placeholder = "text") {
+  if (!textarea) return;
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const selected = textarea.value.slice(start, end) || placeholder;
+  const replacement = before + selected + after;
+  const newVal = textarea.value.slice(0, start) + replacement + textarea.value.slice(end);
+  // Return new value and cursor position
+  return { newVal, cursor: start + before.length + selected.length + after.length };
+}
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-    useEffect(() => {
-        if (editData && Object.keys(editData).length > 0) {
-            setFormData({
-                title: editData.title || '',
-                category: editData.category || '',
-                author: editData.author || 'Admin',
-                // IMPORTANT: Hum original URL ko rakhenge,
-                // handleSubmit function check karega ke ye String hai ya File
-                thumbnail: editData.thumbnail || null,
-                metaTitle: editData.metaTitle || '',
-                metaDescription: editData.metaDescription || '',
-                summary: editData.summary || '',
-                excerpt: editData.excerpt || '',
-                tags: editData.tags || [],
-                keywords: editData.keywords || [],
-                // Blocks ko properly map karein taake edit ke waqt UI mein masla na ho
-                blocks: editData.blocks ? [...editData.blocks] : [],
-                faqs: editData.faqs ? [...editData.faqs] : []
-            });
+export default function GuideForm({ editData }) {
+  const [formData, setFormData] = useState(EMPTY_FORM);
+  const [coverPreview, setCoverPreview] = useState(null);
+  const [currentTag, setCurrentTag] = useState("");
+  const [currentKeyword, setCurrentKeyword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState({ text: "", type: "" });
+  const [activePane, setActivePane] = useState("split"); // "write" | "preview" | "split"
+  const [wordCount, setWordCount] = useState(0);
+  const textareaRef = useRef(null);
+  const fileInputRef = useRef(null);
 
-            // Preview set karein (Ye Cloudinary ka URL dikhayega)
-            if (editData.thumbnail) {
-                setThumbnailPreview(editData.thumbnail);
-            }
-        }
-    }, [editData]);// Jab bhi editData change hoga, form fill ho jayega
+  // Populate form on edit
+  useEffect(() => {
+    if (editData && Object.keys(editData).length > 0) {
+      setFormData({
+        title: editData.title || "",
+        category: editData.category || "",
+        author: editData.author || "ChannelIncome Team",
+        status: editData.status || "published",
+        coverImage: editData.coverImage || null,
+        coverImageAlt: editData.coverImageAlt || "",
+        content: editData.content || "",
+        metaTitle: editData.metaTitle || "",
+        metaDescription: editData.metaDescription || "",
+        excerpt: editData.excerpt || "",
+        tags: editData.tags || [],
+        keywords: editData.keywords || [],
+        faqs: editData.faqs || [],
+      });
+      if (editData.coverImage) setCoverPreview(editData.coverImage);
+    }
+  }, [editData]);
 
-    const handleSubmit = (e) => handleSubmitGuide({
-        e,
-        formData,
-        setFormData,
-        setMessage,
-        setThumbnailPreview,
-        fileInputRef,
-        setIsSubmitting,
-        editId: editData?._id // Pass the ID here
-    });
+  // Word count
+  useEffect(() => {
+    const words = formData.content.trim().split(/\s+/).filter(Boolean).length;
+    setWordCount(words);
+  }, [formData.content]);
 
-    // Content Block Update Handler, passing it down to the Collapsible component
-    const updateBlock = (index, field, value) => {
-        updateContentBlock(index, field, value, formData, setFormData);
-    };
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setFormData((p) => ({ ...p, [name]: value }));
+  };
 
-    // Content Block Remove Handler, passing it down to the Collapsible component
-    const removeBlock = (index) => {
-        removeContentBlock(index, formData, setFormData);
-    };
+  const handleCoverChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setFormData((p) => ({ ...p, coverImage: file }));
+    setCoverPreview(URL.createObjectURL(file));
+  };
 
-    // NEW: Add content block at specific position
-    const addContentBlockAtPosition = (type, position) => {
-        const newBlock = {
-            type,
-            text: '',
-            items: type === 'list' ? [''] : undefined,
-            rows: type === 'table' ? [['', '']] : undefined,
-            url: type === 'video' || type === 'link' ? '' : undefined,
-            caption: type === 'image' ? '' : undefined,
-            file: type === 'image' ? null : undefined,
-            question: type === 'faq' ? '' : undefined,
-            answer: type === 'faq' ? '' : undefined
-        };
+  // Toolbar action
+  const applyFormat = useCallback((before, after = "", placeholder = "text") => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    const result = insertMarkdown(ta, before, after, placeholder);
+    if (!result) return;
+    setFormData((p) => ({ ...p, content: result.newVal }));
+    setTimeout(() => {
+      ta.focus();
+      ta.setSelectionRange(result.cursor, result.cursor);
+    }, 0);
+  }, []);
 
-        setFormData(prev => {
-            const newBlocks = [...prev.blocks];
-            newBlocks.splice(position, 0, newBlock);
-            return {
-                ...prev,
-                blocks: newBlocks
-            };
-        });
-    };
+  const toolbar = [
+    { label: "H2", action: () => applyFormat("\n## ", "", "Heading") },
+    { label: "H3", action: () => applyFormat("\n### ", "", "Subheading") },
+    { label: "B", action: () => applyFormat("**", "**", "bold text"), cls: "font-black" },
+    { label: "I", action: () => applyFormat("*", "*", "italic text"), cls: "italic" },
+    { label: "•", action: () => applyFormat("\n- ", "", "list item") },
+    { label: "1.", action: () => applyFormat("\n1. ", "", "list item") },
+    { label: "❝", action: () => applyFormat("\n> ", "", "blockquote") },
+    { label: "</>", action: () => applyFormat("\n```\n", "\n```", "code here"), cls: "font-mono text-xs" },
+    { label: "🔗", action: () => applyFormat("[", "](url)", "link text") },
+    { label: "IMG", action: () => applyFormat("![alt](", ")", "image-url"), cls: "text-xs" },
+  ];
 
-    return (
-        <div className="guide-form-wrapper">
-            <div className="guide-form-container">
-                <div className="form-header-main">
-                    <h1>📝 Create New Guide</h1>
-                    <p>Fill in the details below to create a new guide</p>
-                </div>
+  const handleSubmit = (e) =>
+    handleSubmitGuide({ e, formData, setFormData, setMessage, setIsSubmitting, editId: editData?._id });
 
-                {message.text && (
-                    <div className={`message-alert ${message.type}`}>
-                        {message.text}
-                    </div>
-                )}
+  const readTimeEstimate = Math.max(1, Math.ceil(wordCount / 200));
 
-                <form onSubmit={handleSubmit} className="guide-form">
-
-                    {/* Basic Information */}
-                    <div className="form-section card-style">
-                        <h2><i className="fas fa-info-circle"></i> Basic Information</h2>
-
-                        <div className="form-group">
-                            <label htmlFor="title">Title *</label>
-                            <input
-                                type="text"
-                                id="title"
-                                name="title"
-                                value={formData.title}
-                                onChange={handleInputChange}
-                                required
-                                placeholder="Enter guide title"
-                            />
-                        </div>
-
-                        <div className="form-row-grid">
-                            <div className="form-group">
-                                <label htmlFor="category">Category *</label>
-                                <input
-                                    type="text"
-                                    id="category"
-                                    name="category"
-                                    value={formData.category}
-                                    onChange={handleInputChange}
-                                    required
-                                    placeholder="e.g., Technology, Health"
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="author">Author</label>
-                                <input
-                                    type="text"
-                                    id="author"
-                                    name="author"
-                                    value={formData.author}
-                                    onChange={handleInputChange}
-                                    placeholder="Author name"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-group thumbnail-upload-group">
-                            <label htmlFor="thumbnail">Thumbnail</label>
-                            <div className="thumbnail-upload">
-                                <input
-                                    type="file"
-                                    id="thumbnail"
-                                    ref={fileInputRef}
-                                    onChange={(e) => handleThumbnailChange(e, setFormData, setThumbnailPreview)}
-                                    accept="image/*"
-                                />
-                                {thumbnailPreview && (
-                                    <div className="thumbnail-preview">
-                                        <Image width={100} height={100} src={thumbnailPreview} alt="Thumbnail preview" />
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* SEO Section */}
-                    <div className="form-section card-style">
-                        <h2><i className="fas fa-search"></i> SEO & Summary</h2>
-
-                        <div className="form-group">
-                            <label htmlFor="metaTitle">Meta Title</label>
-                            <input
-                                type="text"
-                                id="metaTitle"
-                                name="metaTitle"
-                                value={formData.metaTitle}
-                                onChange={handleInputChange}
-                                placeholder="Meta title for SEO"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="metaDescription">Meta Description</label>
-                            <textarea
-                                id="metaDescription"
-                                name="metaDescription"
-                                value={formData.metaDescription}
-                                onChange={handleInputChange}
-                                rows="3"
-                                placeholder="Meta description for SEO"
-                            />
-                        </div>
-
-                        <div className="form-row-grid">
-                            <div className="form-group">
-                                <label htmlFor="summary">Summary</label>
-                                <textarea
-                                    id="summary"
-                                    name="summary"
-                                    value={formData.summary}
-                                    onChange={handleInputChange}
-                                    rows="3"
-                                    placeholder="Brief summary of the guide"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="excerpt">Excerpt</label>
-                                <textarea
-                                    id="excerpt"
-                                    name="excerpt"
-                                    value={formData.excerpt}
-                                    onChange={handleInputChange}
-                                    rows="3"
-                                    placeholder="Short excerpt for preview"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Tags and Keywords in a row */}
-                        <div className="form-row-grid">
-                            <div className="form-group tag-keywords-group">
-                                <label><i className="fas fa-tags"></i> Tags</label>
-                                <div className="tag-input">
-                                    <input
-                                        type="text"
-                                        value={currentTag}
-                                        onChange={(e) => setCurrentTag(e.target.value)}
-                                        onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag(currentTag, formData, setFormData, setCurrentTag))}
-                                        placeholder="Add a tag and press Enter"
-                                    />
-                                    <button type="button" onClick={() => handleAddTag(currentTag, formData, setFormData, setCurrentTag)} className="add-btn-tag">
-                                        <i className="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div className="tags-container">
-                                    {formData.tags.map((tag, index) => (
-                                        <span key={index} className="tag">
-                                            {tag}
-                                            <button type="button" onClick={() => handleRemoveTag(index, formData, setFormData)} className="remove-tag-btn">
-                                                x
-                                            </button>
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="form-group tag-keywords-group">
-                                <label><i className="fas fa-key"></i> Keywords</label>
-                                <div className="tag-input">
-                                    <input
-                                        type="text"
-                                        value={currentKeyword}
-                                        onChange={(e) => setCurrentKeyword(e.target.value)}
-                                        onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddKeyword(currentKeyword, formData, setFormData, setCurrentKeyword))}
-                                        placeholder="Add a keyword and press Enter"
-                                    />
-                                    <button type="button" onClick={() => handleAddKeyword(currentKeyword, formData, setFormData, setCurrentKeyword)} className="add-btn-tag">
-                                        <i className="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div className="tags-container">
-                                    {formData.keywords.map((keyword, index) => (
-                                        <span key={index} className="tag keyword">
-                                            {keyword}
-                                            <button type="button" onClick={() => handleRemoveKeyword(index, formData, setFormData)} className="remove-tag-btn">
-                                                x
-                                            </button>
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {/* Content Blocks Section - Now using Collapsible Blocks */}
-                    <div className="form-section content-builder-section">
-                        <div className="section-header">
-                            <h2><i className="fas fa-drafting-compass"></i> Guide Content Blocks</h2>
-                        </div>
-
-                        {formData.blocks.length === 0 ? (
-                            <div className="empty-state">
-                                <i className="fas fa-plus-circle"></i>
-                                <p>No content blocks added yet. Click "Add Block Here" below to add your first block.</p>
-                            </div>
-                        ) : (
-                            <div className="blocks-container">
-                                {formData.blocks.map((block, index) => (
-                                    <CollapsibleContentBlock
-                                        key={index}
-                                        block={block}
-                                        index={index}
-                                        formData={formData}
-                                        setFormData={setFormData}
-                                        updateContentBlockHandler={updateBlock}
-                                        removeContentBlockHandler={removeBlock}
-                                        addContentBlockAtPosition={addContentBlockAtPosition}
-                                    >
-                                        {/* Block-specific content is rendered here */}
-                                        <div className="block-content">
-                                            {block.type === 'heading' || block.type === 'subheading' || block.type === 'paragraph' || block.type === 'link' ? (
-                                                <div className="form-group">
-                                                    <label>
-                                                        {block.type === 'heading' ? 'Heading Text (H2)' :
-                                                            block.type === 'subheading' ? 'Subheading Text (H3)' :
-                                                                block.type === 'paragraph' ? 'Paragraph Text' : 'Link Text'}
-                                                    </label>
-                                                    {block.type === 'paragraph' ? (
-                                                        <textarea
-                                                            value={block.text || ''}
-                                                            onChange={(e) => updateBlock(index, 'text', e.target.value)}
-                                                            rows="4"
-                                                            placeholder={`Enter ${block.type} text`}
-                                                        />
-                                                    ) : (
-                                                        <input
-                                                            type="text"
-                                                            value={block.text || ''}
-                                                            onChange={(e) => updateBlock(index, 'text', e.target.value)}
-                                                            placeholder={`Enter ${block.type} text`}
-                                                        />
-                                                    )}
-                                                    {block.type === 'link' && (
-                                                        <input
-                                                            type="text"
-                                                            value={block.url || ''}
-                                                            onChange={(e) => updateBlock(index, 'url', e.target.value)}
-                                                            placeholder="Enter URL"
-                                                        />
-                                                    )}
-                                                </div>
-                                            ) : block.type === 'list' ? (
-                                                <div className="form-group">
-                                                    <label>List Items</label>
-                                                    {block.items.map((item, itemIndex) => (
-                                                        <div key={itemIndex} className="list-item">
-                                                            <input
-                                                                type="text"
-                                                                value={item}
-                                                                onChange={(e) => updateListItem(index, itemIndex, e.target.value, formData, setFormData)}
-                                                                placeholder={`List item ${itemIndex + 1}`}
-                                                            />
-                                                            {block.items.length > 1 && (
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => removeListItem(index, itemIndex, formData, setFormData)}
-                                                                    className="remove-item-btn"
-                                                                >
-                                                                    <i className="fas fa-times"></i>
-                                                                </button>
-                                                            )}
-                                                        </div>
-                                                    ))}
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => addListItem(index, formData, setFormData)}
-                                                        className="add-more-btn"
-                                                    >
-                                                        <i className="fas fa-plus"></i> Add List Item
-                                                    </button>
-                                                </div>
-                                            ) : block.type === 'table' ? (
-                                                <div className="form-group">
-                                                    <label>Table</label>
-                                                    <div className="table-editor">
-                                                        <table>
-                                                            <tbody>
-                                                                {block.rows.map((row, rowIndex) => (
-                                                                    <tr key={rowIndex}>
-                                                                        {row.map((cell, colIndex) => (
-                                                                            <td key={colIndex}>
-                                                                                <input
-                                                                                    type="text"
-                                                                                    value={cell}
-                                                                                    onChange={(e) => updateTableCell(index, rowIndex, colIndex, e.target.value, formData, setFormData)}
-                                                                                    placeholder={`Cell ${rowIndex + 1}-${colIndex + 1}`}
-                                                                                />
-                                                                            </td>
-                                                                        ))}
-                                                                        <td>
-                                                                            {block.rows.length > 1 && (
-                                                                                <button
-                                                                                    type="button"
-                                                                                    onClick={() => removeTableRow(index, rowIndex, formData, setFormData)}
-                                                                                    className="remove-row-btn"
-                                                                                >
-                                                                                    <i className="fas fa-trash"></i>
-                                                                                </button>
-                                                                            )}
-                                                                        </td>
-                                                                    </tr>
-                                                                ))}
-                                                            </tbody>
-                                                        </table>
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => addTableRow(index, formData, setFormData)}
-                                                            className="add-more-btn"
-                                                        >
-                                                            <i className="fas fa-plus"></i> Add Row
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            ) : block.type === 'image' ? (
-                                                <div className="form-group">
-                                                    <label>Image File/URL</label>
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        onChange={(e) => {
-                                                            const file = e.target.files[0];
-                                                            if (file) updateBlock(index, 'file', file);
-                                                        }}
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        value={block.caption || ''}
-                                                        onChange={(e) => updateBlock(index, 'caption', e.target.value)}
-                                                        placeholder="Image caption"
-                                                    />
-                                                </div>
-                                            ) : block.type === 'video' ? (
-                                                <div className="form-group">
-                                                    <label>Video URL</label>
-                                                    <input
-                                                        type="text"
-                                                        value={block.url || ''}
-                                                        onChange={(e) => updateBlock(index, 'url', e.target.value)}
-                                                        placeholder="Enter video URL (e.g., YouTube link)"
-                                                    />
-                                                </div>
-                                            ) : block.type === 'faq' ? (
-                                                <div className="form-group">
-                                                    <label>FAQ Content</label>
-                                                    <input
-                                                        type="text"
-                                                        value={block.question || ''}
-                                                        onChange={(e) => updateBlock(index, 'question', e.target.value)}
-                                                        placeholder="Question"
-                                                    />
-                                                    <textarea
-                                                        value={block.answer || ''}
-                                                        onChange={(e) => updateBlock(index, 'answer', e.target.value)}
-                                                        rows="3"
-                                                        placeholder="Answer"
-                                                    />
-                                                </div>
-                                            ) : null}
-                                        </div>
-                                    </CollapsibleContentBlock>
-                                ))}
-                            </div>
-                        )}
-
-                        {/* Add first block button when no blocks exist */}
-                        {formData.blocks.length === 0 && (
-                            <div className="flex flex-col items-center gap-4 mt-6">
-
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        const showMenu = document.querySelector('.first-block-menu');
-                                        showMenu.style.display =
-                                            showMenu.style.display === 'flex' ? 'none' : 'flex';
-                                    }}
-                                    className="
-        flex items-center gap-2
-        px-5 py-2
-        text-sm font-semibold
-        text-indigo-600
-        bg-indigo-50
-        border border-indigo-200
-        rounded-lg
-        hover:bg-indigo-100
-        hover:border-indigo-400
-        transition-all
-        shadow-sm
-      "
-                                >
-                                    <i className="fas fa-plus-circle text-indigo-500" />
-                                    Add First Block
-                                </button>
-
-                                <div
-                                    className="
-        inline-block-menu first-block-menu
-        hidden
-        flex flex-wrap justify-center gap-2
-        p-4
-        bg-white
-        border border-slate-200
-        rounded-lg
-        shadow-lg
-        max-w-2xl
-      "
-                                    style={{ display: 'none' }}
-                                >
-                                    {[
-                                        ['heading', 'fa-heading', 'Heading'],
-                                        ['subheading', 'fa-heading', 'Subheading'],
-                                        ['paragraph', 'fa-paragraph', 'Paragraph'],
-                                        ['list', 'fa-list-ul', 'List'],
-                                        ['table', 'fa-table', 'Table'],
-                                        ['image', 'fa-image', 'Image'],
-                                        ['video', 'fa-video', 'Video'],
-                                        ['link', 'fa-link', 'Link'],
-                                        ['faq', 'fa-question-circle', 'FAQ'],
-                                    ].map(([type, icon, label]) => (
-                                        <button
-                                            key={type}
-                                            type="button"
-                                            onClick={() => addContentBlockAtPosition(type, 0)}
-                                            className="
-            flex items-center gap-2
-            px-3 py-1.5
-            text-sm font-medium
-            text-slate-700
-            bg-slate-50
-            border border-slate-200
-            rounded-lg
-            hover:bg-indigo-50
-            hover:text-indigo-600
-            hover:border-indigo-400
-            transition-all
-            active:scale-95
-            whitespace-nowrap
-          "
-                                        >
-                                            <i className={`fas ${icon} text-xs text-slate-500`} />
-                                            {label}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                    </div>
-
-                    {/* Separate FAQs Section - No major changes, keeping it simple */}
-                    <div className="form-section card-style">
-                        <div className="section-header">
-                            <h2><i className="fas fa-question-circle"></i> Schema FAQs (Separate)</h2>
-                            <button type="button" onClick={() => addFAQ(formData, setFormData)} className="add-faq-btn-inline">
-                                <i className="fas fa-plus"></i> Add FAQ
-                            </button>
-                        </div>
-
-                        {formData.faqs.length === 0 ? (
-                            <div className="empty-state-mini">
-                                <p>No Schema FAQs added yet.</p>
-                            </div>
-                        ) : (
-                            <div className="faqs-container">
-                                {formData.faqs.map((faq, index) => (
-                                    <div key={index} className="faq-item">
-                                        <div className="faq-header">
-                                            <span>FAQ {index + 1}</span>
-                                            <button
-                                                type="button"
-                                                onClick={() => removeFAQ(index, formData, setFormData)}
-                                                className="remove-faq-btn"
-                                            >
-                                                <i className="fas fa-trash"></i> Remove
-                                            </button>
-                                        </div>
-                                        <div className="form-group">
-                                            <input
-                                                type="text"
-                                                value={faq.question || ''}
-                                                onChange={(e) => updateFAQ(index, 'question', e.target.value, formData, setFormData)}
-                                                placeholder="Question"
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <textarea
-                                                value={faq.answer || ''}
-                                                onChange={(e) => updateFAQ(index, 'answer', e.target.value, formData, setFormData)}
-                                                rows="3"
-                                                placeholder="Answer"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </form>
-
-                {/* Submit Button Section */}
-                <div className="form-actions submit-bar">
-                    <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        onClick={handleSubmit}
-                        className="submit-btn"
-                    >
-                        {isSubmitting ? (
-                            <>
-                                <i className="fas fa-spinner fa-spin"></i> Creating Guide...
-                            </>
-                        ) : (
-                            <>
-                                <i className="fas fa-save"></i> Create Guide
-                            </>
-                        )}
-                    </button>
-
-                    <div className="form-info">
-                        <p><i className="fas fa-info-circle"></i> Slug, published date, and read time will be auto-generated</p>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Top Bar */}
+      <div className="sticky top-16 z-30 bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <h1 className="text-sm font-bold text-gray-900">
+            {editData?._id ? "Edit Guide" : "New Guide"}
+          </h1>
+          <span className="text-xs text-gray-400">{wordCount} words · ~{readTimeEstimate} min read</span>
         </div>
-    );
-};
 
-export default GuideForm;
+        {/* Status + View toggle */}
+        <div className="flex items-center gap-3">
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleInput}
+            className="text-xs border border-gray-200 rounded-lg px-3 py-1.5 bg-white font-semibold"
+          >
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+          </select>
+
+          <div className="flex rounded-lg border border-gray-200 overflow-hidden text-xs">
+            {["write", "split", "preview"].map((mode) => (
+              <button
+                key={mode}
+                type="button"
+                onClick={() => setActivePane(mode)}
+                className={`px-3 py-1.5 font-semibold capitalize transition ${
+                  activePane === mode ? "bg-gray-900 text-white" : "bg-white text-gray-600 hover:bg-gray-50"
+                }`}
+              >
+                {mode}
+              </button>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={isSubmitting || !formData.title}
+            className="px-5 py-1.5 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white text-xs font-bold rounded-lg transition"
+          >
+            {isSubmitting ? "Saving..." : editData?._id ? "Update" : "Publish"}
+          </button>
+        </div>
+      </div>
+
+      {/* Status message */}
+      {message.text && (
+        <div className={`mx-6 mt-4 px-4 py-3 rounded-lg text-sm font-medium ${
+          message.type === "success" ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"
+        }`}>
+          {message.text}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="p-6 space-y-6">
+
+        {/* Title */}
+        <input
+          name="title"
+          value={formData.title}
+          onChange={handleInput}
+          required
+          placeholder="Post title..."
+          className="w-full text-3xl font-black text-gray-900 placeholder-gray-300 bg-transparent border-none outline-none resize-none"
+        />
+
+        {/* Meta row */}
+        <div className="flex flex-wrap gap-3">
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleInput}
+            className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white"
+          >
+            <option value="">Select category...</option>
+            {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+
+          <input
+            name="author"
+            value={formData.author}
+            onChange={handleInput}
+            placeholder="Author"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-2 w-48"
+          />
+        </div>
+
+        {/* Cover Image */}
+        <div className="flex items-start gap-4">
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 mb-1.5">Cover Image</label>
+            <input type="file" ref={fileInputRef} accept="image/*" onChange={handleCoverChange} className="text-xs" />
+          </div>
+          {coverPreview && (
+            <div className="relative w-32 h-20 rounded-lg overflow-hidden border border-gray-200 flex-shrink-0">
+              <Image src={coverPreview} alt="cover" fill className="object-cover" />
+              <button
+                type="button"
+                onClick={() => { setCoverPreview(null); setFormData((p) => ({ ...p, coverImage: null })); }}
+                className="absolute top-1 right-1 w-5 h-5 bg-black/60 text-white rounded-full text-xs flex items-center justify-center"
+              >x</button>
+            </div>
+          )}
+          {coverPreview && (
+            <input
+              name="coverImageAlt"
+              value={formData.coverImageAlt}
+              onChange={handleInput}
+              placeholder="Image alt text (for SEO)"
+              className="text-xs border border-gray-200 rounded-lg px-3 py-2 flex-1"
+            />
+          )}
+        </div>
+
+        {/* EDITOR */}
+        <div className="rounded-xl border border-gray-200 overflow-hidden bg-white">
+          {/* Toolbar */}
+          <div className="flex items-center gap-1 px-3 py-2 bg-gray-50 border-b border-gray-200 flex-wrap">
+            {toolbar.map((t) => (
+              <button
+                key={t.label}
+                type="button"
+                onClick={t.action}
+                title={t.label}
+                className={`px-2.5 py-1 text-sm rounded hover:bg-gray-200 text-gray-700 font-semibold transition ${t.cls || ""}`}
+              >
+                {t.label}
+              </button>
+            ))}
+            <div className="ml-auto text-xs text-gray-400 pr-2">Markdown supported</div>
+          </div>
+
+          {/* Panes */}
+          <div className={`flex ${activePane === "split" ? "divide-x divide-gray-200" : ""}`}>
+            {/* Write pane */}
+            {(activePane === "write" || activePane === "split") && (
+              <textarea
+                ref={textareaRef}
+                name="content"
+                value={formData.content}
+                onChange={handleInput}
+                placeholder={`Start writing in Markdown...\n\n## Introduction\n\nYour content here.\n\n## Section 2\n\nMore content.`}
+                className={`${activePane === "split" ? "w-1/2" : "w-full"} min-h-[520px] p-5 text-sm font-mono text-gray-800 leading-relaxed outline-none resize-none bg-white`}
+              />
+            )}
+
+            {/* Preview pane */}
+            {(activePane === "preview" || activePane === "split") && (
+              <div className={`${activePane === "split" ? "w-1/2" : "w-full"} min-h-[520px] p-5 overflow-y-auto`}>
+                {formData.content ? (
+                  <div className="prose prose-sm max-w-none prose-headings:font-bold prose-h2:text-xl prose-h2:border-b prose-h2:pb-2 prose-h2:border-gray-100 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded prose-blockquote:border-l-4 prose-blockquote:border-green-500 prose-blockquote:bg-green-50 prose-blockquote:py-1">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {formData.content}
+                    </ReactMarkdown>
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-300 italic">Preview will appear here...</p>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* SEO */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5 space-y-4">
+          <h3 className="text-sm font-bold text-gray-900">SEO &amp; Metadata</h3>
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 mb-1">
+              Meta Title <span className="font-normal text-gray-400">({(formData.metaTitle || "").length}/60 chars)</span>
+            </label>
+            <input name="metaTitle" value={formData.metaTitle} onChange={handleInput}
+              placeholder="SEO title (leave blank to use post title)"
+              className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2" />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 mb-1">
+              Meta Description <span className="font-normal text-gray-400">({(formData.metaDescription || "").length}/160 chars)</span>
+            </label>
+            <textarea name="metaDescription" value={formData.metaDescription} onChange={handleInput} rows={2}
+              placeholder="What this post is about (shown in Google search results)"
+              className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 resize-none" />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 mb-1">Excerpt (card preview)</label>
+            <textarea name="excerpt" value={formData.excerpt} onChange={handleInput} rows={2}
+              placeholder="Short description shown on the guide listing page"
+              className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 resize-none" />
+          </div>
+        </div>
+
+        {/* Tags & Keywords */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5 grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Tags */}
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 mb-2">Tags</label>
+            <div className="flex gap-2 mb-2">
+              <input value={currentTag} onChange={(e) => setCurrentTag(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAddTag(currentTag, formData, setFormData, setCurrentTag); }}}
+                placeholder="Add tag + Enter"
+                className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2" />
+              <button type="button" onClick={() => handleAddTag(currentTag, formData, setFormData, setCurrentTag)}
+                className="px-3 py-2 bg-gray-900 text-white text-xs font-bold rounded-lg">Add</button>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {formData.tags.map((tag, i) => (
+                <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-lg">
+                  {tag}
+                  <button type="button" onClick={() => handleRemoveTag(i, formData, setFormData)} className="text-gray-400 hover:text-red-500">x</button>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Keywords */}
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 mb-2">Keywords (SEO)</label>
+            <div className="flex gap-2 mb-2">
+              <input value={currentKeyword} onChange={(e) => setCurrentKeyword(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAddKeyword(currentKeyword, formData, setFormData, setCurrentKeyword); }}}
+                placeholder="Add keyword + Enter"
+                className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2" />
+              <button type="button" onClick={() => handleAddKeyword(currentKeyword, formData, setFormData, setCurrentKeyword)}
+                className="px-3 py-2 bg-gray-900 text-white text-xs font-bold rounded-lg">Add</button>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {formData.keywords.map((kw, i) => (
+                <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-lg">
+                  {kw}
+                  <button type="button" onClick={() => handleRemoveKeyword(i, formData, setFormData)} className="text-blue-400 hover:text-red-500">x</button>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* FAQs */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-bold text-gray-900">FAQs <span className="font-normal text-gray-400 text-xs">(adds structured FAQ schema to Google)</span></h3>
+            <button type="button" onClick={() => addFAQ(formData, setFormData)}
+              className="px-3 py-1.5 bg-gray-900 text-white text-xs font-bold rounded-lg">+ Add FAQ</button>
+          </div>
+          {formData.faqs.length === 0 ? (
+            <p className="text-xs text-gray-400 italic">No FAQs yet. Add some to get featured snippets in Google.</p>
+          ) : (
+            <div className="space-y-4">
+              {formData.faqs.map((faq, i) => (
+                <div key={i} className="border border-gray-100 rounded-lg p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-gray-400">FAQ {i + 1}</span>
+                    <button type="button" onClick={() => removeFAQ(i, formData, setFormData)}
+                      className="text-xs text-red-400 hover:text-red-600 font-medium">Remove</button>
+                  </div>
+                  <input value={faq.question || ""} onChange={(e) => updateFAQ(i, "question", e.target.value, formData, setFormData)}
+                    placeholder="Question" className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2" />
+                  <textarea value={faq.answer || ""} onChange={(e) => updateFAQ(i, "answer", e.target.value, formData, setFormData)}
+                    placeholder="Answer" rows={2} className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 resize-none" />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Bottom submit */}
+        <div className="flex justify-end">
+          <button type="submit" disabled={isSubmitting || !formData.title}
+            className="px-8 py-3 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-bold rounded-xl transition shadow-lg">
+            {isSubmitting ? "Saving..." : editData?._id ? "Update Guide" : "Publish Guide"}
+          </button>
+        </div>
+
+      </form>
+    </div>
+  );
+}

@@ -36,7 +36,7 @@ export default function HomeIntroduction() {
         {/* ── HERO SECTION ── */}
         <section className="text-center bg-background border border-border rounded-lg shadow-sm p-8">
           <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-            YouTube Money Calculator – Check Channel Earnings Instantly
+            YouTube Money Calculator — Check Any Channel&apos;s Earnings by Name, Views & CPM
           </h1>
 
           <p className="text-sm text-muted leading-relaxed max-w-2xl mx-auto">
@@ -220,6 +220,114 @@ export default function HomeIntroduction() {
           <p className="text-sm text-muted leading-relaxed">
             Two channels can have identical view counts and earn completely different amounts. A finance creator in the US with 100,000 monthly views can earn <strong>$800 – $1,500</strong>. A gaming channel in Pakistan with the same views might earn <strong>$50 – $150</strong>. That's a 10× difference — and most YouTube calculators ignore it entirely. This <strong>YouTube channel money calculator</strong> accounts for both niche and geography to give you an honest estimate.
           </p>
+        </section>
+
+        {/* ── YOUTUBE RPM ESTIMATOR ── */}
+        <section className="bg-background border border-border rounded-lg shadow-sm p-6">
+          <h2 className="text-lg font-bold text-foreground mb-3">
+            YouTube RPM Estimator — What Is RPM and How to Estimate It
+          </h2>
+          <p className="text-sm text-muted leading-relaxed mb-3">
+            RPM (Revenue Per Mille) is the amount YouTube creators actually earn per 1,000 video views after YouTube&apos;s 45% revenue share. It is the single most important earnings metric for any YouTube channel — and it varies dramatically by niche and audience country.
+          </p>
+          <div className="overflow-x-auto mb-3">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-secondary">
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground">Content Niche</th>
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground">Estimated RPM (US audience)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Finance & Business", "$8 – $15"],
+                  ["Technology / AI", "$5 – $12"],
+                  ["Education / How-to", "$4 – $10"],
+                  ["Lifestyle / Vlogs", "$2 – $6"],
+                  ["Entertainment", "$2 – $5"],
+                  ["Gaming", "$2 – $5"],
+                  ["Kids Content", "$1 – $3"],
+                ].map(([niche, rpm], i) => (
+                  <tr key={niche} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
+                    <td className="px-3 py-2 border border-border font-semibold text-foreground">{niche}</td>
+                    <td className="px-3 py-2 border border-border text-primary font-semibold">{rpm}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-muted leading-relaxed mb-3">
+            RPM = (Monthly Views ÷ 1,000) × average RPM for your niche-country combination. A Finance channel with 100,000 US-based monthly views earns roughly $800–$1,500/month. A Gaming channel with the same views but Indian audience earns $50–$150. Use the estimator above to calculate yours.
+          </p>
+          <Link href="/tool/youtube-revenue-calculator" className="text-primary font-semibold underline text-sm">
+            Use the YouTube RPM Estimator →
+          </Link>
+        </section>
+
+        {/* ── YOUTUBE CPM CALCULATOR ── */}
+        <section className="bg-background border border-border rounded-lg shadow-sm p-6">
+          <h2 className="text-lg font-bold text-foreground mb-3">
+            YouTube CPM Calculator — Advertiser Rates by Country (2026)
+          </h2>
+          <p className="text-sm text-muted leading-relaxed mb-3">
+            CPM (Cost Per Mille) is the rate advertisers pay per 1,000 ad impressions on YouTube — before YouTube takes its 45% cut. Your audience&apos;s country is the single biggest CPM driver. A viewer in the United States generates 10–15× more ad revenue than a viewer in Pakistan watching the identical video.
+          </p>
+          <div className="overflow-x-auto mb-3">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-secondary">
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground">Country / Region</th>
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground">Average CPM</th>
+                  <th className="text-left px-3 py-2 border border-border font-semibold text-foreground hidden sm:table-cell">Creator RPM (approx.)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["United States", "$10 – $20", "$5.50 – $11"],
+                  ["United Kingdom", "$8 – $15", "$4.40 – $8.25"],
+                  ["Canada / Australia", "$8 – $14", "$4.40 – $7.70"],
+                  ["Germany / Europe", "$6 – $12", "$3.30 – $6.60"],
+                  ["Middle East", "$4 – $8", "$2.20 – $4.40"],
+                  ["India", "$1 – $3", "$0.55 – $1.65"],
+                  ["Pakistan", "$0.5 – $2", "$0.28 – $1.10"],
+                ].map(([country, cpm, rpm], i) => (
+                  <tr key={country} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
+                    <td className="px-3 py-2 border border-border font-semibold text-foreground">{country}</td>
+                    <td className="px-3 py-2 border border-border text-primary font-semibold">{cpm}</td>
+                    <td className="px-3 py-2 border border-border text-muted hidden sm:table-cell">{rpm}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-[11px] text-muted mb-3">
+            * Creator RPM = CPM × 0.55 (YouTube&apos;s 55% creator share). CPM fluctuates with advertiser demand; Q4 rates are typically 30–50% higher.
+          </p>
+          <Link href="/tool/youtube-revenue-calculator" className="text-primary font-semibold underline text-sm">
+            Calculate Earnings with Your Country&apos;s CPM →
+          </Link>
+        </section>
+
+        {/* ── EARNINGS BY CHANNEL NAME ── */}
+        <section className="bg-background border border-border rounded-lg shadow-sm p-6">
+          <h2 className="text-lg font-bold text-foreground mb-3">
+            YouTube Earnings Calculator by Channel Name — Check Any Channel
+          </h2>
+          <p className="text-sm text-muted leading-relaxed mb-3">
+            Most YouTube calculators only accept view counts. ChannelIncome goes further: enter any YouTube <strong>channel name</strong>, channel URL, or video URL and the tool pulls publicly available channel data — subscriber count, estimated monthly views — then applies real CPM and RPM benchmarks for that channel&apos;s niche and audience geography.
+          </p>
+          <ul className="text-sm text-muted space-y-2 list-disc pl-5 mb-4">
+            <li><strong>Channel name search</strong> — type any creator&apos;s channel name to get their estimated earnings</li>
+            <li><strong>Channel URL lookup</strong> — paste a YouTube channel URL for direct analysis</li>
+            <li><strong>Video URL analysis</strong> — enter a specific video URL to estimate that video&apos;s revenue</li>
+            <li><strong>Manual view entry</strong> — enter your own view count if you prefer not to share your channel</li>
+          </ul>
+          <p className="text-xs text-muted leading-relaxed mb-3">
+            <strong>Note:</strong> The tool uses publicly available data only. No private YouTube Studio data is accessed. Estimates are ranges based on real CPM/RPM benchmarks, not guaranteed figures.
+          </p>
+          <Link href="/tool/youtube-revenue-calculator" className="text-primary font-semibold underline text-sm">
+            Check Any Channel&apos;s Earnings Now →
+          </Link>
         </section>
 
         {/* ── CTA ── */}

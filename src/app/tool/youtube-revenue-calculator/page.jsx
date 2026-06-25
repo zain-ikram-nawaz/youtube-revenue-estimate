@@ -1,20 +1,31 @@
 import YoutubeAnalyzer from "../../../components/YoutubeChecker/YoutubeChecker";
+
 import FAQ from "../../../components/FAQ/FAQ";
 import Script from "next/script";
 import Link from "next/link";
 import { Zap } from "lucide-react";
 
 export const metadata = {
-  title: "YouTube Revenue Calculator 2026",
+  title: "YouTube Revenue Calculator — Free CPM & RPM Estimator (2026)",
   description:
-    "Free YouTube revenue calculator. Enter views, niche & country for a realistic 2026 earnings range based on real CPM/RPM data. No signup required.",
+    "Calculate YouTube channel earnings by channel name, views, niche & country. Real 2026 CPM rates by country and RPM by niche. Instant estimate — no signup required.",
   alternates: {
     canonical: "https://channelincome.com/tool/youtube-revenue-calculator"
   },
+  keywords: [
+    "youtube revenue calculator",
+    "youtube cpm calculator",
+    "youtube rpm estimator",
+    "youtube earnings estimator",
+    "youtube income estimator",
+    "youtube earnings calculator by channel name",
+    "cpm calculator youtube",
+    "youtube money calculator",
+  ],
   openGraph: {
-    title: "YouTube Revenue Calculator 2026 | ChannelIncome",
+    title: "YouTube Revenue Calculator — Free CPM & RPM Estimator | ChannelIncome",
     description:
-      "Estimate YouTube earnings by views, CPM, RPM, niche & country. Free, realistic 2026 revenue estimates for creators worldwide.",
+      "Estimate YouTube earnings by channel name, views, niche & country. Real CPM rates by country and RPM by niche. Free 2026 tool, no signup.",
     url: "https://channelincome.com/tool/youtube-revenue-calculator",
     siteName: "ChannelIncome",
     locale: "en_US",
@@ -23,14 +34,14 @@ export const metadata = {
       url: "https://channelincome.com/icon.png",
       width: 1200,
       height: 630,
-      alt: "YouTube Revenue Calculator 2026 – ChannelIncome Free Tool"
+      alt: "YouTube Revenue Calculator — Free CPM & RPM Estimator | ChannelIncome"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "YouTube Revenue Calculator 2026 | ChannelIncome",
+    title: "YouTube Revenue Calculator — Free CPM & RPM Estimator",
     description:
-      "Free YouTube revenue calculator. Enter views, niche & country for a realistic CPM/RPM-based earnings estimate.",
+      "Calculate YouTube earnings by channel name, views, niche & country. Real CPM & RPM data. Free, instant, no signup.",
     images: ["https://channelincome.com/icon.png"],
     creator: "@channelincome"
   }
@@ -96,22 +107,33 @@ const pills = [
     {
       q: "How can I increase YouTube earnings?",
       a: "Three high-impact strategies: (1) Shift to a higher-CPM niche like finance or tech; (2) Create content that attracts viewers in Tier-1 countries (US, UK, Canada); (3) Improve average view duration — longer watch time enables more mid-roll ads, increasing RPM."
+    },
+    {
+      q: "How accurate is this YouTube CPM calculator?",
+      a: "The calculator uses real 2026 CPM benchmarks by country and niche. Since CPM fluctuates with advertiser demand and seasonality, estimates represent the realistic average range rather than a guaranteed figure. Q4 (October–December) CPMs are typically 30–50% higher due to holiday ad budgets. For exact figures, your YouTube Studio Analytics is the only authoritative source."
+    },
+    {
+      q: "What is the difference between a YouTube revenue estimator and a YouTube income calculator?",
+      a: "They are the same concept under different names. Whether called a YouTube revenue estimator, income calculator, earnings calculator, or money calculator — all estimate how much a channel earns from YouTube ad revenue based on views, RPM, and CPM. ChannelIncome's tool goes further by factoring in your content niche and audience geography — the two variables with the biggest real-world impact on earnings."
     }
   ];
 
   const schemas = {
     app: {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
+      "@type": ["SoftwareApplication", "WebApplication"],
       name: "YouTube Revenue Calculator",
+      alternateName: ["YouTube CPM Calculator", "YouTube RPM Estimator", "YouTube Income Estimator", "YouTube Earnings Estimator", "YouTube Money Calculator"],
       url: "https://channelincome.com/tool/youtube-revenue-calculator",
       applicationCategory: "FinanceApplication",
       operatingSystem: "Web",
-      description: "Free YouTube revenue calculator to estimate realistic earnings using views, CPM, RPM, niche, and audience country. Updated for 2026.",
+      browserRequirements: "Requires JavaScript. Works on all modern browsers.",
+      description: "Free YouTube revenue calculator to estimate channel earnings by channel name, views, CPM, RPM, niche, and audience country. Updated for 2026.",
       featureList: [
-        "YouTube RPM estimation by niche",
-        "YouTube CPM rates by country",
+        "YouTube RPM estimator by niche",
+        "YouTube CPM calculator by country",
         "Channel revenue range calculator",
+        "YouTube earnings by channel name lookup",
         "Niche and country comparison tool",
         "AI-powered channel analysis"
       ],
@@ -125,6 +147,16 @@ const pills = [
         price: "0",
         priceCurrency: "USD"
       }
+    },
+
+    dataset: {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      name: "YouTube CPM & RPM Rates by Niche and Country (2026)",
+      description: "YouTube CPM rates by country and RPM rates by content niche for 2026. Finance: $8–$15 RPM. Technology/AI: $5–$12 RPM. US CPM: $10–$20. UK CPM: $8–$15.",
+      url: "https://channelincome.com/tool/youtube-revenue-calculator",
+      creator: { "@type": "Organization", name: "ChannelIncome", url: "https://channelincome.com" },
+      temporalCoverage: "2026"
     },
 
     faq: {
@@ -167,6 +199,7 @@ const pills = [
   <>
       {/* ── Schemas ── */}
       <Script id="app-schema"        type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.app) }} />
+      <Script id="dataset-schema"    type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.dataset) }} />
       <Script id="faq-schema"        type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }} />
       <Script id="howto-schema"      type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.howTo) }} />
       <Script id="breadcrumb-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }} />

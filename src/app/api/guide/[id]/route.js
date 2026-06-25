@@ -1,185 +1,90 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "../../../lib/db"; // Path adjust karlein
-import Guide from "../../../../models/guide"; // Path adjust karlein
+import { connectDB } from "../../../lib/db";
+import Guide from "../../../../models/guide";
 import cloudinary from "../../../lib/cloudinary";
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const MAX = 5 * 1024 * 1024;
 
-// Helper functions (Aap inhe separate file mein bhi rakh sakte hain taake code repeat na ho)
-function safeParse(value, fallback = []) {
-  try {
-    return typeof value === "string" ? JSON.parse(value) : value;
-  } catch { return fallback; }
+function safeParse(v, fb = []) {
+  try { return JSON.parse(v); } catch { return fb; }
 }
 
-function generateSlug(title) {
-  return title.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^\w-]+/g, "");
-}
-
-async function uploadImage(file, folderName = "guides") {
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
+async function uploadImage(file, folder = "guide-covers") {
+  const buf = Buffer.from(await file.arrayBuffer());
   return new Promise((resolve, reject) => {
-    const stream = cloudinary.uploader.upload_stream(
-      {
-        folder: folderName,
-        transformation: [
-          { width: 1200, height: 800, crop: "limit" },
-          { quality: "auto:good" },
-          { fetch_format: "auto" },
-        ],
-      },
-      (error, result) => {
-        if (error) reject(error);
-        else resolve(result.secure_url);
-      }
-    );
-    stream.end(buffer);
+    cloudinary.uploader.upload_stream(
+      { folder, transformation: [{ width: 1200, height: 800, crop: "limit" }, { quality: "auto:good" }, { fetch_format: "auto" }] },
+      (err, res) => (err ? reject(err) : resolve(res.secure_url))
+    ).end(buf);
   });
+}
+
+function cloudinaryId(url) {
+  if (!url) return null;
+  const parts = url.split("/");
+  const file = parts.pop().split(".")[0];
+  const folder = parts.pop();
+  return `${folder}/${file}`;
 }
 
 export async function PUT(req, { params }) {
   try {
     await connectDB();
-    // NEXT.JS 15 FIX: params ko await karna lazmi hai
-    const resolvedParams = await params;
-    const id = resolvedParams.id;
-    const formData = await req.formData();
+    const { id } = await params;
+    const existing = await Guide.findById(id);
+    if (!existing) return NextResponse.json({ success: false, message: "Not found" }, { status: 404 });
 
-    // 1. Purana data fetch karein (Existing images check karne ke liye)
-    const existingGuide = await Guide.findById(id);
-    if (!existingGuide) {
-      return NextResponse.json({ success: false, message: "Guide not found" }, { status: 404 });
-    }
+    const form = await req.formData();
+    const title = form.get("title");
 
-    // 2. Basic fields extract karein
-    const title = formData.get("title");
-    const updateData = {
+    const update = {
       title,
-      slug: generateSlug(title),
-      category: formData.get("category"),
-      author: formData.get("author") || "Admin",
-      metaTitle: formData.get("metaTitle"),
-      metaDescription: formData.get("metaDescription"),
-      summary: formData.get("summary"),
-      excerpt: formData.get("excerpt"),
-      readTime: Number(formData.get("readTime")) || undefined,
-      tags: safeParse(formData.get("tags")),
-      keywords: safeParse(formData.get("keywords")),
-      faqs: safeParse(formData.get("faqs")),
+      category: form.get("category"),
+      author: form.get("author") || "ChannelIncome Team",
+      status: form.get("status") || "published",
+      coverImageAlt: form.get("coverImageAlt") || title,
+      content: form.get("content") || existing.content,
+      metaTitle: form.get("metaTitle"),
+      metaDescription: form.get("metaDescription"),
+      excerpt: form.get("excerpt"),
+      tags: safeParse(form.get("tags")),
+      keywords: safeParse(form.get("keywords")),
+      faqs: safeParse(form.get("faqs")),
+      readTime: Number(form.get("readTime")) || existing.readTime,
     };
 
-    // 3. Thumbnail Logic (New vs Existing)
-    const thumbnailFile = formData.get("thumbnail");
-    if (thumbnailFile && typeof thumbnailFile !== "string" && thumbnailFile.size > 0) {
-      // Agar user ne Nayi file upload ki hai
-      if (thumbnailFile.size > MAX_FILE_SIZE) throw new Error("Thumbnail size limit exceeded (5MB)");
-      updateData.thumbnail = await uploadImage(thumbnailFile, "thumbnails");
+    const imgFile = form.get("coverImage");
+    if (imgFile && typeof imgFile !== "string" && imgFile.size > 0) {
+      if (imgFile.size > MAX) throw new Error("Cover image max 5MB");
+      update.coverImage = await uploadImage(imgFile, "guide-covers");
     } else {
-      // Agar user ne image change nahi ki, to purani hi rehne dein
-      updateData.thumbnail = formData.get("existingThumbnail") || existingGuide.thumbnail;
+      update.coverImage = form.get("existingCoverImage") || existing.coverImage;
     }
 
-    // 4. Blocks processing (Images in blocks)
-    const blocks = safeParse(formData.get("blocks"));
-
-
-updateData.blocks = await Promise.all(
-  blocks.map(async (block, index) => {
-    if (block.type === "image") {
-      // 1. Check karein ke kya ye block ek placeholder key hai (e.g., "blockImage_0")
-      const isPlaceholder = typeof block.file === "string" && block.file.startsWith("blockImage_");
-
-      if (isPlaceholder) {
-        // 2. Agar placeholder hai, to formData se asal file nikalien
-        const fileObj = formData.get(block.file);
-
-        if (fileObj && typeof fileObj !== "string" && fileObj.size > 0) {
-          const newImageUrl = await uploadImage(fileObj, "guide-blocks");
-          return { ...block, file: newImageUrl }; // DB mein URL save hoga
-        }
-      }
-
-      // 3. Agar block.file pehle se ek URL hai (Update ke waqt image change nahi ki)
-      // to wo waisa hi save ho jayega.
-      return block;
-    }
-
-    // Baaki blocks (text, list etc) as it is return honge
-    return block;
-  })
-);
-
-    // 5. Update in MongoDB
-    const updatedGuide = await Guide.findByIdAndUpdate(id, updateData, { new: true });
-
-    return NextResponse.json({ success: true, guide: updatedGuide });
-
-  } catch (error) {
-    console.error("Update Error:", error);
-    return NextResponse.json({
-      success: false,
-      message: error.message || "Error updating guide",
-    }, { status: error.message.includes("limit") ? 400 : 500 });
+    const updated = await Guide.findByIdAndUpdate(id, update, { new: true });
+    return NextResponse.json({ success: true, guide: updated });
+  } catch (err) {
+    console.error("PUT guide error:", err);
+    return NextResponse.json({ success: false, message: err.message }, { status: 500 });
   }
 }
-
-// Helper function: URL se Public ID nikalne ke liye
-const getPublicIdFromUrl = (url) => {
-  if (!url) return null;
-  // Example: https://res.cloudinary.com/demo/image/upload/v1234/folder/image.jpg
-  // Isme se "folder/image" nikalna hai
-  const parts = url.split('/');
-  const fileNameWithExtension = parts.pop(); // image.jpg
-  const folder = parts.pop(); // folder
-  const publicId = `${folder}/${fileNameWithExtension.split('.')[0]}`;
-  // console.log(publicId,"deleted")
-  return publicId;
-};
 
 export async function DELETE(req, { params }) {
   try {
     await connectDB();
-
-    // Next.js 15 Fix: await params
-    const resolvedParams = await params;
-    const { id } = resolvedParams;
-
-    // 1. Pehle guide ka data fetch karein taake URLs mil saken
+    const { id } = await params;
     const guide = await Guide.findById(id);
-    if (!guide) {
-      return NextResponse.json({ success: false, message: "Guide not found" }, { status: 404 });
+    if (!guide) return NextResponse.json({ success: false, message: "Not found" }, { status: 404 });
+
+    if (guide.coverImage) {
+      const pid = cloudinaryId(guide.coverImage);
+      if (pid) await cloudinary.uploader.destroy(pid);
     }
 
-    // 2. Thumbnail delete karein Cloudinary se
-    if (guide.thumbnail) {
-      const thumbId = getPublicIdFromUrl(guide.thumbnail);
-      if (thumbId) await cloudinary.uploader.destroy(thumbId);
-    }
-
-    // 3. Blocks ki images delete karein
-    if (guide.blocks && guide.blocks.length > 0) {
-      const imageBlocks = guide.blocks.filter(block => block.type === 'image' && block.file);
-
-      // Saari images ko parallel delete karein
-      await Promise.all(
-        imageBlocks.map(async (block) => {
-          const blockImageId = getPublicIdFromUrl(block.file);
-          if (blockImageId) return cloudinary.uploader.destroy(blockImageId);
-        })
-      );
-    }
-
-    // 4. Database se guide delete karein
     await Guide.findByIdAndDelete(id);
-
-    return NextResponse.json({
-      success: true,
-      message: "Guide and all associated images deleted successfully"
-    });
-
-  } catch (error) {
-    console.error("Delete Error:", error);
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ success: true, message: "Guide deleted" });
+  } catch (err) {
+    console.error("DELETE guide error:", err);
+    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
   }
 }
