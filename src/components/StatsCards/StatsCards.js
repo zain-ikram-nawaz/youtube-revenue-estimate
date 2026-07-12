@@ -58,34 +58,34 @@ export default function StatsCards({ data, aiData }) {
       {aiData && <IntelligenceBar title="Growth" text={aiData} />}
 
       {/* Channel Blueprint Section */}
-      <div className="relative mt-8 bg-primary rounded-lg p-8 overflow-hidden shadow-2xl border-4 border-secondary">
+      <div className="relative mt-8 bg-ink rounded-3xl p-8 overflow-hidden shadow-2xl border border-white/10">
         <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[100px] -mr-32 -mt-32" />
 
         <div className="relative z-10">
           <div className="flex items-center gap-4 mb-8">
-            <h3 className="text-xl font-black text-background uppercase tracking-tighter">🚀 Channel Blueprint</h3>
-            <div className="h-[2px] flex-1 bg-gradient-to-r from-primary-hover/60 to-transparent" />
+            <h3 className="font-display text-xl font-extrabold text-white uppercase tracking-tighter">🚀 Channel Blueprint</h3>
+            <div className="h-[2px] flex-1 bg-gradient-to-r from-primary/60 to-transparent" />
           </div>
 
           <div className="grid md:grid-cols-2 gap-10">
             <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 bg-background/10 rounded-lg border border-background/20 hover:bg-background/20 transition-colors">
-                <span className="text-background/60 text-xs font-bold uppercase tracking-widest">Monthly Views</span>
+              <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
+                <span className="text-white/50 text-xs font-bold uppercase tracking-widest">Monthly Views</span>
                 <span className="text-lg font-black text-accent tracking-tight">{data?.avgMonthlyViews?.toLocaleString()}</span>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-background/10 rounded-lg border border-background/20 hover:bg-background/20 transition-colors">
-                <span className="text-background/60 text-xs font-bold uppercase tracking-widest">Channel ID</span>
-                <span className="text-[10px] font-mono text-background/80 bg-primary-hover px-2 py-1 rounded select-all cursor-pointer">{data?.channelId}</span>
+              <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
+                <span className="text-white/50 text-xs font-bold uppercase tracking-widest">Channel ID</span>
+                <span className="text-[10px] font-mono text-white/80 bg-white/10 px-2 py-1 rounded-full select-all cursor-pointer">{data?.channelId}</span>
               </div>
             </div>
 
             <div className="flex flex-col justify-center">
-               <div className="bg-accent/10 p-6 rounded-lg border border-accent/30">
+               <div className="bg-accent/10 p-6 rounded-2xl border border-accent/30">
                   <p className="text-xs font-black text-accent uppercase tracking-widest mb-3">Strategic Context</p>
-                  <p className="text-sm text-background/80 leading-relaxed font-medium">
-                    This profile was established on <span className="text-background font-bold">{new Date(data?.creationDate).toLocaleDateString()}</span>.
-                    Currently in its <span className="text-background font-bold">{Math.floor((new Date() - new Date(data.creationDate)) / (365.25 * 24 * 60 * 60 * 1000))} year</span>,
+                  <p className="text-sm text-white/80 leading-relaxed font-medium">
+                    This profile was established on <span className="text-white font-bold">{new Date(data?.creationDate).toLocaleDateString()}</span>.
+                    Currently in its <span className="text-white font-bold">{Math.floor((new Date() - new Date(data.creationDate)) / (365.25 * 24 * 60 * 60 * 1000))} year</span>,
                     showing high performance markers relative to its niche.
                   </p>
                </div>

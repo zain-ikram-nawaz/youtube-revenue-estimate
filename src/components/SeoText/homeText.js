@@ -34,14 +34,19 @@ export default function HomeIntroduction() {
         </section>
 
         {/* ── HERO SECTION ── */}
-        <section className="text-center bg-background border border-border rounded-lg shadow-sm p-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+        <section className="text-center bg-background border border-border rounded-3xl shadow-sm p-8 md:p-12">
+          <div className="inline-flex items-center gap-2 bg-secondary border border-border rounded-full px-3 py-1 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-[11px] font-bold tracking-widest text-muted uppercase">Free · No Signup · 2026</span>
+          </div>
+
+          <h1 className="font-display text-2xl md:text-4xl font-extrabold text-foreground mb-4 tracking-tight leading-tight">
             YouTube Money Calculator — Check Any Channel&apos;s Earnings by Name, Views & CPM
           </h1>
 
           <p className="text-sm text-muted leading-relaxed max-w-2xl mx-auto">
             Estimate YouTube revenue with a fast, free tool built for creators, marketers, and channel owners. This{" "}
-            <strong>YouTube money calculator</strong> uses views, CPM, RPM, niche, and country to help you understand realistic earnings — not just a random number based on views alone.
+            <strong className="text-foreground">YouTube money calculator</strong> uses views, CPM, RPM, niche, and country to help you understand realistic earnings — not just a random number based on views alone.
           </p>
 
           <div className="mt-4 text-xs text-muted">
@@ -51,13 +56,13 @@ export default function HomeIntroduction() {
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/tool/youtube-revenue-calculator"
-              className="inline-flex items-center justify-center gap-2 bg-primary text-background font-semibold text-sm px-5 py-2.5 rounded-lg hover:opacity-90 transition"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-sm px-6 py-3 rounded-full shadow-sm hover:bg-primary-hover active:scale-95 transition-all"
             >
               Try the YouTube Revenue Calculator →
             </Link>
             <Link
               href="/guide"
-              className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-secondary transition"
+              className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-bold text-sm px-6 py-3 rounded-full hover:bg-secondary transition-colors"
             >
               Read Creator Guides
             </Link>
@@ -114,7 +119,7 @@ export default function HomeIntroduction() {
                 {subscriberEarnings.map((row, i) => (
                   <tr key={row.subs} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
                     <td className="px-3 py-2 border border-border font-semibold text-foreground">{row.subs}</td>
-                    <td className="px-3 py-2 border border-border text-primary font-semibold">{row.monthly}</td>
+                    <td className="px-3 py-2 border border-border text-accent-hover font-bold">{row.monthly}</td>
                     <td className="px-3 py-2 border border-border text-muted">{row.yearly}</td>
                     <td className="px-3 py-2 border border-border text-muted hidden sm:table-cell">{row.note}</td>
                   </tr>
@@ -250,7 +255,7 @@ export default function HomeIntroduction() {
                 ].map(([niche, rpm], i) => (
                   <tr key={niche} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
                     <td className="px-3 py-2 border border-border font-semibold text-foreground">{niche}</td>
-                    <td className="px-3 py-2 border border-border text-primary font-semibold">{rpm}</td>
+                    <td className="px-3 py-2 border border-border text-accent-hover font-bold">{rpm}</td>
                   </tr>
                 ))}
               </tbody>
@@ -293,7 +298,7 @@ export default function HomeIntroduction() {
                 ].map(([country, cpm, rpm], i) => (
                   <tr key={country} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
                     <td className="px-3 py-2 border border-border font-semibold text-foreground">{country}</td>
-                    <td className="px-3 py-2 border border-border text-primary font-semibold">{cpm}</td>
+                    <td className="px-3 py-2 border border-border text-accent-hover font-bold">{cpm}</td>
                     <td className="px-3 py-2 border border-border text-muted hidden sm:table-cell">{rpm}</td>
                   </tr>
                 ))}
@@ -331,19 +336,22 @@ export default function HomeIntroduction() {
         </section>
 
         {/* ── CTA ── */}
-        <section className="text-center bg-primary text-background rounded-lg p-8">
-          <h2 className="text-lg font-bold mb-2">
-            Start Checking Any YouTube Channel
-          </h2>
-          <p className="text-sm opacity-80 mb-5">
-            Get instant revenue estimates. Understand your real earning potential in under 30 seconds.
-          </p>
-          <Link
-            href="/tool/youtube-revenue-calculator"
-            className="inline-flex items-center gap-2 bg-background text-foreground font-semibold text-sm px-6 py-3 rounded-lg hover:opacity-90 transition"
-          >
-            Open the Free Calculator →
-          </Link>
+        <section className="relative overflow-hidden text-center bg-ink text-white rounded-3xl p-8 md:p-12">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_0%,rgba(224,32,26,0.35),transparent)]" />
+          <div className="relative z-10">
+            <h2 className="font-display text-xl md:text-2xl font-extrabold mb-2">
+              Start Checking Any YouTube Channel
+            </h2>
+            <p className="text-sm text-white/70 mb-6">
+              Get instant revenue estimates. Understand your real earning potential in under 30 seconds.
+            </p>
+            <Link
+              href="/tool/youtube-revenue-calculator"
+              className="inline-flex items-center gap-2 bg-primary text-white font-bold text-sm px-6 py-3 rounded-full shadow-lg hover:bg-primary-hover active:scale-95 transition-all"
+            >
+              Open the Free Calculator →
+            </Link>
+          </div>
         </section>
 
       </div>

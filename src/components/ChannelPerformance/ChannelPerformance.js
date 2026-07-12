@@ -20,11 +20,11 @@ export default function ChannelPerformance({ data, aiData }) {
       </div>
 
       {aiData && (
-        <div className="bg-primary rounded-lg p-6 text-background shadow-lg">
+        <div className="bg-ink rounded-3xl p-6 text-white shadow-lg border border-white/10">
           <h3 className="flex items-center gap-2 font-bold mb-2">
-            <span className="bg-background text-primary px-2 py-0.5 rounded text-xs uppercase">Algorithm Note</span>
+            <span className="bg-accent text-ink px-2 py-0.5 rounded-full text-xs uppercase font-black">Algorithm Note</span>
           </h3>
-          <p className="text-sm md:text-base leading-relaxed opacity-90">{aiData}</p>
+          <p className="text-sm md:text-base leading-relaxed text-white/85">{aiData}</p>
         </div>
       )}
     </div>

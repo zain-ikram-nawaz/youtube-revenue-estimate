@@ -296,7 +296,7 @@ export default function ChannelEstimator({ seoSections }) {
         {/* Side Drawer Overlay */}
         {isModalOpen && (
           <div
-            className="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm transition-opacity"
+            className="fixed inset-0 z-[60] bg-ink/50 backdrop-blur-sm transition-opacity"
             onClick={() => setIsModalOpen(false)}
           />
         )}
@@ -318,7 +318,7 @@ export default function ChannelEstimator({ seoSections }) {
                       className="w-10 h-10 rounded-lg object-cover"
                     />
                   ) : (
-                    <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-background font-bold">
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">
                       {data?.channelName?.charAt(0) || 'C'}
                     </div>
                   )}
@@ -341,7 +341,7 @@ export default function ChannelEstimator({ seoSections }) {
                 </div>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="p-2 hover:bg-accent text-primary rounded-lg transition-colors font-bold"
+                  className="p-2 hover:bg-secondary text-primary rounded-full transition-colors font-bold"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -380,7 +380,7 @@ export default function ChannelEstimator({ seoSections }) {
                 {data?.videoInfo && (
                   <div className="mb-6 p-4 bg-secondary border border-border rounded-lg">
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-background text-sm font-bold">
+                      <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold">
                         📹
                       </div>
                       <div className="flex-1">
@@ -410,7 +410,7 @@ export default function ChannelEstimator({ seoSections }) {
                 )}
 
                 {/* Enhanced Navigation Tabs */}
-                <div className="flex flex-wrap gap-2 mb-6 p-1 bg-secondary rounded-lg">
+                <div className="flex flex-wrap gap-1 mb-6 p-1 bg-secondary rounded-full">
                   {[
                     { key: "overview", label: "Overview", icon: "📊" },
                     { key: "revenue", label: "Revenue", icon: "💰" },
@@ -421,8 +421,8 @@ export default function ChannelEstimator({ seoSections }) {
                     <button
                       key={tab.key}
                       onClick={() => setActiveTab(tab.key)}
-                      className={`flex-1 py-2 px-2 text-xs uppercase tracking-wider font-black rounded-lg transition-all flex items-center justify-center gap-1 ${activeTab === tab.key
-                          ? "bg-background text-primary shadow-sm"
+                      className={`flex-1 py-2 px-2 text-xs uppercase tracking-wider font-black rounded-full transition-all flex items-center justify-center gap-1 ${activeTab === tab.key
+                          ? "bg-primary text-white shadow-sm"
                           : "text-muted hover:text-foreground"
                         }`}
                     >
@@ -487,18 +487,18 @@ export default function ChannelEstimator({ seoSections }) {
         {/* Enhanced Error Display */}
         {error && !loading && (
           <div className="lg:col-span-12 mt-4">
-            <div className="max-w-2xl mx-auto p-4 bg-accent border border-accent-hover rounded-lg">
+            <div className="max-w-2xl mx-auto p-4 bg-primary/5 border border-primary/30 rounded-2xl">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center text-background text-sm font-bold flex-shrink-0 mt-0.5">
+                <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0 mt-0.5">
                   !
                 </div>
                 <div>
                   <h3 className="font-semibold text-primary mb-1">Error</h3>
-                  <p className="text-primary text-sm mb-3">{error}</p>
+                  <p className="text-foreground text-sm mb-3">{error}</p>
 
                   {/* Helpful suggestions */}
-                  <div className="text-xs text-primary">
-                    <p className="font-medium mb-1">Try these formats:</p>
+                  <div className="text-xs text-muted">
+                    <p className="font-medium mb-1 text-foreground">Try these formats:</p>
                     <ul className="list-disc list-inside space-y-1 ml-2">
                       <li>Channel URL: https://youtube.com/@channelname</li>
                       <li>Channel name: channelname or @channelname</li>

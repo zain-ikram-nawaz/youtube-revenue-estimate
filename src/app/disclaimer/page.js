@@ -57,13 +57,13 @@ export default function Disclaimer() {
         />
 
         {/* Header */}
-        <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-lg mb-3 shadow-sm">
-            <svg className="w-6 h-6 text-background" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="bg-background rounded-3xl shadow-sm border border-border p-5 text-center">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-full mb-3 shadow-sm">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
           </div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-snug">
+          <h1 className="font-display text-lg md:text-xl font-extrabold text-foreground mb-2 leading-snug">
             Disclaimer
           </h1>
           <p className="text-xs text-muted leading-relaxed">

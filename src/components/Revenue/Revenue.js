@@ -4,14 +4,17 @@ export default function Revenue({ data, aiData }) {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-primary p-8 rounded-lg text-background shadow-2xl relative">
-          <div className="text-xs font-black uppercase tracking-widest text-accent mb-2">Lifetime Earnings</div>
-          <div className="text-4xl font-black">${data?.estimatedRevenue?.toLocaleString() || 0}</div>
-          <div className="absolute top-4 right-6 text-primary-hover/40 text-4xl font-bold">01</div>
+        <div className="bg-ink p-8 rounded-3xl text-white shadow-2xl relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_100%_0%,rgba(245,166,35,0.18),transparent)]" />
+          <div className="relative z-10">
+            <div className="text-xs font-black uppercase tracking-widest text-accent mb-2">Lifetime Earnings</div>
+            <div className="font-display text-4xl font-black text-accent">${data?.estimatedRevenue?.toLocaleString() || 0}</div>
+          </div>
+          <div className="absolute top-4 right-6 text-white/10 text-4xl font-bold">01</div>
         </div>
-        <div className="bg-background p-8 rounded-lg border-2 border-border shadow-sm relative">
+        <div className="bg-background p-8 rounded-3xl border-2 border-border shadow-sm relative">
           <div className="text-xs font-black uppercase tracking-widest text-primary mb-2">Monthly Average</div>
-          <div className="text-4xl font-black text-foreground">{data?.avgMonthlyRevenue?.toLocaleString() || 0}</div>
+          <div className="font-display text-4xl font-black text-foreground">{data?.avgMonthlyRevenue?.toLocaleString() || 0}</div>
           <div className="absolute top-4 right-6 text-border text-4xl font-bold">02</div>
         </div>
       </div>

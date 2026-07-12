@@ -89,10 +89,10 @@ export default async function GuideListingPage({ searchParams }) {
 
             {/* Page Header */}
             <div className="text-center mb-8 max-w-3xl">
-                <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-                    YouTube Creator Guides <span className="text-red-600">(2026)</span>
+                <h1 className="font-display text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight">
+                    YouTube Creator Guides <span className="text-primary">(2026)</span>
                 </h1>
-                <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                <p className="text-muted max-w-2xl mx-auto text-lg">
                     Practical guides on YouTube monetization, RPM, CPM, and channel growth. Free, data-backed, no fluff.
                 </p>
             </div>
@@ -102,9 +102,9 @@ export default async function GuideListingPage({ searchParams }) {
                 <div className="w-full max-w-5xl mb-10 space-y-6">
 
                     {/* Quick Answer */}
-                    <div className="bg-white border-l-4 border-red-500 rounded-lg p-5 shadow-sm">
-                        <p className="text-xs font-bold uppercase tracking-widest text-red-500 mb-1">Quick Answer</p>
-                        <p className="text-sm text-gray-700 leading-relaxed">
+                    <div className="bg-background border-l-4 border-primary rounded-2xl p-5 shadow-sm">
+                        <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Quick Answer</p>
+                        <p className="text-sm text-foreground leading-relaxed">
                             These guides explain how YouTube ad revenue works, why RPM differs by niche and country, and what creators can do to increase their earnings. Everything here is free — no subscription, no paywall.
                         </p>
                     </div>
@@ -112,26 +112,26 @@ export default async function GuideListingPage({ searchParams }) {
                     {/* Category grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {categories.map((cat) => (
-                            <div key={cat.title} className="bg-white border border-gray-100 rounded-lg p-5 shadow-sm">
+                            <div key={cat.title} className="bg-background border border-border rounded-2xl p-5 shadow-sm hover:border-primary/30 transition-colors">
                                 <p className="text-2xl mb-2">{cat.icon}</p>
-                                <h2 className="text-sm font-bold text-gray-900 mb-1">{cat.title}</h2>
-                                <p className="text-xs text-gray-500 leading-relaxed">{cat.desc}</p>
+                                <h2 className="text-sm font-bold text-foreground mb-1">{cat.title}</h2>
+                                <p className="text-xs text-muted leading-relaxed">{cat.desc}</p>
                             </div>
                         ))}
                     </div>
 
                     {/* Start Here */}
-                    <div className="bg-white border border-gray-100 rounded-lg p-5 shadow-sm">
-                        <h2 className="text-sm font-bold text-gray-900 mb-2">New to YouTube Monetization? Start Here</h2>
-                        <p className="text-xs text-gray-500 leading-relaxed mb-3">
-                            If you&#39;re just getting started, the most important thing to understand is the difference between <strong>CPM</strong> (what advertisers pay) and <strong>RPM</strong> (what you actually earn). Most creators think they&#39;re the same — they&#39;re not. YouTube keeps 45% of every ad dollar. Our guides explain this clearly, along with practical steps to improve your earnings regardless of your channel size.
+                    <div className="bg-background border border-border rounded-2xl p-5 shadow-sm">
+                        <h2 className="text-sm font-bold text-foreground mb-2">New to YouTube Monetization? Start Here</h2>
+                        <p className="text-xs text-muted leading-relaxed mb-3">
+                            If you&#39;re just getting started, the most important thing to understand is the difference between <strong className="text-foreground">CPM</strong> (what advertisers pay) and <strong className="text-foreground">RPM</strong> (what you actually earn). Most creators think they&#39;re the same — they&#39;re not. YouTube keeps 45% of every ad dollar. Our guides explain this clearly, along with practical steps to improve your earnings regardless of your channel size.
                         </p>
-                        <p className="text-xs text-gray-500 leading-relaxed mb-4">
+                        <p className="text-xs text-muted leading-relaxed mb-4">
                             Creators in finance and technology niches consistently earn 3–8× more per view than gaming or entertainment channels — not because they have more subscribers, but because advertisers pay more for those audiences. Understanding this dynamic is the foundation of every monetization decision you&#39;ll make.
                         </p>
                         <Link
                             href="/tool/youtube-revenue-calculator"
-                            className="inline-flex items-center text-xs font-bold text-red-600 hover:text-red-700 transition"
+                            className="inline-flex items-center text-xs font-bold text-primary hover:text-primary-hover transition"
                         >
                             Estimate your channel earnings with our free calculator →
                         </Link>
@@ -143,33 +143,33 @@ export default async function GuideListingPage({ searchParams }) {
             <HomeListing data={guides} />
 
             {/* Pagination */}
-            <div className="flex items-center gap-6 mt-12 bg-gray-50 px-6 py-3 rounded-lg shadow-sm">
+            <div className="flex items-center gap-6 mt-12 bg-secondary px-6 py-3 rounded-full shadow-sm">
                 {page > 1 ? (
                     <Link
                         href={`/guide/?page=${page - 1}`}
-                        className="px-5 py-2 rounded-lg font-bold bg-white text-red-600 border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm"
+                        className="px-5 py-2 rounded-full font-bold bg-background text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all shadow-sm"
                     >
                         ← Previous
                     </Link>
                 ) : (
-                    <button disabled className="px-5 py-2 rounded-lg font-bold bg-gray-200 text-gray-400 cursor-not-allowed">
+                    <button disabled className="px-5 py-2 rounded-full font-bold bg-border/60 text-muted cursor-not-allowed">
                         ← Previous
                     </button>
                 )}
 
-                <span className="font-bold text-gray-700">
-                    Page <span className="text-red-600">{page}</span> of {totalPages}
+                <span className="font-bold text-foreground">
+                    Page <span className="text-primary">{page}</span> of {totalPages}
                 </span>
 
                 {page < totalPages ? (
                     <Link
                         href={`/guide/?page=${page + 1}`}
-                        className="px-5 py-2 rounded-lg font-bold bg-red-600 text-white hover:bg-red-700 transition-all shadow-md"
+                        className="px-5 py-2 rounded-full font-bold bg-primary text-white hover:bg-primary-hover transition-all shadow-md"
                     >
                         Next →
                     </Link>
                 ) : (
-                    <button disabled className="px-5 py-2 rounded-lg font-bold bg-gray-200 text-gray-400 cursor-not-allowed">
+                    <button disabled className="px-5 py-2 rounded-full font-bold bg-border/60 text-muted cursor-not-allowed">
                         Next →
                     </button>
                 )}

@@ -1,29 +1,36 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 
 @theme {
 
-  /* ========== BRAND COLORS ========== */
-  --color-primary:        #0D530E;   /* dark forest green — buttons, CTAs */
-  --color-primary-hover:  #306D29;   /* medium green on hover */
+  /* ========== BRAND COLORS — "Broadcast" ========== */
+  --color-primary:        #E0201A;   /* YouTube red — CTAs, links, active states */
+  --color-primary-hover:  #B8140F;   /* deep red on hover */
 
-  --color-accent:         #306D29;   /* medium green — highlights, tags, icons */
-  --color-accent-hover:   #0D530E;   /* dark green on hover */
+  --color-accent:         #F5A623;   /* amber — CPM/RPM money highlights, chips */
+  --color-accent-hover:   #D68C0F;   /* deep amber on hover */
 
   /* ========== SURFACE COLORS ========== */
-  --color-background:     #FBF5DD;   /* warm cream — main page background */
-  --color-secondary:      #E7E1B1;   /* straw/tan — card & section backgrounds */
+  --color-background:     #FFFFFF;   /* clean white — main page background */
+  --color-secondary:      #F7F5F1;   /* warm light gray — card & section backgrounds */
+
+  /* ========== DARK SURFACE (hero bands, footer, feature blocks) ========== */
+  --color-ink:            #17130F;   /* near-black — big statement surfaces */
+  --color-ink-soft:       #241F1A;   /* lighter dark — cards/hover on ink */
 
   /* ========== TEXT COLORS ========== */
-  --color-foreground:     #0D530E;   /* dark green — primary text on cream bg */
-  --color-muted:          #4A7A44;   /* softer green — secondary / subtle text */
+  --color-foreground:     #1A1A1A;   /* near-black ink — primary text on white */
+  --color-muted:          #6B6B6B;   /* neutral gray — secondary / subtle text */
 
   /* ========== UTILITY ========== */
-  --color-border:         #C8C090;   /* warm beige — dividers and borders */
+  --color-border:         #EAE7E1;   /* warm light gray — dividers and borders */
 
   /* ========== FONT & SHAPE ========== */
-  --font-mono: 'JetBrains Mono', monospace;
-  --radius-lg: 3px;
+  --font-sans:    var(--font-inter-raw), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta-raw), var(--font-inter-raw), ui-sans-serif, sans-serif;
+  --font-mono:    var(--font-jbmono-raw), 'JetBrains Mono', ui-monospace, monospace;
+  --radius-lg: 16px;
 
   /* ========== FONT SIZES ========== */
   --text-xs:   0.75rem;   /* 12px */
@@ -37,15 +44,29 @@
 /* Base defaults */
 @layer base {
   html, body {
-    background-color: #FBF5DD;
-    color: #0D530E;
+    background-color: #FFFFFF;
+    color: #1A1A1A;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background-color: #E0201A;
+    color: #FFFFFF;
+  }
+
+  :focus-visible {
+    outline: 2px solid #E0201A;
+    outline-offset: 2px;
   }
 }
 
 .nextjs-progress-bar {
-  background-color: #0D530E;
-  height: 5px;
-  border-radius: 3px;
+  background-color: #E0201A;
+  height: 3px;
+  border-radius: 999px;
 }
 
 

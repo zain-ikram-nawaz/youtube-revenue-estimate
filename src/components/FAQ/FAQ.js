@@ -26,7 +26,7 @@ export default function FAQPage({ faq = [] }) {
 
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-xl md:text-2xl font-black text-foreground">
+          <h2 className="font-display text-xl md:text-2xl font-extrabold text-foreground">
             {faq?.title || "Frequently Asked Questions"}
           </h2>
 
@@ -91,7 +91,7 @@ export default function FAQPage({ faq = [] }) {
 
           <Link
             href="/contact-us"
-            className="inline-flex items-center px-5 py-2 rounded-lg bg-primary-hover text-white text-xs font-bold hover:opacity-90 transition shadow-lg"
+            className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary text-white text-xs font-bold hover:bg-primary-hover transition-colors shadow-sm"
           >
             Contact Support
           </Link>

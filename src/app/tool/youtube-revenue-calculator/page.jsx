@@ -222,25 +222,25 @@ const pills = [
         </section>
 
         {/* ════════════════════════════
-            HERO — dark green bg
+            HERO — near-black ink bg, red glow
         ════════════════════════════ */}
-        <section className="relative bg-primary overflow-hidden px-4 py-14 md:py-20">
+        <section className="relative bg-ink overflow-hidden px-4 py-14 md:py-20">
           {/* subtle accent glow */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_80%_50%,rgba(48,109,41,0.25),transparent)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_80%_50%,rgba(224,32,26,0.28),transparent)]" />
 
           <div className="relative z-10 max-w-4xl mx-auto">
             {/* eyebrow */}
-            <div className="inline-flex items-center gap-2 bg-primary-hover border border-border rounded-lg px-3 py-1 mb-5">
-              <span className="w-1.5 h-1.5 rounded-lg bg-accent animate-pulse" />
-              <span className="text-[11px] font-medium tracking-widest text-background/70 uppercase">Free Tool · Updated 2026</span>
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-3 py-1 mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="text-[11px] font-medium tracking-widest text-white/70 uppercase">Free Tool · Updated 2026</span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-bold text-background leading-tight tracking-tight mb-4">
+            <h1 className="font-display text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight mb-4">
               YouTube Revenue <br />
               <span className="text-accent">Calculator 2026</span>
             </h1>
 
-            <p className="text-[15px] text-background/70 leading-relaxed max-w-xl mb-8">
+            <p className="text-[15px] text-white/70 leading-relaxed max-w-xl mb-8">
               Most calculators give you one number based on views alone — and it's almost always wrong.
               A finance channel with 100,000 views in the US earns 4–5× more than a gaming channel
               with the same views in Pakistan. Ours accounts for niche and audience country,
@@ -249,7 +249,7 @@ const pills = [
 
             <Link
               href="#youtube-tool"
-              className="inline-flex items-center gap-2 bg-secondary hover:bg-background active:scale-95 text-foreground text-sm font-semibold px-5 py-3 rounded-lg transition-all"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover active:scale-95 text-white text-sm font-bold px-6 py-3 rounded-full shadow-lg transition-all"
             >
               <Zap className="w-4 h-4" /> Calculate My Earnings
             </Link>
@@ -286,16 +286,11 @@ const pills = [
           </div>
         </section>
 
-        {/* ════════════════════════════
-            TOOL
-        ════════════════════════════ */}
         <section id="youtube-tool" className="bg-secondary border-b border-border">
           <YoutubeAnalyzer seoSections={{ faq: faqData }} />
         </section>
 
-        {/* ════════════════════════════
-            CPM / RPM TABLES
-        ════════════════════════════ */}
+
         <section className="bg-background border-b border-border px-4 py-12">
           <div className="max-w-4xl mx-auto">
             <p className="text-[11px] font-semibold tracking-widest uppercase text-accent mb-2">2026 Rate Data</p>
@@ -335,8 +330,6 @@ const pills = [
                   RPM = revenue after YouTube's 45% share
                 </p>
               </div>
-
-              {/* Country table */}
               <div className="rounded-lg border border-border overflow-hidden">
                 <div className="bg-primary px-4 py-3 flex items-center justify-between">
                   <h3 className="text-sm font-semibold text-background">CPM by Country</h3>
@@ -367,9 +360,6 @@ const pills = [
           </div>
         </section>
 
-        {/* ════════════════════════════
-            EEAT — METHODOLOGY
-        ════════════════════════════ */}
         <section className="bg-secondary border-b border-border px-4 py-12">
           <div className="max-w-4xl mx-auto">
             <p className="text-[11px] font-semibold tracking-widest uppercase text-accent mb-2">Methodology</p>
@@ -397,9 +387,6 @@ const pills = [
           </div>
         </section>
 
-        {/* ════════════════════════════
-            FAQ
-        ════════════════════════════ */}
         <section id="faq" className="bg-background px-4 py-12">
           <div className="max-w-4xl mx-auto">
             <p className="text-[11px] font-semibold tracking-widest uppercase text-accent mb-2">FAQ</p>
@@ -445,13 +432,10 @@ const pills = [
 
       </main>
 
-      {/* ════════════════════════════
-          MOBILE FLOATING CTA
-      ════════════════════════════ */}
       <div className="fixed bottom-4 right-4 md:hidden z-50">
         <Link
           href="#youtube-tool"
-          className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-background text-xs font-bold px-5 py-3.5 rounded-lg shadow-lg active:scale-95 transition-all tracking-wide"
+          className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white text-xs font-bold px-5 py-3.5 rounded-full shadow-lg active:scale-95 transition-all tracking-wide"
         >
           <Zap className="w-3.5 h-3.5" /> ESTIMATE NOW
         </Link>

@@ -24,13 +24,13 @@ export default function StepLoader() {
     <div className="flex flex-col items-center justify-center p-8 min-h-[400px] w-full max-w-md mx-auto">
       {/* Main Spinning Icon */}
       <div className="relative mb-8">
-        <div className="absolute inset-0 rounded-lg bg-primary/20 animate-ping opacity-20"></div>
-        <div className="relative bg-background p-4 rounded-lg shadow-xl border border-border">
+        <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping opacity-20"></div>
+        <div className="relative bg-background p-4 rounded-full shadow-xl border border-border">
           <Loader2 className="w-12 h-12 text-primary animate-spin" />
         </div>
       </div>
 
-      <h2 className="text-xl font-black text-foreground mb-6 tracking-tight">
+      <h2 className="font-display text-xl font-extrabold text-foreground mb-6 tracking-tight">
         Analyzing Channel Data...
       </h2>
 

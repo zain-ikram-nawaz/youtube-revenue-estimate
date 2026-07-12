@@ -1,12 +1,33 @@
 import "./globals.css";
+import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import Script from "next/script";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter-raw",
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-jakarta-raw",
+  display: "swap",
+});
+
+const jbMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-jbmono-raw",
+  display: "swap",
+});
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F5F5F0",
+  themeColor: "#E0201A",
 };
 
 export const metadata = {
@@ -47,8 +68,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`antialiased`}>
+    <html lang="en" className={`${inter.variable} ${jakarta.variable} ${jbMono.variable}`}>
+      <body className="antialiased font-sans">
 
         {/* Ahrefs Analytics */}
         <Script

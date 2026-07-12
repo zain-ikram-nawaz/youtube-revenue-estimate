@@ -112,10 +112,10 @@ const handleSubmit = async (e) => {
       <div className="max-w-5xl mx-auto space-y-4">
 
         {/* Header Section */}
-        <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-lg mb-3 shadow-sm">
+        <div className="bg-background rounded-3xl shadow-sm border border-border p-5 text-center">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-full mb-3 shadow-sm">
             <svg
-              className="w-6 h-6 text-background"
+              className="w-6 h-6 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -123,7 +123,7 @@ const handleSubmit = async (e) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
           </div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-snug">
+          <h1 className="font-display text-lg md:text-xl font-extrabold text-foreground mb-2 leading-snug">
             Contact ChannelIncome | YouTube Revenue Calculator Support & Partnerships
           </h1>
           <p className="text-xs text-muted leading-relaxed">
@@ -135,7 +135,7 @@ const handleSubmit = async (e) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {/* Contact Information */}
           <div className="bg-background rounded-lg shadow-sm border border-border p-4">
-            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
+            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mb-3">
               <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
@@ -174,7 +174,7 @@ const handleSubmit = async (e) => {
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-semibold text-primary border border-border px-2 py-1 rounded hover:bg-secondary transition"
+                      className="text-xs font-semibold text-primary border border-border px-2.5 py-1 rounded-full hover:bg-secondary transition"
                     >
                       {s.label}
                     </a>
@@ -186,7 +186,7 @@ const handleSubmit = async (e) => {
 
           {/* Quick Contact Form */}
           <div className="bg-background rounded-lg shadow-sm border border-border p-4">
-            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
+            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mb-3">
               <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
@@ -215,18 +215,18 @@ const handleSubmit = async (e) => {
 
           {/* Submission Status */}
           {submitStatus === 'success' && (
-            <div className="bg-accent border border-primary rounded-lg p-3 mb-4">
+            <div className="bg-accent/10 border border-accent/40 rounded-2xl p-3 mb-4">
               <div className="flex items-center">
-                <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-accent-hover mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <p className="text-primary font-medium text-xs">Thank you for your message! We'll get back to you within 24 hours.</p>
+                <p className="text-accent-hover font-medium text-xs">Thank you for your message! We'll get back to you within 24 hours.</p>
               </div>
             </div>
           )}
 
           {submitStatus === 'error' && (
-            <div className="bg-accent border border-primary rounded-lg p-3 mb-4">
+            <div className="bg-primary/5 border border-primary/30 rounded-2xl p-3 mb-4">
               <div className="flex items-center">
                 <svg className="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -336,7 +336,7 @@ const handleSubmit = async (e) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`px-6 py-2 bg-primary text-background font-semibold rounded-lg text-xs transition-colors ${
+                className={`px-6 py-2.5 bg-primary text-white font-bold rounded-full text-xs transition-colors ${
                   isSubmitting
                     ? 'opacity-50 cursor-not-allowed'
                     : 'hover:bg-primary-hover focus:ring-2 focus:ring-accent'
@@ -403,7 +403,7 @@ const handleSubmit = async (e) => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary-hover text-background text-xs font-medium rounded-lg transition-colors shadow-sm"
+              className="inline-flex items-center px-5 py-2.5 bg-primary hover:bg-primary-hover text-white text-xs font-bold rounded-full transition-colors shadow-sm"
             >
               Try Revenue Estimator Now
               <svg className="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -412,7 +412,7 @@ const handleSubmit = async (e) => {
             </Link>
             <Link
               href="/about-us"
-              className="inline-flex items-center px-4 py-2 bg-transparent border border-border text-foreground text-xs font-medium rounded-lg hover:bg-secondary transition-colors"
+              className="inline-flex items-center px-5 py-2.5 bg-transparent border border-border text-foreground text-xs font-bold rounded-full hover:bg-secondary transition-colors"
             >
               Learn More About Us
             </Link>

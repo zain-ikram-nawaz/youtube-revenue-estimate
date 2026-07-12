@@ -14,13 +14,13 @@ export default function AboutUsPage() {
             <div className="max-w-5xl mx-auto space-y-4">
 
                 {/* Header Section */}
-                <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-lg mb-3 shadow-sm">
-                        <svg className="w-6 h-6 text-background" fill="currentColor" viewBox="0 0 24 24">
+                <div className="bg-background rounded-3xl shadow-sm border border-border p-5 text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-full mb-3 shadow-sm">
+                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
                         </svg>
                     </div>
-                    <h1 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-snug">
+                    <h1 className="font-display text-lg md:text-xl font-extrabold text-foreground mb-2 leading-snug">
                         About ChannelIncome: Your Free YouTube Earnings Calculator & Advanced Analytics Platform
                     </h1>
                     <p className="text-xs text-muted leading-relaxed">
@@ -31,7 +31,7 @@ export default function AboutUsPage() {
                 {/* Mission & Vision Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div className="bg-background rounded-lg shadow-sm border border-border p-4">
-                        <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
+                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mb-3">
                             <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
@@ -46,7 +46,7 @@ export default function AboutUsPage() {
                     </div>
 
                     <div className="bg-background rounded-lg shadow-sm border border-border p-4">
-                        <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mb-3">
+                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mb-3">
                             <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
@@ -93,7 +93,7 @@ export default function AboutUsPage() {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div className="text-center p-3 bg-secondary rounded-lg">
-                            <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
                                 <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>
@@ -104,7 +104,7 @@ export default function AboutUsPage() {
                             </p>
                         </div>
                         <div className="text-center p-3 bg-secondary rounded-lg">
-                            <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
                                 <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
@@ -115,7 +115,7 @@ export default function AboutUsPage() {
                             </p>
                         </div>
                         <div className="text-center p-3 bg-secondary rounded-lg">
-                            <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
                                 <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
@@ -176,7 +176,7 @@ export default function AboutUsPage() {
                     </p>
                     <Link
                         href="/tool/youtube-revenue-calculator"
-                        className="inline-flex items-center px-4 py-2.5 bg-primary hover:bg-primary-hover text-background text-sm font-medium rounded-lg transition-colors shadow-sm active:scale-95"
+                        className="inline-flex items-center px-5 py-2.5 bg-primary hover:bg-primary-hover text-white text-sm font-bold rounded-full transition-colors shadow-sm active:scale-95"
                     >
                         Start Your Free YouTube Revenue Analysis
                         <svg className="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

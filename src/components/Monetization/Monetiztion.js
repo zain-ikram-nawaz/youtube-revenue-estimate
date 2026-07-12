@@ -32,10 +32,10 @@ export default function Monetization({ data, aiData }) {
 
         {/* AI Strategic Advice */}
         {aiData && (
-          <div className="bg-primary text-background rounded-lg p-6 shadow-xl relative overflow-hidden">
-             <div className="absolute -right-4 -bottom-4 opacity-10 rotate-12 text-9xl font-black italic">$$$</div>
-             <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-3 text-background/60">Monetization Engine Advice</h4>
-             <p className="text-sm md:text-base leading-relaxed italic opacity-90">"{aiData}"</p>
+          <div className="bg-ink text-white rounded-3xl p-6 shadow-xl relative overflow-hidden border border-white/10">
+             <div className="absolute -right-4 -bottom-4 opacity-[0.06] rotate-12 text-9xl font-black italic">$$$</div>
+             <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-3 text-accent">Monetization Engine Advice</h4>
+             <p className="text-sm md:text-base leading-relaxed italic text-white/85">"{aiData}"</p>
           </div>
         )}
       </div>

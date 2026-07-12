@@ -38,9 +38,9 @@ export default function Analytics({ data, aiData }) {
 
         {/* AI Advanced Strategy */}
         {aiData && (
-          <div className="bg-primary rounded-lg p-6 text-background border-b-4 border-accent">
+          <div className="bg-ink rounded-3xl p-6 text-white border-b-4 border-accent">
              <div className="text-[10px] font-black uppercase text-accent mb-2">Algorithm Breakthrough Advice</div>
-             <p className="text-sm leading-relaxed opacity-90 italic">"{aiData}"</p>
+             <p className="text-sm leading-relaxed text-white/85 italic">"{aiData}"</p>
           </div>
         )}
       </div>

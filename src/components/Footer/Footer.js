@@ -42,26 +42,27 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-primary border-t border-white/10">
+    <footer className="bg-ink relative">
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-primary" />
 
-      <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
+      <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
 
         {/* Top minimal brand */}
-        <div className="group flex items-center justify-between p-4 rounded-lg border border-white/10 bg-primary transition-all duration-300 hover:border-primary-hover hover:shadow-[0_0_25px_rgba(48,109,41,0.12)]">
+        <div className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-5 rounded-2xl border border-white/10 bg-ink-soft transition-colors duration-300 hover:border-primary/40">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-primary-hover flex items-center justify-center text-white font-bold">
+            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-bold shrink-0">
               ▶
             </div>
             <div>
-              <h2 className="text-white text-sm font-bold leading-tight">
-                YouTube Revenue Estimator
+              <h2 className="text-white text-sm font-display font-bold leading-tight">
+                ChannelIncome — YouTube Revenue Estimator
               </h2>
-              <p className="text-white/60 text-[11px]">
+              <p className="text-white/50 text-[11px] mt-0.5">
                 Free CPM &amp; RPM calculator for creators
               </p>
             </div>
           </div>
-          <div className="text-[11px] text-white/50 hidden sm:block">
+          <div className="text-[11px] text-white/40">
             Last updated: June 1, 2026
           </div>
         </div>
@@ -70,8 +71,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 
           {/* Links */}
-          <div className="p-4 rounded-lg border border-white/10 bg-primary hover:border-primary-hover transition group">
-            <h3 className="text-white text-xs font-bold mb-3">Links</h3>
+          <div className="p-4 rounded-2xl border border-white/10 bg-ink-soft hover:border-primary/40 transition-colors group">
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider mb-3">Links</h3>
             <div className="space-y-2 text-xs">
               {[
                 { name: "Home", href: "/" },
@@ -83,7 +84,7 @@ export default function Footer() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block text-white/60 hover:text-white transition"
+                  className="block text-white/55 hover:text-primary transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -92,13 +93,13 @@ export default function Footer() {
           </div>
 
           {/* Creator */}
-          <div className="p-4 rounded-lg border border-white/10 bg-primary hover:border-primary-hover transition group">
-            <h3 className="text-white text-xs font-bold mb-3">Creator</h3>
+          <div className="p-4 rounded-2xl border border-white/10 bg-ink-soft hover:border-primary/40 transition-colors group">
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider mb-3">Creator</h3>
             <div className="space-y-2">
               <p className="text-white text-xs font-semibold">Zain Ikram Nawaz</p>
               <a
                 href="mailto:support@channelincome.com"
-                className="block text-white/60 hover:text-white text-xs transition"
+                className="block text-white/55 hover:text-primary text-xs transition-colors"
               >
                 support@channelincome.com
               </a>
@@ -110,7 +111,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="text-white/50 hover:text-white transition"
+                    className="text-white/40 hover:text-primary transition-colors"
                   >
                     {s.icon}
                   </a>
@@ -120,17 +121,17 @@ export default function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div className="p-4 rounded-lg border border-white/10 bg-primary hover:border-primary-hover transition group col-span-2 md:col-span-1">
-            <h3 className="text-white text-xs font-bold mb-3">Updates</h3>
+          <div className="p-4 rounded-2xl border border-white/10 bg-ink-soft hover:border-primary/40 transition-colors group col-span-2 md:col-span-1">
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider mb-3">Updates</h3>
             <form className="space-y-2">
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full px-3 py-2 rounded-lg bg-primary text-white text-xs border border-white/20 outline-none focus:border-white/50"
+                className="w-full px-3 py-2 rounded-xl bg-ink text-white text-xs border border-white/15 outline-none focus:border-primary transition-colors"
               />
               <button
                 type="submit"
-                className="w-full py-2 rounded-lg bg-primary-hover text-white text-xs font-bold hover:opacity-90 transition"
+                className="w-full py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-hover transition-colors"
               >
                 Subscribe
               </button>
@@ -140,23 +141,23 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="text-center py-3 border border-white/10 rounded-lg bg-primary hover:border-primary-hover transition">
-          <p className="text-[11px] text-white/50">
+        <div className="text-center py-4 border border-white/10 rounded-2xl bg-ink-soft">
+          <p className="text-[11px] text-white/45">
             © 2026 ChannelIncome · Built by{" "}
             <a
               href="https://pk.linkedin.com/in/zain-ikram-nawaz-65b5312a9"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/70 hover:text-white transition underline"
+              className="text-white/70 hover:text-primary transition-colors underline"
             >
               Zain Ikram Nawaz
             </a>
             {" "}· All rights reserved
           </p>
           <div className="flex justify-center gap-4 mt-2 text-[11px]">
-            <Link href="/privacy-policy" className="text-white/50 hover:text-white">Privacy</Link>
-            <Link href="/terms-of-service" className="text-white/50 hover:text-white">Terms</Link>
-            <Link href="/disclaimer" className="text-white/50 hover:text-white">Disclaimer</Link>
+            <Link href="/privacy-policy" className="text-white/45 hover:text-primary transition-colors">Privacy</Link>
+            <Link href="/terms-of-service" className="text-white/45 hover:text-primary transition-colors">Terms</Link>
+            <Link href="/disclaimer" className="text-white/45 hover:text-primary transition-colors">Disclaimer</Link>
           </div>
         </div>
 
