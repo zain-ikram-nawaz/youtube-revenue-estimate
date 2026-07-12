@@ -214,7 +214,7 @@ const pills = [
           className="bg-secondary border-b border-border px-4 py-4"
         >
           <div className="max-w-4xl mx-auto flex items-start gap-3">
-            <span className="flex-shrink-0 text-[11px] font-bold uppercase tracking-widest text-primary mt-0.5">TL;DR</span>
+            <span className="flex-shrink-0 text-[11px] font-bold uppercase tracking-widest text-primary mt-0.5"></span>
             <p className="text-xs text-muted leading-relaxed">
               YouTube pays <strong className="text-foreground">$0.50–$10 per 1,000 views (RPM)</strong>. Finance channels in the US earn the most. Gaming and kids content in South Asia earn the least. Enter your views, niche, and country below for a personalized estimate.
             </p>

@@ -25,9 +25,7 @@ export default function HomeIntroduction() {
           aria-label="Quick Answer"
           className="bg-background border-l-4 border-primary rounded-lg shadow-sm p-6"
         >
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-primary mb-2">
-            TL;DR — Quick Answer
-          </p>
+       
           <p className="text-sm text-foreground leading-relaxed">
             YouTube pays creators <strong>$0.50 – $10 per 1,000 views (RPM)</strong> on average. The actual amount depends on your content niche and where your audience is located. Finance channels in the US earn the most; kids content in low-CPM countries earns the least. Use our free calculator below to get a realistic estimate for your specific channel.
           </p>
