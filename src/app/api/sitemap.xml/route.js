@@ -12,6 +12,10 @@ let lastGenerated = 0;
 const staticPageConfig = [
   { path: "/",                              changefreq: "daily",   priority: "1.0" },
   { path: "/tool/youtube-revenue-calculator", changefreq: "weekly",  priority: "0.9" },
+  { path: "/tool/youtube-channel-comparison", changefreq: "weekly",  priority: "0.8" },
+  { path: "/tool/youtube-shorts-calculator", changefreq: "weekly",  priority: "0.8" },
+  { path: "/tool/youtube-tag-extractor",    changefreq: "weekly",  priority: "0.8" },
+  { path: "/tool/tiktok-money-calculator",  changefreq: "weekly",  priority: "0.8" },
   { path: "/guide",                         changefreq: "daily",   priority: "0.8" },
   { path: "/about-us",                      changefreq: "monthly", priority: "0.5" },
   { path: "/contact-us",                    changefreq: "monthly", priority: "0.4" },

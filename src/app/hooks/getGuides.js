@@ -2,14 +2,25 @@ import { cache } from 'react';
 import { connectDB } from '../lib/db';
 import Guide from '../../models/guide';
 
-export const getGuides = cache(async (page = 1, limit = 8) => {
+export const getGuides = cache(async (page = 1, limit = 8, q = "") => {
   try {
     await connectDB();
 
+    const filter = q
+      ? {
+          $or: [
+            { title: { $regex: q, $options: "i" } },
+            { excerpt: { $regex: q, $options: "i" } },
+            { tags: { $regex: q, $options: "i" } },
+            { keywords: { $regex: q, $options: "i" } },
+          ],
+        }
+      : {};
+
     // Parallel execution: Dono kaam ek sath honge
     const [totalGuides, rawGuides] = await Promise.all([
-      Guide.countDocuments(),
-      Guide.find()
+      Guide.countDocuments(filter),
+      Guide.find(filter)
         .sort({ createdAt: -1 })
         .skip((page - 1) * limit)
         .limit(limit)

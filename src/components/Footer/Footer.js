@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link';
+import { getAllLiveTools } from '../../app/lib/tools';
 
 const socialLinks = [
   {
@@ -68,7 +69,7 @@ export default function Footer() {
         </div>
 
         {/* Middle grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
           {/* Links */}
           <div className="p-4 rounded-2xl border border-white/10 bg-ink-soft hover:border-primary/40 transition-colors group">
@@ -76,7 +77,6 @@ export default function Footer() {
             <div className="space-y-2 text-xs">
               {[
                 { name: "Home", href: "/" },
-                { name: "Revenue Calculator", href: "/tool/youtube-revenue-calculator" },
                 { name: "Guides", href: "/guide" },
                 { name: "About", href: "/about-us" },
                 { name: "Contact", href: "/contact-us" },
@@ -87,6 +87,22 @@ export default function Footer() {
                   className="block text-white/55 hover:text-primary transition-colors"
                 >
                   {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Tools */}
+          <div className="p-4 rounded-2xl border border-white/10 bg-ink-soft hover:border-primary/40 transition-colors group">
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider mb-3">Tools</h3>
+            <div className="space-y-2 text-xs">
+              {getAllLiveTools().map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={tool.href}
+                  className="block text-white/55 hover:text-primary transition-colors"
+                >
+                  {tool.shortName}
                 </Link>
               ))}
             </div>

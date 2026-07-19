@@ -17,7 +17,7 @@ const steps = [
 
 export default function HomeIntroduction() {
   return (
-    <main className="bg-secondary min-h-screen px-4 py-10">
+    <div className="bg-secondary min-h-screen px-4 py-10">
       <div className="max-w-5xl mx-auto space-y-8">
 
         {/* ── QUICK ANSWER BOX (GEO + AEO + Featured Snippet) ── */}
@@ -353,6 +353,6 @@ export default function HomeIntroduction() {
         </section>
 
       </div>
-    </main>
+    </div>
   );
 }

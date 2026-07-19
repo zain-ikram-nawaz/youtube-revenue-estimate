@@ -22,6 +22,9 @@ export const handleSubmitGuide = async ({
       data.append("coverImage", formData.coverImage, formData.coverImage.name);
     } else if (typeof formData.coverImage === "string") {
       data.append("existingCoverImage", formData.coverImage);
+    } else if (editId) {
+      // coverImage explicitly cleared by the user
+      data.append("removeCoverImage", "true");
     }
 
     // All other text fields

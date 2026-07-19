@@ -8,10 +8,20 @@ export const revalidate = 3600;
 export async function generateMetadata({ searchParams }) {
     const resolvedSearchParams = await searchParams;
     const page = Number(resolvedSearchParams.page) || 1;
+    const q = resolvedSearchParams.q?.trim() || "";
     const isFirstPage = page === 1;
     const canonicalUrl = page === 1
         ? "https://channelincome.com/guide"
         : `https://channelincome.com/guide?page=${page}`;
+
+    if (q) {
+        return {
+            title: `Search results for "${q}"`,
+            description: `Guides matching "${q}" on YouTube monetization, RPM, CPM, and channel growth.`,
+            alternates: { canonical: "https://channelincome.com/guide" },
+            robots: { index: false, follow: true },
+        };
+    }
 
     return {
         title: isFirstPage
@@ -56,9 +66,10 @@ const categories = [
 export default async function GuideListingPage({ searchParams }) {
     const resolvedSearchParams = await searchParams;
     const page = Number(resolvedSearchParams.page) || 1;
+    const q = resolvedSearchParams.q?.trim() || "";
     const limit = 8;
 
-    const { guides, pagination: { totalPages } } = await getGuides(page, limit);
+    const { guides, pagination: { totalPages } } = await getGuides(page, limit, q);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -90,15 +101,38 @@ export default async function GuideListingPage({ searchParams }) {
             {/* Page Header */}
             <div className="text-center mb-8 max-w-3xl">
                 <h1 className="font-display text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight">
-                    YouTube Creator Guides <span className="text-primary">(2026)</span>
+                    {q ? (
+                        <>Search results for <span className="text-primary">&quot;{q}&quot;</span></>
+                    ) : (
+                        <>YouTube Creator Guides <span className="text-primary">(2026)</span></>
+                    )}
                 </h1>
                 <p className="text-muted max-w-2xl mx-auto text-lg">
-                    Practical guides on YouTube monetization, RPM, CPM, and channel growth. Free, data-backed, no fluff.
+                    {q
+                        ? `${guides.length ? "Guides matching your search." : "No guides matched your search — try a different term."}`
+                        : "Practical guides on YouTube monetization, RPM, CPM, and channel growth. Free, data-backed, no fluff."}
                 </p>
             </div>
 
+            {/* Search box */}
+            <form action="/guide" method="GET" className="w-full max-w-xl mb-8 flex gap-2">
+                <input
+                    type="text"
+                    name="q"
+                    defaultValue={q}
+                    placeholder="Search guides (e.g. CPM, RPM, Shorts)"
+                    className="flex-1 px-4 py-2.5 rounded-full border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+                />
+                <button
+                    type="submit"
+                    className="px-5 py-2.5 rounded-full font-bold bg-primary text-white text-sm hover:bg-primary-hover transition-colors"
+                >
+                    Search
+                </button>
+            </form>
+
             {/* Intro — what this library covers (GEO/AEO content) */}
-            {page === 1 && (
+            {page === 1 && !q && (
                 <div className="w-full max-w-5xl mb-10 space-y-6">
 
                     {/* Quick Answer */}
@@ -146,7 +180,7 @@ export default async function GuideListingPage({ searchParams }) {
             <div className="flex items-center gap-6 mt-12 bg-secondary px-6 py-3 rounded-full shadow-sm">
                 {page > 1 ? (
                     <Link
-                        href={`/guide/?page=${page - 1}`}
+                        href={`/guide/?page=${page - 1}${q ? `&q=${encodeURIComponent(q)}` : ""}`}
                         className="px-5 py-2 rounded-full font-bold bg-background text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all shadow-sm"
                     >
                         ← Previous
@@ -163,7 +197,7 @@ export default async function GuideListingPage({ searchParams }) {
 
                 {page < totalPages ? (
                     <Link
-                        href={`/guide/?page=${page + 1}`}
+                        href={`/guide/?page=${page + 1}${q ? `&q=${encodeURIComponent(q)}` : ""}`}
                         className="px-5 py-2 rounded-full font-bold bg-primary text-white hover:bg-primary-hover transition-all shadow-md"
                     >
                         Next →

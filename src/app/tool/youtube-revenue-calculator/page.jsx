@@ -4,6 +4,7 @@ import FAQ from "../../../components/FAQ/FAQ";
 import Script from "next/script";
 import Link from "next/link";
 import { Zap } from "lucide-react";
+import RelatedTools from "../../../components/RelatedTools/RelatedTools";
 
 export const metadata = {
   title: "YouTube Revenue Calculator — Free CPM & RPM Estimator (2026)",
@@ -426,6 +427,10 @@ const pills = [
                   </Link>
                 </div>
               </div>
+            </div>
+
+            <div className="mt-8">
+              <RelatedTools currentSlug="youtube-revenue-calculator" />
             </div>
           </div>
         </section>

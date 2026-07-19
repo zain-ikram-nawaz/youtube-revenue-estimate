@@ -78,7 +78,7 @@ export default function ListingGuide({ data, role, setEditData, setActiveTab, se
           {/* Image Section */}
           <div className="relative h-40 w-full bg-slate-100 overflow-hidden">
             <Image
-              src={guide?.thumbnail || "/icon.png"}
+              src={guide?.coverImage || guide?.thumbnail || "/icon.png"}
               alt={guide?.title}
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"

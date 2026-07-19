@@ -56,7 +56,17 @@ export async function PUT(req, { params }) {
     const imgFile = form.get("coverImage");
     if (imgFile && typeof imgFile !== "string" && imgFile.size > 0) {
       if (imgFile.size > MAX) throw new Error("Cover image max 5MB");
+      if (existing.coverImage) {
+        const oldId = cloudinaryId(existing.coverImage);
+        if (oldId) await cloudinary.uploader.destroy(oldId);
+      }
       update.coverImage = await uploadImage(imgFile, "guide-covers");
+    } else if (form.get("removeCoverImage") === "true") {
+      if (existing.coverImage) {
+        const oldId = cloudinaryId(existing.coverImage);
+        if (oldId) await cloudinary.uploader.destroy(oldId);
+      }
+      update.coverImage = "";
     } else {
       update.coverImage = form.get("existingCoverImage") || existing.coverImage;
     }

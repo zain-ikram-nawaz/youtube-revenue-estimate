@@ -6,6 +6,9 @@ import { Clock, Calendar, ArrowLeft, ChevronRight, Tag } from "lucide-react";
 import Link from "next/link";
 import Script from "next/script";
 import MarkdownRenderer from "../../../components/MarkdownRenderer/MarkdownRenderer";
+import RelatedGuides from "../../../components/RelatedGuides/RelatedGuides";
+import RelatedTools from "../../../components/RelatedTools/RelatedTools";
+import { getRelatedGuides } from "../../hooks/getRelatedGuides";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -57,6 +60,11 @@ export default async function GuidePage({ params }) {
   const headings = extractHeadings(guide.content || "");
   const coverImage = guide.coverImage || guide.thumbnail;
   const readTime = guide.readTime || Math.max(1, Math.ceil((guide.content || "").split(/\s+/).length / 200));
+  const relatedGuides = await getRelatedGuides({
+    slug: guide.slug,
+    tags: guide.tags || [],
+    category: guide.category,
+  });
 
   const jsonLd = [
     {
@@ -65,7 +73,14 @@ export default async function GuidePage({ params }) {
       headline: guide.title,
       description: guide.metaDescription || guide.excerpt,
       image: coverImage || "https://channelincome.com/icon.png",
-      author: { "@type": "Person", name: guide.author || "ChannelIncome Team" },
+      author:
+        guide.author && guide.author !== "ChannelIncome Team"
+          ? { "@type": "Person", name: guide.author }
+          : {
+              "@type": "Organization",
+              name: "ChannelIncome Team",
+              url: "https://channelincome.com/about-us",
+            },
       publisher: {
         "@type": "Organization",
         name: "ChannelIncome",
@@ -220,6 +235,12 @@ export default async function GuidePage({ params }) {
                 </div>
               </div>
             )}
+
+            <RelatedGuides guides={relatedGuides} />
+
+            <div className="mt-12">
+              <RelatedTools currentSlug="" limit={3} />
+            </div>
 
             {/* CTA */}
             <div className="relative overflow-hidden mt-16 p-8 bg-ink rounded-3xl text-center shadow-xl">
