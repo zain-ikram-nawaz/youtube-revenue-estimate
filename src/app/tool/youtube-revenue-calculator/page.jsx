@@ -220,6 +220,12 @@ const pills = [
               YouTube pays <strong className="text-foreground">$0.50–$10 per 1,000 views (RPM)</strong>. Finance channels in the US earn the most. Gaming and kids content in South Asia earn the least. Enter your views, niche, and country below for a personalized estimate.
             </p>
           </div>
+          <div className="max-w-4xl mx-auto mt-2 text-[11px] text-muted">
+            Written by Zain Ikram Nawaz, ChannelIncome founder · Rate tables last reviewed July 2026 ·{" "}
+            <Link href="/disclaimer" className="underline hover:text-primary">
+              Estimates only, not financial or investment advice
+            </Link>
+          </div>
         </section>
 
         {/* ════════════════════════════
@@ -410,7 +416,9 @@ const pills = [
                   What this tool does is give you a realistic range based on how ad revenue
                   actually works — factoring in niche and geography, not just views.
                   Use it to compare potential across niches and plan your content strategy.
-                  For exact figures, YouTube Studio is the only source.
+                  For exact figures, YouTube Studio is the only source. This tool is for
+                  informational and planning purposes only — it is not financial, investment,
+                  or tax advice.
                 </p>
                 <div className="flex flex-wrap gap-3 mt-3">
                   <Link

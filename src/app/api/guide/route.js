@@ -42,6 +42,8 @@ export async function POST(req) {
       title,
       category: form.get("category"),
       author: form.get("author") || "ChannelIncome Team",
+      reviewedBy: form.get("reviewedBy") || "",
+      lastReviewedAt: form.get("lastReviewedAt") || undefined,
       status: form.get("status") || "published",
       coverImage,
       coverImageAlt: form.get("coverImageAlt") || title,

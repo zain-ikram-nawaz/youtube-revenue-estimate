@@ -22,6 +22,8 @@ const guideSchema = new mongoose.Schema(
     title:          { type: String, required: true },
     slug:           { type: String, unique: true, index: true },
     author:         { type: String, default: "ChannelIncome Team" },
+    reviewedBy:     { type: String },
+    lastReviewedAt: { type: Date },
     category:       { type: String, index: true },
     status:         { type: String, enum: ["draft", "published"], default: "published" },
     coverImage:     { type: String },

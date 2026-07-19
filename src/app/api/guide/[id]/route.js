@@ -41,6 +41,8 @@ export async function PUT(req, { params }) {
       title,
       category: form.get("category"),
       author: form.get("author") || "ChannelIncome Team",
+      reviewedBy: form.get("reviewedBy") || "",
+      lastReviewedAt: form.get("lastReviewedAt") || undefined,
       status: form.get("status") || "published",
       coverImageAlt: form.get("coverImageAlt") || title,
       content: form.get("content") || existing.content,

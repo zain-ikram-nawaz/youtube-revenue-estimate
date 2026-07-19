@@ -38,7 +38,7 @@ export default function AboutUsPage() {
                         </div>
                         <h2 className="text-sm font-bold text-foreground mb-2">Our Mission: Democratizing Creator Analytics</h2>
                         <p className="text-xs text-muted leading-relaxed mb-2">
-                            To democratize access to YouTube analytics and earnings data, helping creators of all sizes make informed decisions about their channel growth, content strategy, and monetization optimization through our YouTube money calculator.
+                            To democratize access to YouTube analytics and earnings data, helping creators of all sizes make informed decisions about their channel growth, content strategy, and monetization.
                         </p>
                         <p className="text-xs text-muted leading-relaxed">
                             We believe every creator deserves transparent insights into their potential YouTube earnings and revenue projections, regardless of their channel size or experience level.
@@ -53,10 +53,10 @@ export default function AboutUsPage() {
                         </div>
                         <h2 className="text-sm font-bold text-foreground mb-2">Our Vision: Driving Sustainable Creator Success</h2>
                         <p className="text-xs text-muted leading-relaxed mb-2">
-                            To become the most trusted platform for YouTube creators worldwide, providing comprehensive analytics that drive real channel growth and sustainable revenue. This includes tracking vital metrics like engagement rates and monetization readiness through our YouTube revenue checker.
+                            To become the most trusted platform for YouTube creators worldwide, providing comprehensive analytics that drive real channel growth and sustainable revenue — including vital metrics like engagement rates and monetization readiness.
                         </p>
                         <p className="text-xs text-muted leading-relaxed">
-                            We envision a creator economy where data-driven decisions, supported by ChannelIncome's YouTube earnings estimator, lead to more successful and profitable channels across all content niches.
+                            We envision a creator economy where data-driven decisions lead to more successful and profitable channels across all content niches.
                         </p>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ export default function AboutUsPage() {
                             </div>
                             <h3 className="text-xs font-bold text-foreground mb-1">Secure & Privacy-Focused</h3>
                             <p className="text-xs text-muted leading-relaxed">
-                                We never store your YouTube channel data permanently and adhere to strict privacy standards. Our YouTube revenue checker only analyzes publicly available metrics.
+                                We never store your YouTube channel data permanently and adhere to strict privacy standards. The calculator only analyzes publicly available metrics.
                             </p>
                         </div>
                         <div className="text-center p-3 bg-secondary rounded-lg">
@@ -122,7 +122,7 @@ export default function AboutUsPage() {
                             </div>
                             <h3 className="text-xs font-bold text-foreground mb-1">Completely Free YouTube Tools</h3>
                             <p className="text-xs text-muted leading-relaxed">
-                                Access all our advanced analytics, YouTube earnings calculator, and <Link href="/guide" className="text-primary font-semibold underline hover:no-underline">YouTube Growth Strategies</Link> without any cost. Empowering creators is our priority.
+                                Access all our analytics tools and <Link href="/guide" className="text-primary font-semibold underline hover:no-underline">growth guides</Link> without any cost. Empowering creators is our priority.
                             </p>
                         </div>
                     </div>
@@ -172,7 +172,7 @@ export default function AboutUsPage() {
                 <div className="bg-background rounded-lg shadow-sm border border-border p-5 text-center">
                     <h2 className="text-base font-bold text-foreground mb-2">Ready to Calculate Your YouTube Earnings?</h2>
                     <p className="text-xs text-muted mb-4 max-w-lg mx-auto leading-relaxed">
-                        Use ChannelIncome's free YouTube income calculator to optimize your content strategy, track revenue potential, and achieve your financial goals with accurate earnings projections.
+                        Use ChannelIncome's free calculator to plan your content strategy and understand your channel's realistic revenue potential.
                     </p>
                     <Link
                         href="/tool/youtube-revenue-calculator"

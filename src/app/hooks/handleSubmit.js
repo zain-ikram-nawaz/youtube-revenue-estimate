@@ -51,7 +51,7 @@ export const handleSubmitGuide = async ({
 
     if (!editId) {
       setFormData({
-        title: "", category: "", author: "ChannelIncome Team", status: "published",
+        title: "", category: "", author: "ChannelIncome Team", reviewedBy: "", lastReviewedAt: "", status: "published",
         coverImage: null, coverImageAlt: "", content: "",
         metaTitle: "", metaDescription: "", excerpt: "",
         tags: [], keywords: [], faqs: [],

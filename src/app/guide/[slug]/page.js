@@ -170,6 +170,13 @@ export default async function GuidePage({ params }) {
                 {readTime} min read
               </div>
               {guide.author && <span className="font-medium text-muted">By {guide.author}</span>}
+              {guide.reviewedBy && (
+                <span className="font-medium text-muted">
+                  · Reviewed by {guide.reviewedBy}
+                  {guide.lastReviewedAt &&
+                    ` on ${new Date(guide.lastReviewedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
+                </span>
+              )}
             </div>
 
             {/* Excerpt / Quick answer */}

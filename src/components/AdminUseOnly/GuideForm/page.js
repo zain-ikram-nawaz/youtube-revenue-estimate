@@ -21,6 +21,8 @@ const EMPTY_FORM = {
   title: "",
   category: "",
   author: "ChannelIncome Team",
+  reviewedBy: "",
+  lastReviewedAt: "",
   status: "published",
   coverImage: null,
   coverImageAlt: "",
@@ -32,6 +34,12 @@ const EMPTY_FORM = {
   keywords: [],
   faqs: [],
 };
+
+const CHECKLIST_ITEMS = [
+  "This post adds information not already covered by an existing guide on this site (no rehashing).",
+  "A real person reviewed the content for accuracy before publishing — not just AI output pasted as-is.",
+  "Claims/numbers here are current and not copied from another site without adding original analysis.",
+];
 
 function insertMarkdown(textarea, before, after = "", placeholder = "text") {
   if (!textarea) return;
@@ -63,6 +71,10 @@ export default function GuideForm({ editData }) {
         title: editData.title || "",
         category: editData.category || "",
         author: editData.author || "ChannelIncome Team",
+        reviewedBy: editData.reviewedBy || "",
+        lastReviewedAt: editData.lastReviewedAt
+          ? new Date(editData.lastReviewedAt).toISOString().slice(0, 10)
+          : "",
         status: editData.status || "published",
         coverImage: editData.coverImage || null,
         coverImageAlt: editData.coverImageAlt || "",
@@ -213,9 +225,39 @@ export default function GuideForm({ editData }) {
             name="author"
             value={formData.author}
             onChange={handleInput}
-            placeholder="Author"
-            className="text-sm border border-gray-200 rounded-lg px-3 py-2 w-48"
+            placeholder="Author (use a real name, not just a team name)"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-2 w-64"
           />
+
+          <input
+            name="reviewedBy"
+            value={formData.reviewedBy}
+            onChange={handleInput}
+            placeholder="Reviewed / fact-checked by"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-2 w-56"
+          />
+
+          <input
+            type="date"
+            name="lastReviewedAt"
+            value={formData.lastReviewedAt}
+            onChange={handleInput}
+            title="Last reviewed date"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-2"
+          />
+        </div>
+
+        {/* E-E-A-T / content quality checklist (not enforced — a reminder before publishing) */}
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+          <p className="text-xs font-bold text-amber-900 mb-2">Before you publish — content quality checklist</p>
+          <ul className="space-y-1.5">
+            {CHECKLIST_ITEMS.map((item) => (
+              <li key={item} className="flex items-start gap-2 text-xs text-amber-900">
+                <input type="checkbox" className="mt-0.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Cover Image */}
